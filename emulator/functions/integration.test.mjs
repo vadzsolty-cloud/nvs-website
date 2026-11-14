@@ -7,6 +7,7 @@ import {getFirestore} from 'firebase-admin/firestore';
 import {emulatorConfig,PROJECT} from './guard.mjs';
 import {DEMO_SHOP,registryId} from './booking.mjs';
 import {processOutbox} from './outbox.mjs';
+import {createPreviewServer} from '../../scripts/preview-server.mjs';
 const app=initializeApp(emulatorConfig()),db=getFirestore(app),auth=getAuth(app);
 const authUrl='http://'+process.env.FIREBASE_AUTH_EMULATOR_HOST;
 const api='http://127.0.0.1:5001/'+PROJECT+'/europe-west1/websiteApi';
@@ -18,18 +19,33 @@ async function request(token,input){return post(api+'/request',input,token);}
 const date=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Bucharest',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(Date.now()+2*86400000));
 async function eventually(fn){let last;for(let n=0;n<60;n++){try{return await fn();}catch(e){last=e;await new Promise(r=>setTimeout(r,250));}}throw last;}
 test('isolated Firebase Auth, Functions, Firestore and mail sink integration',async t=>{
- const customer=await user('customer'),other=await user('other'),shop=await user('shop-reader');
+ const customer=await user('customer'),other=await user('other');
+ await auth.createUser({uid:DEMO_SHOP,email:'workshop@example.invalid',password:'Nvs-test-only-123!',emailVerified:true});
+ const shopToken=await login('workshop@example.invalid');
  // App workshop listener is scoped by shopId == workshop Auth uid.
  await db.doc('shops/'+DEMO_SHOP).set({name:'Synthetic NVS',status:'approved'});
  const carId='car-'+customer.uid;await db.doc('cars/'+carId).set({id:carId,ownerUid:customer.uid,shopId:DEMO_SHOP,plate:'TEST-'+customer.uid,make:'Synthetic',model:'Fixture'});
  const payload={carId,serviceId:'adas',date,time:'10:00',note:'Synthetic test only',lang:'hu',idempotencyKey:randomUUID()};
  let saved;
+ await t.test('local-only web lab serves module/translations with restricted emulator CSP',async()=>{
+  const server=createPreviewServer({output:'../artifacts/emulator-ui',basePath:'/nvs-website',emulatorUi:true});
+  await new Promise(r=>server.listen(0,'127.0.0.1',r));const host='http://127.0.0.1:'+server.address().port;
+  try{
+   for(const l of ['hu','ro','en']){const r=await fetch(host+'/nvs-website/'+l+'/lab/');assert.equal(r.status,200);assert.ok(r.headers.get('content-security-policy').includes('127.0.0.1:9099'));assert.ok((await r.text()).includes('lab-request'));}
+   const script=await fetch(host+'/nvs-website/assets/emulator-lab.js');assert.equal(script.status,200);assert.match(script.headers.get('content-type'),/javascript/);
+   const copy=await (await fetch(host+'/nvs-website/assets/lab-copy.json')).json();for(const l of ['hu','ro','en'])assert.ok(copy[l].states.pending);
+   const home=await fetch(host+'/nvs-website/hu/');assert.ok(home.headers.get('content-security-policy').includes("connect-src 'none'"));assert.ok(!(await home.text()).includes('emulator-lab.js'));
+  }finally{server.closeAllConnections();await new Promise(r=>server.close(r));}
+ });
  await t.test('verified identity, ownership, workshop and forged fields are enforced',async()=>{
   assert.equal((await request(null,payload)).status,401);
   const unverified=await user('unverified',false);assert.equal((await request(unverified.token,payload)).body.error,'EMAIL_NOT_VERIFIED');
   assert.equal((await request(other.token,payload)).body.error,'FORBIDDEN');
   assert.equal((await request(customer.token,{...payload,shopId:'forged'})).body.error,'INVALID_INPUT');
   assert.equal((await request(customer.token,{...payload,status:'confirmed'})).status,400);
+  assert.equal((await request(customer.token,{...payload,date:null})).status,400);
+  assert.equal((await request(customer.token,{...payload,note:'x'.repeat(9000)})).status,413);
+  const badOrigin=await fetch(api+'/request',{method:'POST',headers:{Origin:'https://example.invalid','Content-Type':'application/json'},body:JSON.stringify(payload)});assert.equal(badOrigin.status,403);
   await db.doc('cars/'+carId).update({shopId:'unapproved-other-shop'});assert.equal((await request(customer.token,payload)).status,403);
   await db.doc('cars/'+carId).update({shopId:DEMO_SHOP});
  });
@@ -49,6 +65,7 @@ test('isolated Firebase Auth, Functions, Firestore and mail sink integration',as
  await t.test('Firestore Rules deny direct client writes and unrelated reads',async()=>{
   const url='http://'+process.env.FIRESTORE_EMULATOR_HOST+'/v1/projects/'+PROJECT+'/databases/(default)/documents/appointments/'+saved;
   assert.equal((await fetch(url,{headers:{Authorization:'Bearer '+customer.token}})).status,200);
+  assert.equal((await fetch(url,{headers:{Authorization:'Bearer '+shopToken}})).status,200);
   assert.equal((await fetch(url,{headers:{Authorization:'Bearer '+other.token}})).status,403);
   assert.equal((await fetch(url,{method:'PATCH',headers:{Authorization:'Bearer '+customer.token,'Content-Type':'application/json'},body:JSON.stringify({fields:{status:{stringValue:'confirmed'}}})})).status,403);
  });
@@ -64,6 +81,9 @@ test('isolated Firebase Auth, Functions, Firestore and mail sink integration',as
   assert.equal(await processOutbox(db,retryId,{now:()=>now}),'deferred');
   assert.equal(await processOutbox(db,retryId,{now:()=>now+5000}),'sent');
   assert.equal(await processOutbox(db,retryId,{now:()=>now+5000}),'deduplicated');
+  const deadId='dead-'+randomUUID();await db.doc('webMailOutbox/'+deadId).set({appointmentId:saved,to:sink.to,status:'dead',attempts:0,nextAttemptAt:0});await db.doc('webMailOutbox/'+deadId).update({status:'retry'});
+  for(let i=0;i<5;i++)assert.equal(await processOutbox(db,deadId,{now:()=>now+(i+1)*100000,failDelivery:true}),'retry');
+  assert.equal((await db.doc('webMailOutbox/'+deadId).get()).data().status,'dead');assert.equal((await db.doc('emulatedMail/'+deadId).get()).exists,false);
   await db.doc('appointments/'+saved).update({status:'confirmed'});
   const replay=await request(customer.token,payload);assert.equal(replay.body.status,'confirmed');
  });
@@ -94,6 +114,7 @@ test('isolated Firebase Auth, Functions, Firestore and mail sink integration',as
   const p={...payload,carId:car,idempotencyKey:randomUUID()};assert.equal((await request(fleet.token,p)).status,403);
   await db.doc('companyMembers/'+fleet.uid).update({role:'driver',assignedCarIds:[]});assert.equal((await request(fleet.token,p)).status,403);
   await db.doc('companyMembers/'+fleet.uid).update({assignedCarIds:[car]});assert.equal((await request(fleet.token,p)).status,200);
+  const fleetCars=await (await fetch(api+'/cars',{headers:{Authorization:'Bearer '+fleet.token}})).json();assert.ok(fleetCars.some(c=>c.id===car));
  });
  await t.test('rate limiting applies server-side to new distinct requests',async()=>{
   for(const time of ['11:00','12:00','13:00','14:00'])assert.equal((await request(customer.token,{...payload,time,idempotencyKey:randomUUID()})).status,200);

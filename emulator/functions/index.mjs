@@ -17,7 +17,7 @@ export const websiteApi=onRequest({region:'europe-west1',maxInstances:1},async(r
  if(req.method==='OPTIONS'){res.status(204).end();return;}
  try{
   const {service}=services();
-  if(req.get('content-length')&&Number(req.get('content-length'))>8192){res.status(413).json({error:'INVALID_INPUT'});return;}
+  if(Buffer.byteLength(JSON.stringify(req.body||{}))>8192){res.status(413).json({error:'INVALID_INPUT'});return;}
   const token=/^Bearer (.+)$/.exec(req.get('authorization')||'')?.[1],route=req.path.replace(/\/$/,'');
   let result;
   if(req.method==='POST'&&route==='/request')result=await service.request(token,req.body||{});

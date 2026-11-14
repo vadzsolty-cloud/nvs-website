@@ -72,6 +72,11 @@ test('local emulator build is opt-in and owner approval controls structured stre
  const output=resolve('artifacts/test-builds/lab');
  execFileSync(process.execPath,['scripts/build.mjs'],{env:{...process.env,BASE_PATH:'/nvs-website',SITE_URL:'http://localhost:4180',PRODUCTION:'false',CONTACT_APPROVED:'false',EMULATOR_UI:'true',OUTPUT_DIR:output},stdio:'pipe'});
  for(const l of ['hu','ro','en']){const html=await readFile(output+'/'+l+'/lab/index.html','utf8');assert.ok(html.includes('emulator-lab.js'));assert.ok(html.includes('noindex,nofollow'));}
+ const handler=createPreviewServer({output,basePath:'/nvs-website',emulatorUi:true}).listeners('request')[0];
+ for(const [route,allowed] of [['/hu/lab/',true],['/hu/',false]]){
+  const response={writeHead(status,headers){this.headers=headers;return this;},end(){}};await handler({url:'/nvs-website'+route},response);
+  assert.equal(response.headers['Content-Security-Policy'].includes('http://127.0.0.1:9099'),allowed);
+ }
  const approved=resolve('artifacts/test-builds/approved');
  execFileSync(process.execPath,['scripts/build.mjs'],{env:{...process.env,BASE_PATH:'/nvs-website',SITE_URL:'https://example.com',PRODUCTION:'true',CONTACT_APPROVED:'true',EMULATOR_UI:'false',OUTPUT_DIR:approved},stdio:'pipe'});
  const html=await readFile(approved+'/hu/index.html','utf8');const schema=JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/)[1]);assert.equal(schema.telephone,business.phone);assert.equal(schema.address.streetAddress,business.street);

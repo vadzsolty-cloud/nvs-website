@@ -49,7 +49,6 @@ export function createBookingService({db,auth,now=Date.now}){
   const carId=id(input.carId),key=id(input.idempotencyKey),serviceId=input.serviceId;
   if(!SERVICES.includes(serviceId)||!['hu','ro','en'].includes(input.lang))fail('INVALID_INPUT');
   const note=text(input.note||'',500),startAt=bucharestInstant(input.date,input.time),at=now();
-  if(startAt<=at||startAt>at+180*86400000)fail('INVALID_TIME');
   const payload={carId,date:input.date,time:input.time,serviceId,note,lang:input.lang};
   const digest=hash(JSON.stringify(payload)),apptId='apreq_web_'+hash([u.uid,carId,input.date,input.time].join('|'));
   const dedupe=db.doc('webRequestKeys/'+hash(u.uid+'|'+key)),appt=db.doc('appointments/'+apptId),carRef=db.doc('cars/'+carId),shopRef=db.doc('shops/'+DEMO_SHOP),rate=db.doc('webRateLimits/'+u.uid),guard=db.doc('webRequestGuards/'+hash(carId+'|'+input.date));
@@ -68,6 +67,7 @@ export function createBookingService({db,auth,now=Date.now}){
     const saved=await tx.get(db.doc('appointments/'+prior.data().appointmentId));if(!saved.exists)fail('IDEMPOTENCY_CONFLICT');
     return {id:saved.id,status:saved.data().status,replayed:true};
    }
+   if(startAt<=at||startAt>at+180*86400000)fail('INVALID_TIME');
    const same=await tx.get(db.collection('appointments').where('carId','==',carId).where('date','==',input.date));
    const active=same.docs.find(d=>d.data().time===input.time&&!['declined','customer_cancelled','customer_deleted'].includes(d.data().status));
    if(active)fail('DUPLICATE_REQUEST');
@@ -80,7 +80,15 @@ export function createBookingService({db,auth,now=Date.now}){
    return {id:apptId,status:'pending',replayed:false};
   });
  }
- async function cars(token){const u=await principal(token);return (await db.collection('cars').where('ownerUid','==',u.uid).get()).docs.filter(d=>!d.data().deletedAt).map(d=>({id:d.id,plate:d.data().plate,make:d.data().make,model:d.data().model,linked:d.data().shopId===DEMO_SHOP}));}
+ async function cars(token){
+  const u=await principal(token),own=(await db.collection('cars').where('ownerUid','==',u.uid).get()).docs;
+  const member=(await db.doc('companyMembers/'+u.uid).get()).data();
+  if(member?.status==='active'&&member.companyId&&['company_admin','fleet_manager','driver'].includes(member.role)){
+   const fleet=(await db.collection('cars').where('companyId','==',member.companyId).get()).docs;
+   own.push(...fleet.filter(d=>member.role!=='driver'||Array.isArray(member.assignedCarIds)&&member.assignedCarIds.includes(d.id)));
+  }
+  return [...new Map(own.map(d=>[d.id,d])).values()].filter(d=>!d.data().deletedAt).map(d=>({id:d.id,plate:d.data().plate||'',make:d.data().make||'',model:d.data().model||'',linked:d.data().shopId===DEMO_SHOP}));
+ }
  async function requests(token){const u=await principal(token);return (await db.collection('appointments').where('ownerUid','==',u.uid).get()).docs.map(d=>({id:d.id,status:d.data().status,date:d.data().date,time:d.data().time}));}
  return {request,registerProfile,cars,requests};
 }

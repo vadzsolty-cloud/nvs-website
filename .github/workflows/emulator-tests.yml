@@ -26,6 +26,13 @@ jobs:
       - run: npm install --prefix emulator/functions --ignore-scripts --no-audit --no-fund
       - name: Static build and tests
         run: npm run build && npm test
+      - name: Build local-only HU/RO/EN lab
+        run: npm run build
+        env:
+          EMULATOR_UI: 'true'
+          SITE_URL: http://localhost:4180
+          BASE_PATH: /nvs-website
+          OUTPUT_DIR: artifacts/emulator-ui
       - name: Auth, Firestore, Functions and local mail sink
         run: npm test --prefix emulator
       - uses: actions/upload-artifact@v6

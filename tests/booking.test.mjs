@@ -13,7 +13,7 @@ test('Bucharest conversion rejects nonexistent and ambiguous DST times',()=>{
  assert.equal(new Date(bucharestInstant('2027-07-01','09:00')).toISOString(),'2027-07-01T06:00:00.000Z');
  assert.throws(()=>bucharestInstant('2027-03-28','03:30'),/NONEXISTENT_TIME/);
  assert.throws(()=>bucharestInstant('2027-10-31','03:30'),/AMBIGUOUS_TIME/);
- for(const pair of [['2027-02-30','12:00'],['2027-01-01','24:00'],['2027-01-01','12:70'],['bad','12:00']])assert.throws(()=>bucharestInstant(...pair),/INVALID_TIME/);
+ for(const pair of [['2027-02-30','12:00'],['2027-01-01','24:00'],['2027-01-01','12:70'],['bad','12:00'],[null,'12:00'],['2027-01-01',12]])assert.throws(()=>bucharestInstant(...pair),/INVALID_TIME/);
 });
 test('vehicle registry normalization and SHA-256 match the existing app algorithm',()=>{
  assert.equal(identity(' hr-12 ábc '),'HR12ABC');

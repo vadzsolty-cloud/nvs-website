@@ -1,6 +1,6 @@
 # Night Vision Service Website v0.1
 
-Önálló HU / RO / EN weboldal: 3 főoldal és 18 szolgáltatási oldal. Kizárólag az új vadzsolty-cloud/nvs-website repositoryhoz készült. A meglévő alkalmazás, APK-frissítési rendszer és Firebase változatlan.
+Önálló HU / RO / EN weboldal: 3 főoldal, 18 szolgáltatási és 3 adatkezelési oldal. Kizárólag az új vadzsolty-cloud/nvs-website repositoryhoz készült. A meglévő alkalmazás, APK-frissítési rendszer és Firebase változatlan.
 
 ## Futtatás
 
@@ -48,10 +48,14 @@ A preview noindex,nofollow; a robots.txt tiltja az indexelést. A projektoldal /
 - public/assets/app.js: memóriában működő demó.
 - scripts/preview-server.mjs: alútvonalat támogató helyi kiszolgáló.
 
-Az eredeti NVS-logó változtatás nélkül az alkalmazás __bundler_logo PNG-jéből származik. Eredet és csak olvasási vizsgálat: [docs/SOURCE-AUDIT.md](docs/SOURCE-AUDIT.md). Nincs generált vagy idegen műhelyfotó; minden hiányzó fotó jelölt helykitöltő. A JSON-LD kizárólag a megadott nevet és települést tartalmazza. A Google Maps gomb településkeresés. Az App gomb a meglévő közzétételi repositoryra mutat; közvetlen APK-linket nem találunk ki.
+Az eredeti NVS-logó változtatás nélkül az alkalmazás __bundler_logo PNG-jéből származik. Eredet és csak olvasási vizsgálat: [docs/SOURCE-AUDIT.md](docs/SOURCE-AUDIT.md). Nincs generált vagy idegen műhelyfotó; minden hiányzó fotó jelölt helykitöltő. Az issue #1-ben megadott cím és telefon review-adatként, külön ellenőrzési jelzéssel szerepel. A Google Maps gomb a megadott vállalkozásprofilra, az App gomb a változatlan /nvs-app-letoltes/app/ címre mutat. A JSON-LD e-mailt és Maps-linket is tartalmaz, de az utcacím/telefon csak CONTACT_APPROVED=true után kerülhet bele. A keresőindexeléshez ez az explicit jóváhagyás is szükséges.
 
 ## Hátralévő munka
 
 Szükséges a korábbi látványterv, valódi jóváhagyott fotók, végleges bemutatkozás, pontos műhelycím, telefon, nyitvatartás, domain és éles adatkezelési tájékoztató. A jelenlegi elrendezés önálló első vizuális változat. Asztali és 390 × 844 px mobilos Edge-ellenőrzés az eredeti v0.1 változaton sikerült; a mostani alútvonal-javításhoz automatizált regressziós tesztek készültek. Új távoli böngészőellenőrzés csak tényleges publikálás után állítható.
 
 A közös Firebase Auth/foglalási modell, szerveroldali kapacitásvédelem és értesítések terve: [docs/FIREBASE-INTEGRATION.md](docs/FIREBASE-INTEGRATION.md). A korábbi, elakadt Sites-publikálás történeti állapota: [docs/PUBLISH-STATUS.md](docs/PUBLISH-STATUS.md); GitHub Pages ezt nem használja.
+
+## Issue #1 – emulátoros fejlesztés
+
+Külön feature ág és draft PR, éles Firebase-kapcsolat nélkül. A helyi, háromnyelvű Auth/foglalási labor csak EMULATOR_UI=true és localhost origin mellett épül. A normál GitHub Pages továbbra is demó. Futtatás, korlátok, tesztek és élesítéshez hiányzó beállítások: [docs/ISSUE-1.md](docs/ISSUE-1.md).
