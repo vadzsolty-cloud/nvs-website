@@ -29,5 +29,6 @@ export const websiteApi=onRequest({region:'europe-west1',maxInstances:1},async(r
  }catch(e){const code=e.message;res.status(errors[code]||503).json({error:errors[code]?code:'EMULATOR_UNAVAILABLE'});}
 });
 export const websiteRequestMail=onDocumentCreated({document:'webMailOutbox/{eventId}',region:'europe-west1',retry:true},async event=>{
+ if(event.data?.data().status==='dead')return;
  const {db}=services();await processOutbox(db,event.params.eventId);
 });

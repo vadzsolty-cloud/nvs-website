@@ -58,7 +58,7 @@ test('isolated Firebase Auth, Functions, Firestore and mail sink integration',as
   assert.equal(await processOutbox(db,saved),'deduplicated');
   // Exercise backoff/dead-letter without racing the create trigger: reuse delivered event with a separate existing test record.
   const retryId='retry-'+randomUUID();await db.doc('webMailOutbox/'+retryId).set({appointmentId:saved,to:sink.to,status:'dead',attempts:0,nextAttemptAt:0});
-  await new Promise(r=>setTimeout(r,500));await db.doc('webMailOutbox/'+retryId).update({status:'retry'});
+  await db.doc('webMailOutbox/'+retryId).update({status:'retry'});
   const now=Date.now()+10000;
   assert.equal(await processOutbox(db,retryId,{now:()=>now,failDelivery:true}),'retry');
   assert.equal(await processOutbox(db,retryId,{now:()=>now}),'deferred');
@@ -69,7 +69,7 @@ test('isolated Firebase Auth, Functions, Firestore and mail sink integration',as
  });
  await t.test('email verification, voluntary profile and registry collision never claim another car',async()=>{
   const newUser=await user('new-user',false);
-  const profile={name:'Synthetic Person',phone:'+40000000000',plate:'TEST-'+newUser.uid,make:'Synthetic',model:'Fixture',lang:'ro',acceptNotice:true,marketing:false};
+  const profile={name:'Synthetic Person',phone:'+40000000000',plate:'TEST-'+newUser.uid.slice(-12),make:'Synthetic',model:'Fixture',lang:'ro',acceptNotice:true,marketing:false};
   assert.equal((await post(api+'/register-profile',profile,newUser.token)).status,403);
   assert.equal((await authPost('sendOobCode',{requestType:'VERIFY_EMAIL',idToken:newUser.token})).status,200);
   const oob=await (await fetch(authUrl+'/emulator/v1/projects/'+PROJECT+'/oobCodes')).json();const code=oob.oobCodes.find(c=>c.email===newUser.email&&c.requestType==='VERIFY_EMAIL');assert.ok(code);
@@ -77,12 +77,15 @@ test('isolated Firebase Auth, Functions, Firestore and mail sink integration',as
   newUser.token=await login(newUser.email);
   assert.equal((await post(api+'/register-profile',{...profile,acceptNotice:false},newUser.token)).status,400);
   const registered=await post(api+'/register-profile',profile,newUser.token);assert.equal(registered.status,200,JSON.stringify(registered.body));
+  assert.equal((await post(api+'/register-profile',profile,newUser.token)).body.carId,registered.body.carId);
   const car=(await db.doc('cars/'+registered.body.carId).get()).data();assert.equal(car.ownerUid,newUser.uid);assert.equal(car.shopId,undefined);
   assert.equal((await request(newUser.token,{...payload,carId:registered.body.carId})).status,403);
   assert.equal((await db.doc('webMarketingConsents/'+newUser.uid).get()).exists,false);
   const duplicate=await user('duplicate');const collision=await post(api+'/register-profile',{...profile,marketing:true},duplicate.token);assert.equal(collision.body.error,'VEHICLE_REQUIRES_APP');
   assert.equal((await db.doc('vehicleRegistry/'+registryId('plate',profile.plate)).get()).data().ownerUid,newUser.uid);
   assert.equal((await db.doc('customerRegistrations/'+duplicate.uid).get()).exists,false);
+  const opted=await user('opted');const optResult=await post(api+'/register-profile',{...profile,plate:'TEST-'+opted.uid.slice(-12),marketing:true},opted.token);assert.equal(optResult.status,200);
+  assert.equal((await db.doc('webMarketingConsents/'+opted.uid).get()).data().granted,true);
  });
  await t.test('company access is scoped by active role and driver assignment',async()=>{
   const fleet=await user('fleet'),car='fleet-'+fleet.uid;
