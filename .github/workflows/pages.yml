@@ -1,0 +1,56 @@
+name: Website checks and optional Pages preview
+
+on:
+  push:
+    branches: [dev/website-v1]
+  pull_request:
+    branches: [main, dev/website-v1]
+  workflow_dispatch:
+    inputs:
+      publish_preview:
+        description: Publish the DEMO preview after checking Pages settings
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nvs-website-pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL: https://vadzsolty-cloud.github.io
+      BASE_PATH: /nvs-website
+      PRODUCTION: 'false'
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - run: npm run build
+      - run: npm test
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    if: github.event_name == 'workflow_dispatch' && inputs.publish_preview && github.ref == 'refs/heads/dev/website-v1'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Verify Pages configuration
+        uses: actions/configure-pages@v5
+      - name: Publish DEMO preview
+        id: deployment
+        uses: actions/deploy-pages@v4
