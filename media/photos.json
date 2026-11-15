@@ -1,0 +1,35 @@
+{
+  "_note": "Source of truth for owner workshop photographs. Originals live unchanged in media/originals/. Run: python3 scripts/optimize-photos.py",
+  "photos": [
+    {"slug": "headlight-adjustment", "original": "1000115238.jpg", "widths": [640, 960, 1280], "position": "55% 50%", "tag": {"hu": "Fényszóró", "ro": "Faruri", "en": "Headlights"},
+     "alt": {"hu": "LED-fényszóró beállítása fénymérő berendezéssel az NVS műhelyében", "ro": "Reglarea unui far LED cu echipament de măsurare în atelierul NVS", "en": "Adjusting an LED headlight with beam-setting equipment in the NVS workshop"}},
+    {"slug": "headlight-beam-check", "original": "1000115247.jpg", "widths": [640, 960, 1280], "position": "45% 50%", "tag": {"hu": "Fényszóró", "ro": "Faruri", "en": "Headlights"},
+     "alt": {"hu": "Világító fényszóró a beállítóberendezés mellett, ellenőrzés közben", "ro": "Far aprins lângă echipamentul de reglare, în timpul verificării", "en": "Illuminated headlight next to the aiming equipment during a check"}},
+    {"slug": "adas-calibration-target", "original": "IMG-20261018-WA0012.jpg", "widths": [480, 768, 1152], "position": "40% 38%", "tag": {"hu": "ADAS", "ro": "ADAS", "en": "ADAS"},
+     "alt": {"hu": "MAHLE TechPRO Digital ADAS kalibrálókijelző és kerékre szerelt mérőfejek egy jármű előtt a műhelyben", "ro": "Ecran de calibrare MAHLE TechPRO Digital ADAS și capete de măsurare montate pe roată, în fața unui vehicul din atelier", "en": "MAHLE TechPRO Digital ADAS calibration screen and wheel-mounted measuring heads in front of a vehicle in the workshop"}},
+    {"slug": "acc-radar-calibration-screen", "original": "IMG-20261018-WA0009.jpg", "widths": [640, 1024, 1600], "position": "50% 30%", "tag": {"hu": "ACC radar", "ro": "Radar ACC", "en": "ACC radar"},
+     "alt": {"hu": "MAHLE TechPRO tablet a statikus elülső radarkalibrálás lépésével", "ro": "Tabletă MAHLE TechPRO afișând pasul de calibrare statică a radarului frontal", "en": "MAHLE TechPRO tablet showing the static front radar calibration step"}},
+    {"slug": "workshop-lift-bay", "original": "IMG-20261115-WA0024.jpg", "widths": [480, 768, 1152], "position": "50% 60%", "tag": {"hu": "Műhely", "ro": "Atelier", "en": "Workshop"},
+     "alt": {"hu": "Emelőn álló jármű alváza, mögötte a műhely szerszámfala és szerelőpadjai", "ro": "Partea inferioară a unui vehicul ridicat pe elevator, cu peretele de scule și bancurile de lucru ale atelierului în spate", "en": "Underside of a vehicle on a lift, with the workshop tool wall and workbenches behind it"}},
+    {"slug": "gearbox-shafts", "original": "IMG-20261115-WA0007.jpg", "widths": [480, 768, 1152], "position": "50% 40%", "tag": {"hu": "Váltó", "ro": "Cutie de viteze", "en": "Gearbox"},
+     "alt": {"hu": "Szétszerelt sebességváltó tengelyei és fogaskerekei", "ro": "Arborii și pinioanele unei cutii de viteze demontate", "en": "Shafts and gears of a dismantled gearbox"}},
+    {"slug": "gearbox-on-workbench", "original": "IMG-20261115-WA0011.jpg", "widths": [480, 768, 1152], "position": "50% 55%", "tag": {"hu": "Váltó", "ro": "Cutie de viteze", "en": "Gearbox"},
+     "alt": {"hu": "Kiszerelt váltóegység fogaskerekekkel a műhely munkapadján", "ro": "Ansamblu de cutie de viteze demontat, cu pinioane, pe bancul de lucru al atelierului", "en": "Removed gearbox assembly with gears on the workshop bench"}},
+    {"slug": "gearbox-open-case", "original": "IMG-20261115-WA0013.jpg", "widths": [480, 768, 1152], "position": "50% 45%", "tag": {"hu": "Váltó", "ro": "Cutie de viteze", "en": "Gearbox"},
+     "alt": {"hu": "Nyitott váltóház a tengelyekkel a szerelőkocsin", "ro": "Carcasă de cutie de viteze deschisă, cu arborii, pe căruciorul de montaj", "en": "Open gearbox case with its shafts on the assembly trolley"}},
+    {"slug": "gearbox-housing", "original": "IMG-20261115-WA0036.jpg", "widths": [480, 768, 1152], "position": "50% 45%", "tag": {"hu": "Váltó", "ro": "Cutie de viteze", "en": "Gearbox"},
+     "alt": {"hu": "Váltóház a szerelőkocsin, a háttérben a műhely szerszámfala", "ro": "Carcasă de cutie de viteze pe căruciorul de montaj, cu peretele de scule în fundal", "en": "Gearbox housing on the assembly trolley, with the tool wall in the background"}},
+    {"slug": "gearbox-mechatronic-unit", "original": "IMG-20261115-WA0017.jpg", "widths": [640, 1024, 1600, 2048], "position": "50% 50%", "tag": {"hu": "Váltó", "ro": "Cutie de viteze", "en": "Gearbox"},
+     "alt": {"hu": "Kiszerelt váltóvezérlő (mechatronikai) egység a munkapadon", "ro": "Unitate mecatronică de comandă a cutiei de viteze, demontată, pe bancul de lucru", "en": "Removed gearbox mechatronic control unit on the workbench"}},
+    {"slug": "gearbox-control-unit-installed", "original": "IMG-20261115-WA0014.jpg", "widths": [640, 1024, 1600, 2048], "position": "50% 50%", "tag": {"hu": "Váltó", "ro": "Cutie de viteze", "en": "Gearbox"},
+     "alt": {"hu": "A váltó vezérlőegysége a járműben, alulnézetből, leszerelt fedéllel", "ro": "Unitatea de comandă a cutiei de viteze în vehicul, văzută de dedesubt, cu capacul demontat", "en": "Gearbox control unit in the vehicle seen from below with its cover removed"}},
+    {"slug": "gearbox-assembly-work", "original": "IMG-20261115-WA0034.jpg", "widths": [480, 768, 1152], "position": "50% 60%", "tag": {"hu": "Váltó", "ro": "Cutie de viteze", "en": "Gearbox"},
+     "alt": {"hu": "Kesztyűs kézzel végzett munka a nyitott váltón a szerelőpadnál", "ro": "Lucru cu mănuși de protecție la o cutie de viteze deschisă, lângă bancul de lucru", "en": "Gloved hands working on an open gearbox at the workbench"}}
+  ],
+  "placement": {
+    "hero": "headlight-adjustment",
+    "workshop": "workshop-lift-bay",
+    "services": {"acc": "acc-radar-calibration-screen", "adas": "adas-calibration-target", "led-matrix": "headlight-adjustment", "hunter-3d": null, "camera": null, "diagnostics": null},
+    "gallery": ["adas-calibration-target", "acc-radar-calibration-screen", "headlight-adjustment", "headlight-beam-check", "workshop-lift-bay", "gearbox-mechatronic-unit", "gearbox-shafts", "gearbox-on-workbench", "gearbox-open-case", "gearbox-housing", "gearbox-control-unit-installed", "gearbox-assembly-work"]
+  }
+}
