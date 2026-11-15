@@ -94,3 +94,21 @@ test('demo summarises and resets without network or persistent storage',async()=
  listeners.resetclick();assert.equal(nodes['booking-form'].hidden,false);assert.equal(nodes.result.hidden,true);assert.equal(nodes.selection.textContent,'');assert.ok(nodes['booking-form'].didReset);
  nodes.date.value='2000-01-01';listeners['booking-formsubmit']({preventDefault(){}});assert.equal(nodes.date.validity,'Invalid');assert.equal(nodes['booking-form'].hidden,false);
 });
+
+test('approved address in structured data; map loads from Google only after a click',async()=>{
+ const output=resolve('artifacts/test-builds/map');
+ execFileSync(process.execPath,['scripts/build.mjs'],{env:{...process.env,BASE_PATH:'/nvs-website',SITE_URL:'https://vadzsolty-cloud.github.io',PRODUCTION:'false',CONTACT_APPROVED:'false',EMULATOR_UI:'false',OUTPUT_DIR:output},stdio:'pipe'});
+ for(const l of ['hu','ro','en']){
+  const html=await readFile(output+'/'+l+'/index.html','utf8');
+  const schema=JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/)[1]);
+  assert.equal(schema.address.streetAddress,business.street);assert.equal(schema.telephone,undefined);
+  assert.equal(schema.geo.latitude,business.geo.lat);assert.equal(schema.geo.longitude,business.geo.lng);
+  assert.ok(!html.includes('<iframe'));assert.ok(html.includes('class="map-panel map-consent"'));
+  assert.ok(html.includes('data-map-src="https://maps.google.com/maps?q=46.4619963,25.7936655&amp;z=16&amp;output=embed&amp;hl='+l+'"'));
+ }
+ const listeners={},replaced=[];let created=null;
+ const panel={dataset:{mapSrc:'https://maps.google.com/maps?q=1,2&output=embed',mapTitle:'Map'},classList:{add(c){panel.cls=c;}},querySelector:s=>s==='.map-load'?{addEventListener:(t,f)=>listeners[t]=f}:null,replaceChildren(x){replaced.push(x);}};
+ runInNewContext(await readFile('public/assets/app.js','utf8'),{document:{querySelector:()=>null,querySelectorAll:s=>s==='.map-consent'?[panel]:[],createElement:t=>(created={tag:t,attrs:{},setAttribute(k,v){this.attrs[k]=v;},focus(){this.focused=true;}})}});
+ assert.equal(replaced.length,0);listeners.click();
+ assert.equal(created.tag,'iframe');assert.equal(created.src,panel.dataset.mapSrc);assert.equal(created.title,'Map');assert.equal(panel.cls,'map-loaded');assert.equal(replaced[0],created);
+});

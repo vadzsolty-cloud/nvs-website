@@ -14,7 +14,7 @@ Helyi előnézet: http://localhost:4180/hu/ (RO: /ro/, EN: /en/).
     npm test
     npm run preview
 
-A tesztek (12 db: tests/site, booking, photos) mind a gyökérútvonalas, mind a /nvs-website/ alatti buildet ellenőrzik: 21 oldal, nyelvi metaadatok, canonical/hreflang, assetek, átirányítások, belső linkek, sitemap, kiszolgálói útvonalkezelés és foglalási demó. A kiszolgálót közvetlen request-handler hívással tesztelik, hálózati hozzáférés nélkül. Ez nem távoli HTTP- vagy teljes akadálymentességi audit.
+A tesztek (13 db: tests/site, booking, photos) mind a gyökérútvonalas, mind a /nvs-website/ alatti buildet ellenőrzik: 21 oldal, nyelvi metaadatok, canonical/hreflang, assetek, átirányítások, belső linkek, sitemap, kiszolgálói útvonalkezelés és foglalási demó. A kiszolgálót közvetlen request-handler hívással tesztelik, hálózati hozzáférés nélkül. Ez nem távoli HTTP- vagy teljes akadálymentességi audit.
 
 ## GitHub Pages
 
