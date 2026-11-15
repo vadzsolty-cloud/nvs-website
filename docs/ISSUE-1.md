@@ -50,7 +50,9 @@ A teszt kizárólag a fenti demo projektet használja. Ne futtass `firebase depl
 - Helyi statikus build: sikeres, 24 nyelvi oldal.
 - Helyi automatizált teszt: 8 sikeres; gyökérútvonal, Pages-alútvonal, kapcsolati linkek, NAP-gate, lab opt-in, registry, DST és demó.
 - Helyi Emulator Suite: nem futtatható ezen a hoston. Az egyetlen talált Java indító hibás (`could not find java.dll`). Az npm registry a sandboxból ENOTFOUND hibát ad; a sandboxon kívüli futtatást az automatikus szabályzat elutasítja. Nem kerültem meg a korlátozást.
-- Az emulator workflow külön GitHub Actions runneren, Node 22 + Java 21 mellett fut; eredménye a PR-ben és az issue-kommentben dokumentálandó. A helyi tesztek önmagukban nem bizonyítanak Firebase-integrációt.
+- Az emulator workflow Node 22 + Java 21 mellett sikeres: [43645488775](https://github.com/vadzsolty-cloud/nvs-website/actions/runs/43645488775), ellenőrzött kódcommit: `99dc3d07ce4dda6fd44695db982c0c254c35e8ff`. Nyolc statikus/unit teszt és 9 Emulator Suite teszt (8 részteszt + főteszt), 0 hiba, 0 kihagyás. A Pages-ellenőrzés is sikeres: [43645488697](https://github.com/vadzsolty-cloud/nvs-website/actions/runs/43645488697).
+- Az első emulátorfuttatás egy 25 karakteres korlátot túllépő szintetikus rendszám-fixture miatt hibázott; a fixture javítva, a bemeneti korlát megmaradt. Az ezt követő teljes integrációs futtatások sikeresek. A teszt valódi Auth/Firestore/Functions emulátorokkal, nem mockolt Firebase SDK-val futott.
+- Asztali és 390 × 844 px mobilos helyi Edge-ellenőrzés: kapcsolati cím/tel/mail/Maps/app href, HU és RO adatkezelési oldal és nyelvváltás sikeres. Az első stale-tab hiba friss előnézeti lappal megszűnt. A lab HTTP-útvonalait, JS-/fordításfájlját és szűk CSP-jét a CI tényleges HTTP-kérésekkel ellenőrizte; a teljes lab UI kézi bejelentkezési folyamata helyben a Java-korlát miatt nem volt végigkattintható.
 - Nem történt éles Firebase-olvasás/írás, Rules-/Functions-deploy, app- vagy APK-módosítás. Nem volt új nyilvános weboldal-publikálás ezen a feature ágon.
 
 ## Éles bekötéshez még szükséges
@@ -58,3 +60,11 @@ A teszt kizárólag a fenti demo projektet használja. Ne futtass `firebase depl
 Hiteles és jóváhagyott projektazonosító, NVS shopId, telepített Auth-providerek/action domainek, valós szabályok/indexek és runtime állapot; jármű-műhely összerendelés üzleti jóváhagyása; feladó/domain/Secret Manager és e-mail-szolgáltató; szerveroldali App Check és periméter abuse-védelem; élő adatkezelési tájékoztató és jóváhagyott cím/telefon. Ezek hiányában a nyilvános felület demó marad. A közös account/app-megjelenés igazolása az emulált adatmodellre és appazonos query-re vonatkozik, nem a valódi APK-ban tesztelt éles megjelenésre.
 
 Forrásdokumentáció: https://firebase.google.com/docs/emulator-suite/connect_auth és https://firebase.google.com/docs/emulator-suite/connect_firestore
+
+## Review-képernyőképek
+
+![Asztali kapcsolati előnézet](review/issue1-contact-desktop.jpg)
+
+![Mobilos kapcsolati előnézet](review/issue1-contact-mobile.jpg)
+
+A képek helyi review-buildről készültek. A nyilvános oldal nem frissült ettől a PR-től. A draft PR: https://github.com/vadzsolty-cloud/nvs-website/pull/2; az issue nyitva marad az éles konfiguráció, ellenőrzött cégadatok, éles adatkezelés és release-jóváhagyás rendezéséig.
