@@ -1,0 +1,22 @@
+/* Keep third-party frames inside their contact card in both themes. */
+.map-panel.map-loaded{position:relative;isolation:isolate;display:flex;flex-direction:column;min-width:0;max-width:100%;overflow:hidden;align-self:start;padding:0;gap:0}
+.map-panel.map-loaded>iframe{position:static;inset:auto;display:block;flex:none;width:100%;max-width:100%;height:380px;min-height:0;border:0;filter:none}
+.map-panel.map-loaded>.text-link{position:static;display:block;width:100%;padding:14px;background:var(--panel);color:var(--white)}
+html[data-theme="light"]{--bg:#f5f7f3;--panel:#fff;--white:#172315;--muted:#455240;--green:#326f08;--line:#c4d0be;color:#172315;background:#f5f7f3}
+html[data-theme="light"] h1,html[data-theme="light"] h2,html[data-theme="light"] h3,html[data-theme="light"] header,html[data-theme="light"] .brand,html[data-theme="light"] .service-card,html[data-theme="light"] .booking-strip{color:#172315}
+html[data-theme="light"] p,html[data-theme="light"] .lead,html[data-theme="light"] .hero-bottom,html[data-theme="light"] .back{color:#455240}
+html[data-theme="light"] .hero-highlight,html[data-theme="light"] .eyebrow,html[data-theme="light"] .text-link,html[data-theme="light"] .brand small{color:#326f08}
+html[data-theme="light"] .button,html[data-theme="light"] .actions .text-link{background:#fff;color:#24441a;border-color:#729164}
+html[data-theme="light"] .button:hover,html[data-theme="light"] .actions .text-link:hover{background:#e7f0df;color:#172315}
+html[data-theme="light"] .button.primary{background:#326f08;border-color:#326f08;color:#fff}
+html[data-theme="light"] .button.primary:hover{background:#245306;color:#fff}
+html[data-theme="light"] .slider-controls{background:transparent;color:#172315}
+html[data-theme="light"] .slider-controls button{background:#fff;color:#24441a;border-color:#729164}
+html[data-theme="light"] .slider-dot[aria-current]:before{background:#326f08;box-shadow:none}
+/* Captions stay on a dark image scrim in both themes. */
+html[data-theme="light"] .slide-caption,html[data-theme="light"] .slide-caption strong{color:#fff}
+html[data-theme="light"] .slide-caption small{color:#d6e1d0}
+html[data-theme="light"] .slide-index,html[data-theme="light"] .slide-link,html[data-theme="light"] .slide-icon{color:#a2ff26}
+html[data-theme="light"] .slide-link{background:#0b0e0edb;border-color:#6c9c39}
+html[data-theme="light"] .lightbox,html[data-theme="light"] .lightbox button{color:#fff}
+@media(max-width:700px){.map-panel.map-loaded>iframe{height:320px}}
