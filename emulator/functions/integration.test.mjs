@@ -29,7 +29,7 @@ test('isolated Firebase Auth, Functions, Firestore and mail sink integration',as
  const payload={carId,serviceId:'adas',date,time:'10:00',note:'Synthetic test only',lang:'hu',idempotencyKey:randomUUID()};
  let saved;
  await t.test('production request service rejects forged access and deduplicates pending requests in the isolated emulator',async()=>{
- const svc=productionService({db,auth,shopId:DEMO_SHOP});const p={...payload,time:'15:00',acceptNotice:true,idempotencyKey:randomUUID()};
+ const svc=productionService({db,auth,shopId:DEMO_SHOP});const p={...payload,time:'16:30',acceptNotice:true,idempotencyKey:randomUUID()};
  await assert.rejects(()=>svc.request(customer.token,{...p,acceptNotice:false}),/NOTICE_REQUIRED/);await assert.rejects(()=>svc.request(other.token,p),/FORBIDDEN/);await assert.rejects(()=>svc.request(customer.token,{...p,status:'confirmed'}),/INVALID_INPUT/);const results=await Promise.all([svc.request(customer.token,p),svc.request(customer.token,p)]);assert.equal(results[0].id,results[1].id);const a=(await db.doc('appointments/'+results[0].id).get()).data();assert.equal(a.status,'pending');assert.equal(a.capacityGuaranteed,false);assert.equal(a.shopId,DEMO_SHOP);assert.equal(a.privacyNoticeVersion,'2026-11-15');assert.equal((await db.doc('nvsWebsiteMailOutbox/'+results[0].id).get()).data().status,'pending');await assert.rejects(()=>svc.request(customer.token,{...p,idempotencyKey:randomUUID()}),/DUPLICATE_REQUEST/);
  });
  await t.test('local-only web lab serves module/translations with restricted emulator CSP',async()=>{
