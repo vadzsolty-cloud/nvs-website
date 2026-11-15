@@ -1,0 +1,14 @@
+{
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "nvswebsite",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "*-debug.log",
+        "*.test.mjs"
+      ]
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import {createBookingService as productionService} from '../../backend/functions/booking.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
@@ -27,6 +28,10 @@ test('isolated Firebase Auth, Functions, Firestore and mail sink integration',as
  const carId='car-'+customer.uid;await db.doc('cars/'+carId).set({id:carId,ownerUid:customer.uid,shopId:DEMO_SHOP,plate:'TEST-'+customer.uid,make:'Synthetic',model:'Fixture'});
  const payload={carId,serviceId:'adas',date,time:'10:00',note:'Synthetic test only',lang:'hu',idempotencyKey:randomUUID()};
  let saved;
+ await t.test('production request service rejects forged access and deduplicates pending requests in the isolated emulator',async()=>{
+ const svc=productionService({db,auth,shopId:DEMO_SHOP});const p={...payload,time:'15:00',acceptNotice:true,idempotencyKey:randomUUID()};
+ await assert.rejects(()=>svc.request(customer.token,{...p,acceptNotice:false}),/NOTICE_REQUIRED/);await assert.rejects(()=>svc.request(other.token,p),/FORBIDDEN/);await assert.rejects(()=>svc.request(customer.token,{...p,status:'confirmed'}),/INVALID_INPUT/);const results=await Promise.all([svc.request(customer.token,p),svc.request(customer.token,p)]);assert.equal(results[0].id,results[1].id);const a=(await db.doc('appointments/'+results[0].id).get()).data();assert.equal(a.status,'pending');assert.equal(a.capacityGuaranteed,false);assert.equal(a.shopId,DEMO_SHOP);assert.equal(a.privacyNoticeVersion,'2026-11-15');assert.equal((await db.doc('nvsWebsiteMailOutbox/'+results[0].id).get()).data().status,'pending');await assert.rejects(()=>svc.request(customer.token,{...p,idempotencyKey:randomUUID()}),/DUPLICATE_REQUEST/);
+ });
  await t.test('local-only web lab serves module/translations with restricted emulator CSP',async()=>{
   const server=createPreviewServer({output:'../artifacts/emulator-ui',basePath:'/nvs-website',emulatorUi:true});
   await new Promise(r=>server.listen(0,'127.0.0.1',r));const host='http://127.0.0.1:'+server.address().port;
@@ -34,7 +39,7 @@ test('isolated Firebase Auth, Functions, Firestore and mail sink integration',as
    for(const l of ['hu','ro','en']){const r=await fetch(host+'/nvs-website/'+l+'/lab/');assert.equal(r.status,200);assert.ok(r.headers.get('content-security-policy').includes('127.0.0.1:9099'));assert.ok((await r.text()).includes('lab-request'));}
    const script=await fetch(host+'/nvs-website/assets/emulator-lab.js');assert.equal(script.status,200);assert.match(script.headers.get('content-type'),/javascript/);
    const copy=await (await fetch(host+'/nvs-website/assets/lab-copy.json')).json();for(const l of ['hu','ro','en'])assert.ok(copy[l].states.pending);
-   const home=await fetch(host+'/nvs-website/hu/');assert.ok(home.headers.get('content-security-policy').includes("connect-src 'none'"));assert.ok(!(await home.text()).includes('emulator-lab.js'));
+   const home=await fetch(host+'/nvs-website/hu/');assert.ok(!home.headers.get('content-security-policy').includes('127.0.0.1:9099'));assert.ok(!(await home.text()).includes('emulator-lab.js'));
   }finally{server.closeAllConnections();await new Promise(r=>server.close(r));}
  });
  await t.test('verified identity, ownership, workshop and forged fields are enforced',async()=>{
