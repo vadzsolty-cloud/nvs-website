@@ -7,6 +7,7 @@ import {resolve} from 'node:path';
 import {photos,placement} from '../src/photos.mjs';
 import {ids} from '../src/content.mjs';
 import {sliderOrder} from '../src/slider.mjs';
+import {facebookPosts,pageId} from '../src/facebook-posts.mjs';
 
 // Files whose bottom-left corner shows the Samsung "AI által előállított tartalom" label, the edited
 // crop of the same series, and the AI-generated poster graphics (file_0000*.png) must never be used.
@@ -40,6 +41,9 @@ test('pages use responsive images under /nvs-website/, eager hero, lazy gallery,
   assert.equal([...html.matchAll(/data-lightbox/g)].length,1+placement.gallery.length);
   assert.ok(html.includes('<dialog class="lightbox"'));
   assert.ok(!html.includes('/assets/workshop/'));
+  // Facebook post cards: static links only, every selected post, no embed/SDK
+  for(const p of facebookPosts){assert.ok(html.includes(`href="https://www.facebook.com/${pageId}/posts/${p.id}" target="_blank" rel="noopener"`),p.id);assert.ok(html.includes(p.title[l]));}
+  assert.ok(!/connect\.facebook\.net|<iframe|fbq\(|facebook\.com\/plugins/.test(html));
   // service slider: one slide per service, real photo or labelled icon slide, links to the service page
   const slider=html.match(/<section class="service-slider"[\s\S]*?<\/section>/)[0];
   assert.equal([...slider.matchAll(/class="slide[ "]/g)].length,ids.length);
@@ -50,7 +54,11 @@ test('pages use responsive images under /nvs-website/, eager hero, lazy gallery,
   assert.ok(slider.indexOf(photos[placement.hero].alt[l])>0);
   for(const id of ids){
    const page=await readFile(`${output}/${l}/services/${id}/index.html`,'utf8');
-   assert.equal(page.includes('service-placeholder'),!placement.services[id],id);
+   assert.equal(page.includes('service-placeholder'),!placement.services[id]&&!(placement.serviceSlides||{})[id],id);
+   const slides=(placement.serviceSlides||{})[id]||[];
+   if(slides.length){assert.ok(page.includes('class="service-slider photo-slider"'),id);for(const slug of slides)assert.ok(page.includes(`/nvs-website/assets/photos/${slug}-`),slug);assert.equal([...page.matchAll(/fetchpriority="high"/g)].length,1);}
+   const rel=facebookPosts.filter(p=>p.services.includes(id));
+   for(const p of rel)assert.ok(page.includes(`href="https://www.facebook.com/${pageId}/posts/${p.id}"`),p.id);
    if(placement.services[id])assert.ok(page.includes(`/nvs-website/assets/photos/${placement.services[id]}-`));
   }
  }
@@ -65,7 +73,7 @@ test('lightbox opens, navigates with keys and swipe, closes and restores focus',
  const box={...el('box'),dataset:{of:'/'},showModal(){this.open=true;},close(){this.open=false;handlers['box:close']();},querySelector:s=>({img,'.lightbox-caption':caption,'.lightbox-count':count,'.lightbox-prev':prev,'.lightbox-next':next,'.lightbox-close':close})[s]};
  box.addEventListener=(t,f,)=>{handlers['box:'+t]=f;};
  const links=[0,1,2].map(i=>{const a=el('a'+i);a.attrs.href='/p'+i+'.jpg';a.dataset.caption='C'+i;a.querySelector=()=>({alt:'Alt '+i});return a;});
- runInNewContext(await readFile('public/assets/app.js','utf8'),{document:{querySelector:s=>s==='.lightbox'?box:null,querySelectorAll:()=>links},Math});
+ runInNewContext(await readFile('public/assets/app.js','utf8'),{document:{querySelector:s=>s==='.lightbox'?box:null,querySelectorAll:s=>s.includes('lightbox')?links:[]},Math});
  let prevented=false;handlers['a1:click']({button:0,preventDefault(){prevented=true;}});
  assert.ok(prevented&&box.open);assert.equal(img.src,'/p1.jpg');assert.equal(img.alt,'Alt 1');assert.equal(caption.textContent,'C1');assert.equal(count.textContent,'2 / 3');assert.equal(focused,'close');
  const key=k=>handlers['box:keydown']({key:k,preventDefault(){}});
@@ -83,7 +91,7 @@ test('service slider: controls appear, dots/prev/next move, pause toggles, autop
   const toggle={...make(),firstElementChild:{textContent:''}},controls=make(),prev=make(),next=make();
   const slider={...make(),dataset:{pause:'Pause',play:'Play'},querySelector:s=>({'.slides':track,'.slider-toggle':toggle,'.slider-controls':controls,'.slider-prev':prev,'.slider-next':next})[s],querySelectorAll:s=>s==='.slide'?slides:dots};
   const intervals=[];
-  runInNewContext(await readFile('public/assets/app.js','utf8'),{document:{querySelector:s=>s==='.service-slider'?slider:null,querySelectorAll:()=>[],hidden:false},matchMedia:()=>({matches:reduce}),setInterval:(f,ms)=>{intervals.push(f);return intervals.length;},clearInterval(){},setTimeout(f){f();},clearTimeout(){},Math});
+  runInNewContext(await readFile('public/assets/app.js','utf8'),{document:{querySelector:()=>null,querySelectorAll:s=>s==='.service-slider'?[slider]:[],hidden:false},matchMedia:()=>({matches:reduce}),setInterval:(f,ms)=>{intervals.push(f);return intervals.length;},clearInterval(){},setTimeout(f){f();},clearTimeout(){},Math});
   return {slides,dots,track,toggle,controls,prev,next,slider,intervals};
  };
  const s=await run(false);

@@ -86,3 +86,20 @@ nav{gap:23px;font-size:12px}nav a{padding:8px 0}nav a:hover{border-bottom:1px so
 .slider-dot:before{content:'';position:absolute;left:4px;right:4px;top:13px;height:4px;border-radius:2px;background:#3a4635;transition:background .2s}.slider-dot[aria-current]:before{background:var(--green);box-shadow:0 0 10px #76ff0399}
 @media(max-width:700px){.slides{min-height:0;aspect-ratio:4/3.4;flex:none}.slide-caption{padding:50px 16px 14px}.slide-caption strong{font-size:19px}.slide-caption small{font-size:11px}.slide-icon{inset:0 0 110px}.slide-icon svg{width:90px;height:90px}.slider-dots .slider-dot{width:26px}}
 @media(prefers-reduced-motion:reduce){.slides{scroll-behavior:auto}}
+
+/* Per-service photo slideshow on service pages */
+.service-visual .service-slider{gap:10px}.service-visual .slides{min-height:0;aspect-ratio:4/3;flex:none}
+.photo-slider .slide-zoom{position:absolute;inset:0;border-radius:10px}.photo-slider .slide-zoom .photo{position:absolute;inset:0}
+.slide-caption-small{padding:40px 16px 12px;pointer-events:none}.slide-caption-small small{font-size:11px}
+/* Facebook post cards (static links, no embed) */
+.fb-block{margin:10px 0 40px}.fb-block h3,.gallery-title,.fb-section h2{font-size:24px;font-weight:600;letter-spacing:-.02em;margin:6px 0 8px}.fb-block>p{font-size:13px;max-width:760px}
+.fb-posts{list-style:none;margin:20px 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.fb-card{display:flex;flex-direction:column;gap:8px;height:100%;padding:18px;border:1px solid #3d4a35;border-radius:10px;background:linear-gradient(150deg,#76ff030d,#141a16 40%,#0e120f);transition:border-color .2s,transform .2s}
+.fb-card:hover,.fb-card:focus-visible{border-color:var(--green);transform:translateY(-2px)}
+.fb-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#aeb9a8}.fb-icon svg{width:22px;height:22px;color:var(--green);display:block}.fb-meta>span:nth-child(2){color:var(--green);font-weight:700}
+.fb-kind{border:1px solid #4d5d42;border-radius:20px;padding:1px 8px}
+.fb-card strong{font-size:16px;line-height:1.3;font-weight:650}.fb-card p{font-size:12px;line-height:1.55;margin:0;color:#c3ccbd}.fb-open{margin-top:auto;padding-top:6px;font-size:12px;color:var(--green)}
+.gallery-title{margin-top:10px}.fb-section{border-top:1px solid var(--line)}
+@media(max-width:1000px){.fb-posts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.fb-posts{grid-template-columns:1fr}.fb-card{padding:16px}}
+@media(prefers-reduced-motion:reduce){.fb-card:hover{transform:none}}

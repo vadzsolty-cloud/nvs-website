@@ -50,8 +50,7 @@ if(box&&triggers.length&&typeof box.showModal==='function'){
 }
 
 // Service slider: prev/next, dots, pause/play, autoplay (paused on hover, focus, hidden tab, reduced motion).
-const slider=document.querySelector('.service-slider');
-if(slider){
+for(const slider of (document.querySelectorAll?document.querySelectorAll('.service-slider'):[])){
  const track=slider.querySelector('.slides'),slides=[...slider.querySelectorAll('.slide')],dots=[...slider.querySelectorAll('.slider-dot')];
  const toggle=slider.querySelector('.slider-toggle'),controls=slider.querySelector('.slider-controls');
  const reduce=typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches;

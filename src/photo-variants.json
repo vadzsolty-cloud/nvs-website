@@ -120,5 +120,224 @@
    768,
    1152
   ]
+ },
+ "hunter-alignment-lift": {
+  "original": "IMG-20260511-WA0011.jpg",
+  "width": 4096,
+  "height": 2304,
+  "widths": [
+   640,
+   1024,
+   1600,
+   2048
+  ]
+ },
+ "hunter-alignment-screens": {
+  "original": "IMG-20260511-WA0017.jpg",
+  "width": 4096,
+  "height": 2304,
+  "widths": [
+   640,
+   1024,
+   1600,
+   2048
+  ]
+ },
+ "camera-calibration-target": {
+  "original": "IMG-20260717-WA0009.jpg",
+  "width": 4096,
+  "height": 2304,
+  "widths": [
+   640,
+   1024,
+   1600,
+   2048
+  ]
+ },
+ "camera-calibration-target-front": {
+  "original": "IMG-20251104-WA0070.jpg",
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   640,
+   1024,
+   1600,
+   2048
+  ]
+ },
+ "diagnostics-laptop": {
+  "original": "IMG-20260717-WA0001.jpg",
+  "width": 4096,
+  "height": 2304,
+  "widths": [
+   640,
+   1024,
+   1600,
+   2048
+  ]
+ },
+ "adas-station": {
+  "original": "IMG-20260816-WA0000.jpg",
+  "width": 2304,
+  "height": 4096,
+  "widths": [
+   480,
+   768,
+   1152,
+   1536
+  ]
+ },
+ "headlight-laser-check": {
+  "original": "IMG-20260717-WA0013.jpg",
+  "width": 4096,
+  "height": 2304,
+  "widths": [
+   640,
+   1024,
+   1600,
+   2048
+  ]
+ },
+ "ac-service-unit": {
+  "original": "IMG-20260509-WA0018.jpg",
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   640,
+   1024,
+   1600,
+   2048
+  ]
+ },
+ "diagnostics-tablet-in-car": {
+  "original": "IMG-20260717-WA0007.jpg",
+  "width": 4096,
+  "height": 2304,
+  "widths": [
+   640,
+   1024,
+   1600,
+   2048
+  ]
+ },
+ "acc-radar-reflector": {
+  "original": "IMG-20251104-WA0045.jpg",
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   640,
+   1024,
+   1600,
+   2048
+  ]
+ },
+ "adas-screen-front": {
+  "original": "IMG-20251104-WA0059.jpg",
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   640,
+   1024,
+   1600,
+   2048
+  ]
+ },
+ "adas-guided-setup": {
+  "original": "IMG-20260717-WA0006.jpg",
+  "width": 4096,
+  "height": 2304,
+  "widths": [
+   640,
+   1024,
+   1600,
+   2048
+  ]
+ },
+ "adas-station-van": {
+  "original": "IMG-20260816-WA0002.jpg",
+  "width": 2304,
+  "height": 4096,
+  "widths": [
+   480,
+   768,
+   1152,
+   1536
+  ]
+ },
+ "hunter-alignment-wheel": {
+  "original": "IMG-20251104-WA0047.jpg",
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   640,
+   1024,
+   1600,
+   2048
+  ]
+ },
+ "hunter-console": {
+  "original": "IMG-20260527-WA0009.jpg",
+  "width": 2304,
+  "height": 4096,
+  "widths": [
+   480,
+   768,
+   1152,
+   1536
+  ]
+ },
+ "hunter-camera-beam": {
+  "original": "IMG-20260527-WA0011.jpg",
+  "width": 2304,
+  "height": 4096,
+  "widths": [
+   480,
+   768,
+   1152,
+   1536
+  ]
+ },
+ "camera-target-portrait": {
+  "original": "IMG-20251104-WA0034.jpg",
+  "width": 1152,
+  "height": 2048,
+  "widths": [
+   480,
+   768,
+   1152
+  ]
+ },
+ "camera-target-angle": {
+  "original": "IMG-20260717-WA0011.jpg",
+  "width": 4096,
+  "height": 2304,
+  "widths": [
+   640,
+   1024,
+   1600,
+   2048
+  ]
+ },
+ "camera-target-cabin": {
+  "original": "IMG-20251104-WA0074.jpg",
+  "width": 2048,
+  "height": 1152,
+  "widths": [
+   640,
+   1024,
+   1600,
+   2048
+  ]
+ },
+ "headlight-matrix-led": {
+  "original": "IMG-20260619-WA0005.jpg",
+  "width": 4096,
+  "height": 2304,
+  "widths": [
+   640,
+   1024,
+   1600,
+   2048
+  ]
  }
 }
