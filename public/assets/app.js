@@ -70,4 +70,3 @@ for(const slider of (document.querySelectorAll?document.querySelectorAll('.servi
  let settle=null;track.addEventListener('scroll',()=>{clearTimeout(settle);settle=setTimeout(()=>{const w=track.clientWidth||1;mark(Math.max(0,Math.min(slides.length-1,Math.round(track.scrollLeft/w))));},120);},{passive:true});
  sync();
 }
-
