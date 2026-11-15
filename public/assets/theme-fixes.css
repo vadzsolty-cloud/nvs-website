@@ -20,3 +20,5 @@ html[data-theme="light"] .slide-index,html[data-theme="light"] .slide-link,html[
 html[data-theme="light"] .slide-link{background:#0b0e0edb;border-color:#6c9c39}
 html[data-theme="light"] .lightbox,html[data-theme="light"] .lightbox button{color:#fff}
 @media(max-width:700px){.map-panel.map-loaded>iframe{height:320px}}
+
+html[data-theme="light"] #services .service-card{background:#fff;border-color:#b6c8ac;box-shadow:0 7px 18px #18341312}html[data-theme="light"] #services .service-card:hover{background:#e9f2e1;border-color:#326f08}html[data-theme="light"] #services .service-card h3{color:#172315}html[data-theme="light"] #services .service-card p,html[data-theme="light"] #services .card-link{color:#455240}
