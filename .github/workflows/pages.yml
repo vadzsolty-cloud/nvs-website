@@ -1,4 +1,4 @@
-name: Website checks and optional Pages preview
+name: Website checks and automatic DEMO preview
 
 on:
   push:
@@ -39,7 +39,7 @@ jobs:
           path: dist
 
   deploy:
-    if: github.event_name == 'workflow_dispatch' && inputs.publish_preview && github.ref == 'refs/heads/dev/website-v1'
+    if: github.ref == 'refs/heads/dev/website-v1' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish_preview))
     needs: build
     runs-on: ubuntu-latest
     permissions:
