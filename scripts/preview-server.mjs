@@ -1,7 +1,7 @@
 import http from 'node:http';
 import {readFile,stat} from 'node:fs/promises';
 import {resolve,sep,extname} from 'node:path';
-const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.xml':'application/xml','.txt':'text/plain; charset=utf-8'};
+const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.xml':'application/xml','.txt':'text/plain; charset=utf-8'};
 export function createPreviewServer({output='dist',basePath='',emulatorUi=false}={}){
  const root=resolve(output);
  return http.createServer(async(req,res)=>{
