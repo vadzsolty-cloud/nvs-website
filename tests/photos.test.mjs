@@ -34,7 +34,7 @@ test('pages use responsive images under /nvs-website/, eager hero, lazy gallery,
   for(const m of html.matchAll(/(?:image)?srcset="([^"]+)"/g))for(const item of m[1].split(', ')){const url=item.split(' ')[0];assert.ok(url.startsWith('/nvs-website/assets/photos/'),url);await stat(output+url.slice('/nvs-website'.length));}
   const imgs=[...html.matchAll(/<img [^>]*>/g)].map(m=>m[0]).filter(t=>t.includes('/assets/photos/'));
   const sliderPhotos=sliderOrder.filter(id=>placement.services[id]).length;
-  assert.equal(imgs.length,sliderPhotos+1+placement.gallery.length);
+  assert.equal(imgs.length,sliderPhotos+1+placement.gallery.length+facebookPosts.length);
   for(const t of imgs){assert.match(t,/ alt="[^"]{15,}"/);assert.match(t,/ width="\d+" height="\d+"/);}
   assert.match(imgs[0],/fetchpriority="high"/);assert.ok(imgs.slice(1).every(t=>t.includes('loading="lazy"')));
   assert.ok(html.includes('rel="preload" as="image"'));
@@ -43,7 +43,7 @@ test('pages use responsive images under /nvs-website/, eager hero, lazy gallery,
   assert.ok(!html.includes('/assets/workshop/'));
   // Facebook post cards: static links only, every selected post, no embed/SDK
   for(const p of facebookPosts){assert.ok(html.includes(`href="https://www.facebook.com/${pageId}/posts/${p.id}" target="_blank" rel="noopener"`),p.id);assert.ok(html.includes(p.title[l]));}
-  assert.ok(!/connect\.facebook\.net|fbq\(/.test(html));assert.ok(html.includes('https://www.facebook.com/plugins/video.php'));assert.ok(html.includes('https://www.facebook.com/plugins/post.php'));
+  assert.ok(!/connect\.facebook\.net|fbq\(/.test(html));assert.ok(html.includes('https://www.facebook.com/plugins/video.php'));assert.ok(html.includes('https://www.facebook.com/plugins/page.php'));assert.equal((html.match(/plugins\/video\.php/g)||[]).length,1);
   // service slider: one slide per service, real photo or labelled icon slide, links to the service page
   const slider=html.match(/<section class="service-slider"[\s\S]*?<\/section>/)[0];
   assert.equal([...slider.matchAll(/class="slide[ "]/g)].length,ids.length);
