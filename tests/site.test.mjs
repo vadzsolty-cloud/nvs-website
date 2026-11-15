@@ -7,11 +7,12 @@ import {resolve} from 'node:path';
 import {content,ids} from '../src/content.mjs';
 import {getConfig} from '../scripts/config.mjs';
 import {createPreviewServer} from '../scripts/preview-server.mjs';
+import {business} from '../src/business.mjs';
 
 for(const basePath of ['', '/nvs-website'])test('localized HTML, assets, redirects and preview routing: '+(basePath||'/'),async()=>{
  const output=resolve('artifacts/test-builds/'+(basePath?'pages':'root'));
  const origin='https://vadzsolty-cloud.github.io';
- execFileSync(process.execPath,['scripts/build.mjs'],{env:{...process.env,BASE_PATH:basePath,SITE_URL:origin,PRODUCTION:'false',OUTPUT_DIR:output},stdio:'pipe'});
+ execFileSync(process.execPath,['scripts/build.mjs'],{env:{...process.env,BASE_PATH:basePath,SITE_URL:origin,PRODUCTION:'false',CONTACT_APPROVED:'false',EMULATOR_UI:'false',OUTPUT_DIR:output},stdio:'pipe'});
  const titles=new Set(),descriptions=new Set();
  for(const l of Object.keys(content))for(const id of ['',...ids]){
   const path='/'+l+'/'+(id?'services/'+id+'/':'');
@@ -23,6 +24,12 @@ for(const basePath of ['', '/nvs-website'])test('localized HTML, assets, redirec
   for(const x of Object.keys(content))assert.ok(html.includes('hreflang="'+x+'" href="'+origin+basePath+'/'+x+'/'+(id?'services/'+id+'/':'')+'"'));
   assert.ok(html.includes('noindex,nofollow'));
   const json=JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/)[1]);assert.equal(json['@type'],'AutoRepair');assert.equal(json.telephone,undefined);
+  assert.equal(json.name,business.name);assert.equal(json.email,business.email);assert.equal(json.hasMap,business.maps);
+  assert.ok(html.includes('href="'+business.phoneHref+'"'));assert.ok(html.includes(business.phone));assert.ok(html.includes(business.address));
+  assert.ok(html.includes('href="'+business.facebook+'"'));
+  assert.ok(!html.includes('connect.facebook.net'));assert.ok(!html.includes('<iframe'));
+  assert.ok(html.includes('href="'+business.maps+'"'));assert.ok(html.includes('href="'+business.app+'"'));
+  assert.ok(!html.includes('www.google.com/maps/search'));assert.ok(!html.includes('emulator-lab.js'));
   for(const link of html.matchAll(/(?:href|src)="(\/[^"#]*)/g)){
    assert.ok(link[1].startsWith(basePath+'/'));
    const local=link[1].slice(basePath.length);
@@ -37,7 +44,8 @@ for(const basePath of ['', '/nvs-website'])test('localized HTML, assets, redirec
  assert.equal(titles.size,21);assert.equal(descriptions.size,21);
  const index=await readFile(output+'/index.html','utf8');assert.ok(index.includes('content="0;url='+basePath+'/hu/"'));
  const notFound=await readFile(output+'/404.html','utf8');assert.ok(notFound.includes('href="'+basePath+'/hu/"'));
- const xml=await readFile(output+'/sitemap.xml','utf8');assert.equal([...xml.matchAll(/<loc>/g)].length,21);assert.ok(xml.includes(origin+basePath+'/en/services/adas/'));
+ const xml=await readFile(output+'/sitemap.xml','utf8');assert.equal([...xml.matchAll(/<loc>/g)].length,24);assert.ok(xml.includes(origin+basePath+'/en/services/adas/'));
+ for(const l of ['hu','ro','en']){const policy=await readFile(output+'/'+l+'/privacy/index.html','utf8');assert.ok(policy.includes('<html lang="'+l+'">'));assert.ok(policy.includes('noindex,nofollow'));assert.ok(policy.includes(origin+basePath+'/'+l+'/privacy/'));}
  assert.match(await readFile(output+'/robots.txt','utf8'),/Disallow: \//);await stat(output+'/.nojekyll');
  const server=createPreviewServer({output,basePath});
  const handler=server.listeners('request')[0];
@@ -58,6 +66,22 @@ test('configuration rejects malformed mounts and unsafe origins',()=>{
  for(const SITE_URL of ['file:///tmp/','https://example.com/x','https://user:password@example.com'])assert.throws(()=>getConfig({SITE_URL}));
  assert.equal(getConfig({BASE_PATH:'/nvs-website/'}).basePath,'/nvs-website');
  assert.throws(()=>getConfig({PRODUCTION:'true'}));
+ assert.throws(()=>getConfig({EMULATOR_UI:'true',SITE_URL:'https://vadzsolty-cloud.github.io'}),/Emulator UI/);
+ assert.throws(()=>getConfig({PRODUCTION:'true',SITE_URL:'https://example.com'}),/owner-approved/);
+});
+
+test('local emulator build is opt-in and owner approval controls structured street and phone',async()=>{
+ const output=resolve('artifacts/test-builds/lab');
+ execFileSync(process.execPath,['scripts/build.mjs'],{env:{...process.env,BASE_PATH:'/nvs-website',SITE_URL:'http://localhost:4180',PRODUCTION:'false',CONTACT_APPROVED:'false',EMULATOR_UI:'true',OUTPUT_DIR:output},stdio:'pipe'});
+ for(const l of ['hu','ro','en']){const html=await readFile(output+'/'+l+'/lab/index.html','utf8');assert.ok(html.includes('emulator-lab.js'));assert.ok(html.includes('noindex,nofollow'));}
+ const handler=createPreviewServer({output,basePath:'/nvs-website',emulatorUi:true}).listeners('request')[0];
+ for(const [route,allowed] of [['/hu/lab/',true],['/hu/',false]]){
+  const response={writeHead(status,headers){this.headers=headers;return this;},end(){}};await handler({url:'/nvs-website'+route},response);
+  assert.equal(response.headers['Content-Security-Policy'].includes('http://127.0.0.1:9099'),allowed);
+ }
+ const approved=resolve('artifacts/test-builds/approved');
+ execFileSync(process.execPath,['scripts/build.mjs'],{env:{...process.env,BASE_PATH:'/nvs-website',SITE_URL:'https://example.com',PRODUCTION:'true',CONTACT_APPROVED:'true',EMULATOR_UI:'false',OUTPUT_DIR:approved},stdio:'pipe'});
+ const html=await readFile(approved+'/hu/index.html','utf8');const schema=JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/)[1]);assert.equal(schema.telephone,business.phone);assert.equal(schema.address.streetAddress,business.street);
 });
 
 test('demo summarises and resets without network or persistent storage',async()=>{

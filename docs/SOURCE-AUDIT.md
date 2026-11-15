@@ -1,5 +1,7 @@
 # Csak olvasási projektvizsgálat – 2026-11-14
 
+Issue #1 kiegészítés: a standalone blob az új vizsgálatkor is `de36a5c734eff694f651ace297b5d356a418932f`. A `normalizeVehicleIdentity` NFD/uppercase/alphanumerikus normalizálást, a `vehicleRegistryId` pedig `kind + '_' + SHA256(kind + ':' + normalized)` azonosítót használ. A labor ezt követi; ütközéskor nem vesz át járművet. Olvasással ellenőriztük a műhely shopId-, a személyes ügyfél ownerUid-lekérdezését, valamint a céges tagság/driver assignedCarIds feltételeket. Éles adatot és konfigurációt nem exportáltunk. Új tesztállapot: `docs/ISSUE-1.md`.
+
 ## Érintett források
 
 - `vadzsolty-cloud/night-vision-service`: privát, alapértelmezett ág `main`, HTML/Capacitor alkalmazás. A `www/` egy 4,67 MB-os standalone HTML-t tartalmaz. Külön `native/`, `.github/`, `scripts/`, `app-icon/`, valamint `capacitor.config.json`, `package.json`, `firebase.json`, Firestore és Storage szabályfájlok találhatók a gyökérben. Aláírási és Firebase-konfigurációs fájlokhoz nem nyúltunk, és nem másoltuk át őket.

@@ -1,0 +1,5 @@
+{
+ "name":"nvs-emulator-runner","private":true,
+ "devDependencies":{"firebase-tools":"15.36.0"},
+ "scripts":{"test":"firebase emulators:exec --project demo-nvs-website --config firebase.json --only auth,firestore,functions \"node --test functions/integration.test.mjs\"","start":"firebase emulators:start --project demo-nvs-website --config firebase.json --only auth,firestore,functions"}
+}

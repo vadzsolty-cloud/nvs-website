@@ -1,0 +1,16 @@
+rules_version = '2';
+// Isolated emulator rules only. Never deploy to the existing NVS project.
+service cloud.firestore {
+ match /databases/{database}/documents {
+  match /appointments/{id} {
+   allow read: if request.auth != null && request.auth.token.email_verified == true
+     && (resource.data.ownerUid == request.auth.uid || resource.data.shopId == request.auth.uid);
+   allow write: if false;
+  }
+  match /cars/{id} {
+   allow read: if request.auth != null && resource.data.ownerUid == request.auth.uid;
+   allow write: if false;
+  }
+  match /{document=**} {allow read, write: if false;}
+ }
+}
