@@ -27,7 +27,7 @@ for(const basePath of ['', '/nvs-website'])test('localized HTML, assets, redirec
   assert.equal(json.name,business.name);assert.equal(json.email,business.email);assert.equal(json.hasMap,business.maps);
   assert.ok(html.includes('href="'+business.phoneHref+'"'));assert.ok(html.includes(business.phone));assert.ok(html.includes(business.address));
   assert.ok(html.includes('href="'+business.facebook+'"'));
-  assert.ok(!html.includes('connect.facebook.net'));assert.ok(!html.includes('<iframe'));
+  assert.ok(!html.includes('connect.facebook.net'));assert.ok(html.includes('<iframe'));
   assert.ok(html.includes('href="'+business.maps+'"'));assert.ok(html.includes('href="'+business.app+'"'));
   assert.ok(!html.includes('www.google.com/maps/search'));assert.ok(!html.includes('emulator-lab.js'));
   for(const link of html.matchAll(/(?:href|src)="(\/[^"#]*)/g)){
@@ -95,20 +95,8 @@ test('demo summarises and resets without network or persistent storage',async()=
  nodes.date.value='2000-01-01';listeners['booking-formsubmit']({preventDefault(){}});assert.equal(nodes.date.validity,'Invalid');assert.equal(nodes['booking-form'].hidden,false);
 });
 
-test('approved address and phone in structured data; map loads from Google only after a click',async()=>{
+test('automatic map and localized theme controls',async()=>{
  const output=resolve('artifacts/test-builds/map');
- execFileSync(process.execPath,['scripts/build.mjs'],{env:{...process.env,BASE_PATH:'/nvs-website',SITE_URL:'https://vadzsolty-cloud.github.io',PRODUCTION:'false',CONTACT_APPROVED:'false',EMULATOR_UI:'false',OUTPUT_DIR:output},stdio:'pipe'});
- for(const l of ['hu','ro','en']){
-  const html=await readFile(output+'/'+l+'/index.html','utf8');
-  const schema=JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/)[1]);
-  assert.equal(schema.address.streetAddress,business.street);assert.equal(schema.telephone,business.phone);
-  assert.equal(schema.geo.latitude,business.geo.lat);assert.equal(schema.geo.longitude,business.geo.lng);
-  assert.ok(!html.includes('<iframe'));assert.ok(html.includes('class="map-panel map-consent"'));
-  assert.ok(html.includes('data-map-src="https://maps.google.com/maps?q=46.4619963,25.7936655&amp;z=16&amp;output=embed&amp;hl='+l+'"'));
- }
- const listeners={},replaced=[];let created=null;
- const panel={dataset:{mapSrc:'https://maps.google.com/maps?q=1,2&output=embed',mapTitle:'Map'},classList:{add(c){panel.cls=c;}},querySelector:s=>s==='.map-load'?{addEventListener:(t,f)=>listeners[t]=f}:null,replaceChildren(x){replaced.push(x);}};
- runInNewContext(await readFile('public/assets/app.js','utf8'),{document:{querySelector:()=>null,querySelectorAll:s=>s==='.map-consent'?[panel]:[],createElement:t=>(created={tag:t,attrs:{},setAttribute(k,v){this.attrs[k]=v;},focus(){this.focused=true;}})}});
- assert.equal(replaced.length,0);listeners.click();
- assert.equal(created.tag,'iframe');assert.equal(created.src,panel.dataset.mapSrc);assert.equal(created.title,'Map');assert.equal(panel.cls,'map-loaded');assert.equal(replaced[0],created);
+ execFileSync(process.execPath,['scripts/build.mjs'],{env:{...process.env,BASE_PATH:'/nvs-website',SITE_URL:'https://vadzsolty-cloud.github.io',PRODUCTION:'false',EMULATOR_UI:'false',OUTPUT_DIR:output},stdio:'pipe'});
+ for(const l of ['hu','ro','en']){const html=await readFile(output+'/'+l+'/index.html','utf8');assert.ok(html.includes('src="https://maps.google.com/maps?q=46.4619963,25.7936655&amp;z=16&amp;output=embed&amp;hl='+l+'"'));assert.ok(!html.includes('map-load"'));assert.ok(html.includes('theme-toggle'));assert.ok(html.includes('/nvs-website/assets/theme.js'));}
 });

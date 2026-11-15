@@ -71,12 +71,3 @@ for(const slider of (document.querySelectorAll?document.querySelectorAll('.servi
  sync();
 }
 
-// Click-to-load map: nothing is requested from Google until the visitor asks for the map.
-for(const panel of (document.querySelectorAll?document.querySelectorAll('.map-consent'):[])){
- const btn=panel.querySelector('.map-load');
- if(btn)btn.addEventListener('click',()=>{
-  const frame=document.createElement('iframe');
-  frame.src=panel.dataset.mapSrc;frame.title=panel.dataset.mapTitle;frame.loading='lazy';frame.referrerPolicy='no-referrer-when-downgrade';frame.setAttribute('allowfullscreen','');
-  panel.classList.add('map-loaded');panel.replaceChildren(frame);frame.focus();
- });
-}
