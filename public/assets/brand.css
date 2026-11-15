@@ -66,3 +66,23 @@ nav{gap:23px;font-size:12px}nav a{padding:8px 0}nav a:hover{border-bottom:1px so
 @media(max-width:1000px){.photo-gallery{grid-template-columns:repeat(3,minmax(0,1fr))}.photo-gallery li:nth-child(1),.photo-gallery li:nth-child(2){grid-column:auto}.photo-gallery li:nth-child(1) .photo,.photo-gallery li:nth-child(2) .photo{aspect-ratio:4/5}.detail-hero{display:block}.detail-hero .service-visual{margin-top:25px}}
 @media(max-width:700px){.hero-visual>.hero-photo{min-height:0;height:auto;aspect-ratio:16/10}.about-photo .photo{height:340px}.photo-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.photo-gallery p{font-size:11px}.lightbox button{width:44px;height:44px}.lightbox-prev,.lightbox-next{top:auto;bottom:14px;transform:none}.lightbox-prev{left:calc(50% - 56px)}.lightbox-next{right:calc(50% - 56px)}.lightbox img{max-height:calc(100dvh - 170px)}.lightbox figcaption{padding:0 8px}.service-visual .placeholder{min-height:240px}}
 @media(prefers-reduced-motion:reduce){.zoom-icon{transition:none}}
+
+/* Homepage service slider: scroll-snap strip (works without JS, swipeable), JS adds autoplay + controls. */
+.hero-visual:after{display:none}.hero-visual{flex-direction:column}
+.service-slider{position:relative;flex:1;min-width:0;display:flex;flex-direction:column;gap:12px}
+.slides{list-style:none;margin:0;padding:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;border-radius:10px;scrollbar-width:none;flex:1;min-height:400px;overscroll-behavior-x:contain}
+.slides::-webkit-scrollbar{display:none}.slides:focus-visible{outline:3px solid var(--green);outline-offset:4px}
+.slide{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always;position:relative;overflow:hidden;border-radius:10px;border:1px solid #425238;background:#101511}
+.slide .photo{position:absolute;inset:0}.slide .photo img{border:0;border-radius:0}
+.slide-caption{position:absolute;left:0;right:0;bottom:0;padding:70px 22px 20px;background:linear-gradient(0deg,#060807f2 10%,#060807b0 55%,transparent);display:flex;flex-direction:column;gap:3px}
+.slide-index{font-size:10px;letter-spacing:.18em;color:var(--green);font-weight:700}.slide-caption strong{font-size:24px;line-height:1.2;font-weight:650;letter-spacing:-.02em}.slide-caption small{font-size:12px;color:#c9d3c3;max-width:520px;line-height:1.5}
+.slide-link{align-self:flex-start;margin-top:8px;font-size:12px;color:var(--green);border:1px solid #5f8a35;border-radius:6px;padding:8px 14px;background:#0b0e0ecc}.slide-link:hover{background:#76ff0322}
+.slide-no-photo{background:radial-gradient(circle at 50% 38%,#76ff0326,transparent 45%),linear-gradient(140deg,#19221e,#0d120f 70%)}
+.slide-icon{position:absolute;inset:0 0 120px;display:grid;place-items:center;color:var(--green)}.slide-icon svg{width:130px;height:130px;stroke-width:1.3;filter:drop-shadow(0 0 18px #76ff0355)}
+.slider-controls{display:flex;align-items:center;gap:10px}.slider-controls[hidden]{display:none}
+.slider-controls button{width:40px;height:40px;border-radius:50%;border:1px solid #4f6142;background:#121815;color:var(--white);font-size:22px;line-height:1;display:grid;place-items:center;cursor:pointer;flex:0 0 auto}.slider-controls button:hover{border-color:var(--green);color:var(--green)}
+.slider-toggle{font-size:11px!important;letter-spacing:-.1em}
+.slider-dots{display:flex;gap:6px;flex:1;justify-content:center}.slider-dots .slider-dot{width:30px;height:30px;border:0;background:transparent;position:relative}
+.slider-dot:before{content:'';position:absolute;left:4px;right:4px;top:13px;height:4px;border-radius:2px;background:#3a4635;transition:background .2s}.slider-dot[aria-current]:before{background:var(--green);box-shadow:0 0 10px #76ff0399}
+@media(max-width:700px){.slides{min-height:0;aspect-ratio:4/3.4;flex:none}.slide-caption{padding:50px 16px 14px}.slide-caption strong{font-size:19px}.slide-caption small{font-size:11px}.slide-icon{inset:0 0 110px}.slide-icon svg{width:90px;height:90px}.slider-dots .slider-dot{width:26px}}
+@media(prefers-reduced-motion:reduce){.slides{scroll-behavior:auto}}

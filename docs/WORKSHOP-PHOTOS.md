@@ -29,6 +29,12 @@ Forrás: a tulajdonos telefonjának „1 Night Vision Service” mappája (52 f�
 | IMG-20261115-WA0034.jpg | gearbox-assembly-work | Munka a nyitott váltón a szerelőpadnál | Galéria 12 |
 | 1000136612.jpg (PR #3) | – | Ugyanaz a jelenet, mint IMG-20261018-WA0012, kisebb felbontásban | Csak megőrizve; helyette a nagyobb felbontású változat szerepel |
 
+## Főoldali szolgáltatás-slider
+
+A főoldal jobb oldalán (a korábbi álló hero kép helyén) a hat szolgáltatás lapozható sorban: LED / Matrix → ADAS → ACC → Hunter 3D → kamerakalibrálás → diagnosztika. Valódi fotó csak ott szerepel, ahol a szolgáltatás felismerhető (headlight-adjustment, adas-calibration-target, acc-radar-calibration-screen); a többi dián a szolgáltatás ikonja és „Fotó hamarosan” felirat áll, helyettesítő kép nélkül. Az első dia képe a gyorsan töltődő hero kép, a többi lusta betöltésű.
+
+Működés: CSS scroll-snap sáv (JS nélkül is lapozható, mobilon húzható); JS-sel előző/következő gomb, pontok, szünet/lejátszás gomb, 5,5 mp-es automatikus lapozás, amely egérrel vagy fókusszal a sliderre állva, rejtett lapon és „csökkentett mozgás” beállításnál szünetel. Billentyű: ←/→ a sávon.
+
 ## Helykitöltő maradt
 
 - **Hunter 3D futóműállítás**: nincs valódi Hunter-/futóműállítási fotó (a Hunter-feliratú képek a generált plakátokon szerepelnek).

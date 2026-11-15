@@ -6,6 +6,7 @@ import {runInNewContext} from 'node:vm';
 import {resolve} from 'node:path';
 import {photos,placement} from '../src/photos.mjs';
 import {ids} from '../src/content.mjs';
+import {sliderOrder} from '../src/slider.mjs';
 
 // Files whose bottom-left corner shows the Samsung "AI által előállított tartalom" label, the edited
 // crop of the same series, and the AI-generated poster graphics (file_0000*.png) must never be used.
@@ -31,13 +32,22 @@ test('pages use responsive images under /nvs-website/, eager hero, lazy gallery,
   const html=await readFile(output+'/'+l+'/index.html','utf8');
   for(const m of html.matchAll(/(?:image)?srcset="([^"]+)"/g))for(const item of m[1].split(', ')){const url=item.split(' ')[0];assert.ok(url.startsWith('/nvs-website/assets/photos/'),url);await stat(output+url.slice('/nvs-website'.length));}
   const imgs=[...html.matchAll(/<img [^>]*>/g)].map(m=>m[0]).filter(t=>t.includes('/assets/photos/'));
-  assert.equal(imgs.length,2+placement.gallery.length);
+  const sliderPhotos=sliderOrder.filter(id=>placement.services[id]).length;
+  assert.equal(imgs.length,sliderPhotos+1+placement.gallery.length);
   for(const t of imgs){assert.match(t,/ alt="[^"]{15,}"/);assert.match(t,/ width="\d+" height="\d+"/);}
   assert.match(imgs[0],/fetchpriority="high"/);assert.ok(imgs.slice(1).every(t=>t.includes('loading="lazy"')));
   assert.ok(html.includes('rel="preload" as="image"'));
   assert.equal([...html.matchAll(/data-lightbox/g)].length,1+placement.gallery.length);
   assert.ok(html.includes('<dialog class="lightbox"'));
   assert.ok(!html.includes('/assets/workshop/'));
+  // service slider: one slide per service, real photo or labelled icon slide, links to the service page
+  const slider=html.match(/<section class="service-slider"[\s\S]*?<\/section>/)[0];
+  assert.equal([...slider.matchAll(/class="slide[ "]/g)].length,ids.length);
+  for(const id of ids)assert.ok(slider.includes(`href="/nvs-website/${l}/services/${id}/"`),id);
+  assert.equal([...slider.matchAll(/class="slide slide-no-photo"/g)].length,ids.filter(id=>!placement.services[id]).length);
+  assert.equal([...slider.matchAll(/class="slider-dot"/g)].length,ids.length);
+  assert.ok(slider.includes('aria-roledescription="carousel"')&&slider.includes('class="slider-toggle"'));
+  assert.ok(slider.indexOf(photos[placement.hero].alt[l])>0);
   for(const id of ids){
    const page=await readFile(`${output}/${l}/services/${id}/index.html`,'utf8');
    assert.equal(page.includes('service-placeholder'),!placement.services[id],id);
@@ -64,4 +74,27 @@ test('lightbox opens, navigates with keys and swipe, closes and restores focus',
  handlers['next:click']();assert.equal(img.src,'/p1.jpg');
  handlers['close:click']();assert.ok(!box.open);assert.equal(focused,'a1');assert.equal(img.src,undefined);
  let modified=false;handlers['a0:click']({button:0,ctrlKey:true,preventDefault(){modified=true;}});assert.ok(!modified);
+});
+
+test('service slider: controls appear, dots/prev/next move, pause toggles, autoplay respects reduced motion',async()=>{
+ const make=()=>{const h={};return {h,attrs:{},hidden:true,dataset:{},addEventListener(t,f){h[t]=f;},setAttribute(k,v){this.attrs[k]=v;},removeAttribute(k){delete this.attrs[k];}};};
+ const run=async reduce=>{
+  const slides=[0,1,2].map(i=>({...make(),offsetLeft:100+i*500})),dots=[0,1,2].map(make),track={...make(),clientWidth:500,scrollLeft:0,scrollTo(o){this.to=o;}};
+  const toggle={...make(),firstElementChild:{textContent:''}},controls=make(),prev=make(),next=make();
+  const slider={...make(),dataset:{pause:'Pause',play:'Play'},querySelector:s=>({'.slides':track,'.slider-toggle':toggle,'.slider-controls':controls,'.slider-prev':prev,'.slider-next':next})[s],querySelectorAll:s=>s==='.slide'?slides:dots};
+  const intervals=[];
+  runInNewContext(await readFile('public/assets/app.js','utf8'),{document:{querySelector:s=>s==='.service-slider'?slider:null,querySelectorAll:()=>[],hidden:false},matchMedia:()=>({matches:reduce}),setInterval:(f,ms)=>{intervals.push(f);return intervals.length;},clearInterval(){},setTimeout(f){f();},clearTimeout(){},Math});
+  return {slides,dots,track,toggle,controls,prev,next,slider,intervals};
+ };
+ const s=await run(false);
+ assert.equal(s.controls.hidden,false);assert.equal(s.toggle.attrs['aria-label'],'Pause');assert.equal(s.intervals.length,1);
+ s.next.h.click();assert.equal(s.track.to.left,500);assert.equal(s.dots[1].attrs['aria-current'],'true');assert.equal(s.dots[0].attrs['aria-current'],undefined);
+ s.prev.h.click();s.prev.h.click();assert.equal(s.track.to.left,1000);assert.equal(s.dots[2].attrs['aria-current'],'true');
+ s.dots[0].h.click();assert.equal(s.track.to.left,0);
+ s.intervals[0]();assert.equal(s.track.to.left,500);
+ s.slider.h.mouseenter();s.intervals[0]();assert.equal(s.track.to.left,500);s.slider.h.mouseleave();
+ s.track.h.keydown({key:'ArrowRight',preventDefault(){}});assert.equal(s.track.to.left,1000);
+ s.track.scrollLeft=0;s.track.h.scroll();assert.equal(s.dots[0].attrs['aria-current'],'true');
+ s.toggle.h.click();assert.equal(s.toggle.attrs['aria-label'],'Play');assert.equal(s.toggle.firstElementChild.textContent,'▶');
+ const r=await run(true);assert.equal(r.intervals.length,0);assert.equal(r.toggle.attrs['aria-label'],'Play');
 });

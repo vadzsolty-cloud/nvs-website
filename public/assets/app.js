@@ -48,3 +48,26 @@ if(box&&triggers.length&&typeof box.showModal==='function'){
   if(Math.abs(dx)>50)show(current+(dx<0?1:-1));
  },{passive:true});
 }
+
+// Service slider: prev/next, dots, pause/play, autoplay (paused on hover, focus, hidden tab, reduced motion).
+const slider=document.querySelector('.service-slider');
+if(slider){
+ const track=slider.querySelector('.slides'),slides=[...slider.querySelectorAll('.slide')],dots=[...slider.querySelectorAll('.slider-dot')];
+ const toggle=slider.querySelector('.slider-toggle'),controls=slider.querySelector('.slider-controls');
+ const reduce=typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+ let current=0,timer=null,stopped=reduce,hold=false;
+ const mark=i=>{current=i;dots.forEach((d,k)=>k===i?d.setAttribute('aria-current','true'):d.removeAttribute('aria-current'));};
+ const go=i=>{const n=(i+slides.length)%slides.length;track.scrollTo({left:slides[n].offsetLeft-slides[0].offsetLeft,behavior:reduce?'auto':'smooth'});mark(n);};
+ const tick=()=>{if(!hold&&!stopped&&!document.hidden)go(current+1);};
+ const sync=()=>{toggle.setAttribute('aria-label',stopped?slider.dataset.play:slider.dataset.pause);toggle.firstElementChild.textContent=stopped?'▶':'❚❚';clearInterval(timer);timer=stopped?null:setInterval(tick,5500);};
+ controls.hidden=false;
+ slider.querySelector('.slider-prev').addEventListener('click',()=>go(current-1));
+ slider.querySelector('.slider-next').addEventListener('click',()=>go(current+1));
+ dots.forEach((d,k)=>d.addEventListener('click',()=>go(k)));
+ toggle.addEventListener('click',()=>{stopped=!stopped;sync();});
+ slider.addEventListener('mouseenter',()=>{hold=true;});slider.addEventListener('mouseleave',()=>{hold=false;});
+ slider.addEventListener('focusin',()=>{hold=true;});slider.addEventListener('focusout',()=>{hold=false;});
+ track.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();go(current+(e.key==='ArrowRight'?1:-1));}});
+ let settle=null;track.addEventListener('scroll',()=>{clearTimeout(settle);settle=setTimeout(()=>{const w=track.clientWidth||1;mark(Math.max(0,Math.min(slides.length-1,Math.round(track.scrollLeft/w))));},120);},{passive:true});
+ sync();
+}
