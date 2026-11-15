@@ -26,6 +26,8 @@ for(const basePath of ['', '/nvs-website'])test('localized HTML, assets, redirec
   const json=JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/)[1]);assert.equal(json['@type'],'AutoRepair');assert.equal(json.telephone,undefined);
   assert.equal(json.name,business.name);assert.equal(json.email,business.email);assert.equal(json.hasMap,business.maps);
   assert.ok(html.includes('href="'+business.phoneHref+'"'));assert.ok(html.includes(business.phone));assert.ok(html.includes(business.address));
+  assert.ok(html.includes('href="'+business.facebook+'"'));
+  assert.ok(!html.includes('connect.facebook.net'));assert.ok(!html.includes('<iframe'));
   assert.ok(html.includes('href="'+business.maps+'"'));assert.ok(html.includes('href="'+business.app+'"'));
   assert.ok(!html.includes('www.google.com/maps/search'));assert.ok(!html.includes('emulator-lab.js'));
   for(const link of html.matchAll(/(?:href|src)="(\/[^"#]*)/g)){
