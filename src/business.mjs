@@ -1,5 +1,6 @@
 // Issue #1 owner-supplied data. Street address and phone number approved by the owner as final on 2026-11-15.
 export const business={
+ brandName:'Night Vision Service',
  name:'NICHTVISION SERVICE S.R.L.',
  address:'Strada Principală 244/A, Văcărești (Csíkvacsárcsi), Harghita, România',
  cui:'52237744',vatId:'RO52237744',tradeRegister:'J2025056583000',euid:'ROONRC.J2025056583000',registeredOffice:'Județul Harghita, sat Văcărești, comuna Mihăileni, nr. 244/A, România',

@@ -1,9 +1,15 @@
 import nodemailer from 'nodemailer';
 export const MAILBOX='nightvisionservice2025@gmail.com';
 export function validatePassword(value){const pass=String(value||'').replace(/\s/g,'');if(!/^[A-Za-z0-9]{16}$/.test(pass))throw Error('MAIL_NOT_CONFIGURED');return pass;}
-let cached=null,until=0;
+let cached=null,until=0,pending=null,retryAfter=0;
 export async function mailTransport(app){
  if(cached&&Date.now()<until)return cached;
+ if(pending)return pending;
+ if(Date.now()<retryAfter)throw Error('MAIL_NOT_CONFIGURED');
+ pending=loadTransport(app).catch(()=>{retryAfter=Date.now()+30000;throw Error('MAIL_NOT_CONFIGURED');}).finally(()=>{pending=null;});
+ return pending;
+}
+async function loadTransport(app){
  const token=await app.options.credential.getAccessToken();
  const r=await fetch('https://secretmanager.googleapis.com/v1/projects/night-vision-service/secrets/NVS_GMAIL_APP_PASSWORD/versions/latest:access',{headers:{Authorization:'Bearer '+token.access_token},signal:AbortSignal.timeout(10000)});
  if(!r.ok)throw Error('MAIL_NOT_CONFIGURED');

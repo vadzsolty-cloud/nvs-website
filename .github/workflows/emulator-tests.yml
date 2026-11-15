@@ -24,6 +24,8 @@ jobs:
           java-version: '21'
       - run: npm install --prefix emulator --ignore-scripts --no-audit --no-fund
       - run: npm install --prefix emulator/functions --ignore-scripts --no-audit --no-fund
+      - run: npm ci --prefix backend/functions --ignore-scripts --no-audit --no-fund
+      - run: node --test backend/functions/mail.test.mjs
       - name: Static build and tests
         run: npm run build && npm test
       - name: Build local-only HU/RO/EN lab
