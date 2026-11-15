@@ -1,35 +1,754 @@
 {
-  "_note": "Source of truth for owner workshop photographs. Originals live unchanged in media/originals/. Run: python3 scripts/optimize-photos.py",
-  "photos": [
-    {"slug": "headlight-adjustment", "original": "1000115238.jpg", "widths": [640, 960, 1280], "position": "55% 50%", "tag": {"hu": "Fényszóró", "ro": "Faruri", "en": "Headlights"},
-     "alt": {"hu": "LED-fényszóró beállítása fénymérő berendezéssel az NVS műhelyében", "ro": "Reglarea unui far LED cu echipament de măsurare în atelierul NVS", "en": "Adjusting an LED headlight with beam-setting equipment in the NVS workshop"}},
-    {"slug": "headlight-beam-check", "original": "1000115247.jpg", "widths": [640, 960, 1280], "position": "45% 50%", "tag": {"hu": "Fényszóró", "ro": "Faruri", "en": "Headlights"},
-     "alt": {"hu": "Világító fényszóró a beállítóberendezés mellett, ellenőrzés közben", "ro": "Far aprins lângă echipamentul de reglare, în timpul verificării", "en": "Illuminated headlight next to the aiming equipment during a check"}},
-    {"slug": "adas-calibration-target", "original": "IMG-20261018-WA0012.jpg", "widths": [480, 768, 1152], "position": "40% 38%", "tag": {"hu": "ADAS", "ro": "ADAS", "en": "ADAS"},
-     "alt": {"hu": "MAHLE TechPRO Digital ADAS kalibrálókijelző és kerékre szerelt mérőfejek egy jármű előtt a műhelyben", "ro": "Ecran de calibrare MAHLE TechPRO Digital ADAS și capete de măsurare montate pe roată, în fața unui vehicul din atelier", "en": "MAHLE TechPRO Digital ADAS calibration screen and wheel-mounted measuring heads in front of a vehicle in the workshop"}},
-    {"slug": "acc-radar-calibration-screen", "original": "IMG-20261018-WA0009.jpg", "widths": [640, 1024, 1600], "position": "50% 30%", "tag": {"hu": "ACC radar", "ro": "Radar ACC", "en": "ACC radar"},
-     "alt": {"hu": "MAHLE TechPRO tablet a statikus elülső radarkalibrálás lépésével", "ro": "Tabletă MAHLE TechPRO afișând pasul de calibrare statică a radarului frontal", "en": "MAHLE TechPRO tablet showing the static front radar calibration step"}},
-    {"slug": "workshop-lift-bay", "original": "IMG-20261115-WA0024.jpg", "widths": [480, 768, 1152], "position": "50% 60%", "tag": {"hu": "Műhely", "ro": "Atelier", "en": "Workshop"},
-     "alt": {"hu": "Emelőn álló jármű alváza, mögötte a műhely szerszámfala és szerelőpadjai", "ro": "Partea inferioară a unui vehicul ridicat pe elevator, cu peretele de scule și bancurile de lucru ale atelierului în spate", "en": "Underside of a vehicle on a lift, with the workshop tool wall and workbenches behind it"}},
-    {"slug": "gearbox-shafts", "original": "IMG-20261115-WA0007.jpg", "widths": [480, 768, 1152], "position": "50% 40%", "tag": {"hu": "Váltó", "ro": "Cutie de viteze", "en": "Gearbox"},
-     "alt": {"hu": "Szétszerelt sebességváltó tengelyei és fogaskerekei", "ro": "Arborii și pinioanele unei cutii de viteze demontate", "en": "Shafts and gears of a dismantled gearbox"}},
-    {"slug": "gearbox-on-workbench", "original": "IMG-20261115-WA0011.jpg", "widths": [480, 768, 1152], "position": "50% 55%", "tag": {"hu": "Váltó", "ro": "Cutie de viteze", "en": "Gearbox"},
-     "alt": {"hu": "Kiszerelt váltóegység fogaskerekekkel a műhely munkapadján", "ro": "Ansamblu de cutie de viteze demontat, cu pinioane, pe bancul de lucru al atelierului", "en": "Removed gearbox assembly with gears on the workshop bench"}},
-    {"slug": "gearbox-open-case", "original": "IMG-20261115-WA0013.jpg", "widths": [480, 768, 1152], "position": "50% 45%", "tag": {"hu": "Váltó", "ro": "Cutie de viteze", "en": "Gearbox"},
-     "alt": {"hu": "Nyitott váltóház a tengelyekkel a szerelőkocsin", "ro": "Carcasă de cutie de viteze deschisă, cu arborii, pe căruciorul de montaj", "en": "Open gearbox case with its shafts on the assembly trolley"}},
-    {"slug": "gearbox-housing", "original": "IMG-20261115-WA0036.jpg", "widths": [480, 768, 1152], "position": "50% 45%", "tag": {"hu": "Váltó", "ro": "Cutie de viteze", "en": "Gearbox"},
-     "alt": {"hu": "Váltóház a szerelőkocsin, a háttérben a műhely szerszámfala", "ro": "Carcasă de cutie de viteze pe căruciorul de montaj, cu peretele de scule în fundal", "en": "Gearbox housing on the assembly trolley, with the tool wall in the background"}},
-    {"slug": "gearbox-mechatronic-unit", "original": "IMG-20261115-WA0017.jpg", "widths": [640, 1024, 1600, 2048], "position": "50% 50%", "tag": {"hu": "Váltó", "ro": "Cutie de viteze", "en": "Gearbox"},
-     "alt": {"hu": "Kiszerelt váltóvezérlő (mechatronikai) egység a munkapadon", "ro": "Unitate mecatronică de comandă a cutiei de viteze, demontată, pe bancul de lucru", "en": "Removed gearbox mechatronic control unit on the workbench"}},
-    {"slug": "gearbox-control-unit-installed", "original": "IMG-20261115-WA0014.jpg", "widths": [640, 1024, 1600, 2048], "position": "50% 50%", "tag": {"hu": "Váltó", "ro": "Cutie de viteze", "en": "Gearbox"},
-     "alt": {"hu": "A váltó vezérlőegysége a járműben, alulnézetből, leszerelt fedéllel", "ro": "Unitatea de comandă a cutiei de viteze în vehicul, văzută de dedesubt, cu capacul demontat", "en": "Gearbox control unit in the vehicle seen from below with its cover removed"}},
-    {"slug": "gearbox-assembly-work", "original": "IMG-20261115-WA0034.jpg", "widths": [480, 768, 1152], "position": "50% 60%", "tag": {"hu": "Váltó", "ro": "Cutie de viteze", "en": "Gearbox"},
-     "alt": {"hu": "Kesztyűs kézzel végzett munka a nyitott váltón a szerelőpadnál", "ro": "Lucru cu mănuși de protecție la o cutie de viteze deschisă, lângă bancul de lucru", "en": "Gloved hands working on an open gearbox at the workbench"}}
-  ],
-  "placement": {
-    "hero": "headlight-adjustment",
-    "workshop": "workshop-lift-bay",
-    "services": {"acc": "acc-radar-calibration-screen", "adas": "adas-calibration-target", "led-matrix": "headlight-adjustment", "hunter-3d": null, "camera": null, "diagnostics": null},
-    "gallery": ["adas-calibration-target", "acc-radar-calibration-screen", "headlight-adjustment", "headlight-beam-check", "workshop-lift-bay", "gearbox-mechatronic-unit", "gearbox-shafts", "gearbox-on-workbench", "gearbox-open-case", "gearbox-housing", "gearbox-control-unit-installed", "gearbox-assembly-work"]
+ "_note": "Source of truth for owner workshop photographs. Originals live unchanged in media/originals/. Run: python3 scripts/optimize-photos.py",
+ "photos": [
+  {
+   "slug": "headlight-adjustment",
+   "original": "1000115238.jpg",
+   "widths": [
+    640,
+    960,
+    1280
+   ],
+   "position": "55% 50%",
+   "tag": {
+    "hu": "Fényszóró",
+    "ro": "Faruri",
+    "en": "Headlights"
+   },
+   "alt": {
+    "hu": "LED-fényszóró beállítása fénymérő berendezéssel az NVS műhelyében",
+    "ro": "Reglarea unui far LED cu echipament de măsurare în atelierul NVS",
+    "en": "Adjusting an LED headlight with beam-setting equipment in the NVS workshop"
+   }
+  },
+  {
+   "slug": "headlight-beam-check",
+   "original": "1000115247.jpg",
+   "widths": [
+    640,
+    960,
+    1280
+   ],
+   "position": "45% 50%",
+   "tag": {
+    "hu": "Fényszóró",
+    "ro": "Faruri",
+    "en": "Headlights"
+   },
+   "alt": {
+    "hu": "Világító fényszóró a beállítóberendezés mellett, ellenőrzés közben",
+    "ro": "Far aprins lângă echipamentul de reglare, în timpul verificării",
+    "en": "Illuminated headlight next to the aiming equipment during a check"
+   }
+  },
+  {
+   "slug": "adas-calibration-target",
+   "original": "IMG-20261018-WA0012.jpg",
+   "widths": [
+    480,
+    768,
+    1152
+   ],
+   "position": "40% 38%",
+   "tag": {
+    "hu": "ADAS",
+    "ro": "ADAS",
+    "en": "ADAS"
+   },
+   "alt": {
+    "hu": "MAHLE TechPRO Digital ADAS kalibrálókijelző és kerékre szerelt mérőfejek egy jármű előtt a műhelyben",
+    "ro": "Ecran de calibrare MAHLE TechPRO Digital ADAS și capete de măsurare montate pe roată, în fața unui vehicul din atelier",
+    "en": "MAHLE TechPRO Digital ADAS calibration screen and wheel-mounted measuring heads in front of a vehicle in the workshop"
+   }
+  },
+  {
+   "slug": "acc-radar-calibration-screen",
+   "original": "IMG-20261018-WA0009.jpg",
+   "widths": [
+    640,
+    1024,
+    1600
+   ],
+   "position": "50% 30%",
+   "tag": {
+    "hu": "ACC radar",
+    "ro": "Radar ACC",
+    "en": "ACC radar"
+   },
+   "alt": {
+    "hu": "MAHLE TechPRO tablet a statikus elülső radarkalibrálás lépésével",
+    "ro": "Tabletă MAHLE TechPRO afișând pasul de calibrare statică a radarului frontal",
+    "en": "MAHLE TechPRO tablet showing the static front radar calibration step"
+   }
+  },
+  {
+   "slug": "workshop-lift-bay",
+   "original": "IMG-20261115-WA0024.jpg",
+   "widths": [
+    480,
+    768,
+    1152
+   ],
+   "position": "50% 60%",
+   "tag": {
+    "hu": "Műhely",
+    "ro": "Atelier",
+    "en": "Workshop"
+   },
+   "alt": {
+    "hu": "Emelőn álló jármű alváza, mögötte a műhely szerszámfala és szerelőpadjai",
+    "ro": "Partea inferioară a unui vehicul ridicat pe elevator, cu peretele de scule și bancurile de lucru ale atelierului în spate",
+    "en": "Underside of a vehicle on a lift, with the workshop tool wall and workbenches behind it"
+   }
+  },
+  {
+   "slug": "gearbox-shafts",
+   "original": "IMG-20261115-WA0007.jpg",
+   "widths": [
+    480,
+    768,
+    1152
+   ],
+   "position": "50% 40%",
+   "tag": {
+    "hu": "Váltó",
+    "ro": "Cutie de viteze",
+    "en": "Gearbox"
+   },
+   "alt": {
+    "hu": "Szétszerelt sebességváltó tengelyei és fogaskerekei",
+    "ro": "Arborii și pinioanele unei cutii de viteze demontate",
+    "en": "Shafts and gears of a dismantled gearbox"
+   }
+  },
+  {
+   "slug": "gearbox-on-workbench",
+   "original": "IMG-20261115-WA0011.jpg",
+   "widths": [
+    480,
+    768,
+    1152
+   ],
+   "position": "50% 55%",
+   "tag": {
+    "hu": "Váltó",
+    "ro": "Cutie de viteze",
+    "en": "Gearbox"
+   },
+   "alt": {
+    "hu": "Kiszerelt váltóegység fogaskerekekkel a műhely munkapadján",
+    "ro": "Ansamblu de cutie de viteze demontat, cu pinioane, pe bancul de lucru al atelierului",
+    "en": "Removed gearbox assembly with gears on the workshop bench"
+   }
+  },
+  {
+   "slug": "gearbox-open-case",
+   "original": "IMG-20261115-WA0013.jpg",
+   "widths": [
+    480,
+    768,
+    1152
+   ],
+   "position": "50% 45%",
+   "tag": {
+    "hu": "Váltó",
+    "ro": "Cutie de viteze",
+    "en": "Gearbox"
+   },
+   "alt": {
+    "hu": "Nyitott váltóház a tengelyekkel a szerelőkocsin",
+    "ro": "Carcasă de cutie de viteze deschisă, cu arborii, pe căruciorul de montaj",
+    "en": "Open gearbox case with its shafts on the assembly trolley"
+   }
+  },
+  {
+   "slug": "gearbox-housing",
+   "original": "IMG-20261115-WA0036.jpg",
+   "widths": [
+    480,
+    768,
+    1152
+   ],
+   "position": "50% 45%",
+   "tag": {
+    "hu": "Váltó",
+    "ro": "Cutie de viteze",
+    "en": "Gearbox"
+   },
+   "alt": {
+    "hu": "Váltóház a szerelőkocsin, a háttérben a műhely szerszámfala",
+    "ro": "Carcasă de cutie de viteze pe căruciorul de montaj, cu peretele de scule în fundal",
+    "en": "Gearbox housing on the assembly trolley, with the tool wall in the background"
+   }
+  },
+  {
+   "slug": "gearbox-mechatronic-unit",
+   "original": "IMG-20261115-WA0017.jpg",
+   "widths": [
+    640,
+    1024,
+    1600,
+    2048
+   ],
+   "position": "50% 50%",
+   "tag": {
+    "hu": "Váltó",
+    "ro": "Cutie de viteze",
+    "en": "Gearbox"
+   },
+   "alt": {
+    "hu": "Kiszerelt váltóvezérlő (mechatronikai) egység a munkapadon",
+    "ro": "Unitate mecatronică de comandă a cutiei de viteze, demontată, pe bancul de lucru",
+    "en": "Removed gearbox mechatronic control unit on the workbench"
+   }
+  },
+  {
+   "slug": "gearbox-control-unit-installed",
+   "original": "IMG-20261115-WA0014.jpg",
+   "widths": [
+    640,
+    1024,
+    1600,
+    2048
+   ],
+   "position": "50% 50%",
+   "tag": {
+    "hu": "Váltó",
+    "ro": "Cutie de viteze",
+    "en": "Gearbox"
+   },
+   "alt": {
+    "hu": "A váltó vezérlőegysége a járműben, alulnézetből, leszerelt fedéllel",
+    "ro": "Unitatea de comandă a cutiei de viteze în vehicul, văzută de dedesubt, cu capacul demontat",
+    "en": "Gearbox control unit in the vehicle seen from below with its cover removed"
+   }
+  },
+  {
+   "slug": "gearbox-assembly-work",
+   "original": "IMG-20261115-WA0034.jpg",
+   "widths": [
+    480,
+    768,
+    1152
+   ],
+   "position": "50% 60%",
+   "tag": {
+    "hu": "Váltó",
+    "ro": "Cutie de viteze",
+    "en": "Gearbox"
+   },
+   "alt": {
+    "hu": "Kesztyűs kézzel végzett munka a nyitott váltón a szerelőpadnál",
+    "ro": "Lucru cu mănuși de protecție la o cutie de viteze deschisă, lângă bancul de lucru",
+    "en": "Gloved hands working on an open gearbox at the workbench"
+   }
+  },
+  {
+   "slug": "hunter-alignment-lift",
+   "original": "IMG-20260511-WA0011.jpg",
+   "widths": [
+    640,
+    1024,
+    1600,
+    2048
+   ],
+   "position": "45% 55%",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Jármű a futóműállító emelőn, kerékre szerelt mérőfejekkel és Hunter futóműmérő állomással",
+    "ro": "Vehicul pe elevatorul de geometrie, cu capete de măsurare pe roți și stația de geometrie Hunter",
+    "en": "Vehicle on the alignment lift with wheel-mounted targets and the Hunter alignment station"
+   }
+  },
+  {
+   "slug": "hunter-alignment-screens",
+   "original": "IMG-20260511-WA0017.jpg",
+   "widths": [
+    640,
+    1024,
+    1600,
+    2048
+   ],
+   "position": "40% 45%",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Hunter futóműmérő szoftver a műhely monitorain",
+    "ro": "Software de geometrie Hunter pe monitoarele atelierului",
+    "en": "Hunter wheel alignment software on the workshop monitors"
+   }
+  },
+  {
+   "slug": "camera-calibration-target",
+   "original": "IMG-20260717-WA0009.jpg",
+   "widths": [
+    640,
+    1024,
+    1600,
+    2048
+   ],
+   "position": "35% 50%",
+   "tag": {
+    "hu": "Kamera",
+    "ro": "Cameră",
+    "en": "Camera"
+   },
+   "alt": {
+    "hu": "Kamerakalibráló tábla a jármű előtt, kerékre szerelt mérőfejekkel és tablettel",
+    "ro": "Panou de calibrare a camerei în fața vehiculului, cu capete de măsurare pe roți și tabletă",
+    "en": "Camera calibration target in front of the vehicle with wheel-mounted heads and a tablet"
+   }
+  },
+  {
+   "slug": "camera-calibration-target-front",
+   "original": "IMG-20251104-WA0070.jpg",
+   "widths": [
+    640,
+    1024,
+    1600,
+    2048
+   ],
+   "position": "30% 45%",
+   "tag": {
+    "hu": "Kamera",
+    "ro": "Cameră",
+    "en": "Camera"
+   },
+   "alt": {
+    "hu": "Kamerakalibráló tábla egy jármű orra előtt a műhelyben",
+    "ro": "Panou de calibrare a camerei în fața unui vehicul, în atelier",
+    "en": "Camera calibration target in front of a vehicle in the workshop"
+   }
+  },
+  {
+   "slug": "diagnostics-laptop",
+   "original": "IMG-20260717-WA0001.jpg",
+   "widths": [
+    640,
+    1024,
+    1600,
+    2048
+   ],
+   "position": "60% 50%",
+   "tag": {
+    "hu": "Diagnosztika",
+    "ro": "Diagnoză",
+    "en": "Diagnostics"
+   },
+   "redact": [
+    [
+     2640,
+     560,
+     2960,
+     670
+    ],
+    [
+     3150,
+     660,
+     3460,
+     760
+    ]
+   ],
+   "alt": {
+    "hu": "Járműhöz csatlakoztatott diagnosztikai szoftver laptopon az utastérben",
+    "ro": "Software de diagnoză pe laptop, conectat la vehicul, în habitaclu",
+    "en": "Diagnostic software on a laptop connected to the vehicle, inside the cabin"
+   }
+  },
+  {
+   "slug": "adas-station",
+   "original": "IMG-20260816-WA0000.jpg",
+   "widths": [
+    480,
+    768,
+    1152,
+    1536
+   ],
+   "position": "50% 45%",
+   "tag": {
+    "hu": "ADAS",
+    "ro": "ADAS",
+    "en": "ADAS"
+   },
+   "alt": {
+    "hu": "MAHLE TechPRO Digital ADAS kalibrálóállomás és diagnosztikai kocsi a műhelyben",
+    "ro": "Stație de calibrare MAHLE TechPRO Digital ADAS și cărucior de diagnoză în atelier",
+    "en": "MAHLE TechPRO Digital ADAS calibration station and diagnostic trolley in the workshop"
+   }
+  },
+  {
+   "slug": "headlight-laser-check",
+   "original": "IMG-20260717-WA0013.jpg",
+   "widths": [
+    640,
+    1024,
+    1600,
+    2048
+   ],
+   "position": "45% 50%",
+   "tag": {
+    "hu": "Fényszóró",
+    "ro": "Faruri",
+    "en": "Headlights"
+   },
+   "alt": {
+    "hu": "Fényszóró-beállító berendezés lézeres vonallal egy jármű fényszórója előtt",
+    "ro": "Echipament de reglare a farurilor cu linie laser în fața farului unui vehicul",
+    "en": "Headlight aiming unit with a laser line in front of a vehicle headlight"
+   }
+  },
+  {
+   "slug": "ac-service-unit",
+   "original": "IMG-20260509-WA0018.jpg",
+   "widths": [
+    640,
+    1024,
+    1600,
+    2048
+   ],
+   "position": "40% 50%",
+   "tag": {
+    "hu": "Klíma",
+    "ro": "Climatizare",
+    "en": "Air conditioning"
+   },
+   "alt": {
+    "hu": "Járműhöz csatlakoztatott klímaszerviz-berendezés a műhelyben",
+    "ro": "Stație de service pentru climatizare conectată la vehicul, în atelier",
+    "en": "Air conditioning service unit connected to a vehicle in the workshop"
+   }
+  },
+  {
+   "slug": "diagnostics-tablet-in-car",
+   "original": "IMG-20260717-WA0007.jpg",
+   "widths": [
+    640,
+    1024,
+    1600,
+    2048
+   ],
+   "position": "50% 55%",
+   "tag": {
+    "hu": "Diagnosztika",
+    "ro": "Diagnoză",
+    "en": "Diagnostics"
+   },
+   "alt": {
+    "hu": "MAHLE TechPRO diagnosztikai tablet a jármű utasterében",
+    "ro": "Tabletă de diagnoză MAHLE TechPRO în habitaclul vehiculului",
+    "en": "MAHLE TechPRO diagnostic tablet inside the vehicle cabin"
+   }
+  },
+  {
+   "slug": "acc-radar-reflector",
+   "original": "IMG-20251104-WA0045.jpg",
+   "widths": [
+    640,
+    1024,
+    1600,
+    2048
+   ],
+   "position": "30% 45%",
+   "tag": {
+    "hu": "ACC radar",
+    "ro": "Radar ACC",
+    "en": "ACC radar"
+   },
+   "alt": {
+    "hu": "MAHLE TechPRO Digital ADAS kijelző radarreflektorral egy nyitott motorháztetejű jármű előtt",
+    "ro": "Ecran MAHLE TechPRO Digital ADAS cu reflector radar în fața unui vehicul cu capota deschisă",
+    "en": "MAHLE TechPRO Digital ADAS screen with a radar reflector in front of a vehicle with its bonnet open"
+   }
+  },
+  {
+   "slug": "adas-screen-front",
+   "original": "IMG-20251104-WA0059.jpg",
+   "widths": [
+    640,
+    1024,
+    1600,
+    2048
+   ],
+   "position": "35% 50%",
+   "tag": {
+    "hu": "ADAS",
+    "ro": "ADAS",
+    "en": "ADAS"
+   },
+   "alt": {
+    "hu": "MAHLE TechPRO Digital ADAS kalibrálókijelző egy jármű orra előtt",
+    "ro": "Ecran de calibrare MAHLE TechPRO Digital ADAS în fața unui vehicul",
+    "en": "MAHLE TechPRO Digital ADAS calibration screen in front of a vehicle"
+   }
+  },
+  {
+   "slug": "adas-guided-setup",
+   "original": "IMG-20260717-WA0006.jpg",
+   "widths": [
+    640,
+    1024,
+    1600,
+    2048
+   ],
+   "position": "55% 45%",
+   "tag": {
+    "hu": "ADAS",
+    "ro": "ADAS",
+    "en": "ADAS"
+   },
+   "alt": {
+    "hu": "ADAS-kalibráló kijelző beállítási útmutatóval egy jármű előtt",
+    "ro": "Ecran de calibrare ADAS cu ghid de poziționare în fața unui vehicul",
+    "en": "ADAS calibration screen with positioning guidance in front of a vehicle"
+   }
+  },
+  {
+   "slug": "adas-station-van",
+   "original": "IMG-20260816-WA0002.jpg",
+   "widths": [
+    480,
+    768,
+    1152,
+    1536
+   ],
+   "position": "50% 50%",
+   "tag": {
+    "hu": "ADAS",
+    "ro": "ADAS",
+    "en": "ADAS"
+   },
+   "alt": {
+    "hu": "ADAS-kalibráló állomás és kerékre szerelt mérőfej egy kisbusz mellett",
+    "ro": "Stație de calibrare ADAS și cap de măsurare pe roată lângă o dubă",
+    "en": "ADAS calibration station and wheel-mounted head next to a van"
+   }
+  },
+  {
+   "slug": "hunter-alignment-wheel",
+   "original": "IMG-20251104-WA0047.jpg",
+   "widths": [
+    640,
+    1024,
+    1600,
+    2048
+   ],
+   "position": "60% 45%",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Kerékre szerelt mérőfej a futóműállító emelőn, háttérben a Hunter állomás",
+    "ro": "Cap de măsurare pe roată pe elevatorul de geometrie, cu stația Hunter în fundal",
+    "en": "Wheel-mounted target on the alignment lift with the Hunter station behind"
+   }
+  },
+  {
+   "slug": "hunter-console",
+   "original": "IMG-20260527-WA0009.jpg",
+   "widths": [
+    480,
+    768,
+    1152,
+    1536
+   ],
+   "position": "50% 55%",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Hunter futóműmérő konzol a műhelyben",
+    "ro": "Consola de geometrie Hunter în atelier",
+    "en": "Hunter alignment console in the workshop"
+   }
+  },
+  {
+   "slug": "hunter-camera-beam",
+   "original": "IMG-20260527-WA0011.jpg",
+   "widths": [
+    480,
+    768,
+    1152,
+    1536
+   ],
+   "position": "50% 40%",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Hunter 3D kameragerenda és tartalék mérőfejek a műhely falán",
+    "ro": "Grinda cu camere Hunter 3D și capete de măsurare pe peretele atelierului",
+    "en": "Hunter 3D camera beam and spare targets on the workshop wall"
+   }
+  },
+  {
+   "slug": "camera-target-portrait",
+   "original": "IMG-20251104-WA0034.jpg",
+   "widths": [
+    480,
+    768,
+    1152,
+    1536
+   ],
+   "position": "50% 40%",
+   "tag": {
+    "hu": "Kamera",
+    "ro": "Cameră",
+    "en": "Camera"
+   },
+   "alt": {
+    "hu": "Kamerakalibráló tábla és kerékre szerelt mérőfej egy fekete jármű előtt",
+    "ro": "Panou de calibrare a camerei și cap de măsurare pe roată în fața unui vehicul negru",
+    "en": "Camera calibration target and wheel-mounted head in front of a black vehicle"
+   }
+  },
+  {
+   "slug": "camera-target-angle",
+   "original": "IMG-20260717-WA0011.jpg",
+   "widths": [
+    640,
+    1024,
+    1600,
+    2048
+   ],
+   "position": "60% 45%",
+   "tag": {
+    "hu": "Kamera",
+    "ro": "Cameră",
+    "en": "Camera"
+   },
+   "alt": {
+    "hu": "Kamerakalibráló tábla egy fehér jármű orra előtt",
+    "ro": "Panou de calibrare a camerei în fața unui vehicul alb",
+    "en": "Camera calibration target in front of a white vehicle"
+   }
+  },
+  {
+   "slug": "camera-target-cabin",
+   "original": "IMG-20251104-WA0074.jpg",
+   "widths": [
+    640,
+    1024,
+    1600,
+    2048
+   ],
+   "position": "35% 40%",
+   "tag": {
+    "hu": "Kamera",
+    "ro": "Cameră",
+    "en": "Camera"
+   },
+   "alt": {
+    "hu": "Kamerakalibráló tábla, a jármű utasteréből nézve",
+    "ro": "Panou de calibrare a camerei, văzut din habitaclul vehiculului",
+    "en": "Camera calibration target seen from inside the vehicle"
+   }
+  },
+  {
+   "slug": "headlight-matrix-led",
+   "original": "IMG-20260619-WA0005.jpg",
+   "widths": [
+    640,
+    1024,
+    1600,
+    2048
+   ],
+   "position": "55% 50%",
+   "tag": {
+    "hu": "Fényszóró",
+    "ro": "Faruri",
+    "en": "Headlights"
+   },
+   "alt": {
+    "hu": "LED-fényszóró beállítása fénymérő berendezéssel, nyitott motorháztetővel",
+    "ro": "Reglarea unui far LED cu echipament de măsurare, cu capota deschisă",
+    "en": "Adjusting an LED headlight with aiming equipment, bonnet open"
+   }
   }
+ ],
+ "placement": {
+  "hero": "headlight-adjustment",
+  "workshop": "workshop-lift-bay",
+  "services": {
+   "acc": "acc-radar-calibration-screen",
+   "adas": "adas-calibration-target",
+   "led-matrix": "headlight-adjustment",
+   "hunter-3d": "hunter-alignment-lift",
+   "camera": "camera-calibration-target",
+   "diagnostics": "diagnostics-laptop"
+  },
+  "gallery": [
+   "adas-calibration-target",
+   "acc-radar-calibration-screen",
+   "camera-calibration-target",
+   "hunter-alignment-lift",
+   "hunter-alignment-screens",
+   "diagnostics-laptop",
+   "headlight-adjustment",
+   "headlight-laser-check",
+   "adas-station",
+   "camera-calibration-target-front",
+   "headlight-beam-check",
+   "ac-service-unit",
+   "workshop-lift-bay",
+   "gearbox-mechatronic-unit",
+   "gearbox-shafts",
+   "gearbox-on-workbench",
+   "gearbox-open-case",
+   "gearbox-housing",
+   "gearbox-control-unit-installed",
+   "gearbox-assembly-work"
+  ],
+  "serviceSlides": {
+   "acc": [
+    "acc-radar-calibration-screen",
+    "acc-radar-reflector",
+    "diagnostics-tablet-in-car"
+   ],
+   "adas": [
+    "adas-calibration-target",
+    "adas-screen-front",
+    "adas-guided-setup",
+    "adas-station",
+    "adas-station-van"
+   ],
+   "hunter-3d": [
+    "hunter-alignment-lift",
+    "hunter-alignment-wheel",
+    "hunter-alignment-screens",
+    "hunter-console",
+    "hunter-camera-beam"
+   ],
+   "camera": [
+    "camera-calibration-target",
+    "camera-target-angle",
+    "camera-calibration-target-front",
+    "camera-target-portrait",
+    "camera-target-cabin"
+   ],
+   "led-matrix": [
+    "headlight-adjustment",
+    "headlight-matrix-led",
+    "headlight-laser-check",
+    "headlight-beam-check"
+   ],
+   "diagnostics": [
+    "diagnostics-laptop",
+    "diagnostics-tablet-in-car",
+    "adas-station"
+   ]
+  }
+ }
 }

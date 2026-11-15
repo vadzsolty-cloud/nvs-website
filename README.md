@@ -14,7 +14,7 @@ Helyi előnézet: http://localhost:4180/hu/ (RO: /ro/, EN: /en/).
     npm test
     npm run preview
 
-A tesztek (12 db: tests/site, booking, photos) mind a gyökérútvonalas, mind a /nvs-website/ alatti buildet ellenőrzik: 21 oldal, nyelvi metaadatok, canonical/hreflang, assetek, átirányítások, belső linkek, sitemap, kiszolgálói útvonalkezelés és foglalási demó. A kiszolgálót közvetlen request-handler hívással tesztelik, hálózati hozzáférés nélkül. Ez nem távoli HTTP- vagy teljes akadálymentességi audit.
+A tesztek (13 db: tests/site, booking, photos) mind a gyökérútvonalas, mind a /nvs-website/ alatti buildet ellenőrzik: 21 oldal, nyelvi metaadatok, canonical/hreflang, assetek, átirányítások, belső linkek, sitemap, kiszolgálói útvonalkezelés és foglalási demó. A kiszolgálót közvetlen request-handler hívással tesztelik, hálózati hozzáférés nélkül. Ez nem távoli HTTP- vagy teljes akadálymentességi audit.
 
 ## GitHub Pages
 
@@ -50,7 +50,7 @@ A preview noindex,nofollow; a robots.txt tiltja az indexelést. A projektoldal /
 
 Valódi műhelyfotók: eredetik a media/originals/ mappában, katalógus a media/photos.json-ban, reszponzív AVIF/WebP/JPEG változatok a `python3 scripts/optimize-photos.py` paranccsal (Pillow, WebP+AVIF). A teljes fájl–hely megfeleltetés és a kizárt (AI-jelölésű vagy generált) képek listája: [docs/WORKSHOP-PHOTOS.md](docs/WORKSHOP-PHOTOS.md). A galéria nagyítható, billentyűzettel és mobilon lapozva is használható.
 
-Az eredeti NVS-logó változtatás nélkül az alkalmazás __bundler_logo PNG-jéből származik. Eredet és csak olvasási vizsgálat: [docs/SOURCE-AUDIT.md](docs/SOURCE-AUDIT.md). Nincs generált vagy idegen műhelyfotó; a Hunter 3D, kamerakalibrálás és diagnosztika oldalán valódi fotó hiányában jelölt helykitöltő áll. Az issue #1-ben megadott cím és telefon review-adatként, külön ellenőrzési jelzéssel szerepel. A Google Maps gomb a megadott vállalkozásprofilra, az App gomb a változatlan /nvs-app-letoltes/app/ címre mutat. A JSON-LD e-mailt és Maps-linket is tartalmaz, de az utcacím/telefon csak CONTACT_APPROVED=true után kerülhet bele. A keresőindexeléshez ez az explicit jóváhagyás is szükséges.
+Az eredeti NVS-logó változtatás nélkül az alkalmazás __bundler_logo PNG-jéből származik. Eredet és csak olvasási vizsgálat: [docs/SOURCE-AUDIT.md](docs/SOURCE-AUDIT.md). Nincs generált vagy idegen műhelyfotó; mind a hat szolgáltatási oldal és a főoldali slider valódi műhelyfotót mutat (fotó hiányában jelölt helykitöltő jelenne meg). Az issue #1-ben megadott cím és telefon review-adatként, külön ellenőrzési jelzéssel szerepel. A Google Maps gomb a megadott vállalkozásprofilra, az App gomb a változatlan /nvs-app-letoltes/app/ címre mutat. A JSON-LD e-mailt és Maps-linket is tartalmaz, de az utcacím/telefon csak CONTACT_APPROVED=true után kerülhet bele. A keresőindexeléshez ez az explicit jóváhagyás is szükséges.
 
 ## Hátralévő munka
 

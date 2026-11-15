@@ -50,8 +50,7 @@ if(box&&triggers.length&&typeof box.showModal==='function'){
 }
 
 // Service slider: prev/next, dots, pause/play, autoplay (paused on hover, focus, hidden tab, reduced motion).
-const slider=document.querySelector('.service-slider');
-if(slider){
+for(const slider of (document.querySelectorAll?document.querySelectorAll('.service-slider'):[])){
  const track=slider.querySelector('.slides'),slides=[...slider.querySelectorAll('.slide')],dots=[...slider.querySelectorAll('.slider-dot')];
  const toggle=slider.querySelector('.slider-toggle'),controls=slider.querySelector('.slider-controls');
  const reduce=typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -70,4 +69,14 @@ if(slider){
  track.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();go(current+(e.key==='ArrowRight'?1:-1));}});
  let settle=null;track.addEventListener('scroll',()=>{clearTimeout(settle);settle=setTimeout(()=>{const w=track.clientWidth||1;mark(Math.max(0,Math.min(slides.length-1,Math.round(track.scrollLeft/w))));},120);},{passive:true});
  sync();
+}
+
+// Click-to-load map: nothing is requested from Google until the visitor asks for the map.
+for(const panel of (document.querySelectorAll?document.querySelectorAll('.map-consent'):[])){
+ const btn=panel.querySelector('.map-load');
+ if(btn)btn.addEventListener('click',()=>{
+  const frame=document.createElement('iframe');
+  frame.src=panel.dataset.mapSrc;frame.title=panel.dataset.mapTitle;frame.loading='lazy';frame.referrerPolicy='no-referrer-when-downgrade';frame.setAttribute('allowfullscreen','');
+  panel.classList.add('map-loaded');panel.replaceChildren(frame);frame.focus();
+ });
 }

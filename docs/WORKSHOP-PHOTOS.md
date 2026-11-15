@@ -31,17 +31,50 @@ Forrás: a tulajdonos telefonjának „1 Night Vision Service” mappája (52 f�
 
 ## Főoldali szolgáltatás-slider
 
-A főoldal jobb oldalán (a korábbi álló hero kép helyén) a hat szolgáltatás lapozható sorban: LED / Matrix → ADAS → ACC → Hunter 3D → kamerakalibrálás → diagnosztika. Valódi fotó csak ott szerepel, ahol a szolgáltatás felismerhető (headlight-adjustment, adas-calibration-target, acc-radar-calibration-screen); a többi dián a szolgáltatás ikonja és „Fotó hamarosan” felirat áll, helyettesítő kép nélkül. Az első dia képe a gyorsan töltődő hero kép, a többi lusta betöltésű.
+A főoldal jobb oldalán (a korábbi álló hero kép helyén) a hat szolgáltatás lapozható sorban: LED / Matrix → ADAS → ACC → Hunter 3D → kamerakalibrálás → diagnosztika. Minden dián a szolgáltatás saját, valódi fotója szerepel (a második kör óta Hunter 3D, kamerakalibrálás és diagnosztika is); ha egy szolgáltatásnak nincs fotója, a dia ikont és „Fotó hamarosan” feliratot mutat helyettesítő kép nélkül. Az első dia képe a gyorsan töltődő hero kép, a többi lusta betöltésű.
 
 Működés: CSS scroll-snap sáv (JS nélkül is lapozható, mobilon húzható); JS-sel előző/következő gomb, pontok, szünet/lejátszás gomb, 5,5 mp-es automatikus lapozás, amely egérrel vagy fókusszal a sliderre állva, rejtett lapon és „csökkentett mozgás” beállításnál szünetel. Billentyű: ←/→ a sávon.
 
-## Helykitöltő maradt
+## Bővítés a teljes telefonos mappából (2026-11-15, második kör)
 
-- **Hunter 3D futóműállítás**: nincs valódi Hunter-/futóműállítási fotó (a Hunter-feliratú képek a generált plakátokon szerepelnek).
-- **Kamerakalibrálás**: nincs olyan fotó, amelyen kifejezetten kamerakalibrálás látszik.
-- **Autódiagnosztika**: a TechPRO-tablet képe radarkalibrálást mutat, ezért az ACC-hez került; önálló diagnosztikai munkafotó nincs.
+A tulajdonos a teljes „1 Night Vision Service” mappát átmásolta (306 kép, 16 videó, 3 PDF). A 255 új képből 173 valódi `IMG-*` fotót egyenként, kontaktlapokon néztünk át, a bal alsó sarkot külön ellenőrizve.
 
-A helykitöltő HU/RO/EN nyelven jelzi: „Ehhez a szolgáltatáshoz még nincs jóváhagyott, valódi műhelyfotó.”
+| Eredeti fájl | Webes név (slug) | Tartalom | Hely |
+|---|---|---|---|
+| IMG-20260511-WA0011.jpg | hunter-alignment-lift | Jármű a futóműállító emelőn, Hunter állomással | Hunter 3D szolgáltatási oldal; slider; galéria 04 |
+| IMG-20260511-WA0017.jpg | hunter-alignment-screens | Hunter futóműmérő szoftver a monitorokon | Galéria 05 |
+| IMG-20260717-WA0009.jpg | camera-calibration-target | Kamerakalibráló tábla a jármű előtt | Kamerakalibrálás oldal; slider; galéria 03 |
+| IMG-20251104-WA0070.jpg | camera-calibration-target-front | Kamerakalibráló tábla egy jármű orra előtt | Galéria 10 |
+| IMG-20260717-WA0001.jpg | diagnostics-laptop | Járműhöz csatlakoztatott diagnosztikai szoftver laptopon | Autódiagnosztika oldal; slider; galéria 06 |
+| IMG-20260816-WA0000.jpg | adas-station | MAHLE TechPRO Digital ADAS állomás és diagnosztikai kocsi | Galéria 09 |
+| IMG-20260717-WA0013.jpg | headlight-laser-check | Fényszóró-beállító lézeres vonallal | Galéria 08 |
+| IMG-20260509-WA0018.jpg | ac-service-unit | Járműhöz csatlakoztatott klímaszerviz-berendezés | Galéria 12 |
+
+**Szolgáltatásonkénti képsorok (harmadik kör):** a szolgáltatási oldalakon a korábbi egyetlen kép helyén nagyítható képsor (slider) fut, 3–5 valódi fotóval (`placement.serviceSlides`):
+
+- ACC: acc-radar-calibration-screen, acc-radar-reflector (IMG-20251104-WA0045), diagnostics-tablet-in-car (IMG-20260717-WA0007)
+- ADAS: adas-calibration-target, adas-screen-front (IMG-20251104-WA0059), adas-guided-setup (IMG-20260717-WA0006), adas-station, adas-station-van (IMG-20260816-WA0002)
+- Hunter 3D: hunter-alignment-lift, hunter-alignment-wheel (IMG-20251104-WA0047), hunter-alignment-screens, hunter-console (IMG-20260527-WA0009), hunter-camera-beam (IMG-20260527-WA0011)
+- Kamerakalibrálás: camera-calibration-target, camera-target-angle (IMG-20260717-WA0011), camera-calibration-target-front, camera-target-portrait (IMG-20251104-WA0034), camera-target-cabin (IMG-20251104-WA0074)
+- LED / Matrix: headlight-adjustment, headlight-matrix-led (IMG-20260619-WA0005), headlight-laser-check, headlight-beam-check
+- Diagnosztika: diagnostics-laptop, diagnostics-tablet-in-car, adas-station
+
+Mind rendszám és felismerhető személy nélküli felvétel; a képaláírások csak azt írják le, ami a képen látszik, konkrét ügyfélmunkához nem kötjük őket.
+
+**Facebook-bejegyzések:** a „Munkáink” szakasz tetején és a szolgáltatási oldalak alján 9 kiválasztott bejegyzés kártyája jelenik meg a hivatalos oldalról (src/facebook-posts.mjs): cím, dátum, rövid összefoglaló a tulajdonos saját HU/RO szövege alapján (EN fordítás), és statikus link a bejegyzésre. Csak olyan bejegyzés került be, amelyen nincs Meta „MI-tartalom” jelölés; a 69 bejegyzésből 21 ilyen jelölésű volt, ezek kimaradtak. Nincs Facebook SDK, iframe, automatikusan betöltődő beágyazás vagy követőkód; a Facebook-képek/videók nem lettek letöltve.
+
+**Adatvédelmi kitakarás:** az IMG-20260717-WA0001 laptopképernyőjén olvasható alvázszám (VIN) és egy azonosítószám csak a webes változatokon el van homályosítva (`redact` a media/photos.json-ban); az eredeti fájl változatlan. Ez nem vízjel- vagy eredetjelölés-eltávolítás.
+
+Ezzel mind a hat szolgáltatásnak van valódi fotója; helykitöltő már nem szerepel. A slider is minden szolgáltatásnál valódi képet mutat.
+
+**A második körben kizárva:**
+- minden „(1)” végű másolat (15 db): szerkesztett EXIF-mintájúak, közülük hatban látható „AI által előállított tartalom” jelölés (pl. IMG-20251104-WA0026(1), WA0053(1), IMG-20260509-WA0001(1), WA0005(1), IMG-20260527-WA0004(1), WA0008(1));
+- 67 PNG (`file_0000…`, `a_banner…`, `a_digital_advertisement…`, `a_facebook_announcement…`, F.png stb.), 2 `grok_image_*` és 8 `Messenger_creation_*` kép: generált vagy szerkesztett grafikák;
+- olvasható rendszámú vagy ügyféljárművet azonosító felvételek (pl. IMG-20251104-WA0025, WA0026, WA0053);
+- mérési eredményt mutató kijelzők (pl. IMG-20260717-WA0000 „Measure confirmed”) – mérési eredményt nem teszünk közzé referenciaként;
+- videók és PDF-ek: nem kerültek feldolgozásra.
+
+További jó, de kihagyott fotók (később felhasználhatók): sok ADAS-kalibrálás (IMG-20251104-WA0036–0101), Hunter-állomás (IMG-20260527-WA0001–0013), fényszóró-beállítás (IMG-20260619-WA0002–0007), váltó/mechatronika (IMG-20260613-*, IMG-20260717-WA0015–0029).
 
 ## Kizárt fájlok és indok
 
