@@ -7,6 +7,7 @@ export const business={
  facebook:'https://www.facebook.com/share/19q4Kb3jFq/',
  maps:'https://maps.app.goo.gl/PCEcWUp4iUa8GtKy6?g_st=ac',
  app:'https://vadzsolty-cloud.github.io/nvs-app-letoltes/app/',
+ download:'https://vadzsolty-cloud.github.io/nvs-app-letoltes/#letoltes',
  addressApproved:true,phoneApproved:true,postalCode:'537203',
  // Coordinates of the owner's Google Business Profile pin (Night Vision Service, Str. Principală nr. 244/A).
  geo:{lat:46.4619963,lng:25.7936655},

@@ -44,7 +44,7 @@ for(const basePath of ['', '/nvs-website'])test('localized HTML, assets, redirec
  assert.equal(titles.size,21);assert.equal(descriptions.size,21);
  const index=await readFile(output+'/index.html','utf8');assert.ok(index.includes('content="0;url='+basePath+'/hu/"'));
  const notFound=await readFile(output+'/404.html','utf8');assert.ok(notFound.includes('href="'+basePath+'/hu/"'));
- const xml=await readFile(output+'/sitemap.xml','utf8');assert.equal([...xml.matchAll(/<loc>/g)].length,24);assert.ok(xml.includes(origin+basePath+'/en/services/adas/'));
+ const xml=await readFile(output+'/sitemap.xml','utf8');assert.equal([...xml.matchAll(/<loc>/g)].length,33);assert.ok(xml.includes(origin+basePath+'/en/services/adas/'));
  for(const l of ['hu','ro','en']){const policy=await readFile(output+'/'+l+'/privacy/index.html','utf8');assert.ok(policy.includes('<html lang="'+l+'">'));assert.ok(policy.includes('noindex,nofollow'));assert.ok(policy.includes(origin+basePath+'/'+l+'/privacy/'));}
  assert.match(await readFile(output+'/robots.txt','utf8'),/Disallow: \//);await stat(output+'/.nojekyll');
  const server=createPreviewServer({output,basePath});
@@ -95,8 +95,8 @@ test('demo summarises and resets without network or persistent storage',async()=
  nodes.date.value='2000-01-01';listeners['booking-formsubmit']({preventDefault(){}});assert.equal(nodes.date.validity,'Invalid');assert.equal(nodes['booking-form'].hidden,false);
 });
 
-test('automatic map and localized theme controls',async()=>{
+test('map is gated before consent and theme controls are localized',async()=>{
  const output=resolve('artifacts/test-builds/map');
  execFileSync(process.execPath,['scripts/build.mjs'],{env:{...process.env,BASE_PATH:'/nvs-website',SITE_URL:'https://vadzsolty-cloud.github.io',PRODUCTION:'false',EMULATOR_UI:'false',OUTPUT_DIR:output},stdio:'pipe'});
- for(const l of ['hu','ro','en']){const html=await readFile(output+'/'+l+'/index.html','utf8');assert.ok(html.includes('src="https://maps.google.com/maps?q=46.4619963,25.7936655&amp;z=16&amp;output=embed&amp;hl='+l+'"'));assert.ok(!html.includes('map-load"'));assert.ok(html.includes('theme-toggle'));assert.ok(html.includes('/nvs-website/assets/theme.js'));}
+ for(const l of ['hu','ro','en']){const html=await readFile(output+'/'+l+'/index.html','utf8');assert.ok(html.includes('src="https://maps.google.com/maps?q=46.4619963,25.7936655&amp;z=16&amp;output=embed&amp;hl='+l+'"'));assert.ok(!html.includes('map-load"'));assert.ok(!/<iframe\b[^>]*\ssrc=/.test(html));assert.ok(html.includes('data-consent-category="maps"'));assert.ok(html.includes('theme-toggle'));assert.ok(html.includes('/nvs-website/assets/theme.js'));}
 });
