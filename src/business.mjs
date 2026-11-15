@@ -23,3 +23,5 @@ export const mapCopy={
  ro:{title:'Unde ne găsești',load:'Încarcă harta',note:'Harta se încarcă de pe Google Maps doar la clic; în acel moment se aplică regulile Google privind datele.',frame:'Night Vision Service pe hartă – Google Maps',open:'Deschide în Google Maps'},
  en:{title:'Where to find us',load:'Load the map',note:'The map loads from Google Maps only when you click; Google’s privacy terms then apply.',frame:'Night Vision Service on the map – Google Maps',open:'Open in Google Maps'}
 };
+
+export const embedPrivacy={"hu":"A Google-térkép és a Facebook-beágyazások automatikusan betöltődnek, amikor elérhetővé válnak az oldalon; ekkor a szolgáltatók hozzáférési adatokat kezelhetnek és saját sütiket használhatnak. A témaválasztást a böngésző helyben menti.","ro":"Harta Google și conținutul Facebook încorporat se încarcă automat pe pagină; furnizorii pot prelucra date de acces și pot utiliza propriile cookie-uri. Preferința temei este salvată local.","en":"Google Maps and embedded Facebook content load automatically on the page; providers may process access data and use their own cookies. Your theme preference is saved locally."};

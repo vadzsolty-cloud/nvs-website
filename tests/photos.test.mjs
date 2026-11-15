@@ -43,7 +43,7 @@ test('pages use responsive images under /nvs-website/, eager hero, lazy gallery,
   assert.ok(!html.includes('/assets/workshop/'));
   // Facebook post cards: static links only, every selected post, no embed/SDK
   for(const p of facebookPosts){assert.ok(html.includes(`href="https://www.facebook.com/${pageId}/posts/${p.id}" target="_blank" rel="noopener"`),p.id);assert.ok(html.includes(p.title[l]));}
-  assert.ok(!/connect\.facebook\.net|<iframe|fbq\(|facebook\.com\/plugins/.test(html));
+  assert.ok(!/connect\.facebook\.net|fbq\(/.test(html));assert.ok(html.includes('https://www.facebook.com/plugins/video.php'));assert.ok(html.includes('https://www.facebook.com/plugins/post.php'));
   // service slider: one slide per service, real photo or labelled icon slide, links to the service page
   const slider=html.match(/<section class="service-slider"[\s\S]*?<\/section>/)[0];
   assert.equal([...slider.matchAll(/class="slide[ "]/g)].length,ids.length);
