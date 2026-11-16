@@ -1,4 +1,5 @@
-import {createBookingService as productionService} from '../../backend/functions/booking.mjs';
+import {createBookingService as productionService,hash as productionHash} from '../../backend/functions/booking.mjs';
+import {deliverNotification} from '../../backend/functions/mail.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
@@ -29,8 +30,39 @@ test('isolated Firebase Auth, Functions, Firestore and mail sink integration',as
  const payload={carId,serviceId:'adas',date,time:'10:00',note:'Synthetic test only',lang:'hu',idempotencyKey:randomUUID()};
  let saved;
  await t.test('production request service rejects forged access and deduplicates pending requests in the isolated emulator',async()=>{
- const svc=productionService({db,auth,shopId:DEMO_SHOP});const p={...payload,time:'16:30',acceptNotice:true,idempotencyKey:randomUUID()};
- await assert.rejects(()=>svc.request(customer.token,{...p,acceptNotice:false}),/NOTICE_REQUIRED/);await assert.rejects(()=>svc.request(other.token,p),/FORBIDDEN/);await assert.rejects(()=>svc.request(customer.token,{...p,status:'confirmed'}),/INVALID_INPUT/);const results=await Promise.all([svc.request(customer.token,p),svc.request(customer.token,p)]);assert.equal(results[0].id,results[1].id);const a=(await db.doc('appointments/'+results[0].id).get()).data();assert.equal(a.status,'pending');assert.equal(a.capacityGuaranteed,false);assert.equal(a.shopId,DEMO_SHOP);assert.equal(a.privacyNoticeVersion,'2026-11-15');assert.equal((await db.doc('nvsWebsiteMailOutbox/'+results[0].id).get()).data().status,'pending');await assert.rejects(()=>svc.request(customer.token,{...p,idempotencyKey:randomUUID()}),/DUPLICATE_REQUEST/);
+ await db.doc('customerRegistrations/'+customer.uid).set({name:'Synthetic Customer',phone:'+40700111222',email:customer.email});
+ const svc=productionService({db,auth,shopId:DEMO_SHOP});const p={...payload,time:'16:30',acceptNotice:true,noticeVersion:'2026-11-16',idempotencyKey:randomUUID()};
+ await assert.rejects(()=>svc.request(customer.token,{...p,acceptNotice:false}),/NOTICE_REQUIRED/);await assert.rejects(()=>svc.request(other.token,p),/FORBIDDEN/);await assert.rejects(()=>svc.request(customer.token,{...p,status:'confirmed'}),/INVALID_INPUT/);const results=await Promise.all([svc.request(customer.token,p),svc.request(customer.token,p)]);assert.equal(results[0].id,results[1].id);const a=(await db.doc('appointments/'+results[0].id).get()).data();assert.equal(a.status,'pending');assert.equal(a.capacityGuaranteed,false);assert.equal(a.shopId,DEMO_SHOP);assert.equal(a.privacyNoticeVersion,'2026-11-16');assert.equal((await db.doc('nvsWebsiteMailOutbox/'+results[0].id).get()).data().status,'pending');await assert.rejects(()=>svc.request(customer.token,{...p,idempotencyKey:randomUUID()}),/DUPLICATE_REQUEST/);
+ });
+ await t.test('production callback and other-service details are required, scoped and mailed from a stable snapshot',async()=>{
+  const svc=productionService({db,auth,shopId:DEMO_SHOP});
+  const p={...payload,time:'17:00',serviceId:'other',note:'Automata váltó olajcseréje',contactName:'Synthetic Callback',contactPhone:'+40 700 222 333',acceptNotice:true,noticeVersion:'2026-11-16',idempotencyKey:randomUUID()};
+  assert.deepEqual(await svc.profile(customer.token),{name:'Synthetic Customer',phone:'+40700111222'});
+  assert.deepEqual(await svc.profile(other.token),{name:'',phone:''});
+  await assert.rejects(()=>svc.request(customer.token,{...p,note:' '}),/SERVICE_DETAILS_REQUIRED/);
+  await assert.rejects(()=>svc.request(customer.token,{...p,contactPhone:'+1'}),/CONTACT_REQUIRED/);
+  await assert.rejects(()=>svc.request(customer.token,{...p,contactName:''}),/CONTACT_REQUIRED/);
+  await assert.rejects(()=>svc.request(customer.token,{...p,contactPhone:{fake:'number'}}),/CONTACT_REQUIRED/);
+  await assert.rejects(()=>svc.request(customer.token,{...p,contactEmail:'forged@example.invalid'}),/INVALID_INPUT/);
+  await assert.rejects(()=>svc.request(customer.token,{...p,vehicle:{plate:'FORGED'}}),/INVALID_INPUT/);
+  await db.doc('cars/'+carId).update({vin:'SYNTHETICVIN000001',year:'2021',mileage:123456,transmission:'Automatic',privateHistory:'NOT_FOR_EMAIL'});
+  const result=await svc.request(customer.token,p),outbox=db.doc('nvsWebsiteMailOutbox/'+result.id);
+  const event=(await outbox.get()).data();assert.equal(event.details.contact.email,customer.email);assert.equal(event.details.contact.phone,p.contactPhone);assert.equal(event.details.vehicle.vin,'SYNTHETICVIN000001');assert.equal(event.details.vehicle.privateHistory,undefined);
+  await db.doc('cars/'+carId).update({vin:'LATER_EDIT_MUST_NOT_REPLACE_SNAPSHOT'});
+  let sent=0,message;await deliverNotification(db,result.id,{async sendMail(m){sent++;message=m;}});
+  assert.equal(message.to,'nightvisionservice2025@gmail.com');
+  for(const value of ['Synthetic Callback',p.contactPhone,customer.email,'SYNTHETICVIN000001','123456','2021','Automatic',p.note,'Egyéb szervizmunka'])assert.ok(message.text.includes(value),value);
+  assert.ok(!message.text.includes('NOT_FOR_EMAIL'));assert.ok(!message.text.includes('LATER_EDIT_MUST_NOT_REPLACE_SNAPSHOT'));
+  await deliverNotification(db,result.id,{async sendMail(){sent++;}});assert.equal(sent,1);assert.equal((await outbox.get()).data().status,'sent');
+  await assert.rejects(()=>svc.request(customer.token,{...p,contactPhone:'+40700999888'}),/IDEMPOTENCY_CONFLICT/);
+ });
+ await t.test('an already saved legacy idempotency key replays without a new mail or contact migration',async()=>{
+  const svc=productionService({db,auth,shopId:DEMO_SHOP}),key=randomUUID(),legacyId='legacy-'+randomUUID();
+  const p={...payload,time:'18:00',acceptNotice:true,idempotencyKey:key};
+  const oldPayload={carId,date:p.date,time:p.time,serviceId:p.serviceId,note:p.note,lang:p.lang};
+  await db.doc('appointments/'+legacyId).set({...oldPayload,source:'web',ownerUid:customer.uid,shopId:DEMO_SHOP,status:'pending'});
+  await db.doc('nvsWebsiteRequestKeys/'+productionHash(customer.uid+'|'+key)).set({uid:customer.uid,digest:productionHash(JSON.stringify(oldPayload)),appointmentId:legacyId});
+  const result=await svc.request(customer.token,p);assert.equal(result.id,legacyId);assert.equal(result.replayed,true);assert.equal((await db.doc('nvsWebsiteMailOutbox/'+legacyId).get()).exists,false);
  });
  await t.test('local-only web lab serves module/translations with restricted emulator CSP',async()=>{
   const server=createPreviewServer({output:'../artifacts/emulator-ui',basePath:'/nvs-website',emulatorUi:true});
@@ -127,3 +159,4 @@ test('isolated Firebase Auth, Functions, Firestore and mail sink integration',as
  });
  await deleteApp(app);
 });
+

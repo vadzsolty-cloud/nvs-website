@@ -72,9 +72,11 @@
    try{const health=await api('/health');if(!health.bookingEnabled||!health.mailConfigured)throw Error('MAIL_NOT_CONFIGURED');}catch{display(copy.notReady,'SERVICE_UNAVAILABLE');return;}
    const data=await auth('signInWithPassword',{email:q('email').value.trim(),password:password.value,returnSecureToken:true});
    if(!data.idToken)throw Error('AUTH_FAILED');token=data.idToken;phase='cars';
-   const cars=(await api('/cars')).filter(c=>c.linked);q('car').replaceChildren();
+   const [carList,profile]=await Promise.all([api('/cars'),api('/profile').catch(()=>({}))]);
+   const cars=carList.filter(c=>c.linked);q('car').replaceChildren();
    for(const car of cars){const o=document.createElement('option');o.value=car.id;o.textContent=[car.plate,car.make,car.model].filter(Boolean).join(' · ');q('car').append(o);}
    if(!cars.length){token=null;display(copy.noCars,'NO_LINKED_CARS');return;}
+   q('contact-name').value=typeof profile.name==='string'?profile.name:'';q('contact-phone').value=typeof profile.phone==='string'?profile.phone:'';
    password.value='';hidePassword();q('login').hidden=true;q('account').hidden=false;display('');q('car').focus();
   }catch(e){
    if(phase==='cars'&&e.message==='EMAIL_NOT_VERIFIED'){
@@ -94,12 +96,16 @@
   catch(e){display(errorMessage(e.message,'verify'),'VERIFICATION_FAILED');}
   finally{lock(false);}
  });
- q('logout').addEventListener('click',()=>{token=null;clearVerification();key=null;digest=null;hidePassword();q('login').reset();q('request').reset();q('car').replaceChildren();q('login').hidden=false;q('account').hidden=true;display('');});
+ q('logout').addEventListener('click',()=>{token=null;clearVerification();key=null;digest=null;hidePassword();q('login').reset();q('request').reset();updateService();q('car').replaceChildren();q('login').hidden=false;q('account').hidden=true;display('');});
  q('request').addEventListener('submit',async e=>{
   e.preventDefault();if(busy||!token)return;lock(true);display(copy.busy);
-  try{const body={carId:q('car').value,serviceId:q('service').value,date:q('date').value,time:q('time').value,note:q('note').value,lang,acceptNotice:q('notice').checked};const d=JSON.stringify(body);if(d!==digest){key=crypto.randomUUID();digest=d;}body.idempotencyKey=key;const result=await api('/request',body);display(copy.success+' ID: '+result.id);}
-  catch(e){display(e.message==='MAIL_NOT_CONFIGURED'?copy.notReady:e.message==='UNAUTHENTICATED'?copy.sessionExpired:copy.error);}
+  try{const body={carId:q('car').value,contactName:q('contact-name').value,contactPhone:q('contact-phone').value,serviceId:q('service').value,date:q('date').value,time:q('time').value,note:q('note').value,lang,noticeVersion:'2026-11-16',acceptNotice:q('notice').checked};const d=JSON.stringify(body);if(d!==digest){key=crypto.randomUUID();digest=d;}body.idempotencyKey=key;await api('/request',body);display(copy.success);}
+  catch(e){display(e.message==='MAIL_NOT_CONFIGURED'?copy.notReady:e.message==='UNAUTHENTICATED'?copy.sessionExpired:e.message==='CONTACT_REQUIRED'?copy.contactError:e.message==='SERVICE_DETAILS_REQUIRED'?copy.noteError:copy.error);}
   finally{lock(false);}
  });
+ const noteLabel=q('note-label');
+ const updateService=()=>{const other=q('service').value==='other';q('note').required=other;noteLabel.textContent=other?noteLabel.dataset.other:noteLabel.dataset.default;};
+ q('service').addEventListener('change',updateService);updateService();
  const d=new Date();q('date').min=[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');
 })();
+

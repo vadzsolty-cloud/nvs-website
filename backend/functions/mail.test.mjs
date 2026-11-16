@@ -21,3 +21,19 @@ test('missing secret fails closed and backs off instead of repeatedly attempting
  const {mailTransport}=await import('./mail.mjs?failure');const originalFetch=globalThis.fetch;let reads=0;
  try{globalThis.fetch=async()=>{reads++;return {ok:false,status:404}};const app={options:{credential:{getAccessToken:async()=>({access_token:'synthetic-only'})}}};await assert.rejects(()=>mailTransport(app),/MAIL_NOT_CONFIGURED/);await assert.rejects(()=>mailTransport(app),/MAIL_NOT_CONFIGURED/);assert.equal(reads,1);}finally{globalThis.fetch=originalFetch;}
 });
+test('notification includes callback details and recorded vehicle fields, with safe HTML',async()=>{
+ const {buildNotification}=await import('./notification.mjs');
+ const details={contact:{name:'Synthetic Customer',phone:'+40 700 111 222',email:'customer@example.invalid'},companyName:'Synthetic Fleet',vehicle:{plate:'TEST-001',make:'Fixture',model:'Vehicle',year:'2021',vin:'SYNTHETICVIN000001',mileage:'123456',fuelType:'Hybrid',engineCapacity:'1998',powerKw:'110',transmission:'Automatic',color:'Grey',history:'PRIVATE_HISTORY_MUST_NOT_LEAK'}};
+ const message=buildNotification({date:'2099-12-01',time:'10:00',serviceId:'other',note:'Olajcsere\n<script>not executable</script>'},details,'internal-only-id');
+ for(const value of ['Synthetic Customer','+40 700 111 222','customer@example.invalid','TEST-001','Fixture','2021','SYNTHETICVIN000001','123456','Hybrid','1998','110','Automatic','Grey','Olajcsere','Egyéb szervizmunka'])assert.ok(message.text.includes(value),value);
+ assert.ok(message.html.includes('href="tel:+40700111222"'));assert.ok(message.html.includes('&lt;script&gt;'));assert.ok(!message.html.includes('<script>'));assert.ok(!message.text.includes('PRIVATE_HISTORY_MUST_NOT_LEAK'));assert.ok(message.subject.includes('TEST-001'));
+});
+test('snapshots contain vehicle data only and contact validation requires a callable phone',async()=>{
+ const {notificationDetails,contactDetails}=await import('./request-details.mjs');
+ const profile={name:'Synthetic Person',phone:'+40 700 111 222'},user={email:'verified@example.invalid'};
+ assert.deepEqual(contactDetails({},profile,user),{name:'Synthetic Person',phone:'+40 700 111 222',email:user.email});
+ for(const bad of ['', 'abc', '+1', '000000000000000000000', '+40\nBcc:other@example.invalid'])assert.throws(()=>contactDetails({contactPhone:bad},profile,user),/CONTACT_REQUIRED/);
+ const snapshot=notificationDetails({plate:'TEST-002',vin:'SYNTHETICVIN',history:[{private:'secret'}],photos:['private-url'],accessToken:'secret'},contactDetails({},profile,user),profile);
+ assert.equal(snapshot.vehicle.plate,'TEST-002');assert.equal(snapshot.vehicle.vin,'SYNTHETICVIN');assert.ok(!JSON.stringify(snapshot).includes('secret'));assert.ok(!JSON.stringify(snapshot).includes('private-url'));
+});
+

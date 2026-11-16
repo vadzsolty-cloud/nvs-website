@@ -8,7 +8,7 @@ import {mailTransport,deliverNotification} from './mail.mjs';
 const projectId='night-vision-service',shopId='QB2fsNCT32ReZ5fiGcaHM7BjoNw2';
 const app=initializeApp({projectId,credential:applicationDefault()});
 const options={region:'europe-west1',serviceAccount:'nvs-website@night-vision-service.iam.gserviceaccount.com',maxInstances:2,memory:'256MiB',timeoutSeconds:45};
-const codes={UNAUTHENTICATED:401,EMAIL_NOT_VERIFIED:403,FORBIDDEN:403,NOTICE_REQUIRED:400,INVALID_INPUT:400,INVALID_TIME:400,NONEXISTENT_TIME:400,AMBIGUOUS_TIME:400,RATE_LIMITED:429,DUPLICATE_REQUEST:409,IDEMPOTENCY_CONFLICT:409,MAIL_NOT_CONFIGURED:503};
+const codes={UNAUTHENTICATED:401,EMAIL_NOT_VERIFIED:403,FORBIDDEN:403,NOTICE_REQUIRED:400,CONTACT_REQUIRED:400,SERVICE_DETAILS_REQUIRED:400,INVALID_INPUT:400,INVALID_TIME:400,NONEXISTENT_TIME:400,AMBIGUOUS_TIME:400,RATE_LIMITED:429,DUPLICATE_REQUEST:409,IDEMPOTENCY_CONFLICT:409,MAIL_NOT_CONFIGURED:503};
 function guard(){if(process.env.GCLOUD_PROJECT!==projectId||process.env.FIRESTORE_EMULATOR_HOST||process.env.FIREBASE_AUTH_EMULATOR_HOST)throw Error('WRONG_ENVIRONMENT');}
 export const nvsWebsiteApi=onRequest(options,async(req,res)=>{
  res.set('Cache-Control','no-store');const origin=req.get('origin');
@@ -24,6 +24,7 @@ export const nvsWebsiteApi=onRequest(options,async(req,res)=>{
   if(!token)throw Error('UNAUTHENTICATED');
   const db=getFirestore(app),service=createBookingService({db,auth:getAuth(app),shopId});
   if(req.method==='GET'&&route==='/cars'){res.json(await service.cars(token));return;}
+  if(req.method==='GET'&&route==='/profile'){res.json(await service.profile(token));return;}
   if(req.method==='GET'&&route==='/requests'){res.json(await service.requests(token));return;}
   if(req.method==='POST'&&route==='/request'){
    // Verify account/ownership before checking mail; reject when notifications cannot be delivered.
@@ -43,3 +44,4 @@ export const nvsWebsiteMail=onDocumentCreated({...options,document:'nvsWebsiteMa
  }
  await deliverNotification(db,event.params.eventId,transport);
 });
+
