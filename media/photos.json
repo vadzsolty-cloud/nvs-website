@@ -680,7 +680,7 @@
  ],
  "placement": {
   "hero": "headlight-adjustment",
-  "workshop": "workshop-lift-bay",
+  "workshop": "camera-calibration-target-front",
   "services": {
    "acc": "acc-radar-calibration-screen",
    "adas": "adas-calibration-target",
