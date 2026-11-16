@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import {buildNotification,legacyDetails} from './notification.mjs';
 export const MAILBOX='nightvisionservice2025@gmail.com';
 export const SENDER=String(process.env.NVS_MAIL_SENDER||'').trim().toLowerCase();
 export function validatePassword(value){const pass=String(value||'').replace(/\s/g,'');if(!/^[A-Za-z0-9]{16}$/.test(pass))throw Error('MAIL_NOT_CONFIGURED');return pass;}
@@ -28,10 +29,12 @@ export async function deliverNotification(db,id,transport){
  try{
   const a=(await db.doc('appointments/'+id).get()).data();
   if(!a||a.source!=='web'||a.shopId!=='QB2fsNCT32ReZ5fiGcaHM7BjoNw2')throw Error('INVALID_EVENT');
-  await transport.sendMail({from:{name:'Night Vision Service',address:SENDER},to:MAILBOX,replyTo:MAILBOX,messageId:'<'+id+'@night-vision-service.web.app>',subject:'NVS: új időpontkérés / solicitare nouă',text:['Új, műhelyi visszaigazolásra váró időpontkérés.','Solicitare nouă, în așteptarea confirmării atelierului.','Dátum / Data: '+a.date,'Idő / Ora: '+a.time,'Szolgáltatás / Serviciu: '+a.serviceId,'Azonosító / ID: '+id,'A kérés nem garantált, visszaigazolt időpont.','https://vadzsolty-cloud.github.io/nvs-app-letoltes/app/'].join('\n')});
+  const details=event.details||await legacyDetails(db,a);
+  await transport.sendMail({from:{name:'Night Vision Service',address:SENDER},to:MAILBOX,replyTo:MAILBOX,messageId:'<'+id+'@night-vision-service.web.app>',...buildNotification(a,details,id)});
   await ref.update({status:'sent',sentAt:Date.now(),leaseUntil:0,lastError:null});
  }catch{
   await ref.update({status:(event.attempts||0)+1>=5?'dead':'retry',leaseUntil:0,lastError:'MAIL_DELIVERY_FAILED'});
   if((event.attempts||0)+1<5)throw Error('MAIL_DELIVERY_FAILED');
  }
 }
+

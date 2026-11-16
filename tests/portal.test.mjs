@@ -16,9 +16,11 @@ test('localized customer and download pages preserve routes, privacy and shared 
   assert.ok(html.includes('content="noindex,nofollow"'));assert.ok(html.includes('id="site-menu"'));assert.ok(html.includes(`href="/nvs-website/${lang}/account/"`));
   for(const asset of html.matchAll(/(?:src|href)="(\/nvs-website\/assets\/[^"#]+)"/g))await stat(output+asset[1].slice('/nvs-website'.length));
   if(kind==='account'){
+   assert.ok(html.includes('id="native-contact-name"'));assert.ok(html.includes('id="native-contact-phone"'));assert.ok(html.includes('value="other"'));
    assert.ok(html.includes('id="native-login"'));assert.ok(html.includes('id="register"'));assert.ok(html.includes('href="https://vadzsolty-cloud.github.io/nvs-app-letoltes/app/"'));assert.ok(html.includes(`href="/nvs-website/${lang}/download/"`));
   }else{
    assert.ok(html.includes('data-download-page'));assert.ok(html.includes('href="https://github.com/vadzsolty-cloud/nvs-app-letoltes/releases/latest"'));assert.ok(!html.includes('id="native-login"'));
   }
  }
 });
+

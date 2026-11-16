@@ -38,6 +38,7 @@ const {execFileSync}=require('node:child_process');
     return route.fulfill({status:healthReady?200:503,json:{bookingEnabled:healthReady,mailConfigured:healthReady}});
    }
    assert.equal(req.headers().authorization,'Bearer synthetic-token');
+   if(url.pathname.endsWith('/profile'))return route.fulfill({json:{name:'Synthetic Customer',phone:'+40700111222'}});
    if(url.pathname.endsWith('/cars'))return route.fulfill({status:carsError?403:200,json:carsError?{error:carsError}:noCars?[]:[{id:'fixture-car',plate:'FIXTURE',linked:true}]});
    bookingCalls++;throw Error('Unexpected booking write in auth regression test');
   });
@@ -140,3 +141,4 @@ const {execFileSync}=require('node:child_process');
   assert.equal(bookingCalls,0);console.log('PASS: HU/RO/EN autofill + implicit/programmatic submit blocked; explicit sign-in; password retained on errors; eye works during slow backend and after errors; successful sign-in clears password. Typing, paste, caret, hold/cancel/blur, themes and Pages subpath verified. All Auth/mail/booking traffic synthetic.');
  }finally{if(browser)await browser.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1});
+
