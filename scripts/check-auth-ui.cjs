@@ -33,22 +33,34 @@ const {execFileSync}=require('node:child_process');
    bookingCalls++;throw Error('Unexpected booking write in auth regression test');
   });
   const page=await context.newPage();
-  const login=async()=>{await page.locator('#native-email').fill('fixture@example.invalid');await page.locator('#native-password').fill('synthetic-only');await page.locator('#native-login button[type=submit]').click();await page.waitForFunction(()=>!document.querySelector('#native-login button[type=submit]').disabled);};
+  const login=async()=>{await page.locator('#native-email').fill('fixture@example.invalid');const field=page.locator('#native-password');await field.tap();await field.press('ControlOrMeta+A');await page.keyboard.type('synthetic-only');assert.equal(await field.inputValue(),'synthetic-only');await page.locator('#native-login button[type=submit]').click();await page.waitForFunction(()=>!document.querySelector('#native-login button[type=submit]').disabled);};
   for(const lang of ['hu','ro','en']){
    const t=nativeCopy[lang];activeLang=lang;authError=null;carsError='EMAIL_NOT_VERIFIED';verificationError=null;
    await page.goto('http://127.0.0.1:4184/nvs-website/'+lang+'/');
    if(await page.locator('#privacy-preferences').isVisible())await page.locator('[data-consent=reject]').click();
    assert.equal(await page.locator('#native-verification').isVisible(),false);
    const pass=page.locator('#native-password'),show=page.locator('#native-password-show');
+   assert.equal((await show.innerText()).trim(),'');assert.equal(await show.getAttribute('aria-label'),t.showPassword);
+   assert.equal(await show.locator('svg').count(),1);
+   await pass.tap();await page.keyboard.type('abc 123 !Á');assert.equal(await pass.inputValue(),'abc 123 !Á');
+   await pass.evaluate(el=>el.setSelectionRange(4,4));
+   const iconBox=await show.boundingBox(),fieldBox=await pass.boundingBox();
+   assert.ok(iconBox.width===44&&iconBox.height===44);assert.ok(iconBox.x>=fieldBox.x&&iconBox.x+iconBox.width<=fieldBox.x+fieldBox.width);
+   await page.mouse.move(iconBox.x+22,iconBox.y+22);await page.mouse.down();assert.equal(await pass.getAttribute('type'),'text');await page.mouse.up();
+   assert.equal(await pass.evaluate(el=>document.activeElement===el),true);assert.equal(await pass.evaluate(el=>el.selectionStart),4);
+   await page.keyboard.type('Z');assert.equal(await pass.inputValue(),'abc Z123 !Á');
+   await pass.press('ControlOrMeta+A');await page.keyboard.insertText('synthetic-only');assert.equal(await pass.inputValue(),'synthetic-only');
    await pass.fill('synthetic-only');await show.scrollIntoViewIfNeeded();
    for(const theme of ['light','dark']){
     await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+    await page.waitForTimeout(250); // Let the existing theme color transition finish.
+    assert.equal(await show.evaluate(el=>getComputedStyle(el).backgroundColor),'rgba(0, 0, 0, 0)');
     await show.dispatchEvent('pointerdown',{button:0,pointerType:'touch',isPrimary:true});assert.equal(await pass.getAttribute('type'),'text');
     assert.equal(await show.getAttribute('aria-pressed'),'true');
     await show.dispatchEvent('pointerup',{button:0,pointerType:'touch'});assert.equal(await pass.getAttribute('type'),'password');
     assert.equal(await show.getAttribute('aria-pressed'),'false');
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
-    if(lang==='hu')await page.screenshot({path:'artifacts/auth-hu-'+theme+'.png'});
+    if(lang==='hu')await page.locator('.native-booking').screenshot({path:'artifacts/auth-hu-'+theme+'.png'});
    }
    for(const event of ['pointerleave','pointercancel','lostpointercapture','blur']){await show.dispatchEvent('pointerdown',{button:0});await show.dispatchEvent(event);assert.equal(await pass.getAttribute('type'),'password');}
    const box=await show.boundingBox();await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();assert.equal(await pass.getAttribute('type'),'text');await page.mouse.move(box.x-10,box.y);assert.equal(await pass.getAttribute('type'),'password');await page.mouse.up();
@@ -80,6 +92,6 @@ const {execFileSync}=require('node:child_process');
   await page.goto('http://127.0.0.1:4184/nvs-website/en/');carsError='EMAIL_NOT_VERIFIED';verificationError='TOO_MANY_ATTEMPTS_TRY_LATER';
   await login();await page.locator('#native-verify-email').click();await page.waitForFunction(()=>!document.querySelector('#native-verify-email').disabled);assert.equal(await page.locator('#native-status').innerText(),nativeCopy.en.authThrottled);
   await page.setViewportSize({width:1440,height:1000});await page.screenshot({path:'artifacts/auth-en-desktop.png'});
-  assert.equal(bookingCalls,0);console.log('PASS: HU/RO/EN auth errors, unverified account, explicit verification email + cooldown, no credential storage; hold-to-show pointer/touch/keyboard/cancel/blur, light/dark mobile layout, Pages subpath. Auth/mail/booking traffic intercepted; no live writes or emails.');
+  assert.equal(bookingCalls,0);console.log('PASS: HU/RO/EN auth errors, unverified account, explicit verification email + cooldown, no credential storage; touch-focused typing, paste, caret preservation, compact eye icon, hold-to-show pointer/touch/keyboard/cancel/blur, light/dark mobile layout, Pages subpath. Auth/mail/booking traffic intercepted; no live writes or emails.');
  }finally{if(browser)await browser.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1});
