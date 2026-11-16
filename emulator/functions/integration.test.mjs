@@ -49,11 +49,14 @@ test('isolated Firebase Auth, Functions, Firestore and mail sink integration',as
   const result=await svc.request(customer.token,p),outbox=db.doc('nvsWebsiteMailOutbox/'+result.id);
   const event=(await outbox.get()).data();assert.equal(event.details.contact.email,customer.email);assert.equal(event.details.contact.phone,p.contactPhone);assert.equal(event.details.vehicle.vin,'SYNTHETICVIN000001');assert.equal(event.details.vehicle.privateHistory,undefined);
   await db.doc('cars/'+carId).update({vin:'LATER_EDIT_MUST_NOT_REPLACE_SNAPSHOT'});
+  // Mail's production shop guard stays strict. This fixture is still solely in the demo emulator.
+  await db.doc('appointments/'+result.id).update({shopId:'QB2fsNCT32ReZ5fiGcaHM7BjoNw2'});
   let sent=0,message;await deliverNotification(db,result.id,{async sendMail(m){sent++;message=m;}});
   assert.equal(message.to,'nightvisionservice2025@gmail.com');
   for(const value of ['Synthetic Callback',p.contactPhone,customer.email,'SYNTHETICVIN000001','123456','2021','Automatic',p.note,'Egyéb szervizmunka'])assert.ok(message.text.includes(value),value);
   assert.ok(!message.text.includes('NOT_FOR_EMAIL'));assert.ok(!message.text.includes('LATER_EDIT_MUST_NOT_REPLACE_SNAPSHOT'));
   await deliverNotification(db,result.id,{async sendMail(){sent++;}});assert.equal(sent,1);assert.equal((await outbox.get()).data().status,'sent');
+  await db.doc('appointments/'+result.id).update({shopId:DEMO_SHOP});
   await assert.rejects(()=>svc.request(customer.token,{...p,contactPhone:'+40700999888'}),/IDEMPOTENCY_CONFLICT/);
  });
  await t.test('an already saved legacy idempotency key replays without a new mail or contact migration',async()=>{
