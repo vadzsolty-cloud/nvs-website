@@ -1,0 +1,13 @@
+.workshop-story{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
+.workshop-intro{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:60px;align-items:center}
+.workshop-intro>div{min-width:0}.workshop-intro h2{font-size:clamp(29px,3vw,43px);line-height:1.2;overflow-wrap:anywhere}.workshop-intro p:last-child{margin-bottom:0}
+.workshop-intro .about-photo .photo{height:auto;max-height:520px;aspect-ratio:4/5;object-fit:cover}
+.workshop-intro figcaption{color:var(--muted)}
+.workshop-equipment{margin-top:48px}.workshop-equipment>h3{font-size:clamp(23px,2.4vw,30px);margin-bottom:12px}
+.equipment-list{list-style:none;padding:0;margin:25px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.equipment-list li{display:flex;gap:18px;padding:24px;border:1px solid var(--line);border-radius:8px;background:var(--bg);min-width:0}
+.equipment-number{flex-shrink:0;color:var(--green);font-size:12px;letter-spacing:.08em;padding-top:3px}.equipment-list h4{margin:0 0 10px;font-size:17px;line-height:1.45;font-weight:600;overflow-wrap:anywhere}.equipment-list p{font-size:14px;line-height:1.7;margin:0}
+.workshop-values{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:60px;margin-top:42px}.workshop-values .workshop-principle{font-size:clamp(20px,2vw,26px);line-height:1.5;color:var(--white);border-left:3px solid var(--green);padding-left:22px}.workshop-values p:last-child{margin-bottom:0}
+.workshop-signature{margin:35px 0 0;padding-top:25px;border-top:1px solid var(--line);font-size:17px;line-height:1.7;color:var(--white);max-width:950px}
+@media(max-width:1000px){.workshop-intro,.workshop-values{gap:30px}.equipment-list li{padding:20px;gap:12px}}
+@media(max-width:700px){.workshop-intro,.workshop-values,.equipment-list{grid-template-columns:1fr}.workshop-intro .about-photo{order:2}.workshop-intro .about-photo .photo{aspect-ratio:4/3;max-height:360px}.workshop-intro h2{font-size:30px}.workshop-equipment{margin-top:32px}.workshop-values{margin-top:30px;gap:22px}.equipment-list li{padding:20px 16px}.workshop-signature{font-size:16px}}
