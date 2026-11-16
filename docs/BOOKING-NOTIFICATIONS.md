@@ -6,7 +6,7 @@ A sikerüzenet HU/RO/EN nyelven közérthető: a kérés elküldve, a műhely e-
 
 A kapcsolattartó neve és visszahívási telefonszáma kötelező, az ellenőrzött fiók saját regisztrációs adataiból előtöltve. Módosítható anélkül, hogy átírnánk az appos profilt. Ha nincs előtölthető adat, kézzel megadható. Az e-mail-címet a szerver a hitelesített Firebase Auth fiókból veszi; a kliens nem írhatja felül.
 
-A hat kiemelt szolgáltatás mellett `other` / „Egyéb szervizmunka” is választható. Ennél a megjegyzés mező a kért munka kötelező leírása lesz, legfeljebb 1500 karakterrel. A többi szolgáltatásnál továbbra is opcionális. A főoldal és az ügyfélkapu jelzi az általános szervizmunkát, valamint az autóbádogosság és gumiszerelés kivételét. A leírás a meglévő app által olvasott `note` mezőben marad.
+A hat kiemelt szolgáltatás mellett `other` / „Egyéb szervizmunka” is választható. Ennél a megjegyzés mező a kért munka kötelező leírása lesz, legfeljebb 1500 karakterrel. A többi szolgáltatásnál továbbra is opcionális. A főoldal és az ügyfélkapu jelzi az általános szervizmunkát. A tulajdonos kérésére a nem vállalt munkákat nem soroljuk fel az oldalon. A leírás a meglévő app által olvasott `note` mezőben marad.
 
 ## Értesítés a műhelynek
 
