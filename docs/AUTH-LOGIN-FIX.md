@@ -24,4 +24,10 @@ Az eredeti app `patch-v386-beta-firebase-compat.py` forrásában a `loginBeta` u
 
 Kizárólag a weboldal forrása változik. Nincs eredeti app/APK/frissítési módosítás, Firebase-szabálytelepítés vagy backendváltoztatás.
 
+## Utólagos javítás: kis ikon és mezőszerkesztés
+
+A tulajdonos kérésére a szöveges jelszómutató helyett 20 × 20 px szem ikon jelenik meg a jelszómező jobb szélén; a láthatatlan érintési terület 44 × 44 px. A mező teljes szélességű, az ikon számára külön jobb oldali belső térrel. A gomb akadálymentes neve és címe mindhárom nyelven megmarad; a dekoratív SVG nem vesz át pointereseményt.
+
+A láthatósági kezelő csak akkor állítja át az input típusát, ha az ténylegesen változik; egy szokásos mezőérintés/felengedés nem írja újra a típusát. Láthatóságváltáskor megőrzi a fókuszban lévő mező kijelölését és kurzorát. Az új böngészős regresszió érintés utáni tényleges billentyűeseményekkel gépel, középre beszúr, szemgomb használata után ellenőrzi a fókuszt/kurzort/értéket, valamint szövegbeillesztést és ikonméretet is ellenőriz. Az eredeti általános gépelési panasz nem volt reprodukálható a korábbi szintetikus `fill()` alapú teszttel; a bővített teszt ellenőrzi a korábban nem lefedett interakciókat is. Valódi mobileszközön a tulajdonosi visszaellenőrzés továbbra is szükséges.
+
 Hivatalos referencia: [Firebase Auth REST API – belépés és e-mail-megerősítés](https://firebase.google.com/docs/reference/rest/auth/).

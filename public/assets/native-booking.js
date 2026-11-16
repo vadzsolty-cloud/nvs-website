@@ -4,8 +4,17 @@
  let token=null,verificationToken=null,key=null,digest=null,config=null,copy=null,busy=false,verifyAfter=0;
  const q=id=>document.getElementById('native-'+id),status=q('status'),password=q('password'),reveal=q('password-show');
  const display=(message,code='')=>{status.textContent=message;status.dataset.errorCode=code;};
- const hidePassword=()=>{password.type='password';reveal.setAttribute('aria-pressed','false');};
- const showPassword=()=>{if(!busy&&!reveal.disabled){password.type='text';reveal.setAttribute('aria-pressed','true');}};
+ function passwordVisibility(visible){
+  const type=visible?'text':'password';
+  if(password.type!==type){
+   const start=password.selectionStart,end=password.selectionEnd,direction=password.selectionDirection;
+   password.type=type;
+   if(document.activeElement===password&&start!==null)password.setSelectionRange(start,end,direction);
+  }
+  reveal.setAttribute('aria-pressed',String(visible));
+ }
+ const hidePassword=()=>passwordVisibility(false);
+ const showPassword=()=>{if(!busy&&!reveal.disabled)passwordVisibility(true);};
  reveal.addEventListener('pointerdown',e=>{if(e.button===0){e.preventDefault();showPassword();}});
  for(const event of ['pointerup','pointercancel','pointerleave','lostpointercapture','blur'])reveal.addEventListener(event,hidePassword);
  window.addEventListener('pointerup',hidePassword);window.addEventListener('pointercancel',hidePassword);
