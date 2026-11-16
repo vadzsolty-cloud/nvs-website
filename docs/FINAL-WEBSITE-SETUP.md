@@ -26,7 +26,7 @@ Kizárólag új website erőforrások: nvswebsite codebase, nvsWebsiteApi és nv
 
 ## Gmail és fennmaradó aktiválási lépés
 
-Feladó és címzett: nightvisionservice2025@gmail.com. Gmail alkalmazásjelszó, smtp.gmail.com:465 TLS. A normál Gmail-jelszó nem használható. Új, érték nélküli Secret Manager-tároló: NVS_GMAIL_APP_PASSWORD. A felhasználó ide mentheti az alkalmazásjelszót: https://console.cloud.google.com/security/secret-manager/secret/NVS_GMAIL_APP_PASSWORD/versions?project=night-vision-service
+Címzett és válaszcím: nightvisionservice2025@gmail.com. A feladó a tulajdonos külön jóváhagyott saját Gmail-fiókja, szerveroldali NVS_MAIL_SENDER beállítással. A privát .env.night-vision-service fájl nem kerül Gitbe vagy forráscsomagba; a személyes feladócím nincs a publikus frontendbe írva. Az SMTP-bejelentkezés és a From ugyanaz a jóváhagyott fiók, nem hamisítjuk a céges feladót. Gmail alkalmazásjelszó, smtp.gmail.com:465 TLS. A normál Gmail-jelszó nem használható. Új, érték nélküli Secret Manager-tároló: NVS_GMAIL_APP_PASSWORD. A felhasználó a saját feladói Gmail-fiókjában generált alkalmazásjelszót ide mentheti: https://console.cloud.google.com/security/secret-manager/secret/NVS_GMAIL_APP_PASSWORD/versions?project=night-vision-service
 
 A titok csak a dedikált szolgáltatásfióknak olvasható; nincs a repóban, HTML-ben, frontendkonfigurációban vagy naplóban. A booking-config.json Firebase apiKey mezője a Firebase által nyilvános böngészős konfigurációként kiadott kulcs, nem SMTP-titok vagy Admin kulcs.
 
@@ -43,3 +43,7 @@ A körben a hiányzó Eventarc receive jogosultságot a dedikált identitáson p
 Tesztelés: statikus/site tesztek, böngészős consent/layout, egyetlen videó/idővonal/borító ellenőrzése, natív UI teszt kizárólag szintetikus, interceptált Auth/booking hálózattal. A produkciós kérésmentő kódút külön emulátortesztet kapott (jogosultság, hamis mezők, notice, párhuzamos idempotencia, függő outbox). Éles ügyfélrekordot tesztből nem hoztunk létre.
 
 A végleges jogi adatmegőrzési rend, törzstőke, alkalmazandó engedély és a Gmail-jelszó/tesztlevél ellenőrzése hiányában nem állítunk minden részletre kiterjedő jogi/üzemi készültséget.
+
+## 2026-11-16: személyes feladó, céges címzett
+
+A felhasználó jóváhagyta a saját Gmail-fiók feladóként használatát. A 2026-11-16-i első ellenőrzéskor az 1-es titokverzió létezett, de a tartalma nem volt érvényes alkalmazásjelszó-formátumú, ezért nem történt SMTP-hitelesítés vagy levélküldés. A feladóváltás után az új feladói fiókhoz tartozó valódi alkalmazásjelszó szükséges. A címzett és Reply-To céges marad. Három mail-teszt ellenőrzi a hitelesítési feladót, az SMTP-ellenőrzés összevonását/hibavisszalépését, a rögzített céges címzettet és a más címre történő küldés tiltását.
