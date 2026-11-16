@@ -1,3 +1,4 @@
+import {uiIcon} from './icons.mjs';
 export const workshopCopy={
  hu:{
   label:'Műhelyünk',title:'Műhelyünk – Modern technológia, kompromisszumok nélküli precizitás',
@@ -60,5 +61,5 @@ export const workshopCopy={
 const esc=value=>String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 export function workshopSection(lang,photo){
  const t=workshopCopy[lang];
- return `<section id="about" class="section workshop-story" aria-labelledby="workshop-title"><div class="workshop-intro"><div class="about-photo">${photo}</div><div><p class="eyebrow">NIGHT VISION SERVICE / ${esc(t.label)}</p><h2 id="workshop-title">${esc(t.title)}</h2><p class="lead">${esc(t.intro)}</p><p>${esc(t.investment)}</p></div></div><div class="workshop-equipment"><h3>${esc(t.equipmentTitle)}</h3><p>${esc(t.equipmentIntro)}</p><ul class="equipment-list" role="list">${t.equipment.map(([name,description],i)=>`<li><span class="equipment-number" aria-hidden="true">${String(i+1).padStart(2,'0')}</span><div><h4>${esc(name)}</h4><p>${esc(description)}</p></div></li>`).join('')}</ul></div><div class="workshop-values"><p class="workshop-principle">${esc(t.principle)}</p><div><p>${esc(t.approach)}</p><p>${esc(t.belief)}</p></div></div><p class="workshop-signature">${esc(t.signature)}</p></section>`;
+ return `<section id="about" class="section workshop-story" aria-labelledby="workshop-title"><div class="workshop-intro"><div class="about-photo">${photo}</div><div><p class="eyebrow">NIGHT VISION SERVICE / ${esc(t.label)}</p><h2 id="workshop-title">${esc(t.title)}</h2><p class="lead">${esc(t.intro)}</p><p>${esc(t.investment)}</p></div></div><div class="workshop-equipment"><h3>${esc(t.equipmentTitle)}</h3><p>${esc(t.equipmentIntro)}</p><ul class="equipment-list" role="list">${t.equipment.map(([name,description],i)=>`<li><span class="equipment-number" aria-hidden="true">${uiIcon(['diagnostic','car','target','wheel','suspension','brake','headlight'][i])}</span><div><h4>${esc(name)}</h4><p>${esc(description)}</p></div></li>`).join('')}</ul></div><div class="workshop-values"><p class="workshop-principle">${esc(t.principle)}</p><div><p>${esc(t.approach)}</p><p>${esc(t.belief)}</p></div></div><p class="workshop-signature">${esc(t.signature)}</p></section>`;
 }

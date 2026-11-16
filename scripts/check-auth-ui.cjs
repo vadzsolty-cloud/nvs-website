@@ -45,7 +45,7 @@ const {execFileSync}=require('node:child_process');
   const login=async()=>{await page.locator('#native-email').fill('fixture@example.invalid');const field=page.locator('#native-password');await field.fill('');await field.tap();assert.equal(await field.isEditable(),true);await page.keyboard.type('synthetic-only');assert.equal(await field.inputValue(),'synthetic-only');await page.locator('#native-sign-in').click();await page.waitForFunction(()=>!document.querySelector('#native-sign-in').disabled);};
   for(const lang of ['hu','ro','en']){
    const t=nativeCopy[lang];activeLang=lang;authError=null;carsError='EMAIL_NOT_VERIFIED';verificationError=null;
-   await page.goto('http://127.0.0.1:4184/nvs-website/'+lang+'/');
+   await page.goto('http://127.0.0.1:4184/nvs-website/'+lang+'/account/');
    assert.match(await page.locator('script[src*="native-booking-"]').getAttribute('src'),/^\/nvs-website\/assets\/native-booking-[a-f0-9]{12}\.js$/);
    if(await page.locator('#privacy-preferences').isVisible())await page.locator('[data-consent=reject]').click();
    assert.equal(await page.locator('#native-verification').isVisible(),false);
@@ -116,7 +116,7 @@ const {execFileSync}=require('node:child_process');
    await page.screenshot({path:'artifacts/auth-'+lang+'-mobile.png'});
   }
   // A rejected verification request must not display a successful-send message.
-  await page.goto('http://127.0.0.1:4184/nvs-website/en/');carsError='EMAIL_NOT_VERIFIED';verificationError='TOO_MANY_ATTEMPTS_TRY_LATER';
+  await page.goto('http://127.0.0.1:4184/nvs-website/en/account/');carsError='EMAIL_NOT_VERIFIED';verificationError='TOO_MANY_ATTEMPTS_TRY_LATER';
   await login();await page.locator('#native-verify-email').click();await page.waitForFunction(()=>!document.querySelector('#native-verify-email').disabled);assert.equal(await page.locator('#native-status').innerText(),nativeCopy.en.authThrottled);
   await page.setViewportSize({width:1440,height:1000});await page.screenshot({path:'artifacts/auth-en-desktop.png'});
   // The explicit button remains accessible with the keyboard.
@@ -124,7 +124,7 @@ const {execFileSync}=require('node:child_process');
   await page.keyboard.press('Enter');await page.waitForFunction(()=>!document.querySelector('#native-sign-in').disabled);
   assert.equal(authCalls,beforeKeyboard+1);assert.equal(await page.locator('#native-status').innerText(),nativeCopy.en.authInvalid);assert.equal(await page.locator('#native-password').inputValue(),'synthetic-only');authError=null;
   // A slow/unavailable backend must not prevent reviewing an autofilled password.
-  await page.goto('http://127.0.0.1:4184/nvs-website/en/');holdHealth=true;healthReady=false;
+  await page.goto('http://127.0.0.1:4184/nvs-website/en/account/');holdHealth=true;healthReady=false;
   const beforeSlowAuth=authCalls,held=new Promise(resolve=>onHealthHeld=resolve);
   await page.locator('#native-email').fill('fixture@example.invalid');await page.locator('#native-password').fill('synthetic-only');await page.locator('#native-sign-in').click();await held;
   assert.equal(await page.locator('#native-password').isEditable(),false);assert.equal(await page.locator('#native-password-show').isEnabled(),true);
@@ -133,7 +133,7 @@ const {execFileSync}=require('node:child_process');
   assert.equal(await page.locator('#native-status').innerText(),nativeCopy.en.notReady);assert.equal(await page.locator('#native-password').inputValue(),'synthetic-only');assert.equal(await page.locator('#native-password').getAttribute('type'),'text');assert.equal(await page.locator('#native-password').isEditable(),true);
   await page.locator('#native-password-show').dispatchEvent('pointerup',{button:0,pointerType:'touch'});assert.equal(await page.locator('#native-password').getAttribute('type'),'password');assert.equal(authCalls,beforeSlowAuth);
   holdHealth=false;healthReady=true;authError='INVALID_LOGIN_CREDENTIALS';activeLang='en';
-  await page.goto('http://127.0.0.1:4184/nvs-website/en/?legacy=1');
+  await page.goto('http://127.0.0.1:4184/nvs-website/en/account/?legacy=1');
   const legacyButton=page.locator('#native-login > button');assert.equal(await legacyButton.getAttribute('id'),null);assert.equal(await legacyButton.getAttribute('type'),'button');
   await page.locator('#native-email').fill('fixture@example.invalid');await page.locator('#native-password').fill('synthetic-only');await legacyButton.click();await page.waitForFunction(()=>!document.querySelector('#native-login > button').disabled);
   assert.equal(await page.locator('#native-status').innerText(),nativeCopy.en.authInvalid);assert.equal(await page.locator('#native-password').inputValue(),'synthetic-only');
