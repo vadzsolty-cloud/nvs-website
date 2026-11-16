@@ -15,7 +15,7 @@ jobs:
       - run: npm install --no-save --package-lock=false playwright@1.65.1
       - run: npx playwright install --with-deps chromium
       - run: npm run build
-      - run: mkdir -p artifacts && node scripts/check-layout.cjs && node scripts/check-privacy.cjs && node scripts/check-booking-ui.cjs && node scripts/check-auth-ui.cjs
+      - run: mkdir -p artifacts && node scripts/check-layout.cjs && node scripts/check-privacy.cjs && node scripts/check-booking-ui.cjs && node scripts/check-auth-ui.cjs && node scripts/check-premium.cjs
       - uses: actions/upload-artifact@v6
         if: always()
         with:
