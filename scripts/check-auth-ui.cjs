@@ -10,11 +10,17 @@ const {execFileSync}=require('node:child_process');
  try{
   browser=await chromium.launch({headless:true,...(process.env.PW_EXECUTABLE?{executablePath:process.env.PW_EXECUTABLE}:{})});
   const context=await browser.newContext({viewport:{width:390,height:844},hasTouch:true});
-  let authError=null,carsError='EMAIL_NOT_VERIFIED',verificationError=null,authCalls=0,mailCalls=0,bookingCalls=0,networkError=false,noCars=false,activeLang='hu';
+  let authError=null,carsError='EMAIL_NOT_VERIFIED',verificationError=null,authCalls=0,mailCalls=0,bookingCalls=0,networkError=false,noCars=false,activeLang='hu',holdHealth=false,healthReady=true,releaseHealth=null,onHealthHeld=()=>{};
   const authHosts=['identitytoolkit.googleapis.com','europe-west1-night-vision-service.cloudfunctions.net'];
   await context.route('**/*',async route=>{
    const req=route.request(),url=new URL(req.url());
-   if(url.origin==='http://127.0.0.1:4184')return route.continue();
+   if(url.origin==='http://127.0.0.1:4184'){
+    if(url.searchParams.has('legacy')){
+     const response=await route.fetch();const html=await response.text();
+     return route.fulfill({response,body:html.replace('<button id="native-sign-in" class="button" type="button">','<button class="button" type="submit">')});
+    }
+    return route.continue();
+   }
    if(!authHosts.includes(url.hostname))return route.abort();
    if(url.hostname==='identitytoolkit.googleapis.com'){
     const body=req.postDataJSON();assert.equal(req.headers()['x-firebase-locale'],activeLang);
@@ -27,19 +33,38 @@ const {execFileSync}=require('node:child_process');
     if(networkError)return route.abort();
     return route.fulfill({status:authError?400:200,json:authError?{error:{message:authError}}:{idToken:'synthetic-token'}});
    }
-   if(url.pathname.endsWith('/health'))return route.fulfill({json:{bookingEnabled:true,mailConfigured:true}});
+   if(url.pathname.endsWith('/health')){
+    if(holdHealth)await new Promise(resolve=>{releaseHealth=resolve;onHealthHeld();});
+    return route.fulfill({status:healthReady?200:503,json:{bookingEnabled:healthReady,mailConfigured:healthReady}});
+   }
    assert.equal(req.headers().authorization,'Bearer synthetic-token');
    if(url.pathname.endsWith('/cars'))return route.fulfill({status:carsError?403:200,json:carsError?{error:carsError}:noCars?[]:[{id:'fixture-car',plate:'FIXTURE',linked:true}]});
    bookingCalls++;throw Error('Unexpected booking write in auth regression test');
   });
   const page=await context.newPage();
-  const login=async()=>{await page.locator('#native-email').fill('fixture@example.invalid');const field=page.locator('#native-password');await field.tap();await field.press('ControlOrMeta+A');await page.keyboard.type('synthetic-only');assert.equal(await field.inputValue(),'synthetic-only');await page.locator('#native-login button[type=submit]').click();await page.waitForFunction(()=>!document.querySelector('#native-login button[type=submit]').disabled);};
+  const login=async()=>{await page.locator('#native-email').fill('fixture@example.invalid');const field=page.locator('#native-password');await field.fill('');await field.tap();assert.equal(await field.isEditable(),true);await page.keyboard.type('synthetic-only');assert.equal(await field.inputValue(),'synthetic-only');await page.locator('#native-sign-in').click();await page.waitForFunction(()=>!document.querySelector('#native-sign-in').disabled);};
   for(const lang of ['hu','ro','en']){
    const t=nativeCopy[lang];activeLang=lang;authError=null;carsError='EMAIL_NOT_VERIFIED';verificationError=null;
    await page.goto('http://127.0.0.1:4184/nvs-website/'+lang+'/');
+   assert.match(await page.locator('script[src*="native-booking-"]').getAttribute('src'),/^\/nvs-website\/assets\/native-booking-[a-f0-9]{12}\.js$/);
    if(await page.locator('#privacy-preferences').isVisible())await page.locator('[data-consent=reject]').click();
    assert.equal(await page.locator('#native-verification').isVisible(),false);
    const pass=page.locator('#native-password'),show=page.locator('#native-password-show');
+   const beforeAutofill=authCalls;
+   await page.evaluate(()=>{
+    const set=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set;
+    for(const [id,value] of [['native-email','fixture@example.invalid'],['native-password','synthetic-only']]){
+     const input=document.getElementById(id);set.call(input,value);input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));
+    }
+    document.getElementById('native-login').requestSubmit();
+   });
+   assert.equal(await show.isEnabled(),true,'Implicit autofill submission must not disable password review');
+   assert.equal(await pass.inputValue(),'synthetic-only','Autofill must remain available for review');
+   await page.waitForTimeout(150);assert.equal(authCalls,beforeAutofill,'Autofill must not start authentication');
+   await page.evaluate(()=>document.getElementById('native-sign-in').click());
+   await pass.press('Enter');assert.equal(authCalls,beforeAutofill,'Only deliberate activation of the login button signs in');
+   await show.dispatchEvent('pointerdown',{button:0,pointerType:'touch'});assert.equal(await pass.getAttribute('type'),'text');assert.equal(await pass.inputValue(),'synthetic-only');await show.dispatchEvent('pointerup',{button:0,pointerType:'touch'});
+   await pass.fill('');
    assert.equal((await show.innerText()).trim(),'');assert.equal(await show.getAttribute('aria-label'),t.showPassword);
    assert.equal(await show.locator('svg').count(),1);
    await pass.tap();await page.keyboard.type('abc 123 !Á');assert.equal(await pass.inputValue(),'abc 123 !Á');
@@ -70,7 +95,7 @@ const {execFileSync}=require('node:child_process');
    assert.equal(authCalls,callsBefore,'Reveal button must not submit login');
    await show.dispatchEvent('pointerdown',{button:0});await page.evaluate(()=>window.dispatchEvent(new Event('blur')));assert.equal(await pass.getAttribute('type'),'password');
    await login();assert.equal(await page.locator('#native-status').innerText(),t.emailUnverified);
-   assert.equal(await page.locator('#native-verification').isVisible(),true);assert.equal(await page.locator('#native-account').isVisible(),false);assert.equal(await pass.inputValue(),'');
+   assert.equal(await page.locator('#native-verification').isVisible(),true);assert.equal(await page.locator('#native-account').isVisible(),false);assert.equal(await pass.inputValue(),'synthetic-only');
    const beforeMail=mailCalls;
    await page.locator('#native-verify-email').click();await page.waitForFunction(()=>!document.querySelector('#native-verify-email').disabled);
    assert.equal(await page.locator('#native-status').innerText(),t.verifySent);assert.equal(mailCalls,beforeMail+1);
@@ -79,6 +104,8 @@ const {execFileSync}=require('node:child_process');
    for(const code of ['INVALID_LOGIN_CREDENTIALS','INVALID_PASSWORD','EMAIL_NOT_FOUND','USER_DISABLED','TOO_MANY_ATTEMPTS_TRY_LATER','OPERATION_NOT_ALLOWED']){
     authError=code;await login();const expected=['INVALID_LOGIN_CREDENTIALS','INVALID_PASSWORD','EMAIL_NOT_FOUND'].includes(code)?t.authInvalid:code==='USER_DISABLED'?t.authDisabled:code==='OPERATION_NOT_ALLOWED'?t.authConfig:t.authThrottled;
     assert.equal(await page.locator('#native-status').innerText(),expected);assert.equal(await page.locator('#native-verification').isVisible(),false);
+    assert.equal(await pass.inputValue(),'synthetic-only','Failed login must preserve the entered password');assert.equal(await show.isEnabled(),true);
+    await show.dispatchEvent('pointerdown',{button:0,pointerType:'touch'});assert.equal(await pass.getAttribute('type'),'text');assert.equal(await pass.inputValue(),'synthetic-only');await show.dispatchEvent('pointerup',{button:0,pointerType:'touch'});
    }
    authError=null;networkError=true;await login();assert.equal(await page.locator('#native-status').innerText(),t.authNetwork);networkError=false;
    carsError='SERVICE_UNAVAILABLE';await login();assert.equal(await page.locator('#native-status').innerText(),t.carsError);
@@ -92,6 +119,24 @@ const {execFileSync}=require('node:child_process');
   await page.goto('http://127.0.0.1:4184/nvs-website/en/');carsError='EMAIL_NOT_VERIFIED';verificationError='TOO_MANY_ATTEMPTS_TRY_LATER';
   await login();await page.locator('#native-verify-email').click();await page.waitForFunction(()=>!document.querySelector('#native-verify-email').disabled);assert.equal(await page.locator('#native-status').innerText(),nativeCopy.en.authThrottled);
   await page.setViewportSize({width:1440,height:1000});await page.screenshot({path:'artifacts/auth-en-desktop.png'});
-  assert.equal(bookingCalls,0);console.log('PASS: HU/RO/EN auth errors, unverified account, explicit verification email + cooldown, no credential storage; touch-focused typing, paste, caret preservation, compact eye icon, hold-to-show pointer/touch/keyboard/cancel/blur, light/dark mobile layout, Pages subpath. Auth/mail/booking traffic intercepted; no live writes or emails.');
+  // The explicit button remains accessible with the keyboard.
+  authError='INVALID_LOGIN_CREDENTIALS';await page.locator('#native-sign-in').focus();const beforeKeyboard=authCalls;
+  await page.keyboard.press('Enter');await page.waitForFunction(()=>!document.querySelector('#native-sign-in').disabled);
+  assert.equal(authCalls,beforeKeyboard+1);assert.equal(await page.locator('#native-status').innerText(),nativeCopy.en.authInvalid);assert.equal(await page.locator('#native-password').inputValue(),'synthetic-only');authError=null;
+  // A slow/unavailable backend must not prevent reviewing an autofilled password.
+  await page.goto('http://127.0.0.1:4184/nvs-website/en/');holdHealth=true;healthReady=false;
+  const beforeSlowAuth=authCalls,held=new Promise(resolve=>onHealthHeld=resolve);
+  await page.locator('#native-email').fill('fixture@example.invalid');await page.locator('#native-password').fill('synthetic-only');await page.locator('#native-sign-in').click();await held;
+  assert.equal(await page.locator('#native-password').isEditable(),false);assert.equal(await page.locator('#native-password-show').isEnabled(),true);
+  await page.locator('#native-password-show').dispatchEvent('pointerdown',{button:0,pointerType:'touch'});assert.equal(await page.locator('#native-password').getAttribute('type'),'text');
+  releaseHealth();await page.waitForFunction(()=>!document.querySelector('#native-sign-in').disabled);
+  assert.equal(await page.locator('#native-status').innerText(),nativeCopy.en.notReady);assert.equal(await page.locator('#native-password').inputValue(),'synthetic-only');assert.equal(await page.locator('#native-password').getAttribute('type'),'text');assert.equal(await page.locator('#native-password').isEditable(),true);
+  await page.locator('#native-password-show').dispatchEvent('pointerup',{button:0,pointerType:'touch'});assert.equal(await page.locator('#native-password').getAttribute('type'),'password');assert.equal(authCalls,beforeSlowAuth);
+  holdHealth=false;healthReady=true;authError='INVALID_LOGIN_CREDENTIALS';activeLang='en';
+  await page.goto('http://127.0.0.1:4184/nvs-website/en/?legacy=1');
+  const legacyButton=page.locator('#native-login > button');assert.equal(await legacyButton.getAttribute('id'),null);assert.equal(await legacyButton.getAttribute('type'),'button');
+  await page.locator('#native-email').fill('fixture@example.invalid');await page.locator('#native-password').fill('synthetic-only');await legacyButton.click();await page.waitForFunction(()=>!document.querySelector('#native-login > button').disabled);
+  assert.equal(await page.locator('#native-status').innerText(),nativeCopy.en.authInvalid);assert.equal(await page.locator('#native-password').inputValue(),'synthetic-only');
+  assert.equal(bookingCalls,0);console.log('PASS: HU/RO/EN autofill + implicit/programmatic submit blocked; explicit sign-in; password retained on errors; eye works during slow backend and after errors; successful sign-in clears password. Typing, paste, caret, hold/cancel/blur, themes and Pages subpath verified. All Auth/mail/booking traffic synthetic.');
  }finally{if(browser)await browser.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1});
