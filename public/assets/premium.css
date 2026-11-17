@@ -1,4 +1,4 @@
-:root{--premium-radius:18px;--premium-soft:#a2ff2610}html[data-theme="light"]{--premium-soft:#326f080b}
+:root{--premium-radius:18px;--premium-soft:#a2ff2610;--content-width:1920px;--page-gutter:clamp(20px,4vw,88px)}html[data-theme="light"]{--premium-soft:#326f080b}
 body{font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}h1,h2,h3{font-weight:500}p{line-height:1.8}.ui-icon{width:24px;height:24px;flex-shrink:0}.button .ui-icon{width:19px;height:19px}.button{gap:12px;border-radius:8px;min-height:48px;font-weight:500}.button:has(.ui-icon)>span{flex:1}.button:hover{transform:translateY(-1px)}.button:active{transform:translateY(0)}
 .site-header{position:sticky;top:0;z-index:45;max-width:none;width:100%;min-height:82px;display:flex;flex-wrap:nowrap;align-items:center;gap:28px;padding:14px max(4%,calc((100vw - 1440px)/2 + 40px));background:var(--bg);border-bottom:1px solid var(--line)}
 .site-header .brand{flex-shrink:0;font-size:13px;letter-spacing:.05em;margin:0;gap:10px}.site-header .brand small{font-size:10px;letter-spacing:.38em;margin-top:5px}.site-header .brand img.site-logo{width:42px;height:45px;border-radius:7px}.site-header .desktop-nav{display:flex;gap:24px;margin:auto;font-size:12px;width:auto;border:0;padding:0;order:0;white-space:nowrap}.header-actions{display:flex;gap:8px;align-items:center;margin-left:auto;flex-shrink:0}.site-header .languages{margin:0;gap:0}.site-header .languages a{font-size:10px;padding:9px 6px}.icon-control{min-width:44px;min-height:44px;padding:10px;display:inline-flex;gap:8px;align-items:center;justify-content:center;background:transparent;border:0;color:var(--white);font:inherit;font-size:12px;border-radius:8px;cursor:pointer}.icon-control:hover{background:var(--premium-soft)}.site-header .theme-toggle{font-size:11px;max-width:82px;margin:0}.site-header .theme-toggle:after{display:none}.site-header .account-link{border:1px solid var(--line);white-space:nowrap}.site-header .menu-toggle span{display:none}body.menu-open{overflow:hidden}
@@ -19,3 +19,73 @@ html[data-theme="light"] .site-header{background:#fff}html[data-theme="light"] #
 html:not(.js-ready) .site-header{flex-wrap:wrap}html:not(.js-ready) .site-header .desktop-nav{order:3;flex:1 1 100%;justify-content:space-between;gap:8px;flex-wrap:wrap}
 html{scroll-padding-top:100px}#services>.eyebrow,#services>.section-heading{position:static;width:auto;height:auto;overflow:visible;clip-path:none}
 @media(max-width:380px){.service-slider .slider-controls{gap:4px;padding:10px 6px}.service-slider .slider-controls>button{width:44px;height:44px;flex-shrink:0}.service-slider .slider-controls .slider-dots{gap:2px}.service-slider .slider-controls .slider-dots .slider-dot{width:16px;min-width:16px}.service-slider .slider-dot:before{width:14px}}
+
+/* Readable type and a shared fluid canvas, from phones to wide desktop screens. */
+html{scroll-padding-top:132px}
+body{font-size:16px}
+.section,.hero,.legal-footer{width:100%;max-width:var(--content-width);padding-left:var(--page-gutter);padding-right:var(--page-gutter)}
+.site-header{gap:24px;padding:14px max(var(--page-gutter),calc((100vw - var(--content-width))/2 + var(--page-gutter)))}
+.site-header .brand{gap:12px;font-size:16px;letter-spacing:.04em}
+.site-header .brand small{font-size:13px;letter-spacing:.3em;margin-top:6px}
+.site-header .brand img.site-logo{width:72px;height:auto;aspect-ratio:1208/1280;object-fit:contain;flex-shrink:0}
+.site-header .desktop-nav{gap:clamp(16px,1.5vw,30px);font-size:15px}
+.site-header .languages a{font-size:13px;min-width:36px;min-height:44px;display:inline-flex;justify-content:center;align-items:center;padding:9px 7px}
+.site-header .icon-control{font-size:14px}.site-header .theme-toggle{font-size:13px;max-width:100px}
+.site-menu nav a,.menu-phone{font-size:17px}
+.hero{gap:clamp(30px,3vw,64px)}.hero h1{font-size:clamp(46px,4.1vw,80px)}
+.hero .lead{font-size:18px;max-width:590px}
+.hero-visual .slides,.hero-visual .slide .photo{min-height:clamp(440px,30vw,620px)}
+.premium-proof>span{font-size:14px}
+p{font-size:16px}.eyebrow,.hero .eyebrow,#services>.eyebrow{font-size:12px}
+.button,.actions .button,.text-link{font-size:15px}
+.section-heading p,#services .section-heading p{font-size:17px;max-width:64ch}
+#services .service-card h3{font-size:24px}#services .service-card p{font-size:16px;line-height:1.7}
+#services .card-link{font-size:15px}#services .card-top>span{font-size:12px}
+.tile-visual{height:clamp(210px,16vw,300px)}
+.booking-strip{width:calc(100% - 2 * var(--page-gutter));max-width:calc(var(--content-width) - 2 * var(--page-gutter));margin-inline:auto}
+.booking-strip strong{font-size:clamp(21px,1.7vw,29px)}.booking-strip small{font-size:15px}
+.equipment-list h4{font-size:19px}.equipment-list p{font-size:16px}
+.workshop-intro .about-photo .photo{max-height:680px}
+.workshop-signature{max-width:80ch;font-size:18px}
+.photo-figure figcaption,.photo-gallery p,.gallery-hint,.photo-source{font-size:14px;line-height:1.7}.photo-gallery p span{font-size:12px}
+.slide-caption small,.slide-caption-small small{font-size:14px}.slide-caption strong{font-size:clamp(24px,2vw,32px)}
+.portal-entry p,.portal-tile p,.register-card p,.account-grid .native-booking>p{font-size:16px}
+.portal-tile .button,.register-card .button{font-size:15px}
+.register-card li,.account-grid label{font-size:15px}
+.native-booking form{max-width:780px}.native-booking input,.native-booking select,.native-booking textarea{font-size:16px}
+.native-booking .field-help,.native-booking #native-account-help{font-size:14px;line-height:1.7}
+.portal-jump .button{font-size:15px}.download-note{font-size:15px}
+.download-page,.legal-page{max-width:1120px}
+.fb-card p,.fb-block>p{font-size:16px}.fb-card small,.fb-photo-card>small,.fb-meta,.fb-open{font-size:14px}.fb-card strong{font-size:19px}
+.legal-footer{font-size:14px}.legal-footer>div>strong{font-size:16px}
+.legal-footer p,.legal-footer nav,.legal-footer>a{font-size:14px;line-height:1.8}
+.legal-footer>div{min-width:0}.legal-footer nav{width:auto;order:0;border:0}
+.legal-footer .copyright{flex:1 1 100%;border-top:1px solid var(--line);padding-top:24px;margin-top:8px}
+.legal-footer .copyright p{max-width:90ch;overflow-wrap:anywhere}.copyright strong{color:var(--white);font-weight:500}
+.consent-panel p,.consent-panel a,.consent-panel label,.consent-panel legend{font-size:14px;line-height:1.6}
+.preview-footer{font-size:12px}
+@media(max-width:1200px){.js-ready .site-header .desktop-nav{display:none}.site-header{gap:16px}}
+@media(max-width:1000px){.hero h1{font-size:clamp(40px,5vw,52px)}.hero .lead{font-size:17px}.hero-visual .slides,.hero-visual .slide .photo{min-height:400px}.section-heading{gap:30px}}
+@media(max-width:700px){
+ html{scroll-padding-top:160px}
+ .site-header{display:grid;grid-template-columns:minmax(0,1fr) 96px;gap:4px 8px;padding:10px var(--page-gutter)}
+ .site-header .brand{grid-column:1;grid-row:1;font-size:13px;gap:9px;min-width:0}
+ .site-header .brand>span{display:block}.site-header .brand small{font-size:11px;letter-spacing:.27em;margin-top:4px}
+ .site-header .brand img.site-logo{width:52px;height:auto}
+ .site-header .header-actions{display:contents}
+ .site-header .languages{grid-column:1;grid-row:2;justify-self:start}
+ .site-header .languages a{font-size:13px;min-width:40px;min-height:40px;padding:6px 8px}
+ .site-header .theme-toggle{grid-column:2;grid-row:2;justify-self:end;min-width:44px;max-width:44px;min-height:40px;font-size:0;padding:6px}
+ .site-header .theme-toggle:before{font-size:23px}
+ .site-header .account-link{grid-column:2;grid-row:1;justify-self:start;margin:0;min-width:44px;min-height:48px;padding:10px}
+ .site-header .menu-toggle{grid-column:2;grid-row:1;justify-self:end;min-width:44px;min-height:48px;padding:10px}
+ html:not(.js-ready) .site-header .desktop-nav{grid-column:1/-1;grid-row:3;font-size:14px}
+ .hero h1{font-size:clamp(39px,9vw,58px)}.hero .lead{font-size:17px}
+ .hero-visual .slides,.hero-visual .slide .photo{min-height:330px}
+ .premium-proof>span{font-size:14px}.tile-visual{height:230px}
+ .section-heading p,#services .section-heading p{font-size:16px}.booking-strip{padding:22px}.booking-strip strong{font-size:20px}.booking-strip small{font-size:14px}
+ .portal-entry p{font-size:16px}.portal-jump .button{font-size:14px}
+ .legal-footer{gap:24px}.legal-footer nav{gap:16px;justify-content:flex-start}.legal-footer p{order:initial;width:auto}
+ .consent-panel p,.consent-panel a,.consent-panel label{font-size:14px}
+}
+
