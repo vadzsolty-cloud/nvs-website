@@ -51,6 +51,33 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    if(lang==='hu')await page.screenshot({path:'artifacts/premium-account-'+width+'.png',fullPage:true});
   }
   assert.equal(releaseCalls,0,'APK resolution is only allowed on the download page');assert.equal(authCalls,0);
+  const desktop=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'no-preference'});
+  await desktop.route('**/*',r=>new URL(r.request().url()).origin==='http://127.0.0.1:4188'?r.continue():r.abort());
+  const motion=await desktop.newPage();
+  const lifted=async selector=>{await motion.locator(selector).first().hover();await motion.waitForFunction(s=>{const el=document.querySelector(s);return new DOMMatrixReadOnly(getComputedStyle(el).transform).m42<-1;},selector);};
+  for(const theme of ['light','dark']){
+   await motion.goto('http://127.0.0.1:4188/nvs-website/hu/');
+   if(await motion.locator('#privacy-preferences').isVisible())await motion.locator('[data-consent=reject]').click();
+   await motion.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+   const social=motion.locator('.facebook-link');assert.equal(await social.count(),1);
+   assert.equal(await social.getAttribute('href'),'https://www.facebook.com/share/19q4Kb3jFq/');assert.ok(await social.getAttribute('aria-label'));
+   const grey=await social.evaluate(async el=>{getComputedStyle(el).color;await Promise.all(el.getAnimations().map(a=>a.finished));return getComputedStyle(el).color;});assert.notEqual(grey,'rgb(24, 119, 242)');
+   await lifted('.facebook-link');await motion.waitForFunction(()=>getComputedStyle(document.querySelector('.facebook-link')).color==='rgb(24, 119, 242)');
+   await social.screenshot({path:'artifacts/facebook-hover-'+theme+'.png'});
+   await motion.mouse.move(0,0);await motion.waitForFunction(c=>getComputedStyle(document.querySelector('.facebook-link')).color===c,grey);
+   await motion.keyboard.press('Tab');await social.focus();assert.equal(await social.evaluate(el=>el.matches(':focus-visible')),true);
+   await motion.waitForFunction(()=>getComputedStyle(document.querySelector('.facebook-link')).color==='rgb(24, 119, 242)');
+   await social.evaluate(el=>el.blur());
+   for(const selector of ['#services .service-card','.service-slider','.equipment-list li','.fb-card','.photo-gallery .zoom','.booking-strip','.portal-entry'])await lifted(selector);
+   await motion.emulateMedia({reducedMotion:'reduce'});
+   for(const selector of ['#services .service-card','.fb-card','.facebook-link']){await motion.locator(selector).first().hover();assert.equal(await motion.locator(selector).first().evaluate(el=>getComputedStyle(el).transform),'none');}
+   await motion.emulateMedia({reducedMotion:'no-preference'});
+   await motion.goto('http://127.0.0.1:4188/nvs-website/hu/account/');
+   await motion.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+   for(const selector of ['.register-card','.portal-tile'])await lifted(selector);
+   await motion.goto('http://127.0.0.1:4188/nvs-website/hu/services/adas/');await lifted('.process article');
+  }
+  await desktop.close();
   const downloadEvent=page.waitForEvent('download');await page.goto('http://127.0.0.1:4188/nvs-website/hu/download/');
   const download=await downloadEvent;assert.equal(download.url(),asset('5.0.10').browser_download_url);assert.equal(releaseCalls,1);assert.equal(apkCalls,1);await download.delete();
   apiFails=true;await page.goto('http://127.0.0.1:4188/nvs-website/en/download/');await page.waitForFunction(()=>document.querySelector('[data-download-status]').textContent===document.querySelector('[data-download-status]').dataset.error);
