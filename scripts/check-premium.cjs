@@ -15,7 +15,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    if(/identitytoolkit|cloudfunctions/.test(u.hostname))authCalls++;return route.abort();
   });
   const page=await context.newPage();await page.emulateMedia({reducedMotion:'reduce'});const errors=[];page.on('pageerror',e=>errors.push(e.message));
-  for(const lang of ['hu','ro','en'])for(const width of [320,390,768,1440]){
+  for(const lang of ['hu','ro','en'])for(const width of [320,390,768,1024,1280,1440,1920,2560]){
    await page.setViewportSize({width,height:950});await page.goto('http://127.0.0.1:4188/nvs-website/'+lang+'/');
    if(await page.locator('#privacy-preferences').isVisible())await page.locator('[data-consent=reject]').click();
    assert.equal(await page.locator('.account-link').getAttribute('href'),'/nvs-website/'+lang+'/account/');
@@ -24,6 +24,15 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
     await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
     const overflow=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,offenders:[...document.querySelectorAll('body *')].filter(el=>{const r=el.getBoundingClientRect();return r.width>0&&r.right>innerWidth+1&&!el.closest('.slides,.site-menu,.lightbox');}).map(el=>({tag:el.tagName,class:el.className,id:el.id,right:el.getBoundingClientRect().right})).slice(0,12)}));
     assert.ok(overflow.scroll<=overflow.width,lang+' '+width+' '+theme+' '+JSON.stringify(overflow));
+    const readability=await page.evaluate(()=>{
+     const rect=s=>document.querySelector(s).getBoundingClientRect(),brand=rect('.site-header .brand'),account=rect('.account-link'),menu=rect('.menu-toggle');
+     return {logo:rect('.site-logo').width,navFont:parseFloat(getComputedStyle(document.querySelector('.languages a')).fontSize),tileFont:parseFloat(getComputedStyle(document.querySelector('#services .service-card p')).fontSize),brandClear:brand.right<=account.left+1,actionsClear:account.right<=menu.left+1,canvas:rect('#services').width};
+    });
+    assert.ok(readability.logo>=(width<=700?52:72),JSON.stringify(readability));
+    assert.ok(readability.navFont>=13&&readability.tileFont>=16,JSON.stringify(readability));
+    assert.ok(readability.brandClear&&readability.actionsClear,lang+' '+width+' header overlap '+JSON.stringify(readability));
+    if(width>=1920)assert.ok(readability.canvas>=1900,'Wide screens should use the larger canvas');
+    assert.ok((await page.locator('.copyright').innerText()).includes('Copyright © 2026 NICHTVISION SERVICE S.R.L.'));
     await page.locator('.menu-toggle').click();assert.equal(await page.locator('#site-menu').evaluate(e=>e.open),true);assert.equal(await page.locator('.menu-toggle').getAttribute('aria-expanded'),'true');
     await page.keyboard.press('Escape');assert.equal(await page.locator('#site-menu').evaluate(e=>e.open),false);assert.equal(await page.locator('.menu-toggle').evaluate(e=>e===document.activeElement),true);
     if(lang==='hu'){
@@ -38,6 +47,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    assert.equal(await page.locator('#native-login').count(),1);assert.equal(await page.locator('#register a').getAttribute('href'),'https://vadzsolty-cloud.github.io/nvs-app-letoltes/app/');
    assert.equal(await page.locator('.languages a[lang=en]').getAttribute('href'),'/nvs-website/en/account/');
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+   assert.equal(await page.locator('.copyright').count(),1);
    if(lang==='hu')await page.screenshot({path:'artifacts/premium-account-'+width+'.png',fullPage:true});
   }
   assert.equal(releaseCalls,0,'APK resolution is only allowed on the download page');assert.equal(authCalls,0);
@@ -48,3 +58,4 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
   assert.deepEqual(errors,[]);console.log('PASS: HU/RO/EN premium layout and account links, accessible menu/Escape/focus, photo tiles, no overflow, existing shared registration, version sorting, prerelease/draft/foreign APK rejection, one automatic download and API failure fallback. All external traffic intercepted.');
  }finally{if(browser)await browser.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1});
+
