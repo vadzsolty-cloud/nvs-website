@@ -131,7 +131,7 @@ html[data-theme="light"] .legal-footer .facebook-link{color:#657065}
 /* Compact, grouped footer with an actual bottom copyright band. */
 body{min-height:100dvh;display:flex;flex-direction:column}main{flex:1;min-width:0;width:100%}
 .legal-footer{display:block;flex-shrink:0;padding-top:28px;padding-bottom:18px;font-size:13px}
-.footer-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1.15fr);gap:28px;align-items:start}
+.footer-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr) minmax(0,1fr) minmax(250px,1.15fr);gap:28px;align-items:start}
 .footer-grid>*{min-width:0}
 .legal-footer .footer-company>strong{font-size:14px;font-weight:600;line-height:1.5;display:block;margin-bottom:8px;color:var(--white)}
 .legal-footer .footer-company p{font-size:13px;line-height:1.6;margin:0 0 10px;max-width:42ch}
@@ -149,12 +149,13 @@ body{min-height:100dvh;display:flex;flex-direction:column}main{flex:1;min-width:
 .legal-footer .footer-group nav a{display:block;font-size:13px;line-height:1.6;padding:4px 0;text-decoration:none;text-underline-offset:4px}
 .legal-footer .footer-contact>a{display:block;font-size:14px;line-height:1.7;padding:2px 0;overflow-wrap:anywhere}
 .legal-footer .footer-phone{color:var(--white);font-weight:500}
-.footer-contact-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:10px}
-.legal-footer .footer-social{margin:0}
+.footer-contact{position:relative}.legal-footer .footer-contact h2{padding-right:54px}
+.footer-contact-row{display:block;margin-top:10px}
+.legal-footer .footer-social{position:absolute;top:0;right:0;margin:0}
 .legal-footer .facebook-link{width:44px;height:44px;border-radius:10px}
 .legal-footer .facebook-link svg{width:25px;height:25px}
 .legal-footer .footer-assurance{display:block;max-width:100%}
-.legal-footer .footer-assurance img{width:175px;height:35px;max-width:100%;object-fit:contain}
+.legal-footer .footer-assurance img{width:250px;height:50px;max-width:none;object-fit:contain}
 .legal-footer nav.footer-authorities{display:flex;flex-wrap:wrap;gap:12px;max-width:none;width:auto;margin:8px 0 0;padding:0;border:0}
 .legal-footer .footer-authorities a{font-size:12px;line-height:1.6;padding:3px 0;text-decoration:none}
 .footer-bottom{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;border-top:1px solid var(--line);margin-top:22px;padding-top:14px}
