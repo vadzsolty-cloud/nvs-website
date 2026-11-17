@@ -33,6 +33,12 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
     assert.ok(readability.brandClear&&readability.actionsClear,lang+' '+width+' header overlap '+JSON.stringify(readability));
     if(width>=1920)assert.ok(readability.canvas>=1900,'Wide screens should use the larger canvas');
     assert.ok((await page.locator('.copyright').innerText()).includes('Copyright © 2026 NICHTVISION SERVICE S.R.L.'));
+    const footer=await page.locator('.legal-footer').evaluate(el=>({height:el.getBoundingClientRect().height,atBottom:el.nextElementSibling?.classList.contains('consent-panel'),groups:[...el.querySelectorAll('[data-footer-group]')].map(g=>g.open)}));
+    assert.equal(footer.atBottom,true,'Footer should be the last normal-flow content');
+    assert.deepEqual(footer.groups,[width>700,width>700]);
+    assert.deepEqual(await page.locator('.footer-assurance img').evaluate(el=>({width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height})),{width:250,height:50});
+    if(width>=1280)assert.ok(footer.height<=380,lang+' '+width+' compact desktop footer '+JSON.stringify(footer));
+    if(width<=700)assert.ok(footer.height<=720,lang+' '+width+' compact mobile footer '+JSON.stringify(footer));
     await page.locator('.menu-toggle').click();assert.equal(await page.locator('#site-menu').evaluate(e=>e.open),true);assert.equal(await page.locator('.menu-toggle').getAttribute('aria-expanded'),'true');
     await page.keyboard.press('Escape');assert.equal(await page.locator('#site-menu').evaluate(e=>e.open),false);assert.equal(await page.locator('.menu-toggle').evaluate(e=>e===document.activeElement),true);
     if(lang==='hu'){
@@ -51,6 +57,10 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    if(lang==='hu')await page.screenshot({path:'artifacts/premium-account-'+width+'.png',fullPage:true});
   }
   assert.equal(releaseCalls,0,'APK resolution is only allowed on the download page');assert.equal(authCalls,0);
+  await page.setViewportSize({width:390,height:950});await page.goto('http://127.0.0.1:4188/nvs-website/hu/');
+  const footerGroup=page.locator('.footer-information');assert.equal(await footerGroup.getAttribute('open'),null);
+  await footerGroup.locator('summary').click();assert.equal(await footerGroup.evaluate(el=>el.open),true);assert.equal(await footerGroup.locator('a').first().isVisible(),true);
+  await page.setViewportSize({width:1440,height:950});await page.waitForFunction(()=>[...document.querySelectorAll('[data-footer-group]')].every(g=>g.open));
   const desktop=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'no-preference'});
   await desktop.route('**/*',r=>new URL(r.request().url()).origin==='http://127.0.0.1:4188'?r.continue():r.abort());
   const motion=await desktop.newPage();
