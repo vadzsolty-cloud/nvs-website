@@ -89,3 +89,42 @@ p{font-size:16px}.eyebrow,.hero .eyebrow,#services>.eyebrow{font-size:12px}
  .consent-panel p,.consent-panel a,.consent-panel label{font-size:14px}
 }
 
+/* A common, restrained response for cards, links and controls. */
+:root{--hover-shadow:0 14px 32px #0005}html[data-theme="light"]{--hover-shadow:0 14px 32px #22351414}
+.footer-social{display:flex;gap:12px;margin:18px 0}
+.legal-footer .facebook-link{display:inline-flex;align-items:center;justify-content:center;width:50px;height:50px;border:1px solid var(--line);border-radius:12px;color:#929b92;background:var(--panel)}
+html[data-theme="light"] .legal-footer .facebook-link{color:#657065}
+.facebook-link svg{display:block;flex-shrink:0}
+:is(.service-card,.service-slider,.portal-tile,.register-card,.portal-entry,.equipment-list li,.process article,.fb-card,.photo-gallery .zoom,.workshop-intro .zoom,.booking-strip){transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease,background-color .22s ease}
+:is(.button:not(.password-show),.icon-control,.social-link,.slider-controls button,.slide-link,.lightbox-close,.lightbox-prev,.lightbox-next){transition:transform .18s ease,color .18s ease,background-color .18s ease,border-color .18s ease,box-shadow .18s ease}
+:is(.desktop-nav a,.site-menu nav a,.menu-phone,.languages a,.text-link,.legal-footer nav a,.legal-footer>div>a){transition:color .18s ease,background-color .18s ease,border-color .18s ease,transform .18s ease}
+.tile-visual img,.fb-cover img,.photo-gallery .zoom img{transition:transform .35s ease}
+:is(.service-card,.service-slider,.portal-tile,.register-card,.portal-entry,.equipment-list li,.process article,.fb-card,.booking-strip):focus-within{border-color:var(--green);box-shadow:var(--hover-shadow)}
+:is(.photo-gallery .zoom,.workshop-intro .zoom):focus-visible{box-shadow:var(--hover-shadow)}
+:is(.button:not(.password-show),.icon-control,.slider-controls button,.slide-link):focus-visible{border-color:var(--green)}
+.legal-footer .facebook-link:focus-visible,html[data-theme="light"] .legal-footer .facebook-link:focus-visible{color:#1877f2;border-color:#1877f2;box-shadow:0 6px 20px #1877f226}
+@media(hover:hover) and (pointer:fine){
+ :is(.service-card,.service-slider,.portal-tile,.register-card,.portal-entry,.equipment-list li,.process article,.fb-card,.booking-strip):hover{border-color:var(--green);box-shadow:var(--hover-shadow)}
+ :is(.photo-gallery .zoom,.workshop-intro .zoom):hover{box-shadow:var(--hover-shadow)}
+ :is(.button:not(.password-show),.icon-control,.slider-controls button,.slide-link):not(:disabled):hover{border-color:var(--green)}
+ :is(.desktop-nav a,.site-menu nav a,.menu-phone,.languages a,.text-link,.legal-footer nav a,.legal-footer>div>a):hover{color:var(--green)}
+ .legal-footer .facebook-link:hover,html[data-theme="light"] .legal-footer .facebook-link:hover{color:#1877f2;border-color:#1877f2;box-shadow:0 6px 20px #1877f226}
+}
+@media(prefers-reduced-motion:no-preference){
+ :is(#services .service-card,.service-slider,.portal-tile,.register-card,.portal-entry,.equipment-list li,.process article,.fb-card,.booking-strip):focus-within{transform:translateY(-4px)}
+ :is(.photo-gallery .zoom,.workshop-intro .zoom):focus-visible{transform:translateY(-3px)}
+ .legal-footer .facebook-link:focus-visible{transform:translateY(-2px)}
+ @media(hover:hover) and (pointer:fine){
+  :is(#services .service-card,.service-slider,.portal-tile,.register-card,.portal-entry,.equipment-list li,.process article,.fb-card,.booking-strip):hover{transform:translateY(-4px)}
+  :is(.photo-gallery .zoom,.workshop-intro .zoom):hover{transform:translateY(-3px)}
+  :is(.button:not(.password-show),.icon-control:not(.password-show),.social-link,.slider-controls button,.slide-link):not(:disabled):hover{transform:translateY(-2px)}
+  :is(.service-card:hover .tile-visual img,.fb-card:hover .fb-cover img,.photo-gallery .zoom:hover img){transform:scale(1.025)}
+  .site-menu nav a:hover{transform:translateX(3px)}
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ :is(#services .service-card,.service-slider,.portal-tile,.register-card,.portal-entry,.equipment-list li,.process article,.fb-card,.booking-strip,.photo-gallery .zoom,.workshop-intro .zoom,.button:not(.password-show),.icon-control,.social-link,.slider-controls button,.slide-link,.lightbox-close,.lightbox-prev,.lightbox-next,.site-menu nav a,.tile-visual img,.fb-cover img,.photo-gallery .zoom img){transition:none;transform:none}
+}
+.button:not(.password-show):disabled{transform:none;cursor:default}
+@media(hover:none){#services .service-card:hover,.fb-card:hover,.button:not(.password-show):hover,.service-card:hover .tile-visual img{transform:none}}
+
