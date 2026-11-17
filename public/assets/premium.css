@@ -57,6 +57,7 @@ p{font-size:16px}.eyebrow,.hero .eyebrow,#services>.eyebrow{font-size:12px}
 .portal-jump .button{font-size:15px}.download-note{font-size:15px}
 .download-page,.legal-page{max-width:1120px}
 .fb-card p,.fb-block>p{font-size:16px}.fb-card small,.fb-photo-card>small,.fb-meta,.fb-open{font-size:14px}.fb-card strong{font-size:19px}
+.legal-footer{font-size:14px}.legal-footer>div>strong{font-size:16px}
 .legal-footer p,.legal-footer nav,.legal-footer>a{font-size:14px;line-height:1.8}
 .legal-footer>div{min-width:0}.legal-footer nav{width:auto;order:0;border:0}
 .legal-footer .copyright{flex:1 1 100%;border-top:1px solid var(--line);padding-top:24px;margin-top:8px}
