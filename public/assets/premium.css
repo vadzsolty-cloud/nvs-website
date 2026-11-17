@@ -128,3 +128,55 @@ html[data-theme="light"] .legal-footer .facebook-link{color:#657065}
 .button:not(.password-show):disabled{transform:none;cursor:default}
 @media(hover:none){#services .service-card:hover,.fb-card:hover,.button:not(.password-show):hover,.service-card:hover .tile-visual img{transform:none}}
 
+/* Compact, grouped footer with an actual bottom copyright band. */
+body{min-height:100dvh;display:flex;flex-direction:column}main{flex:1;min-width:0;width:100%}
+.legal-footer{display:block;flex-shrink:0;padding-top:28px;padding-bottom:18px;font-size:13px}
+.footer-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1.15fr);gap:28px;align-items:start}
+.footer-grid>*{min-width:0}
+.legal-footer .footer-company>strong{font-size:14px;font-weight:600;line-height:1.5;display:block;margin-bottom:8px;color:var(--white)}
+.legal-footer .footer-company p{font-size:13px;line-height:1.6;margin:0 0 10px;max-width:42ch}
+.footer-address>span{display:block;color:var(--white);font-size:12px;margin-bottom:2px}
+.legal-footer .footer-company-note{font-size:12px;color:var(--muted);margin-top:8px}
+.footer-company-note summary{cursor:pointer;font-size:12px;line-height:1.6}
+.legal-footer .footer-company-note p{font-size:12px;margin:8px 0}
+.footer-company-note a{color:var(--green);text-decoration:underline}
+.footer-group summary,.legal-footer .footer-contact h2{font-size:14px;line-height:1.5;letter-spacing:.01em;font-weight:600;color:var(--white);margin:0 0 10px}
+.footer-group summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.footer-group summary::-webkit-details-marker{display:none}
+.footer-group summary:after{content:'−';font-size:17px;color:var(--muted);font-weight:400}
+.footer-group:not([open]) summary:after{content:'+'}
+.legal-footer .footer-group nav{display:flex;flex-direction:column;align-items:flex-start;gap:0;margin:0;max-width:none;width:auto;padding:0;border:0;order:initial}
+.legal-footer .footer-group nav a{display:block;font-size:13px;line-height:1.6;padding:4px 0;text-decoration:none;text-underline-offset:4px}
+.legal-footer .footer-contact>a{display:block;font-size:14px;line-height:1.7;padding:2px 0;overflow-wrap:anywhere}
+.legal-footer .footer-phone{color:var(--white);font-weight:500}
+.footer-contact-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:10px}
+.legal-footer .footer-social{margin:0}
+.legal-footer .facebook-link{width:44px;height:44px;border-radius:10px}
+.legal-footer .facebook-link svg{width:25px;height:25px}
+.legal-footer .footer-assurance{display:block;max-width:100%}
+.legal-footer .footer-assurance img{width:175px;height:35px;max-width:100%;object-fit:contain}
+.legal-footer nav.footer-authorities{display:flex;flex-wrap:wrap;gap:12px;max-width:none;width:auto;margin:8px 0 0;padding:0;border:0}
+.legal-footer .footer-authorities a{font-size:12px;line-height:1.6;padding:3px 0;text-decoration:none}
+.footer-bottom{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;border-top:1px solid var(--line);margin-top:22px;padding-top:14px}
+.legal-footer .copyright{flex:1;min-width:0;border:0;padding:0;margin:0}
+.legal-footer .copyright p{font-size:12px;line-height:1.6;margin:0;max-width:115ch}
+.legal-footer .copyright p+p{margin-top:3px}
+.copyright p>span{display:inline-block;margin-left:8px;color:var(--muted)}
+.legal-footer .footer-preferences{flex-shrink:0;font-size:12px;line-height:1.6;text-decoration:underline;text-underline-offset:4px;padding:2px 0}
+@media(hover:hover) and (pointer:fine){.legal-footer .footer-group nav a:hover,.legal-footer .footer-contact>a:hover,.legal-footer .footer-authorities a:hover{color:var(--green);text-decoration:underline;text-underline-offset:4px}}
+@media(max-width:1100px){.footer-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 36px}.footer-bottom{gap:18px}.legal-footer .copyright p{max-width:85ch}}
+@media(max-width:700px){
+ .legal-footer{padding-top:24px;padding-bottom:18px}
+ .footer-grid{grid-template-columns:1fr;gap:12px}
+ .footer-company{order:0}.footer-contact{order:1}.footer-information{order:2}.footer-apps{order:3}
+ .legal-footer .footer-company p{margin-bottom:8px;max-width:none}
+ .footer-contact-row{flex-wrap:nowrap;gap:14px}
+ .footer-group{border-top:1px solid var(--line)}
+ .footer-group summary{padding:12px 0;margin:0;min-height:44px;font-size:14px}
+ .legal-footer .footer-group nav{padding:0 0 8px}
+ .legal-footer .footer-group nav a{padding:7px 0;min-height:34px}
+ .footer-bottom{display:block;margin-top:16px;padding-top:12px}
+ .copyright p>span{margin-left:0}
+ .legal-footer .footer-preferences{display:inline-block;margin-top:8px;padding:4px 0}
+}
+

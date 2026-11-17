@@ -1,4 +1,7 @@
 (()=>{
+ const compactFooter=matchMedia('(max-width:700px)'),footerGroups=document.querySelectorAll('[data-footer-group]');
+ const arrangeFooter=()=>footerGroups.forEach(group=>{group.open=!compactFooter.matches;});
+ arrangeFooter();compactFooter.addEventListener('change',arrangeFooter);
  const menu=document.getElementById('site-menu'),toggle=document.querySelector('.menu-toggle');
  if(menu&&toggle&&typeof menu.showModal==='function'){
   document.documentElement.classList.add('js-ready');
@@ -40,3 +43,4 @@
  }
  latest();
 })();
+
