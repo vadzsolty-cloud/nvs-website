@@ -5,6 +5,25 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
  const server=createPreviewServer({output:'artifacts/premium-pages',basePath:'/nvs-website'});await new Promise(r=>server.listen(4188,'127.0.0.1',r));let browser;
  try{
   browser=await chromium.launch({headless:true,...(process.env.PW_EXECUTABLE?{executablePath:process.env.PW_EXECUTABLE}:{})});
+  const preferences=await browser.newContext({colorScheme:'light'});
+  await preferences.route('**/*',r=>new URL(r.request().url()).origin==='http://127.0.0.1:4188'?r.continue():r.abort());
+  await preferences.addInitScript(()=>{if(!localStorage.getItem('theme-test-seeded')){localStorage.setItem('nvs-theme','dark');localStorage.setItem('theme-test-seeded','yes');}});
+  const themed=await preferences.newPage();const themeErrors=[];themed.on('pageerror',e=>themeErrors.push(e.message));
+  await themed.goto('http://127.0.0.1:4188/nvs-website/hu/');
+  await themed.locator('[data-consent=reject]').click();
+  const actual=()=>themed.locator('html').getAttribute('data-theme');
+  assert.equal(await actual(),'light');assert.equal(await themed.locator('.theme-toggle').getAttribute('data-mode'),'system');
+  assert.equal(await themed.locator('.fb-cover-brand').count(),0);
+  await themed.emulateMedia({colorScheme:'dark'});await themed.waitForFunction(()=>document.documentElement.dataset.theme==='dark');
+  await themed.locator('.theme-toggle').click();assert.equal(await actual(),'light');
+  await themed.emulateMedia({colorScheme:'light'});await themed.emulateMedia({colorScheme:'dark'});assert.equal(await actual(),'light');
+  await themed.goto('http://127.0.0.1:4188/nvs-website/ro/cookies/');
+  assert.equal(await actual(),'light');assert.equal(await themed.locator('.theme-toggle').getAttribute('data-mode'),'light');
+  await themed.locator('.theme-toggle').click();assert.equal(await actual(),'dark');
+  await themed.locator('.theme-toggle').click();assert.equal(await themed.locator('.theme-toggle').getAttribute('data-mode'),'system');
+  await themed.emulateMedia({colorScheme:'light'});await themed.waitForFunction(()=>document.documentElement.dataset.theme==='light');
+  assert.equal(await themed.evaluate(()=>localStorage.getItem('nvs-theme')),'dark');assert.deepEqual(themeErrors,[]);
+  await preferences.close();
   const context=await browser.newContext({acceptDownloads:true,hasTouch:true});let releaseCalls=0,authCalls=0,apkCalls=0,apiFails=false;
   const asset=v=>({name:'NightVisionService-v'+v+'.apk',browser_download_url:'https://github.com/vadzsolty-cloud/nvs-app-letoltes/releases/download/apk-v'+v+'-run2/NightVisionService-v'+v+'.apk'});
   const releases=[{tag_name:'apk-v5.0.2-run2',assets:[asset('5.0.2')]},{tag_name:'apk-v99.0.0-run2',prerelease:true,assets:[asset('99.0.0')]},{tag_name:'apk-v5.0.10-run2',assets:[asset('5.0.10')]},{tag_name:'apk-v98.0.0-run2',draft:true,assets:[asset('98.0.0')]},{tag_name:'apk-v97.0.0-run2',assets:[{name:'NightVisionService-v97.0.0.apk',browser_download_url:'https://example.invalid/forged.apk'}]}];
@@ -20,6 +39,8 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    if(await page.locator('#privacy-preferences').isVisible())await page.locator('[data-consent=reject]').click();
    assert.equal(await page.locator('.account-link').getAttribute('href'),'/nvs-website/'+lang+'/account/');
    assert.equal(await page.locator('#native-login').count(),0);assert.equal(await page.locator('#services .tile-visual picture').count(),6);
+   assert.equal(await page.locator('.fb-cover-brand').count(),0,'Facebook photo covers should not repeat the company wordmark');
+   assert.equal(await page.locator('.fb-cover-label').filter({hasText:/^NVS$/}).count(),0);
    assert.equal(await page.locator('.equipment-list>li').count(),8);
    assert.equal(await page.locator('.general-workshop-card a').getAttribute('href'),'/nvs-website/'+lang+'/account/');
    for(const theme of ['light','dark']){

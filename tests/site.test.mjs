@@ -23,6 +23,8 @@ for(const basePath of ['', '/nvs-website'])test('localized HTML, assets, redirec
   assert.ok(html.includes('rel="canonical" href="'+origin+basePath+path+'"'));
   for(const x of Object.keys(content))assert.ok(html.includes('hreflang="'+x+'" href="'+origin+basePath+'/'+x+'/'+(id?'services/'+id+'/':'')+'"'));
   assert.ok(html.includes('noindex,nofollow'));
+  assert.ok(!html.includes('fb-cover-brand'));
+  assert.ok(!html.includes('class="fb-cover-label">NVS</span>'));
   const json=JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/)[1]);assert.equal(json['@type'],'AutoRepair');assert.equal(json.telephone,business.phone);
   assert.equal(json.name,business.brandName);assert.equal(json.legalName,business.name);assert.equal(json.vatID,business.vatId);assert.equal(json.email,business.email);assert.equal(json.hasMap,business.maps);
   assert.ok(html.includes('href="'+business.phoneHref+'"'));assert.ok(html.includes(business.phone));assert.ok(html.includes(business.address));
@@ -98,5 +100,11 @@ test('demo summarises and resets without network or persistent storage',async()=
 test('map is gated before consent and theme controls are localized',async()=>{
  const output=resolve('artifacts/test-builds/map');
  execFileSync(process.execPath,['scripts/build.mjs'],{env:{...process.env,BASE_PATH:'/nvs-website',SITE_URL:'https://vadzsolty-cloud.github.io',PRODUCTION:'false',EMULATOR_UI:'false',OUTPUT_DIR:output},stdio:'pipe'});
- for(const l of ['hu','ro','en']){const html=await readFile(output+'/'+l+'/index.html','utf8');assert.ok(html.includes('src="https://maps.google.com/maps?q=46.4619963,25.7936655&amp;z=16&amp;output=embed&amp;hl='+l+'"'));assert.ok(!html.includes('map-load"'));assert.ok(!/<iframe\b[^>]*\ssrc=/.test(html));assert.ok(html.includes('data-consent-category="maps"'));assert.ok(html.includes('theme-toggle'));assert.ok(html.includes('/nvs-website/assets/theme.js'));}
+ for(const l of ['hu','ro','en']){const html=await readFile(output+'/'+l+'/index.html','utf8');assert.ok(html.includes('src="https://maps.google.com/maps?q=46.4619963,25.7936655&amp;z=16&amp;output=embed&amp;hl='+l+'"'));assert.ok(!html.includes('map-load"'));assert.ok(!/<iframe\b[^>]*\ssrc=/.test(html));assert.ok(html.includes('data-consent-category="maps"'));assert.ok(html.includes('theme-toggle'));assert.match(html,/\/nvs-website\/assets\/theme-[a-f0-9]{12}\.js/);}
+ for(const l of ['hu','ro','en'])for(const path of ['',...ids.map(id=>'services/'+id+'/'),'account/','download/','company/','privacy/','cookies/','terms/']){
+  const html=await readFile(output+'/'+l+'/'+path+'index.html','utf8');
+  const theme=html.match(/src="(\/nvs-website\/assets\/theme-[a-f0-9]{12}\.js)"/);
+  assert.ok(theme,l+'/'+path+' must use the versioned theme script');await stat(output+theme[1].slice('/nvs-website'.length));
+  assert.ok(html.includes('data-system="'+{hu:'Rendszer',ro:'Sistem',en:'System'}[l]+'"'));
+ }
 });
