@@ -63,7 +63,11 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    await page.goto('http://127.0.0.1:4188/nvs-website/'+lang+'/services/'+id+'/');
    assert.equal(await page.locator('#service-guide').count(),1);assert.equal(await page.locator('.education-faq details').count(),2);
    assert.equal(await page.locator('.education-systems dt').count(),3);assert.equal(await page.locator('.education-process article').count(),3);
-   assert.ok(await page.locator('.education-heading .lead').innerText());assert.equal(await page.locator('.education-help .button').getAttribute('href'),'/nvs-website/'+lang+'/account/');
+   assert.ok(await page.locator('.education-heading .lead').innerText());
+   assert.equal(await page.locator('main a[href*="/account/"]').count(),0,'Service reading content should not repeat appointment calls to action');
+   assert.equal(await page.locator('main #booking,main #contact,main #app,main .booking-demo,main .education-help').count(),0);
+   assert.equal(await page.locator('.detail-hero p').filter({hasText:'Strada Principală'}).count(),0);
+   assert.equal(await page.locator('.site-header .account-link').count(),1);assert.equal(await page.locator('.footer-apps a[href*="/account/"]').count(),1);
    await page.locator('.education-faq summary').first().click();assert.equal(await page.locator('.education-faq details').first().evaluate(el=>el.open),true);
    assert.equal(await page.locator('.education-faq details').first().locator('p').isVisible(),true);
    for(const width of [320,768,1440])for(const theme of ['light','dark']){

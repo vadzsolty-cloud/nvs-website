@@ -16,9 +16,9 @@ Az ACC, ADAS, Hunter 3D, kamerakalibrálás, LED/Matrix és diagnosztika meglév
 - Tipikus helyzetek, amikor érdemes ellenőrzést egyeztetni.
 - Három lépés a műhelyben, saját témaspecifikus szöveggel.
 - Két natív, billentyűzettel is nyitható gyakori kérdés.
-- Kapcsolódó szolgáltatások, gyártói szakmai háttér és meglévő ügyfélkapu-CTA.
+- Kapcsolódó szolgáltatások és gyártói szakmai háttér, ismétlődő foglalási felhívás nélkül.
 
-Mind a 18 nyelvi változat buildelt HTML. Az ismertetők, kérdések és linkek JavaScript nélkül is olvashatók/használhatók; nem kliensoldali töltés vagy gépi fordítás futásidőben. Az eredeti, valódi műhelyfotók és képlapozók megmaradnak. A nyitóképből külön link vezet az ismertetőhöz. A canonical/hreflang, a hat szolgáltatási URL és a noindex előnézeti működés változatlan; összesen továbbra is 39 oldal készül.
+Mind a 18 nyelvi változat buildelt HTML. Az ismertetők, kérdések és linkek JavaScript nélkül is olvashatók/használhatók; nem kliensoldali töltés vagy gépi fordítás futásidőben. Az eredeti, valódi műhelyfotók és képlapozók megmaradnak. A nyitóképből külön link vezet az ismertetőhöz. A tulajdonos további kérése alapján a szolgáltatási aloldalak elején nincs foglalási gomb vagy műhelycím, és a cikkek végén sincs foglalási felhívás. A nagy foglalási, demó-, app- és térképes kapcsolatblokkok kizárólag a főoldalon jelennek meg. A közös fejléc és lábléc megtartja a belépést, az elérhetőségeket és a jogi adatokat. A canonical/hreflang, a hat szolgáltatási URL és a noindex előnézeti működés változatlan; összesen továbbra is 39 oldal készül.
 
 ## Szakmai keretek és források
 
@@ -37,6 +37,6 @@ A források az aloldalakon is elérhetők. Nincs gyártói logó vagy partneri/m
 
 ## Ellenőrzés és hatókör
 
-A meglévő statikus/site tesztek továbbra is ellenőrzik a nyelvi URL-eket, belső linkeket és képeket. A kibővített böngészőteszt mind a 18 ismertetőn megvizsgálja az elemek és a CTA jelenlétét, a FAQ nyitását, valamint a 320/768/1440 px-es világos/sötét elrendezést. A főoldalon nyolc kártya és a nyelvhelyes általános szervizlink is ellenőrzött. A korábbi fejléc/lábléc/hover/menü/app-letöltési regresszió megmarad.
+A meglévő statikus/site tesztek továbbra is ellenőrzik a nyelvi URL-eket, belső linkeket és képeket. A kibővített böngészőteszt mind a 18 ismertetőn megvizsgálja az ismertető elemeinek jelenlétét, az ismétlődő szolgáltatásoldali CTA/címblokkok hiányát, a fejléc/lábléc megmaradt belépési linkjét, a FAQ nyitását, valamint a 320/768/1440 px-es világos/sötét elrendezést. A főoldalon nyolc kártya és a nyelvhelyes általános szervizlink is ellenőrzött. A korábbi fejléc/lábléc/hover/menü/app-letöltési regresszió megmarad.
 
 Kizárólag az nvs-website statikus tartalma és elrendezése változik. Nincs új Firebase/API/SMTP művelet, app/APK/frissítő/rules módosítás, tesztfoglalás vagy valódi tesztlevél.
