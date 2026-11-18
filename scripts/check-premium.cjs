@@ -20,6 +20,8 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    if(await page.locator('#privacy-preferences').isVisible())await page.locator('[data-consent=reject]').click();
    assert.equal(await page.locator('.account-link').getAttribute('href'),'/nvs-website/'+lang+'/account/');
    assert.equal(await page.locator('#native-login').count(),0);assert.equal(await page.locator('#services .tile-visual picture').count(),6);
+   assert.equal(await page.locator('.equipment-list>li').count(),8);
+   assert.equal(await page.locator('.general-workshop-card a').getAttribute('href'),'/nvs-website/'+lang+'/account/');
    for(const theme of ['light','dark']){
     await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
     const overflow=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,offenders:[...document.querySelectorAll('body *')].filter(el=>{const r=el.getBoundingClientRect();return r.width>0&&r.right>innerWidth+1&&!el.closest('.slides,.site-menu,.lightbox');}).map(el=>({tag:el.tagName,class:el.className,id:el.id,right:el.getBoundingClientRect().right})).slice(0,12)}));
@@ -55,6 +57,20 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
    assert.equal(await page.locator('.copyright').count(),1);
    if(lang==='hu')await page.screenshot({path:'artifacts/premium-account-'+width+'.png',fullPage:true});
+  }
+  const guideIds=['acc','adas','hunter-3d','camera','led-matrix','diagnostics'];
+  for(const lang of ['hu','ro','en'])for(const id of guideIds){
+   await page.goto('http://127.0.0.1:4188/nvs-website/'+lang+'/services/'+id+'/');
+   assert.equal(await page.locator('#service-guide').count(),1);assert.equal(await page.locator('.education-faq details').count(),2);
+   assert.equal(await page.locator('.education-systems dt').count(),3);assert.equal(await page.locator('.education-process article').count(),3);
+   assert.ok(await page.locator('.education-heading .lead').innerText());assert.equal(await page.locator('.education-help .button').getAttribute('href'),'/nvs-website/'+lang+'/account/');
+   await page.locator('.education-faq summary').first().click();assert.equal(await page.locator('.education-faq details').first().evaluate(el=>el.open),true);
+   assert.equal(await page.locator('.education-faq details').first().locator('p').isVisible(),true);
+   for(const width of [320,768,1440])for(const theme of ['light','dark']){
+    await page.setViewportSize({width,height:950});await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,lang+' '+id+' '+width+' '+theme);
+    if(lang==='hu'&&width===1440&&theme==='dark')await page.locator('#service-guide').screenshot({path:'artifacts/service-guide-'+id+'.png'});
+   }
   }
   assert.equal(releaseCalls,0,'APK resolution is only allowed on the download page');assert.equal(authCalls,0);
   await page.setViewportSize({width:390,height:950});await page.goto('http://127.0.0.1:4188/nvs-website/hu/');
@@ -95,4 +111,3 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
   assert.deepEqual(errors,[]);console.log('PASS: HU/RO/EN premium layout and account links, accessible menu/Escape/focus, photo tiles, no overflow, existing shared registration, version sorting, prerelease/draft/foreign APK rejection, one automatic download and API failure fallback. All external traffic intercepted.');
  }finally{if(browser)await browser.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1});
-
