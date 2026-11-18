@@ -40,9 +40,13 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    assert.equal(await page.locator('.account-link').getAttribute('href'),'/nvs-website/'+lang+'/account/');
    assert.equal(await page.locator('#native-login').count(),0);assert.equal(await page.locator('#services .tile-visual picture').count(),6);
    assert.equal(await page.locator('.fb-cover-brand').count(),0,'Facebook photo covers should not repeat the company wordmark');
-   assert.equal(await page.locator('.fb-cover-label').filter({hasText:/^NVS$/}).count(),0);
+   assert.equal(await page.locator('.fb-cover-label').count(),0);
+   assert.equal(await page.locator('.fb-card:visible').count(),3);assert.equal(await page.locator('.fb-card').count(),9);
+   assert.equal(await page.locator('.photo-gallery .zoom:visible').count(),6);assert.equal(await page.locator('.photo-gallery .zoom').count(),20);
+   assert.equal(await page.locator('main a[href*="/account/"]:visible').count(),2);
+   assert.equal(await page.locator('.booking-strip').count(),0);
    assert.equal(await page.locator('.equipment-list>li').count(),8);
-   assert.equal(await page.locator('.general-workshop-card a').getAttribute('href'),'/nvs-website/'+lang+'/account/');
+   assert.equal(await page.locator('.general-workshop-card a').count(),0);
    for(const theme of ['light','dark']){
     await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
     const overflow=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,offenders:[...document.querySelectorAll('body *')].filter(el=>{const r=el.getBoundingClientRect();return r.width>0&&r.right>innerWidth+1&&!el.closest('.slides,.site-menu,.lightbox');}).map(el=>({tag:el.tagName,class:el.className,id:el.id,right:el.getBoundingClientRect().right})).slice(0,12)}));
@@ -71,6 +75,19 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
      assert.equal(await page.locator('#services .tile-visual img').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0)),true);
      await page.locator('#services').screenshot({path:'artifacts/premium-tiles-'+width+'-'+theme+'.png'});
     }
+   }
+   if([390,1440].includes(width))for(const kind of ['posts','photos']){
+    const more=page.locator('[data-reference-more="'+kind+'"]'),summary=more.locator('summary');
+    assert.equal(await more.evaluate(e=>e.open),false);
+    await summary.focus();await page.keyboard.press('Enter');assert.equal(await more.evaluate(e=>e.open),true);
+    assert.equal(await page.locator(kind==='posts'?'.fb-card:visible':'.photo-gallery .zoom:visible').count(),kind==='posts'?9:20);
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+    if(kind==='photos'){
+     const photo=more.locator('.zoom').first();await photo.click();assert.equal(await page.locator('.lightbox').evaluate(e=>e.open),true);
+     assert.ok(await page.locator('.lightbox-caption').innerText());await page.keyboard.press('Escape');assert.equal(await photo.evaluate(e=>e===document.activeElement),true);
+     assert.ok((await more.locator('li>p span').first().innerText()).startsWith('07'));
+    }
+    await summary.focus();await page.keyboard.press('Space');assert.equal(await more.evaluate(e=>e.open),false);
    }
    await page.goto('http://127.0.0.1:4188/nvs-website/'+lang+'/account/');
    assert.equal(await page.locator('#native-login').count(),1);assert.equal(await page.locator('#register a').getAttribute('href'),'https://vadzsolty-cloud.github.io/nvs-app-letoltes/app/');
@@ -119,7 +136,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    await motion.keyboard.press('Tab');await social.focus();assert.equal(await social.evaluate(el=>el.matches(':focus-visible')),true);
    await motion.waitForFunction(()=>getComputedStyle(document.querySelector('.facebook-link')).color==='rgb(24, 119, 242)');
    await social.evaluate(el=>el.blur());
-   for(const selector of ['#services .service-card','.service-slider','.equipment-list li','.fb-card','.photo-gallery .zoom','.booking-strip','.portal-entry'])await lifted(selector);
+   for(const selector of ['#services .service-card','.service-slider','.equipment-list li','.fb-card','.photo-gallery .zoom','.portal-entry','[data-reference-more]>summary'])await lifted(selector);
    await motion.emulateMedia({reducedMotion:'reduce'});
    for(const selector of ['#services .service-card','.fb-card','.facebook-link']){await motion.locator(selector).first().hover();assert.equal(await motion.locator(selector).first().evaluate(el=>getComputedStyle(el).transform),'none');}
    await motion.emulateMedia({reducedMotion:'no-preference'});
@@ -129,6 +146,12 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    await motion.goto('http://127.0.0.1:4188/nvs-website/hu/services/adas/');await lifted('.process article');
   }
   await desktop.close();
+  const noScript=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:950}});
+  await noScript.route('**/*',r=>new URL(r.request().url()).origin==='http://127.0.0.1:4188'?r.continue():r.abort());
+  const plain=await noScript.newPage();await plain.goto('http://127.0.0.1:4188/nvs-website/hu/');
+  assert.equal(await plain.locator('.fb-card:visible').count(),3);assert.equal(await plain.locator('.photo-gallery .zoom:visible').count(),6);
+  for(const kind of ['posts','photos']){await plain.locator('[data-reference-more="'+kind+'"]>summary').click();assert.equal(await plain.locator('[data-reference-more="'+kind+'"]').evaluate(e=>e.open),true);}
+  assert.equal(await plain.locator('.fb-card:visible').count(),9);assert.equal(await plain.locator('.photo-gallery .zoom:visible').count(),20);await noScript.close();
   const downloadEvent=page.waitForEvent('download');await page.goto('http://127.0.0.1:4188/nvs-website/hu/download/');
   const download=await downloadEvent;assert.equal(download.url(),asset('5.0.10').browser_download_url);assert.equal(releaseCalls,1);assert.equal(apkCalls,1);await download.delete();
   apiFails=true;await page.goto('http://127.0.0.1:4188/nvs-website/en/download/');await page.waitForFunction(()=>document.querySelector('[data-download-status]').textContent===document.querySelector('[data-download-status]').dataset.error);

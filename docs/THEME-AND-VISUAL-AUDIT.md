@@ -12,9 +12,11 @@ Dátum: 2026. november 18. Hatókör: nvs-website, HU / RO / EN.
 - Minden Facebook-referenciakártya borítójáról eltűnt az ismétlődő NIGHT VISION SERVICE felirat, és a két általános kártya NVS felirata is. A forrásfotókat, a bennük látható eredeti műhelyfeliratokat és a Facebook által megjelenített beágyazások tartalmát nem módosítjuk.
 - A tárolási kulcs leírása mindhárom nyelvű adatvédelmi tájékoztatóban frissült.
 
-## Audit: további egyeztetésre javasolt egyszerűsítések
+## Audit és az egyeztetés után elvégzett egyszerűsítések
 
-Ezek megfigyelések és javaslatok; ebben a módosításban nem hajtottuk végre őket.
+A felmérés utáni tulajdonosi jóváhagyás alapján az első három javaslat elkészült: két fő időpontkérési felhívás marad a főoldali tartalomban; elsőre 3 Facebook-referencia és 6 fotó látható, a többi natív lenyitással elérhető; a borítókon nincs ráírt szolgáltatásnév és sötétítő felirat-háttér sem. A kártyák alatt a konkrét munkaleírások megmaradnak. A teljes, 9 referenciát és 20 galériafotót tartalmazó HTML, a képnézegető, a képsorrend és a számozás megmarad. A vezérlők HU/RO/EN nyelven, JavaScript nélkül is működnek.
+
+Az alábbi táblázat az eredeti megfigyelést és javaslatot őrzi. Az előnézeti jelzés felülvizsgálata továbbra is a végleges induláshoz és indexeléshez kötött; a mostani vizuális javítás ezt nem változtatja meg.
 
 | Megfigyelés | Javaslat |
 | --- | --- |
@@ -31,5 +33,6 @@ A szolgáltatási cikkek fő tartalma továbbra is mentes az ismétlődő időpo
 - 18 automatizált teszt: a rendszer változásának követése, kézi felülbírálás, visszatérés Rendszer módba, tárolási hiba, régebbi médiafigyelő, más apphoz tartozó kulcs érintetlensége; minden oldaltípus verziózott témafájlja és a borítófeliratok hiánya.
 - Playwright: HU/RO/EN, világos/sötét elrendezés 320–2560 px között; élő rendszerkövetés, nyelvi/jogi oldalak közötti preferencia, fejléc, menü, szolgáltatási oldalak, lábléc, mozgáscsökkentés, letöltési tesztadatok. A külső forgalom a helyi tesztekben elfogott; nincs valódi bejelentkezés, foglalás vagy e-mail.
 - Saját műhelyfotókat használó Facebook-borítók betöltésének ellenőrzése.
+- Jóváhagyott egyszerűsítés regressziója: 3/9 referencia, 6/20 fotó, két fő időpontkérési útvonal; HU/RO/EN mobil/asztali nézet, Enter/Space lenyitás és visszacsukás, további fotó megnyitása és fókusz visszaadása, folytatólagos számozás, JavaScript nélküli natív működés.
 
 A Firebase, a meglévő alkalmazás, az APK-k és a frissítési rendszer nem része ennek a változtatásnak. Az éles közzététel utáni eredmény és a CI állapota a #1 GitHub-feladatban szerepel.

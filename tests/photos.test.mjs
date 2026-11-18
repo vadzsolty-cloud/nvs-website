@@ -8,6 +8,7 @@ import {photos,placement} from '../src/photos.mjs';
 import {ids} from '../src/content.mjs';
 import {sliderOrder} from '../src/slider.mjs';
 import {facebookPosts,pageId} from '../src/facebook-posts.mjs';
+import {referenceCopy} from '../src/reference-disclosure.mjs';
 
 // Files whose bottom-left corner shows the Samsung "AI által előállított tartalom" label, the edited
 // crop of the same series, and the AI-generated poster graphics (file_0000*.png) must never be used.
@@ -31,6 +32,11 @@ test('pages use responsive images under /nvs-website/, eager hero, lazy gallery,
  execFileSync(process.execPath,['scripts/build.mjs'],{env:{...process.env,BASE_PATH:'/nvs-website',SITE_URL:'https://vadzsolty-cloud.github.io',PRODUCTION:'false',CONTACT_APPROVED:'false',EMULATOR_UI:'false',OUTPUT_DIR:output},stdio:'pipe'});
  for(const l of ['hu','ro','en']){
   const html=await readFile(output+'/'+l+'/index.html','utf8');
+  assert.ok(!html.includes('fb-cover-label'));assert.ok(!html.includes('booking-strip'));assert.ok(!html.includes('general-workshop-link'));
+  for(const kind of ['posts','photos']){
+   const disclosure=html.match(new RegExp('<details class="reference-disclosure" data-reference-more="'+kind+'">([\\s\\S]*?)</details>'));
+   assert.ok(disclosure);assert.ok(disclosure[1].includes(referenceCopy[l][kind]));assert.ok(disclosure[1].includes(kind==='posts'?'(+6)':'(+14)'));
+  }
   for(const m of html.matchAll(/(?:image)?srcset="([^"]+)"/g))for(const item of m[1].split(', ')){const url=item.split(' ')[0];assert.ok(url.startsWith('/nvs-website/assets/photos/'),url);await stat(output+url.slice('/nvs-website'.length));}
   const imgs=[...html.matchAll(/<img [^>]*>/g)].map(m=>m[0]).filter(t=>t.includes('/assets/photos/'));
   const sliderPhotos=sliderOrder.filter(id=>placement.services[id]).length;
