@@ -12,7 +12,7 @@ const paths=[
  '<path d="M25 12v24c10 0 17-4 17-12S35 12 25 12zM6 14h12M3 21h15M3 28h15M6 35h12"/>',
  '<rect x="5" y="8" width="38" height="29" rx="3"/><path d="M16 43h16m-8-6v6M10 25h7l4-9 6 17 4-10h7"/>'
 ];
-export const serviceIcon=i=>`<svg aria-hidden="true" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${paths[i]}</svg>`;
+export const serviceIcon=i=>`<svg class="service-icon" aria-hidden="true" focusable="false" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><g class="icon-depth" transform="translate(0 1.4)">${paths[i]}</g><g class="icon-face">${paths[i]}</g></svg>`;
 export function heroTitle(title,focus){const at=title.indexOf(focus);return at<0?title:title.slice(0,at)+`<span class="hero-highlight">${focus}</span>`+title.slice(at+focus.length);}
 export function bookingStrip(v){return `<a class="booking-strip" href="#booking"><span class="strip-icon" aria-hidden="true">${serviceIcon(0)}</span><span><strong>${v.stripTitle}</strong><small>${v.stripNote}</small></span><span class="strip-arrow" aria-hidden="true">↗</span></a>`;}
 

@@ -1,4 +1,8 @@
 const drawings={
+ 'arrow-left':'<path d="M19 12H5m6-6-6 6 6 6"/>',
+ 'chevron-left':'<path d="m15 5-7 7 7 7"/>','chevron-right':'<path d="m9 5 7 7-7 7"/>',
+ 'chevron-down':'<path d="m5 9 7 7 7-7"/>',plus:'<path d="M12 5v14M5 12h14"/>',minus:'<path d="M5 12h14"/>',
+ expand:'<path d="M8 3H3v5m13-5h5v5M3 16v5h5m8 0h5v-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/>',
  wrench:'<path d="M14 6a5 5 0 0 0-6 6L2 18a2.8 2.8 0 0 0 4 4l6-6a5 5 0 0 0 6-6l-3 3-4-4 3-3Z"/>',
  user:'<circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/>',
  menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',close:'<path d="m6 6 12 12M6 18 18 6"/>',
@@ -17,4 +21,4 @@ const drawings={
  brake:'<circle cx="11" cy="12" r="8"/><circle cx="11" cy="12" r="2"/><path d="M16 4h5v10h-4M7 8h.01M7 16h.01M14 7h.01M14 17h.01"/>',
  headlight:'<path d="M12 5v14c6 0 9-3 9-7s-3-7-9-7ZM2 6h6M1 10h7m-7 4h7m-6 4h6"/>'
 };
-export const uiIcon=name=>`<svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${drawings[name]||drawings.arrow}</svg>`;
+export const uiIcon=name=>{const key=Object.hasOwn(drawings,name)?name:'arrow',drawing=drawings[key];return `<svg class="ui-icon" data-icon="${key}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><g class="icon-depth" transform="translate(0 1.1)">${drawing}</g><g class="icon-face">${drawing}</g></svg>`;};

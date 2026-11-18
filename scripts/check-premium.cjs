@@ -45,10 +45,14 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    assert.equal(await page.locator('.photo-gallery .zoom:visible').count(),6);assert.equal(await page.locator('.photo-gallery .zoom').count(),20);
    assert.equal(await page.locator('main a[href*="/account/"]:visible').count(),2);
    assert.equal(await page.locator('.booking-strip').count(),0);
+   assert.equal(await page.locator('.hero .slider-prev [data-icon="chevron-left"],.hero .slider-next [data-icon="chevron-right"]').count(),2);
+   assert.equal(await page.locator('#services .card-top .service-icon .icon-depth').count(),6);
+   assert.equal(await page.locator('#services .card-link').first().evaluate(e=>parseFloat(getComputedStyle(e).borderTopWidth)>=1&&getComputedStyle(e).boxShadow!=='none'),true);
    assert.equal(await page.locator('.equipment-list>li').count(),8);
    assert.equal(await page.locator('.general-workshop-card a').count(),0);
    for(const theme of ['light','dark']){
     await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+    assert.ok(['rgb(245, 248, 242)','rgb(162, 255, 38)'].includes(await page.locator('.hero .slider-prev').evaluate(e=>getComputedStyle(e).color)));
     const overflow=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,offenders:[...document.querySelectorAll('body *')].filter(el=>{const r=el.getBoundingClientRect();return r.width>0&&r.right>innerWidth+1&&!el.closest('.slides,.site-menu,.lightbox');}).map(el=>({tag:el.tagName,class:el.className,id:el.id,right:el.getBoundingClientRect().right})).slice(0,12)}));
     assert.ok(overflow.scroll<=overflow.width,lang+' '+width+' '+theme+' '+JSON.stringify(overflow));
     const readability=await page.evaluate(()=>{
@@ -76,7 +80,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
      await page.locator('#services').screenshot({path:'artifacts/premium-tiles-'+width+'-'+theme+'.png'});
     }
    }
-   if([390,1440].includes(width))for(const kind of ['posts','photos']){
+   if([320,390,1440].includes(width))for(const kind of ['posts','photos']){
     const more=page.locator('[data-reference-more="'+kind+'"]'),summary=more.locator('summary');
     assert.equal(await more.evaluate(e=>e.open),false);
     await summary.focus();await page.keyboard.press('Enter');assert.equal(await more.evaluate(e=>e.open),true);
@@ -84,6 +88,13 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
     if(kind==='photos'){
      const photo=more.locator('.zoom').first();await photo.click();assert.equal(await page.locator('.lightbox').evaluate(e=>e.open),true);
+     const before=await page.locator('.lightbox-count').innerText();await page.locator('.lightbox-next').click();assert.notEqual(await page.locator('.lightbox-count').innerText(),before);await page.locator('.lightbox-prev').click();assert.equal(await page.locator('.lightbox-count').innerText(),before);
+     for(const theme of ['light','dark']){
+      await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+      assert.ok(['rgb(245, 248, 242)','rgb(162, 255, 38)'].includes(await page.locator('.lightbox-prev').evaluate(e=>getComputedStyle(e).color)));
+      assert.equal(await page.locator('.lightbox-prev [data-icon="chevron-left"] .icon-depth').count(),1);
+      if(width<=700){const positions=await page.locator('.lightbox').evaluate(e=>({caption:e.querySelector('figcaption').getBoundingClientRect().bottom,controls:e.querySelector('.lightbox-prev').getBoundingClientRect().top}));assert.ok(positions.caption<=positions.controls-4,JSON.stringify(positions));}
+     }
      assert.ok(await page.locator('.lightbox-caption').innerText());await page.keyboard.press('Escape');assert.equal(await photo.evaluate(e=>e===document.activeElement),true);
      assert.ok((await more.locator('li>p span').first().innerText()).startsWith('07'));
     }
@@ -91,6 +102,8 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    }
    await page.goto('http://127.0.0.1:4188/nvs-website/'+lang+'/account/');
    assert.equal(await page.locator('#native-login').count(),1);assert.equal(await page.locator('#register a').getAttribute('href'),'https://vadzsolty-cloud.github.io/nvs-app-letoltes/app/');
+   assert.equal(await page.locator('.back [data-icon="arrow-left"] .icon-depth').count(),1);
+   assert.equal(await page.locator('.back').evaluate(e=>parseFloat(getComputedStyle(e).borderTopWidth)>=1&&getComputedStyle(e).boxShadow!=='none'),true);
    assert.equal(await page.locator('.languages a[lang=en]').getAttribute('href'),'/nvs-website/en/account/');
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
    assert.equal(await page.locator('.copyright').count(),1);
