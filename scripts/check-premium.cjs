@@ -149,6 +149,8 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
   const noScript=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:950}});
   await noScript.route('**/*',r=>new URL(r.request().url()).origin==='http://127.0.0.1:4188'?r.continue():r.abort());
   const plain=await noScript.newPage();await plain.goto('http://127.0.0.1:4188/nvs-website/hu/');
+  assert.equal(await plain.locator('.consent-panel').evaluate(e=>getComputedStyle(e).position),'static');
+  assert.equal(await plain.locator('.consent-actions').isVisible(),false);assert.equal(await plain.locator('iframe[src]').count(),0);
   assert.equal(await plain.locator('.fb-card:visible').count(),3);assert.equal(await plain.locator('.photo-gallery .zoom:visible').count(),6);
   for(const kind of ['posts','photos']){await plain.locator('[data-reference-more="'+kind+'"]>summary').click();assert.equal(await plain.locator('[data-reference-more="'+kind+'"]').evaluate(e=>e.open),true);}
   assert.equal(await plain.locator('.fb-card:visible').count(),9);assert.equal(await plain.locator('.photo-gallery .zoom:visible').count(),20);await noScript.close();

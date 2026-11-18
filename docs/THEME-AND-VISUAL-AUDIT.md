@@ -18,6 +18,8 @@ A felmérés utáni tulajdonosi jóváhagyás alapján az első három javaslat 
 
 Az alábbi táblázat az eredeti megfigyelést és javaslatot őrzi. Az előnézeti jelzés felülvizsgálata továbbra is a végleges induláshoz és indexeléshez kötött; a mostani vizuális javítás ezt nem változtatja meg.
 
+A JavaScript nélküli ellenőrzés egy meglévő akadályt is feltárt: az adatvédelmi panel ilyenkor nem zárható be, és a rögzített elhelyezése takarta a tartalmat. A `noscript` megjelenítésben ezért a tájékoztató az oldal normál folyamában jelenik meg, a JavaScriptet igénylő választógombok nélkül. A külső tartalmak engedély nélkül továbbra sem töltődnek be; a normál, JavaScriptes hozzájárulási működés változatlan.
+
 | Megfigyelés | Javaslat |
 | --- | --- |
 | A főoldal tartalmában 4 látható időpontkérési útvonal van: hero gomb, kiemelt sáv, általános műhelykártya és az alsó ügyfélkapu. Ezen felül elérhető a közös fejléc/lábléc. | A hero és az alsó ügyfélkapu maradjon; a középső sáv és a műhelykártya ismétlődő felhívása egyszerűsíthető. |
