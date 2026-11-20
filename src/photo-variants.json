@@ -519,5 +519,55 @@
    540,
    720
   ]
+ },
+ "hunter-volvo-front-close": {
+  "original": "1000141191.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
+ },
+ "hunter-volvo-hunter-station": {
+  "original": "1000141185.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
+ },
+ "hunter-volvo-front-left-target": {
+  "original": "1000141197.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
+ },
+ "hunter-volvo-front-right-target": {
+  "original": "1000141200.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
+ },
+ "hunter-volvo-front-overview": {
+  "original": "1000141188.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
  }
 }

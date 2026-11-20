@@ -1041,6 +1041,111 @@
     "ro": "Stație MAHLE TechPRO Digital ADAS cu țintă Night Vision și tabletă de diagnoză",
     "en": "MAHLE TechPRO Digital ADAS station with a Night Vision target and diagnostic tablet"
    }
+  },
+  {
+   "slug": "hunter-volvo-front-close",
+   "original": "1000141191.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Kék Volvo elölnézetből a futóműállító emelőn az NVS műhelyében",
+    "ro": "Volvo albastru văzut din față pe elevatorul de geometrie în atelierul NVS",
+    "en": "Front view of a blue Volvo on the alignment lift in the NVS workshop"
+   }
+  },
+  {
+   "slug": "hunter-volvo-hunter-station",
+   "original": "1000141185.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Hunter futóműmérő állomás egy kék Volvo mellett, kerékre szerelt mérőfejjel",
+    "ro": "Stație Hunter de geometrie lângă un Volvo albastru, cu un cap de măsurare montat pe roată",
+    "en": "Hunter alignment station beside a blue Volvo with a wheel-mounted measuring head"
+   }
+  },
+  {
+   "slug": "hunter-volvo-front-left-target",
+   "original": "1000141197.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Kék Volvo futóműmérés közben, a bal első kerékre szerelt Hunter mérőfejjel",
+    "ro": "Volvo albastru în timpul măsurării geometriei, cu un cap Hunter pe roata din stânga față",
+    "en": "Blue Volvo during wheel alignment measurement with a Hunter target on the front left wheel"
+   }
+  },
+  {
+   "slug": "hunter-volvo-front-right-target",
+   "original": "1000141200.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Kék Volvo a futóműállító emelőn, a jobb első kerékre szerelt mérőfejjel",
+    "ro": "Volvo albastru pe elevatorul de geometrie, cu un cap de măsurare pe roata din dreapta față",
+    "en": "Blue Volvo on the alignment lift with a measuring head on the front right wheel"
+   }
+  },
+  {
+   "slug": "hunter-volvo-front-overview",
+   "original": "1000141188.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Kék Volvo és a kerékre szerelt mérőfejek a futóműállító emelőn, tágabb elölnézetből",
+    "ro": "Volvo albastru cu capete de măsurare pe roți pe elevatorul de geometrie, vedere frontală de ansamblu",
+    "en": "Wider front view of a blue Volvo and wheel-mounted targets on the alignment lift"
+   }
   }
  ],
  "placement": {
@@ -1096,6 +1201,11 @@
     "hunter-audi-on-alignment-lift",
     "hunter-audi-wheel-target-closeup",
     "hunter-audi-side-alignment",
+    "hunter-volvo-front-close",
+    "hunter-volvo-hunter-station",
+    "hunter-volvo-front-left-target",
+    "hunter-volvo-front-right-target",
+    "hunter-volvo-front-overview",
     "hunter-alignment-lift",
     "hunter-alignment-wheel",
     "hunter-alignment-screens",

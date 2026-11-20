@@ -159,7 +159,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    assert.equal(await page.locator('.site-header .account-link').count(),1);assert.equal(await page.locator('.footer-apps a[href*="/account/"]').count(),1);
    await page.locator('.education-faq summary').first().click();assert.equal(await page.locator('.education-faq details').first().evaluate(el=>el.open),true);
    assert.equal(await page.locator('.education-faq details').first().locator('p').isVisible(),true);
-   for(const width of [320,768,1440])for(const theme of ['light','dark']){
+   for(const width of [320,768,1280,1440])for(const theme of ['light','dark']){
     await page.setViewportSize({width,height:950});await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,lang+' '+id+' '+width+' '+theme);
     if(lang==='hu'&&width===1440&&theme==='dark')await page.locator('#service-guide').screenshot({path:'artifacts/service-guide-'+id+'.png'});
