@@ -170,7 +170,8 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    await motion.keyboard.press('Tab');await social.focus();assert.equal(await social.evaluate(el=>el.matches(':focus-visible')),true);
    await motion.waitForFunction(()=>getComputedStyle(document.querySelector('.facebook-link')).color==='rgb(24, 119, 242)');
    await social.evaluate(el=>el.blur());
-   for(const selector of ['#services .service-card','.service-slider','.equipment-list li','.fb-card','.photo-gallery .zoom','.portal-entry','[data-reference-more]>summary'])await lifted(selector);
+   for(const selector of ['#services .service-card','.service-slider','.fb-card','.photo-gallery .zoom','.portal-entry','[data-reference-more]>summary'])await lifted(selector);
+   await motion.locator('.equipment-card>summary').first().hover();assert.equal(await motion.locator('.equipment-list>li').first().evaluate(e=>getComputedStyle(e).transform),'none');await motion.waitForFunction(()=>getComputedStyle(document.querySelector('.equipment-list>li')).boxShadow!=='none');
    await motion.emulateMedia({reducedMotion:'reduce'});
    for(const selector of ['#services .service-card','.fb-card','.facebook-link']){await motion.locator(selector).first().hover();assert.equal(await motion.locator(selector).first().evaluate(el=>getComputedStyle(el).transform),'none');}
    await motion.emulateMedia({reducedMotion:'no-preference'});

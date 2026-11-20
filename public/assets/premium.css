@@ -262,7 +262,8 @@ html[data-theme] .lightbox button:not(:hover):not(:focus-visible){color:#f5f8f2}
 @media(max-width:700px){.lightbox{padding:16px 0 82px}.lightbox img{max-height:calc(100dvh - 250px)}.lightbox figcaption{padding:10px 12px;max-width:90vw;font-size:12px}}
 
 /* Equal workshop cards with native, keyboard-accessible explanations. */
-.equipment-list{align-items:start}.equipment-list>li{display:block;padding:0;border-radius:15px}
+/* Keep native accordion targets stationary while opening and focusing. */
+.equipment-list{align-items:start}.equipment-list>li{display:block;padding:0;border-radius:15px;transform:none!important}
 .equipment-card{border-radius:inherit}.equipment-card>summary{display:grid;grid-template-columns:48px minmax(0,1fr) 32px;align-items:start;gap:16px;min-height:72px;padding:24px;list-style:none;cursor:pointer;border-radius:inherit}
 .equipment-card>summary::-webkit-details-marker{display:none}.equipment-card>summary::marker{content:''}.equipment-card>summary:focus-visible{outline:3px solid var(--green);outline-offset:-3px}
 .equipment-summary-copy{min-width:0}.equipment-name{display:block;font-size:19px;font-weight:600;line-height:1.45;margin-bottom:10px;color:var(--white);overflow-wrap:anywhere}.equipment-teaser{display:block;font-size:16px;line-height:1.7;color:var(--muted)}
