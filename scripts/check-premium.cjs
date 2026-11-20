@@ -116,10 +116,14 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
       assert.equal(await page.locator('.lightbox-prev [data-icon="chevron-left"] .icon-depth').count(),1);
       if(width<=700){const positions=await page.locator('.lightbox').evaluate(e=>({caption:e.querySelector('figcaption').getBoundingClientRect().bottom,controls:e.querySelector('.lightbox-prev').getBoundingClientRect().top}));assert.ok(positions.caption<=positions.controls-4,JSON.stringify(positions));}
      }
-     assert.ok(await page.locator('.lightbox-caption').innerText());await page.keyboard.press('Escape');assert.equal(await photo.evaluate(e=>e===document.activeElement),true);
+     assert.ok(await page.locator('.lightbox-caption').innerText());
+     // Native dialog close restores focus in a queued event; await its handler before the next keypress.
+     await page.evaluate(()=>{window.__nvsTestDialogClosed=new Promise(resolve=>document.querySelector('.lightbox').addEventListener('close',()=>resolve(true),{once:true}));});
+     await page.keyboard.press('Escape');await page.evaluate(()=>window.__nvsTestDialogClosed);await page.evaluate(()=>{delete window.__nvsTestDialogClosed;});
+     assert.equal(await photo.evaluate(e=>e===document.activeElement),true);
      assert.ok((await more.locator('li>p span').first().innerText()).startsWith('07'));
     }
-    await summary.focus();await page.keyboard.press('Space');assert.equal(await more.evaluate(e=>e.open),false);
+    await summary.press('Space');await page.waitForFunction(kind=>!document.querySelector('[data-reference-more="'+kind+'"]').open,kind);assert.equal(await more.evaluate(e=>e.open),false);
    }
    await page.goto('http://127.0.0.1:4188/nvs-website/'+lang+'/account/');
    assert.equal(await page.locator('#native-login').count(),1);assert.equal(await page.locator('#register a').getAttribute('href'),'https://vadzsolty-cloud.github.io/nvs-app-letoltes/app/');
