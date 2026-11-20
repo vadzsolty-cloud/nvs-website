@@ -569,5 +569,55 @@
    540,
    720
   ]
+ },
+ "hunter-volvo-rear-target-station": {
+  "original": "1000141194.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
+ },
+ "hunter-bmw-steering-wheel-clamp": {
+  "original": "1000141224.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
+ },
+ "hunter-bmw-rear-on-alignment-lift": {
+  "original": "1000141221.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
+ },
+ "hunter-bmw-front-wheel-target": {
+  "original": "1000141218.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
+ },
+ "hunter-bmw-side-hunter-station": {
+  "original": "1000141215.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
  }
 }

@@ -1146,6 +1146,111 @@
     "ro": "Volvo albastru cu capete de măsurare pe roți pe elevatorul de geometrie, vedere frontală de ansamblu",
     "en": "Wider front view of a blue Volvo and wheel-mounted targets on the alignment lift"
    }
+  },
+  {
+   "slug": "hunter-volvo-rear-target-station",
+   "original": "1000141194.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Hunter futóműmérő állomás és a kék Volvo hátsó kerekére szerelt mérőfej",
+    "ro": "Stație Hunter de geometrie și cap de măsurare montat pe roata din spate a unui Volvo albastru",
+    "en": "Hunter alignment station and a measuring head mounted on the rear wheel of a blue Volvo"
+   }
+  },
+  {
+   "slug": "hunter-bmw-steering-wheel-clamp",
+   "original": "1000141224.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Fehér BMW utastere kormányrögzítővel a futóműállítás előkészítése során",
+    "ro": "Habitaclul unui BMW alb cu dispozitiv de blocare a volanului în timpul pregătirii geometriei",
+    "en": "Interior of a white BMW with a steering wheel clamp during preparation for wheel alignment"
+   }
+  },
+  {
+   "slug": "hunter-bmw-rear-on-alignment-lift",
+   "original": "1000141221.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Fehér BMW hátulról a futóműállító emelőn az NVS műhelyében",
+    "ro": "BMW alb văzut din spate pe elevatorul de geometrie în atelierul NVS",
+    "en": "Rear view of a white BMW on the alignment lift in the NVS workshop"
+   }
+  },
+  {
+   "slug": "hunter-bmw-front-wheel-target",
+   "original": "1000141218.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Fehér BMW a futóműállító emelőn, az első kerékre szerelt Hunter mérőfejjel",
+    "ro": "BMW alb pe elevatorul de geometrie, cu un cap de măsurare Hunter montat pe roata din față",
+    "en": "White BMW on the alignment lift with a Hunter measuring head mounted on the front wheel"
+   }
+  },
+  {
+   "slug": "hunter-bmw-side-hunter-station",
+   "original": "1000141215.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Fehér BMW oldalnézetből, kerékre szerelt mérőfejekkel a Hunter állomás mellett",
+    "ro": "BMW alb văzut din lateral, cu capete de măsurare pe roți lângă stația Hunter",
+    "en": "Side view of a white BMW with wheel-mounted measuring heads beside the Hunter station"
+   }
   }
  ],
  "placement": {
@@ -1206,6 +1311,11 @@
     "hunter-volvo-front-left-target",
     "hunter-volvo-front-right-target",
     "hunter-volvo-front-overview",
+    "hunter-volvo-rear-target-station",
+    "hunter-bmw-steering-wheel-clamp",
+    "hunter-bmw-rear-on-alignment-lift",
+    "hunter-bmw-front-wheel-target",
+    "hunter-bmw-side-hunter-station",
     "hunter-alignment-lift",
     "hunter-alignment-wheel",
     "hunter-alignment-screens",
