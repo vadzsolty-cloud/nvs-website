@@ -339,5 +339,55 @@
    1600,
    2048
   ]
+ },
+ "hunter-audi-front-wheel": {
+  "original": "1000141131.jpg",
+  "width": 1280,
+  "height": 720,
+  "widths": [
+   640,
+   960,
+   1280
+  ]
+ },
+ "hunter-audi-front-three-quarter": {
+  "original": "1000141128.jpg",
+  "width": 1280,
+  "height": 720,
+  "widths": [
+   640,
+   960,
+   1280
+  ]
+ },
+ "hunter-audi-on-alignment-lift": {
+  "original": "1000141126.jpg",
+  "width": 1280,
+  "height": 720,
+  "widths": [
+   640,
+   960,
+   1280
+  ]
+ },
+ "hunter-audi-wheel-target-closeup": {
+  "original": "1000141129.jpg",
+  "width": 1280,
+  "height": 720,
+  "widths": [
+   640,
+   960,
+   1280
+  ]
+ },
+ "hunter-audi-side-alignment": {
+  "original": "1000141130.jpg",
+  "width": 1280,
+  "height": 720,
+  "widths": [
+   640,
+   960,
+   1280
+  ]
  }
 }

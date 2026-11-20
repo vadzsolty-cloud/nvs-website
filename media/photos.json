@@ -676,6 +676,106 @@
     "ro": "Reglarea unui far LED cu echipament de măsurare, cu capota deschisă",
     "en": "Adjusting an LED headlight with aiming equipment, bonnet open"
    }
+  },
+  {
+   "slug": "hunter-audi-front-wheel",
+   "original": "1000141131.jpg",
+   "widths": [
+    640,
+    960,
+    1280
+   ],
+   "position": "80% 45%",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Bézs Audi az NVS futóműállító padján, az első kerékre szerelt Hunter 3D mérőtáblával",
+    "ro": "Audi bej pe standul de geometrie NVS, cu țintă Hunter 3D montată pe roata din față",
+    "en": "Beige Audi on the NVS wheel alignment rack with a Hunter 3D target on the front wheel"
+   }
+  },
+  {
+   "slug": "hunter-audi-front-three-quarter",
+   "original": "1000141128.jpg",
+   "widths": [
+    640,
+    960,
+    1280
+   ],
+   "position": "58% 50%",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Bézs Audi elölről és oldalról, a kerekekre szerelt Hunter 3D mérőtáblákkal a műhelyben",
+    "ro": "Audi bej văzut din față și lateral, cu ținte Hunter 3D montate pe roți în atelier",
+    "en": "Front three-quarter view of a beige Audi with Hunter 3D alignment targets attached to its wheels in the workshop"
+   }
+  },
+  {
+   "slug": "hunter-audi-on-alignment-lift",
+   "original": "1000141126.jpg",
+   "widths": [
+    640,
+    960,
+    1280
+   ],
+   "position": "55% 50%",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Emelőn álló bézs Audi Hunter 3D futóműmérés közben, több kerékre szerelt mérőtáblával",
+    "ro": "Audi bej pe elevator în timpul măsurării geometriei Hunter 3D, cu ținte montate pe mai multe roți",
+    "en": "Beige Audi on the alignment lift during Hunter 3D measurement with targets attached to multiple wheels"
+   }
+  },
+  {
+   "slug": "hunter-audi-wheel-target-closeup",
+   "original": "1000141129.jpg",
+   "widths": [
+    640,
+    960,
+    1280
+   ],
+   "position": "68% 50%",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Kerékre szerelt Hunter 3D mérőtábla közelről, háttérben a futóműmérés képernyője",
+    "ro": "Detaliu al țintei Hunter 3D montate pe roată, cu ecranul de măsurare a geometriei în fundal",
+    "en": "Close-up of a Hunter 3D wheel-mounted target with the wheel alignment measurement screen in the background"
+   }
+  },
+  {
+   "slug": "hunter-audi-side-alignment",
+   "original": "1000141130.jpg",
+   "widths": [
+    640,
+    960,
+    1280
+   ],
+   "position": "60% 50%",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Bézs Audi a futóműállító padon, oldalról látható mérőtáblákkal és műhelyemelőkkel",
+    "ro": "Audi bej pe standul de geometrie, cu ținte de măsurare vizibile lateral și elevatoare în atelier",
+    "en": "Beige Audi on the wheel alignment rack with side-view measurement targets and workshop lifts"
+   }
   }
  ],
  "placement": {
@@ -685,7 +785,7 @@
    "acc": "acc-radar-calibration-screen",
    "adas": "adas-calibration-target",
    "led-matrix": "headlight-adjustment",
-   "hunter-3d": "hunter-alignment-lift",
+   "hunter-3d": "hunter-audi-front-wheel",
    "camera": "camera-calibration-target",
    "diagnostics": "diagnostics-laptop"
   },
@@ -725,6 +825,11 @@
     "adas-station-van"
    ],
    "hunter-3d": [
+    "hunter-audi-front-wheel",
+    "hunter-audi-front-three-quarter",
+    "hunter-audi-on-alignment-lift",
+    "hunter-audi-wheel-target-closeup",
+    "hunter-audi-side-alignment",
     "hunter-alignment-lift",
     "hunter-alignment-wheel",
     "hunter-alignment-screens",

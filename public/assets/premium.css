@@ -272,3 +272,6 @@ html[data-theme] .lightbox button:not(:hover):not(:focus-visible){color:#f5f8f2}
 .equipment-explanation{margin:0 24px;padding:20px 0 24px;border-top:1px solid var(--line)}.equipment-explanation p{font-size:16px;line-height:1.75;margin:0 0 14px;color:var(--muted)}.equipment-explanation p:last-child{margin-bottom:0}.equipment-explanation strong{font-weight:600;color:var(--white)}
 .workshop-equipment .equipment-hint{font-size:14px;line-height:1.6;color:var(--muted);margin-top:10px}
 @media(max-width:700px){.equipment-card>summary{grid-template-columns:44px minmax(0,1fr) 30px;padding:20px 16px;gap:12px}.equipment-card .equipment-number{width:44px;height:44px;flex-basis:44px;padding:7px}.equipment-toggle{width:30px;height:30px}.equipment-name{font-size:18px}.equipment-explanation{margin:0 16px;padding-bottom:20px}}
+
+/* Keep the controls readable when a service has a larger photo collection. */
+@media(max-width:700px){.photo-slider[data-many-photos] .slider-controls{flex-wrap:wrap;justify-content:center}.photo-slider[data-many-photos] .slider-controls>.slider-dots{order:0;flex-basis:100%;justify-content:center;flex-wrap:wrap;row-gap:4px}.photo-slider[data-many-photos] .slider-controls>button{order:1}}
