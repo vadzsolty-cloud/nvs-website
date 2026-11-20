@@ -836,13 +836,33 @@
     "ro": "Verificarea farurilor din unghi: compartimentul motor Audi deschis, linii laser verzi și echipamentul de măsurare",
     "en": "Angled view of headlight testing showing an open Audi engine bay, green laser lines and measuring equipment"
    }
+  },
+  {
+   "slug": "acc-radar-workshop-overview",
+   "original": "1000141145.jpg",
+   "widths": [
+    640,
+    960,
+    1280
+   ],
+   "position": "50% 50%",
+   "tag": {
+    "hu": "ACC radar",
+    "ro": "Radar ACC",
+    "en": "ACC radar"
+   },
+   "alt": {
+    "hu": "MAHLE kalibrálókijelző és kerékre szerelt mérőfej egy fekete jármű mellett az NVS műhelyében",
+    "ro": "Ecran de calibrare MAHLE și cap de măsurare montat pe roată, lângă un vehicul negru în atelierul NVS",
+    "en": "MAHLE calibration screen and wheel-mounted measuring head beside a black vehicle in the NVS workshop"
+   }
   }
  ],
  "placement": {
   "hero": "headlight-audi-laser-overview",
   "workshop": "adas-calibration-target",
   "services": {
-   "acc": "acc-radar-calibration-screen",
+   "acc": "acc-radar-workshop-overview",
    "adas": "adas-calibration-target",
    "led-matrix": "headlight-audi-laser-overview",
    "hunter-3d": "hunter-audi-front-wheel",
@@ -873,6 +893,7 @@
   ],
   "serviceSlides": {
    "acc": [
+    "acc-radar-workshop-overview",
     "acc-radar-calibration-screen",
     "acc-radar-reflector",
     "diagnostics-tablet-in-car"
