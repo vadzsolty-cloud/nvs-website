@@ -936,6 +936,111 @@
     "ro": "Nissan roșu văzut din partea opusă, cu un cap de măsurare pentru calibrare pe roata din dreapta față, în atelier",
     "en": "Red Nissan from the opposite side with a calibration measuring head on the front right wheel in the workshop"
    }
+  },
+  {
+   "slug": "night-vision-audi-instrument-display",
+   "original": "1000141170.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Night Vision",
+    "ro": "Night Vision",
+    "en": "Night Vision"
+   },
+   "alt": {
+    "hu": "Night Vision kalibrálási célkép egy Audi műszeregységének kijelzőjén",
+    "ro": "Imaginea țintei de calibrare Night Vision pe afișajul instrumentelor unui Audi",
+    "en": "Night Vision calibration target image on an Audi instrument cluster display"
+   }
+  },
+  {
+   "slug": "night-vision-audi-calibration-setup",
+   "original": "1000141167.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Night Vision",
+    "ro": "Night Vision",
+    "en": "Night Vision"
+   },
+   "alt": {
+    "hu": "Fehér Audi Night Vision kalibrálás közben, MAHLE kijelzővel és kerékre szerelt mérőfejjel",
+    "ro": "Audi alb în timpul calibrării Night Vision, cu ecran MAHLE și cap de măsurare pe roată",
+    "en": "White Audi during Night Vision calibration with a MAHLE screen and wheel-mounted measuring head"
+   }
+  },
+  {
+   "slug": "night-vision-audi-display-side",
+   "original": "1000141164.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Night Vision",
+    "ro": "Night Vision",
+    "en": "Night Vision"
+   },
+   "alt": {
+    "hu": "Az Audi Night Vision kalibrálási képe a műszeregységen, oldalról nézve",
+    "ro": "Imaginea de calibrare Night Vision pe instrumentele Audi, văzută din lateral",
+    "en": "Side view of the Night Vision calibration image on an Audi instrument display"
+   }
+  },
+  {
+   "slug": "night-vision-audi-diagnostic-interior",
+   "original": "1000141173.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Night Vision",
+    "ro": "Night Vision",
+    "en": "Night Vision"
+   },
+   "alt": {
+    "hu": "Audi utastér diagnosztikai laptoppal és védőfóliás kormánnyal a Night Vision ellenőrzés során",
+    "ro": "Habitaclu Audi cu laptop de diagnoză și volan protejat în timpul verificării Night Vision",
+    "en": "Audi interior with a diagnostic laptop and protected steering wheel during a Night Vision check"
+   }
+  },
+  {
+   "slug": "night-vision-mahle-calibration-target",
+   "original": "1000141176.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Night Vision",
+    "ro": "Night Vision",
+    "en": "Night Vision"
+   },
+   "alt": {
+    "hu": "MAHLE TechPRO Digital ADAS állomás Night Vision céltáblával és diagnosztikai tablettel",
+    "ro": "Stație MAHLE TechPRO Digital ADAS cu țintă Night Vision și tabletă de diagnoză",
+    "en": "MAHLE TechPRO Digital ADAS station with a Night Vision target and diagnostic tablet"
+   }
   }
  ],
  "placement": {
@@ -999,6 +1104,11 @@
    ],
    "camera": [
     "camera-calibration-target",
+    "night-vision-audi-instrument-display",
+    "night-vision-audi-calibration-setup",
+    "night-vision-audi-display-side",
+    "night-vision-audi-diagnostic-interior",
+    "night-vision-mahle-calibration-target",
     "camera-nissan-target-front",
     "camera-nissan-target-side",
     "camera-nissan-measuring-heads-left",
