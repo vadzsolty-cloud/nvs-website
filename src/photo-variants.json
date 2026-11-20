@@ -429,5 +429,45 @@
    960,
    1280
   ]
+ },
+ "camera-nissan-target-front": {
+  "original": "1000141148.jpg",
+  "width": 1280,
+  "height": 720,
+  "widths": [
+   640,
+   960,
+   1280
+  ]
+ },
+ "camera-nissan-target-side": {
+  "original": "1000141157.jpg",
+  "width": 1280,
+  "height": 720,
+  "widths": [
+   640,
+   960,
+   1280
+  ]
+ },
+ "camera-nissan-measuring-heads-left": {
+  "original": "1000141151.jpg",
+  "width": 1280,
+  "height": 720,
+  "widths": [
+   640,
+   960,
+   1280
+  ]
+ },
+ "camera-nissan-measuring-heads-right": {
+  "original": "1000141154.jpg",
+  "width": 1280,
+  "height": 720,
+  "widths": [
+   640,
+   960,
+   1280
+  ]
  }
 }

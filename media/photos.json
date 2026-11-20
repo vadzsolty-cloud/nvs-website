@@ -856,6 +856,86 @@
     "ro": "Ecran de calibrare MAHLE și cap de măsurare montat pe roată, lângă un vehicul negru în atelierul NVS",
     "en": "MAHLE calibration screen and wheel-mounted measuring head beside a black vehicle in the NVS workshop"
    }
+  },
+  {
+   "slug": "camera-nissan-target-front",
+   "original": "1000141148.jpg",
+   "widths": [
+    640,
+    960,
+    1280
+   ],
+   "position": "50% 45%",
+   "tag": {
+    "hu": "Kamera",
+    "ro": "Cameră",
+    "en": "Camera"
+   },
+   "alt": {
+    "hu": "MAHLE TechPRO Digital ADAS kamerakalibráló kijelző egy piros Nissan előtt a műhelyben",
+    "ro": "Ecran MAHLE TechPRO Digital ADAS pentru calibrarea camerei în fața unui Nissan roșu, în atelier",
+    "en": "MAHLE TechPRO Digital ADAS camera calibration screen in front of a red Nissan in the workshop"
+   }
+  },
+  {
+   "slug": "camera-nissan-target-side",
+   "original": "1000141157.jpg",
+   "widths": [
+    640,
+    960,
+    1280
+   ],
+   "position": "50% 50%",
+   "tag": {
+    "hu": "Kamera",
+    "ro": "Cameră",
+    "en": "Camera"
+   },
+   "alt": {
+    "hu": "Piros Nissan a kamerakalibráló kijelző mellett, kerékre szerelt mérőfejjel és diagnosztikai tablettel",
+    "ro": "Nissan roșu lângă ecranul de calibrare a camerei, cu un cap de măsurare pe roată și o tabletă de diagnoză",
+    "en": "Red Nissan beside the camera calibration screen with a wheel-mounted measuring head and diagnostic tablet"
+   }
+  },
+  {
+   "slug": "camera-nissan-measuring-heads-left",
+   "original": "1000141151.jpg",
+   "widths": [
+    640,
+    960,
+    1280
+   ],
+   "position": "50% 50%",
+   "tag": {
+    "hu": "Kamera",
+    "ro": "Cameră",
+    "en": "Camera"
+   },
+   "alt": {
+    "hu": "Piros Nissan elölnézetből, a bal első kerékre szerelt kalibrálási mérőfejjel az NVS műhelyében",
+    "ro": "Nissan roșu văzut din față, cu un cap de măsurare pentru calibrare pe roata din stânga față, în atelierul NVS",
+    "en": "Front view of a red Nissan with a calibration measuring head on the front left wheel in the NVS workshop"
+   }
+  },
+  {
+   "slug": "camera-nissan-measuring-heads-right",
+   "original": "1000141154.jpg",
+   "widths": [
+    640,
+    960,
+    1280
+   ],
+   "position": "50% 50%",
+   "tag": {
+    "hu": "Kamera",
+    "ro": "Cameră",
+    "en": "Camera"
+   },
+   "alt": {
+    "hu": "Piros Nissan a másik oldalról, a jobb első kerékre szerelt kalibrálási mérőfejjel a műhelyben",
+    "ro": "Nissan roșu văzut din partea opusă, cu un cap de măsurare pentru calibrare pe roata din dreapta față, în atelier",
+    "en": "Red Nissan from the opposite side with a calibration measuring head on the front right wheel in the workshop"
+   }
   }
  ],
  "placement": {
@@ -919,6 +999,10 @@
    ],
    "camera": [
     "camera-calibration-target",
+    "camera-nissan-target-front",
+    "camera-nissan-target-side",
+    "camera-nissan-measuring-heads-left",
+    "camera-nissan-measuring-heads-right",
     "camera-target-angle",
     "camera-calibration-target-front",
     "camera-target-portrait",
