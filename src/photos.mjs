@@ -26,4 +26,4 @@ export const galleryCopy={
  en:{open:'Enlarge image',dialog:'Image viewer',close:'Close',prev:'Previous image',next:'Next image',of:'/',hint:'Select a photo to enlarge it. Works with arrow keys, Esc and swiping on mobile.',source:'Real NVS workshop photo · taken by the owner',workshopCaption:alt(placement.workshop,'en'),servicePhoto:'Real photo from this kind of work',placeholder:'There is no approved, real workshop photo for this service yet.',placeholderTitle:'Photo coming soon',categories:'Calibration, headlight aiming and gearbox repair – photos of our own work.'}
 };
 // Focus points live in a generated stylesheet (no inline styles, so a strict style-src 'self' CSP keeps working).
-export const photoCss=()=>Object.values(photos).map(p=>`.ph-${p.slug} img{object-position:${p.position}}`).join('\n')+'\n';
+export const photoCss=()=>Object.values(photos).map(p=>`.ph-${p.slug} img{object-position:${p.position}${p.fit==='contain'?';object-fit:contain':''}}`).join('\n')+'\n';

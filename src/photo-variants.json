@@ -469,5 +469,55 @@
    960,
    1280
   ]
+ },
+ "night-vision-audi-instrument-display": {
+  "original": "1000141170.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
+ },
+ "night-vision-audi-calibration-setup": {
+  "original": "1000141167.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
+ },
+ "night-vision-audi-display-side": {
+  "original": "1000141164.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
+ },
+ "night-vision-audi-diagnostic-interior": {
+  "original": "1000141173.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
+ },
+ "night-vision-mahle-calibration-target": {
+  "original": "1000141176.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
  }
 }
