@@ -776,15 +776,75 @@
     "ro": "Audi bej pe standul de geometrie, cu ținte de măsurare vizibile lateral și elevatoare în atelier",
     "en": "Beige Audi on the wheel alignment rack with side-view measurement targets and workshop lifts"
    }
+  },
+  {
+   "slug": "headlight-audi-laser-overview",
+   "original": "1000141139.jpg",
+   "widths": [
+    640,
+    960,
+    1280
+   ],
+   "position": "62% 48%",
+   "tag": {
+    "hu": "Fényszóró",
+    "ro": "Faruri",
+    "en": "Headlights"
+   },
+   "alt": {
+    "hu": "Fehér Audi fényszóró-beállítása nyitott motorháztetővel, zöld lézervonalakkal és fényszóró-ellenőrző műszerrel",
+    "ro": "Reglarea farurilor unui Audi alb, cu capota deschisă, linii laser verzi și aparat de verificare a farurilor",
+    "en": "White Audi undergoing headlight adjustment with bonnet open, green laser alignment lines and a headlight testing instrument"
+   }
+  },
+  {
+   "slug": "headlight-audi-laser-closeup",
+   "original": "1000141142.jpg",
+   "widths": [
+    640,
+    960,
+    1280
+   ],
+   "position": "70% 55%",
+   "tag": {
+    "hu": "Fényszóró",
+    "ro": "Faruri",
+    "en": "Headlights"
+   },
+   "alt": {
+    "hu": "Audi fényszórójának közeli képe zöld pozicionáló lézervonalakkal, mellette a narancssárga ellenőrző műszer",
+    "ro": "Detaliu al farului Audi cu linii laser verzi de poziționare și aparatul portocaliu de verificare alături",
+    "en": "Close-up of an Audi headlight with green positioning laser lines and the orange testing instrument alongside"
+   }
+  },
+  {
+   "slug": "headlight-audi-laser-angle",
+   "original": "1000141136.jpg",
+   "widths": [
+    640,
+    960,
+    1280
+   ],
+   "position": "64% 55%",
+   "tag": {
+    "hu": "Fényszóró",
+    "ro": "Faruri",
+    "en": "Headlights"
+   },
+   "alt": {
+    "hu": "Fényszóró-ellenőrzés ferde nézetből: nyitott Audi-motortér, zöld lézervonalak és a mérőberendezés",
+    "ro": "Verificarea farurilor din unghi: compartimentul motor Audi deschis, linii laser verzi și echipamentul de măsurare",
+    "en": "Angled view of headlight testing showing an open Audi engine bay, green laser lines and measuring equipment"
+   }
   }
  ],
  "placement": {
-  "hero": "headlight-adjustment",
+  "hero": "headlight-audi-laser-overview",
   "workshop": "adas-calibration-target",
   "services": {
    "acc": "acc-radar-calibration-screen",
    "adas": "adas-calibration-target",
-   "led-matrix": "headlight-adjustment",
+   "led-matrix": "headlight-audi-laser-overview",
    "hunter-3d": "hunter-audi-front-wheel",
    "camera": "camera-calibration-target",
    "diagnostics": "diagnostics-laptop"
@@ -844,6 +904,9 @@
     "camera-target-cabin"
    ],
    "led-matrix": [
+    "headlight-audi-laser-overview",
+    "headlight-audi-laser-closeup",
+    "headlight-audi-laser-angle",
     "headlight-adjustment",
     "headlight-matrix-led",
     "headlight-laser-check",

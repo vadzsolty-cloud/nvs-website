@@ -28,6 +28,10 @@ test('photo catalogue: real originals kept, trilingual alt text, every placement
  const suppliedAlignmentOrder=['1000141131.jpg','1000141128.jpg','1000141126.jpg','1000141129.jpg','1000141130.jpg'];
  assert.deepEqual(placement.serviceSlides['hunter-3d'].slice(0,5).map(slug=>photos[slug].original),suppliedAlignmentOrder);
  assert.equal(photos[placement.services['hunter-3d']].original,suppliedAlignmentOrder[0]);
+ const suppliedHeadlightOrder=['1000141139.jpg','1000141142.jpg','1000141136.jpg']; // Owner selected the second attachment as the lead image.
+ assert.deepEqual(placement.serviceSlides['led-matrix'].slice(0,3).map(slug=>photos[slug].original),suppliedHeadlightOrder);
+ assert.equal(photos[placement.services['led-matrix']].original,suppliedHeadlightOrder[0]);
+ assert.equal(placement.hero,placement.services['led-matrix']);
 });
 
 test('pages use responsive images under /nvs-website/, eager hero, lazy gallery, placeholders for missing services',async()=>{
