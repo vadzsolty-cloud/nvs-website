@@ -132,6 +132,19 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    assert.equal(await page.locator('.languages a[lang=en]').getAttribute('href'),'/nvs-website/en/account/');
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
    assert.equal(await page.locator('.copyright').count(),1);
+   const contact=page.locator('.portal-contact');await contact.waitFor({state:'visible'});
+   assert.equal(await contact.locator('.portal-contact-phone').getAttribute('href'),'tel:+40741738604');
+   assert.equal(await contact.locator('.portal-contact-email').getAttribute('href'),'mailto:nightvisionservice2025@gmail.com');
+   for(const theme of ['light','dark']){
+    await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,lang+' '+width+' contact '+theme);
+    const layout=await page.evaluate(()=>{const r=s=>document.querySelector(s).getBoundingClientRect(),phone=r('.portal-contact-phone'),contact=r('.portal-contact'),heading=r('.portal-heading');return {phoneTop:phone.top,phoneHeight:phone.height,font:parseFloat(getComputedStyle(document.querySelector('.portal-contact-phone strong')).fontSize),contactTop:contact.top,contactBottom:contact.bottom,contactLeft:contact.left,headingRight:heading.right,headingBottom:heading.bottom,loginTop:r('#native-login').top};});
+    assert.ok(layout.font>=24&&layout.phoneHeight>=44,JSON.stringify(layout));
+    assert.ok(layout.phoneTop<950,lang+' '+width+' phone should be immediately available '+JSON.stringify(layout));
+    if(width>1000)assert.ok(layout.contactLeft>=layout.headingRight,JSON.stringify(layout));
+    else assert.ok(layout.contactTop>=layout.headingBottom&&layout.contactBottom<layout.loginTop,JSON.stringify(layout));
+    if(lang==='hu'&&[320,390,1280,1440].includes(width))await page.locator('.portal-hero').screenshot({path:'artifacts/portal-contact-'+width+'-'+theme+'.png'});
+   }
    if(lang==='hu')await page.screenshot({path:'artifacts/premium-account-'+width+'.png',fullPage:true});
   }
   const guideIds=['acc','adas','hunter-3d','camera','led-matrix','diagnostics'];
