@@ -49,7 +49,11 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    assert.equal(await page.locator('#services .card-top .service-icon .icon-depth').count(),6);
    assert.equal(await page.locator('#services .card-link').first().evaluate(e=>parseFloat(getComputedStyle(e).borderTopWidth)>=1&&getComputedStyle(e).boxShadow!=='none'),true);
    assert.equal(await page.locator('.equipment-list>li').count(),8);
-   assert.equal(await page.locator('.general-workshop-card a').count(),0);
+   assert.equal(await page.locator('.equipment-card').count(),8);
+   assert.equal(await page.locator('.equipment-card[open]').count(),0);
+   assert.equal(await page.locator('.general-workshop-card,.general-workshop-label').count(),0);
+   const equipmentStyles=await page.locator('.equipment-list>li').evaluateAll(items=>items.map(e=>{const s=getComputedStyle(e);return {background:s.backgroundColor,radius:s.borderRadius,padding:s.padding};}));
+   assert.ok(equipmentStyles.every(s=>JSON.stringify(s)===JSON.stringify(equipmentStyles[0])),'All eight cards should share the same base styling');
    for(const theme of ['light','dark']){
     await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
     assert.ok(['rgb(245, 248, 242)','rgb(162, 255, 38)'].includes(await page.locator('.hero .slider-prev').evaluate(e=>getComputedStyle(e).color)));
@@ -79,6 +83,23 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
      assert.equal(await page.locator('#services .tile-visual img').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0)),true);
      await page.locator('#services').screenshot({path:'artifacts/premium-tiles-'+width+'-'+theme+'.png'});
     }
+   }
+   if([320,768,1440].includes(width)){
+    const equipment=page.locator('.equipment-card');
+    for(let i=0;i<8;i++){
+     const card=equipment.nth(i);await card.locator('summary').focus();await page.keyboard.press('Enter');
+     assert.equal(await card.evaluate(e=>e.open),true);assert.equal(await card.locator('.equipment-explanation').isVisible(),true);
+     assert.equal(await card.locator('.equipment-collapse').isVisible(),true);assert.equal(await card.locator('.equipment-expand').isVisible(),false);
+     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,lang+' '+width+' equipment '+i);
+    }
+    assert.equal(await page.locator('.equipment-card[open]').count(),8,'Equipment explanations should open independently');
+    for(const theme of ['light','dark']){
+     await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
+     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,lang+' '+width+' open equipment '+theme);
+    }
+    if(lang==='hu'&&width===1440)await page.locator('.workshop-equipment').screenshot({path:'artifacts/equipment-expanded-desktop.png'});
+    for(let i=0;i<8;i++){const card=equipment.nth(i);await card.locator('summary').focus();await page.keyboard.press('Space');assert.equal(await card.evaluate(e=>e.open),false);}
+    assert.equal(await page.locator('.equipment-explanation:visible').count(),0);
    }
    if([320,390,1440].includes(width))for(const kind of ['posts','photos']){
     const more=page.locator('[data-reference-more="'+kind+'"]'),summary=more.locator('summary');
@@ -149,7 +170,8 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    await motion.keyboard.press('Tab');await social.focus();assert.equal(await social.evaluate(el=>el.matches(':focus-visible')),true);
    await motion.waitForFunction(()=>getComputedStyle(document.querySelector('.facebook-link')).color==='rgb(24, 119, 242)');
    await social.evaluate(el=>el.blur());
-   for(const selector of ['#services .service-card','.service-slider','.equipment-list li','.fb-card','.photo-gallery .zoom','.portal-entry','[data-reference-more]>summary'])await lifted(selector);
+   for(const selector of ['#services .service-card','.service-slider','.fb-card','.photo-gallery .zoom','.portal-entry','[data-reference-more]>summary'])await lifted(selector);
+   await motion.locator('.equipment-card>summary').first().hover();assert.equal(await motion.locator('.equipment-list>li').first().evaluate(e=>getComputedStyle(e).transform),'none');await motion.waitForFunction(()=>getComputedStyle(document.querySelector('.equipment-list>li')).boxShadow!=='none');
    await motion.emulateMedia({reducedMotion:'reduce'});
    for(const selector of ['#services .service-card','.fb-card','.facebook-link']){await motion.locator(selector).first().hover();assert.equal(await motion.locator(selector).first().evaluate(el=>getComputedStyle(el).transform),'none');}
    await motion.emulateMedia({reducedMotion:'no-preference'});
@@ -164,6 +186,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
   const plain=await noScript.newPage();await plain.goto('http://127.0.0.1:4188/nvs-website/hu/');
   assert.equal(await plain.locator('.consent-panel').evaluate(e=>getComputedStyle(e).position),'static');
   assert.equal(await plain.locator('.consent-actions').isVisible(),false);assert.equal(await plain.locator('iframe[src]').count(),0);
+  const nativeCard=plain.locator('.equipment-card').last();await nativeCard.locator('summary').click();assert.equal(await nativeCard.evaluate(e=>e.open),true);assert.equal(await nativeCard.locator('.equipment-explanation').isVisible(),true);await nativeCard.locator('summary').click();assert.equal(await nativeCard.evaluate(e=>e.open),false);
   assert.equal(await plain.locator('.fb-card:visible').count(),3);assert.equal(await plain.locator('.photo-gallery .zoom:visible').count(),6);
   for(const kind of ['posts','photos']){await plain.locator('[data-reference-more="'+kind+'"]>summary').click();assert.equal(await plain.locator('[data-reference-more="'+kind+'"]').evaluate(e=>e.open),true);}
   assert.equal(await plain.locator('.fb-card:visible').count(),9);assert.equal(await plain.locator('.photo-gallery .zoom:visible').count(),20);await noScript.close();
