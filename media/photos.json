@@ -1251,6 +1251,90 @@
     "ro": "BMW alb văzut din lateral, cu capete de măsurare pe roți lângă stația Hunter",
     "en": "Side view of a white BMW with wheel-mounted measuring heads beside the Hunter station"
    }
+  },
+  {
+   "slug": "hunter-bmw-wheel-measuring-head-closeup",
+   "original": "1000141212.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "BMW-kerékre szerelt Hunter mérőfej közelről, háttérben a futóműmérő kijelzővel",
+    "ro": "Prim-plan al capului de măsurare Hunter montat pe o roată BMW, cu ecranul de geometrie în fundal",
+    "en": "Close-up of a Hunter measuring head on a BMW wheel with the alignment screen in the background"
+   }
+  },
+  {
+   "slug": "hunter-bmw-front-between-lift-posts",
+   "original": "1000141209.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Fehér BMW az emelő oszlopai között, az első keréken futóműmérő fejjel",
+    "ro": "BMW alb între stâlpii elevatorului, cu un cap de măsurare a geometriei pe roata din față",
+    "en": "White BMW between the lift posts with an alignment measuring head on the front wheel"
+   }
+  },
+  {
+   "slug": "hunter-bmw-front-alignment-overview",
+   "original": "1000141206.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Fehér BMW elölnézetből a futóműállító emelőn, kerékre szerelt mérőfejjel",
+    "ro": "BMW alb văzut din față pe elevatorul de geometrie, cu un cap de măsurare montat pe roată",
+    "en": "Front view of a white BMW on the alignment lift with a wheel-mounted measuring head"
+   }
+  },
+  {
+   "slug": "hunter-bmw-front-low-angle",
+   "original": "1000141203.jpg",
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "position": "50% 50%",
+   "fit": "contain",
+   "tag": {
+    "hu": "Hunter 3D",
+    "ro": "Hunter 3D",
+    "en": "Hunter 3D"
+   },
+   "alt": {
+    "hu": "Fehér BMW alacsony nézőpontból a futóműállító emelőn, a kerékre szerelt mérőfejjel",
+    "ro": "BMW alb văzut de jos pe elevatorul de geometrie, cu un cap de măsurare montat pe roată",
+    "en": "Low-angle view of a white BMW on the alignment lift with a wheel-mounted measuring head"
+   }
   }
  ],
  "placement": {
@@ -1316,6 +1400,10 @@
     "hunter-bmw-rear-on-alignment-lift",
     "hunter-bmw-front-wheel-target",
     "hunter-bmw-side-hunter-station",
+    "hunter-bmw-wheel-measuring-head-closeup",
+    "hunter-bmw-front-between-lift-posts",
+    "hunter-bmw-front-alignment-overview",
+    "hunter-bmw-front-low-angle",
     "hunter-alignment-lift",
     "hunter-alignment-wheel",
     "hunter-alignment-screens",
