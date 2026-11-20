@@ -1,3 +1,4 @@
+import {equipmentTopics,equipmentLabels,equipmentGuides} from './equipment-guides.mjs';
 import {uiIcon} from './icons.mjs';
 export const workshopCopy={
  hu:{
@@ -59,12 +60,17 @@ export const workshopCopy={
  }
 };
 export const generalWorkshop={
- hu:{label:'A mindennapokban is számíthatsz ránk',title:'Általános szerviz és karbantartás',text:'Átvizsgálás, időszakos karbantartás, mechanikus és elektronikus hibák feltárása, javítása. A hétköznapi autós gondokkal is fordulj hozzánk: megbeszéljük, mit tapasztalsz, és milyen munkára van szükség.',action:'Beszéljünk az autódról'},
- ro:{label:'Alături de tine și zi de zi',title:'Service general și întreținere',text:'Verificări, întreținere periodică, identificarea și repararea defecțiunilor mecanice și electronice. Apelează la noi și pentru problemele auto de zi cu zi: discutăm ce observi și stabilim împreună lucrarea necesară.',action:'Hai să discutăm despre mașina ta'},
- en:{label:'Here for everyday motoring, too',title:'General servicing and maintenance',text:'Vehicle inspections, routine maintenance, and investigation and repair of mechanical and electronic faults. Bring us your everyday car concerns, too: we will discuss the symptoms and agree the work your vehicle needs.',action:'Let’s talk about your car'}
+ hu:{title:'Általános szerviz és karbantartás',text:'Átvizsgálás, időszakos karbantartás és a mindennapi mechanikus, elektronikus hibák javítása.'},
+ ro:{title:'Service general și întreținere',text:'Verificări, întreținere periodică și remedierea problemelor mecanice și electronice de zi cu zi.'},
+ en:{title:'General servicing and maintenance',text:'Vehicle inspections, routine maintenance and repair of everyday mechanical and electronic faults.'}
 };
 const esc=value=>String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 export function workshopSection(lang,photo){
- const t=workshopCopy[lang],g=generalWorkshop[lang];
- return `<section id="about" class="section workshop-story" aria-labelledby="workshop-title"><div class="workshop-intro"><div class="about-photo">${photo}</div><div><p class="eyebrow">NIGHT VISION SERVICE / ${esc(t.label)}</p><h2 id="workshop-title">${esc(t.title)}</h2><p class="lead">${esc(t.intro)}</p><p>${esc(t.investment)}</p></div></div><div class="workshop-equipment"><h3>${esc(t.equipmentTitle)}</h3><p>${esc(t.equipmentIntro)}</p><ul class="equipment-list" role="list">${t.equipment.map(([name,description],i)=>`<li><span class="equipment-number" aria-hidden="true">${uiIcon(['diagnostic','car','target','wheel','suspension','brake','headlight'][i])}</span><div><h4>${esc(name)}</h4><p>${esc(description)}</p></div></li>`).join('')}<li class="general-workshop-card"><span class="equipment-number" aria-hidden="true">${uiIcon('wrench')}</span><div><p class="general-workshop-label">${esc(g.label)}</p><h4>${esc(g.title)}</h4><p>${esc(g.text)}</p></div></li></ul></div><div class="workshop-values"><p class="workshop-principle">${esc(t.principle)}</p><div><p>${esc(t.approach)}</p><p>${esc(t.belief)}</p></div></div><p class="workshop-signature">${esc(t.signature)}</p></section>`;
+ const t=workshopCopy[lang],g=generalWorkshop[lang],labels=equipmentLabels[lang];
+ const equipment=[...t.equipment,[g.title,g.text]];
+ const cards=equipment.map(([name,description],i)=>{
+  const topic=equipmentTopics[i],id=`equipment-${lang}-${topic}`,guide=equipmentGuides[lang][topic];
+  return `<li><details class="equipment-card" data-equipment="${topic}"><summary aria-labelledby="${id}-title" aria-describedby="${id}-teaser"><span class="equipment-number" aria-hidden="true">${uiIcon(['diagnostic','car','target','wheel','suspension','brake','headlight','wrench'][i])}</span><span class="equipment-summary-copy"><span class="equipment-name" id="${id}-title">${esc(name)}</span><span class="equipment-teaser" id="${id}-teaser">${esc(description)}</span></span><span class="equipment-toggle" aria-hidden="true"><span class="equipment-expand">${uiIcon('plus')}</span><span class="equipment-collapse">${uiIcon('minus')}</span></span></summary><div class="equipment-explanation"><p><strong>${esc(labels.meaning)}</strong> ${esc(guide[0])}</p><p><strong>${esc(labels.when)}</strong> ${esc(guide[1])}</p></div></details></li>`;
+ }).join('');
+ return `<section id="about" class="section workshop-story" aria-labelledby="workshop-title"><div class="workshop-intro"><div class="about-photo">${photo}</div><div><p class="eyebrow">NIGHT VISION SERVICE / ${esc(t.label)}</p><h2 id="workshop-title">${esc(t.title)}</h2><p class="lead">${esc(t.intro)}</p><p>${esc(t.investment)}</p></div></div><div class="workshop-equipment"><h3>${esc(t.equipmentTitle)}</h3><p>${esc(t.equipmentIntro)}</p><p class="equipment-hint">${esc(labels.hint)}</p><ul class="equipment-list" role="list">${cards}</ul></div><div class="workshop-values"><p class="workshop-principle">${esc(t.principle)}</p><div><p>${esc(t.approach)}</p><p>${esc(t.belief)}</p></div></div><p class="workshop-signature">${esc(t.signature)}</p></section>`;
 }
