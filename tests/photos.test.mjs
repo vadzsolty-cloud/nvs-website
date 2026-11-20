@@ -25,6 +25,9 @@ test('photo catalogue: real originals kept, trilingual alt text, every placement
  }
  for(const slug of [placement.hero,placement.workshop,...placement.gallery,...Object.values(placement.services).filter(Boolean)])assert.ok(photos[slug],slug);
  assert.deepEqual(Object.keys(placement.services).sort(),[...ids].sort());
+ const suppliedAlignmentOrder=['1000141131.jpg','1000141128.jpg','1000141126.jpg','1000141129.jpg','1000141130.jpg'];
+ assert.deepEqual(placement.serviceSlides['hunter-3d'].slice(0,5).map(slug=>photos[slug].original),suppliedAlignmentOrder);
+ assert.equal(photos[placement.services['hunter-3d']].original,suppliedAlignmentOrder[0]);
 });
 
 test('pages use responsive images under /nvs-website/, eager hero, lazy gallery, placeholders for missing services',async()=>{
