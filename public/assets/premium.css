@@ -312,3 +312,6 @@ html[data-theme] .lightbox button:not(:hover):not(:focus-visible){color:#f5f8f2}
  .portal-contact-phone{padding:12px}
  .portal-contact-company{margin-top:18px}
 }
+
+/* Long photo galleries wrap their page indicators inside laptop-width controls. */
+@media(min-width:701px){.photo-slider[data-many-photos] .slider-controls:not([hidden]){display:grid;grid-template-columns:44px minmax(0,1fr) 44px 44px;gap:10px}.photo-slider[data-many-photos] .slider-dots{min-width:0;flex-wrap:wrap;row-gap:4px}}
