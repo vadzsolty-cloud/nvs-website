@@ -342,3 +342,9 @@ html[data-theme] .lightbox button:not(:hover):not(:focus-visible){color:#f5f8f2}
 /* Owner's workshop exterior: frame the building; enlargement retains the complete photograph. */
 .workshop-intro .about-photo .ph-workshop-exterior-main{aspect-ratio:3/2;max-height:none}
 .workshop-intro .about-photo .ph-workshop-exterior-main img{object-fit:cover}
+
+/* Native portrait video: keep the whole 9:16 player and the first timeline preview visible. */
+.facebook-live-grid{align-items:start}
+.fb-featured{background:#000}
+.fb-cover .photo img{object-fit:contain}
+.fb-photo-card:hover .fb-cover img{transform:none}
