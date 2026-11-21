@@ -1,6 +1,6 @@
 // Selected posts from the official Night Vision Service Facebook page (owner-run), read on 2026-11-15.
 // Only posts without Meta's "MI-tartalom" (AI content) label. Titles/summaries follow the owner's own
-// bilingual HU/RO post text; EN is a faithful translation. Links only – no SDK, iframe or tracking.
+// bilingual HU/RO post text; EN is a faithful translation. Public links and consent-gated native embeds.
 export const pageId='61572089218581';
 export const postUrl=id=>`https://www.facebook.com/${pageId}/posts/${id}`;
 export const facebookPosts=[
@@ -39,3 +39,7 @@ export const fbCopy={
 };
 const locale={hu:'hu-HU',ro:'ro-RO',en:'en-GB'};
 export const fbDate=(iso,l)=>new Intl.DateTimeFormat(locale[l],{year:'numeric',month:'long',day:'numeric',timeZone:'UTC'}).format(new Date(iso+'T12:00:00Z'));
+
+// Verified public video permalink for the existing Audi SQ5 featured post (2026-11-21).
+// Facebook redirects the post URL to this video; the public player uses a 9:16 portrait viewport.
+export const featuredVideo={postId:'122133267458736307',url:'https://www.facebook.com/61572089218581/videos/1697012922028515/',width:360,height:640};

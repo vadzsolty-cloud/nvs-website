@@ -13,7 +13,7 @@ export const business={
  addressApproved:true,phoneApproved:true,postalCode:'537203',
  // Coordinates of the owner's Google Business Profile pin (Night Vision Service, Str. Principală nr. 244/A).
  geo:{lat:46.4619963,lng:25.7936655},
- mapEmbed:'https://maps.google.com/maps?q=46.4619963,25.7936655&z=16&output=embed'
+ mapEmbed:'https://maps.google.com/maps?q=46.4619963,25.7936655&z=18&t=k&output=embed'
 };
 export const contactCopy={
  hu:{book:'Időpontkérés – demó',maps:'Útvonal a műhelyhez – Google Maps',phone:'Telefon',pending:'',app:'NVS App letöltése',privacy:'Adatkezelési tájékoztató',privacyBody:'Ez a fejlesztői bemutató nem hoz létre fiókot, foglalást vagy marketingfeliratkozást. Az időpontválasztás csak a lap memóriájában él, újratöltéskor elvész. Nem használunk analitikát vagy marketingcookie-t. A tárhelyszolgáltató a weboldal kiszolgálásához technikai hozzáférési adatokat kezelhet. A telefon, e-mail, Maps és alkalmazás hivatkozás megnyitásakor a kiválasztott szolgáltató szabályai érvényesek. Az e-mail link nem küld automatikusan üzenetet. Az adatkezelőként megadott cég: Night Vision Service SRL; kapcsolat: nightvisionservice2025@gmail.com. A teljes éles fiók- és foglalási adatkezelési tájékoztató, megőrzési idők, adatfeldolgozók és ügyféljogok részletes rendezése az integráció élesítése előtt szükséges. A külön helyi emulátorlabor kizárólag szintetikus adatokkal tesztelhető, és nincs bekötve ezen a nyilvános oldalon.'},
