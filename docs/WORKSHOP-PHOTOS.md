@@ -25,3 +25,7 @@ Ez a védelem az aktuális saját webes képekre és az aktuális forrásfájlok
 A korábbi 64 fotó teljes átnézése mellett 54 új kép került feldolgozásra: 11 váltóolajcsere, 12 ACC, 7 klíma és 24 futóműállítás. Két erősen hasonló felvétel kimaradt (1000141304.jpg a 1000141302.jpg mellett; 1000141229.jpg a 1000141231.jpg mellett). Egy képsoron belül minden fotó egyszer szerepel. A fotók alapállapota és a különböző gépkocsik felvételei nem keverednek más munkatípusok közé.
 
 Az Audi maradt a Hunter szolgáltatás főfotója, az ACC főfotója továbbra is az eredetileg kiválasztott műhely-áttekintés. A váltóolajcsere külön főoldali képsort kapott. A klímatöltés és -javítás önálló HU/RO/EN szolgáltatási oldalon, főoldali kártyával érhető el. A meglévő foglalási szolgáltatásazonosítók, az alkalmazás és a backend nem változtak.
+
+## A műhely külső főfotója
+
+2026-11-21: 1000141397.jpg → workshop-exterior-main került a „Műhelyünk” bemutatkozó rész főképeként a szöveg mellé, mindhárom nyelven. A két jobb oldali autó rendszáma a forrásban és mind a hét webváltozatban fedett. A kártya 3:2 arányú, épületre igazított képkivágást mutat; nagyításkor a teljes álló fotó nyílik meg. Az előző műhelykép a katalógusban megmarad, az új fotó egyszer szerepel a főoldalon. A katalógus így 119 egyedi képet tartalmaz.
