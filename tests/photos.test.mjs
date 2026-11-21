@@ -4,7 +4,7 @@ import {readFile,stat} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import {runInNewContext} from 'node:vm';
 import {resolve} from 'node:path';
-import {photos,placement} from '../src/photos.mjs';
+import {photos,placement,assetStem} from '../src/photos.mjs';
 import {ids} from '../src/content.mjs';
 import {sliderOrder} from '../src/slider.mjs';
 import {facebookPosts,pageId} from '../src/facebook-posts.mjs';
@@ -20,8 +20,8 @@ test('photo catalogue: real originals kept, trilingual alt text, every placement
   await stat('media/originals/'+p.original);
   for(const l of ['hu','ro','en']){assert.ok(p.alt[l].length>15,p.slug+l);assert.ok(p.tag[l]);}
   assert.notEqual(p.alt.hu,p.alt.en);assert.notEqual(p.alt.hu,p.alt.ro);
-  for(const w of p.widths)for(const ext of ['avif','webp'])await stat(`public/assets/photos/${p.slug}-${w}.${ext}`);
-  await stat(`public/assets/photos/${p.slug}-${p.widths.at(-1)}.jpg`);
+  for(const w of p.widths)for(const ext of ['avif','webp'])await stat(`public/assets/photos/${assetStem(p.slug)}-${w}.${ext}`);
+  await stat(`public/assets/photos/${assetStem(p.slug)}-${p.widths.at(-1)}.jpg`);
  }
  for(const slug of [placement.hero,placement.workshop,...placement.gallery,...Object.values(placement.services).filter(Boolean)])assert.ok(photos[slug],slug);
  assert.deepEqual(Object.keys(placement.services).sort(),[...ids].sort());
@@ -47,11 +47,11 @@ test('pages use responsive images under /nvs-website/, eager hero, lazy gallery,
   for(const m of html.matchAll(/(?:image)?srcset="([^"]+)"/g))for(const item of m[1].split(', ')){const url=item.split(' ')[0];assert.ok(url.startsWith('/nvs-website/assets/photos/'),url);await stat(output+url.slice('/nvs-website'.length));}
   const imgs=[...html.matchAll(/<img [^>]*>/g)].map(m=>m[0]).filter(t=>t.includes('/assets/photos/'));
   const sliderPhotos=sliderOrder.filter(id=>placement.services[id]).length;
-  assert.equal(imgs.length,sliderPhotos+Object.values(placement.services).filter(Boolean).length+1+placement.gallery.length+facebookPosts.length);
+  assert.equal(imgs.length,sliderPhotos+Object.values(placement.services).filter(Boolean).length+1+placement.gallery.length+facebookPosts.length+placement.gearboxOilSlides.length+1);
   for(const t of imgs){assert.match(t,/ alt="[^"]{15,}"/);assert.match(t,/ width="\d+" height="\d+"/);}
   assert.match(imgs[0],/fetchpriority="high"/);assert.ok(imgs.slice(1).every(t=>t.includes('loading="lazy"')));
   assert.ok(html.includes('rel="preload" as="image"'));
-  assert.equal([...html.matchAll(/data-lightbox/g)].length,1+placement.gallery.length);
+  assert.equal([...html.matchAll(/data-lightbox/g)].length,1+placement.gallery.length+placement.gearboxOilSlides.length);
   assert.ok(html.includes('<dialog class="lightbox"'));
   assert.ok(!html.includes('/assets/workshop/'));
   // Facebook post cards: static links only, every selected post, no embed/SDK

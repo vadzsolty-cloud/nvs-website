@@ -6,7 +6,8 @@ const catalog=read('../media/photos.json'),variants=read('./photo-variants.json'
 export const photos=Object.fromEntries(catalog.photos.map(p=>[p.slug,{...p,...variants[p.slug]}]));
 export const placement=catalog.placement;
 const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
-const file=(slug,w,ext)=>`/assets/photos/${slug}-${w}.${ext}`;
+export const assetStem=slug=>photos[slug].assetStem||slug;
+const file=(slug,w,ext)=>`/assets/photos/${assetStem(slug)}-${w}.${ext}`;
 const srcset=(p,ext)=>p.widths.map(w=>`${file(p.slug,w,ext)} ${w}w`).join(', ');
 export const fullSize=slug=>{const p=photos[slug];return file(slug,p.widths.at(-1),'jpg');};
 export const alt=(slug,l)=>photos[slug].alt[l];
