@@ -338,3 +338,7 @@ html[data-theme] .lightbox button:not(:hover):not(:focus-visible){color:#f5f8f2}
 .ac-service-steps article{padding:24px;border:1px solid var(--line);border-radius:20px}
 .ac-service-guide h2,.ac-contact h2{font-size:clamp(25px,3vw,42px)}
 @media(max-width:700px){.additional-service-card,.ac-service-steps{grid-template-columns:minmax(0,1fr)}.additional-service-photo{aspect-ratio:16/10}}
+
+/* Owner's workshop exterior: frame the building; enlargement retains the complete photograph. */
+.workshop-intro .about-photo .ph-workshop-exterior-main{aspect-ratio:3/2;max-height:none}
+.workshop-intro .about-photo .ph-workshop-exterior-main img{object-fit:cover}

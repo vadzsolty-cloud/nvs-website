@@ -1199,5 +1199,15 @@
    540,
    720
   ]
+ },
+ "workshop-exterior-main": {
+  "original": "1000141397.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
  }
 }

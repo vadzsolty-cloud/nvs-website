@@ -1579,6 +1579,19 @@
     "gearbox-oil-bmw-front-detail-private-v1-720.jpg": "080762867af3e0c6a17056eb69acc4f633c57f8b0c4a83661ebe20cfc3198a2c"
    },
    "reviewSha256": "93abb3219fddb8f6d2f001234d3514f2751c1dbca87167096fbd89dcb6e19c87"
+  },
+  "workshop-exterior-main": {
+   "sourceSha256": "7d0feaf44235038fbe4753b1097448ac7b36c3710e1d7e689667997f171a2430",
+   "files": {
+    "workshop-exterior-main-private-v1-360.avif": "7cb0195a0505e61eb5eda97a5ab43e7f80ac019b2518c1046718e98c43558200",
+    "workshop-exterior-main-private-v1-360.webp": "6c6e0255a6d217666f15f2186f1bfcb15e1eeab4d1b691ec3019435feada0a3a",
+    "workshop-exterior-main-private-v1-540.avif": "4a19754195d946f2441a2adfe4f7c5b5487a6b50d7be6ad443fa9f332c93f8f5",
+    "workshop-exterior-main-private-v1-540.webp": "32d87fe5f3990f52a837f4c70b71d2d57d2ca4f58804e31b20fbb1bc266e9bbe",
+    "workshop-exterior-main-private-v1-720.avif": "7ff8d48781ce33eb70eb3703611c2d36aa17d3cc024ca2c62f30402b1b955148",
+    "workshop-exterior-main-private-v1-720.webp": "2b4d5adc38344842aef29a4bb730ce05f43e79028b7a6f8ba9da265f8ee2cc67",
+    "workshop-exterior-main-private-v1-720.jpg": "ed32a4ad414711d0809e507e394aac63f78a6ab363b762530a87c78e50b3fbdd"
+   },
+   "reviewSha256": "cb09ebb3782c2a0bb8ea28456508e5f30e14b5866fd5fffc8ff59f1a6e68f169"
   }
  }
 }

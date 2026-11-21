@@ -3238,11 +3238,50 @@
     720
    ],
    "fit": "contain"
+  },
+  {
+   "slug": "workshop-exterior-main",
+   "original": "1000141397.jpg",
+   "position": "50% 32%",
+   "tag": {
+    "hu": "Műhelyünk",
+    "ro": "Atelierul nostru",
+    "en": "Our workshop"
+   },
+   "alt": {
+    "hu": "A Night Vision Service műhelyének homlokzata három szervizkapuval, napelemekkel és térkövezett udvarral",
+    "ro": "Fațada atelierului Night Vision Service cu trei porți de service, panouri solare și curte pavată",
+    "en": "The Night Vision Service workshop exterior with three service doors, rooftop solar panels and a paved courtyard"
+   },
+   "privacy": {
+    "reviewedAt": "2026-11-21",
+    "registration": "masked",
+    "regions": [
+     [
+      566,
+      619,
+      582,
+      637
+     ],
+     [
+      600,
+      642,
+      621,
+      660
+     ]
+    ]
+   },
+   "assetStem": "workshop-exterior-main-private-v1",
+   "widths": [
+    360,
+    540,
+    720
+   ]
   }
  ],
  "placement": {
   "hero": "headlight-audi-laser-overview",
-  "workshop": "adas-calibration-target",
+  "workshop": "workshop-exterior-main",
   "services": {
    "acc": "acc-radar-workshop-overview",
    "adas": "adas-calibration-target",
