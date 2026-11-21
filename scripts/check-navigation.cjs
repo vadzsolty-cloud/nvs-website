@@ -49,7 +49,7 @@ const {execFileSync}=require('node:child_process');
      }
     }
    }
-   assert.equal(await page.locator('#site-menu').getByRole('link',{name:portalCopy[lang].online,exact:true}).getAttribute('href'),business.app);
+   assert.equal(await page.locator('#site-menu').getByRole('link',{name:portalCopy[lang].online,exact:true,includeHidden:true}).getAttribute('href'),business.app);
    assert.equal(await page.locator('#site-menu .menu-phone').getAttribute('href'),business.phoneHref);
    // Desktop navigation and drawer navigation must land at the same section start.
    if(width===1440)for(let i=0;i<targets.length;i++){
