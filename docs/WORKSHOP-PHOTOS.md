@@ -29,3 +29,7 @@ Az Audi maradt a Hunter szolgáltatás főfotója, az ACC főfotója továbbra i
 ## A műhely külső főfotója
 
 2026-11-21: 1000141397.jpg → workshop-exterior-main került a „Műhelyünk” bemutatkozó rész főképeként a szöveg mellé, mindhárom nyelven. A két jobb oldali autó rendszáma a forrásban és mind a hét webváltozatban fedett. A kártya 3:2 arányú, épületre igazított képkivágást mutat; nagyításkor a teljes álló fotó nyílik meg. Az előző műhelykép a katalógusban megmarad, az új fotó egyszer szerepel a főoldalon. A katalógus így 119 egyedi képet tartalmaz.
+
+## Diagnosztikai képsor bővítése
+
+2026-11-21: a tulajdonos kérésére a diagnosztika korábbi utolsó képe, az `adas-station` (IMG-20260816-WA0000.jpg) lett a nyitókép a főoldali szolgáltatásnál, a részletes képsorban. A képsor a már jóváhagyott katalógusból három további felvételt kapott: Audi utastér diagnosztikai laptoppal (1000141173.jpg), MAHLE diagnosztikai eredményképernyő (1000141265.jpg), illetve diagnosztikai laptop a Volkswagen mellett (1000141260.jpg). Mind a hat kép egyedi a képsoron belül; új képfájl, másolat vagy adatvédelmi felülvizsgálat nem keletkezett. A három felvétel korábbi Night Vision/ACC elhelyezése megmarad.

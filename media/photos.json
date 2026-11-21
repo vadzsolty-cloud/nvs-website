@@ -3288,7 +3288,7 @@
    "led-matrix": "headlight-audi-laser-overview",
    "hunter-3d": "hunter-audi-front-wheel",
    "camera": "camera-calibration-target",
-   "diagnostics": "diagnostics-laptop"
+   "diagnostics": "adas-station"
   },
   "gallery": [
    "adas-calibration-target",
@@ -3414,9 +3414,12 @@
     "headlight-beam-check"
    ],
    "diagnostics": [
+    "adas-station",
     "diagnostics-laptop",
     "diagnostics-tablet-in-car",
-    "adas-station"
+    "night-vision-audi-diagnostic-interior",
+    "acc-vw-diagnostic-result",
+    "acc-vw-diagnostic-trolley"
    ]
   },
   "gearboxOilSlides": [
