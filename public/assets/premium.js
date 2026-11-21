@@ -10,7 +10,8 @@
   toggle.addEventListener('click',()=>{menu.showModal();toggle.setAttribute('aria-expanded','true');document.body.classList.add('menu-open');menu.querySelector('.menu-close').focus();});
   menu.querySelector('.menu-close').addEventListener('click',close);
   menu.addEventListener('click',e=>{if(e.target===menu||e.target.closest('a'))close();});
-  menu.addEventListener('close',()=>{toggle.setAttribute('aria-expanded','false');document.body.classList.remove('menu-open');toggle.focus();});
+  // Restore keyboard focus without cancelling the selected anchor's scrolling.
+  menu.addEventListener('close',()=>{toggle.setAttribute('aria-expanded','false');document.body.classList.remove('menu-open');toggle.focus({preventScroll:true});});
  }
  const page=document.querySelector('[data-download-page]');if(!page)return;
  const status=page.querySelector('[data-download-status]'),link=page.querySelector('[data-apk-link]');
@@ -43,4 +44,3 @@
  }
  latest();
 })();
-
