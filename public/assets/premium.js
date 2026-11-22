@@ -2,12 +2,63 @@
  const compactFooter=matchMedia('(max-width:700px)'),footerGroups=document.querySelectorAll('[data-footer-group]');
  const arrangeFooter=()=>footerGroups.forEach(group=>{group.open=!compactFooter.matches;});
  arrangeFooter();compactFooter.addEventListener('change',arrangeFooter);
+ // Keep anchor arrivals below the full header, even when the reading header is compact.
+ const header=document.querySelector('.site-header');
+ const smallViewport=matchMedia('(max-width:1200px), (max-height:700px)');
+ let lastY=Math.max(0,scrollY),travel=0,direction=0,frame=0,anchorUntil=0,lastWidth=innerWidth;
+ const expandHeader=()=>header?.classList.remove('is-compact');
+ const measureHeader=()=>{
+  if(!header)return;
+  const compact=header.classList.contains('is-compact');
+  header.classList.remove('scroll-header','is-compact');
+  const height=header.getBoundingClientRect().height;
+  header.style.setProperty('--header-full-height',height+'px');
+  document.documentElement.style.setProperty('--anchor-offset',Math.ceil(height+24)+'px');
+  header.classList.toggle('scroll-header',smallViewport.matches);
+  header.classList.toggle('is-compact',compact&&smallViewport.matches);
+  lastY=Math.max(0,scrollY);travel=0;direction=0;
+ };
+ if(header){
+  measureHeader();
+  smallViewport.addEventListener('change',()=>{expandHeader();measureHeader();});
+  addEventListener('resize',()=>{if(innerWidth!==lastWidth){lastWidth=innerWidth;measureHeader();}},{passive:true});
+  document.fonts?.ready.then(measureHeader);
+  addEventListener('scroll',()=>{
+   if(frame)return;
+   frame=requestAnimationFrame(()=>{
+    frame=0;
+    const y=Math.max(0,Math.min(scrollY,document.documentElement.scrollHeight-innerHeight)),delta=y-lastY;
+    lastY=y;
+    if(!smallViewport.matches||document.body.classList.contains('menu-open')||performance.now()<anchorUntil){travel=0;direction=0;return;}
+    if(y<24){expandHeader();travel=0;return;}
+    if(Math.abs(delta)<1)return;
+    const nextDirection=Math.sign(delta);
+    travel=nextDirection===direction?travel+Math.abs(delta):Math.abs(delta);direction=nextDirection;
+    if(direction>0&&travel>=28&&y>parseFloat(header.style.getPropertyValue('--header-full-height'))+48){
+     // Do not hide a control while it is being used from the keyboard.
+     if(!header.querySelector(':focus-visible'))header.classList.add('is-compact');
+    }else if(direction<0&&travel>=16)expandHeader();
+   });
+  },{passive:true});
+  // A visitor's gesture takes precedence over an in-progress anchor animation.
+  for(const event of ['wheel','touchmove'])addEventListener(event,()=>{anchorUntil=0;},{passive:true});
+  addEventListener('keydown',event=>{if(['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' '].includes(event.key))anchorUntil=0;});
+  header.addEventListener('focusin',()=>{if(header.querySelector(':focus-visible'))expandHeader();});
+  document.addEventListener('click',event=>{
+   const link=event.target.closest('a[href]');if(!link)return;
+   const destination=new URL(link.href,location.href);
+   if(destination.origin===location.origin&&destination.pathname===location.pathname&&destination.hash){
+    // Reserve the full header before native fragment scrolling, in either direction.
+    expandHeader();anchorUntil=performance.now()+1600;travel=0;direction=0;
+   }
+  },true);
+ }
  const menu=document.getElementById('site-menu'),toggle=document.querySelector('.menu-toggle');
  if(menu&&toggle&&typeof menu.showModal==='function'){
   document.documentElement.classList.add('js-ready');
   toggle.hidden=false;
   const close=()=>{if(menu.open)menu.close();};
-  toggle.addEventListener('click',()=>{menu.showModal();toggle.setAttribute('aria-expanded','true');document.body.classList.add('menu-open');menu.querySelector('.menu-close').focus();});
+  toggle.addEventListener('click',()=>{expandHeader();menu.showModal();toggle.setAttribute('aria-expanded','true');document.body.classList.add('menu-open');menu.querySelector('.menu-close').focus();});
   menu.querySelector('.menu-close').addEventListener('click',close);
   menu.addEventListener('click',e=>{if(e.target===menu||e.target.closest('a'))close();});
   // Restore keyboard focus without cancelling the selected anchor's scrolling.
