@@ -23,12 +23,12 @@ const {execFileSync}=require('node:child_process');
    await page.waitForURL(url=>url.hash==='#'+target&&!url.pathname.includes('/services/'));
    await page.waitForFunction(id=>{
     const section=document.getElementById(id);
-    // Services has intentional top spacing; its visible introduction is the arrival point.
-    const arrival=id==='services'?section.querySelector(':scope > .eyebrow'):section;
+    // All destinations align their visible content below the full header.
+    const arrival=section.firstElementChild;
     const top=arrival.getBoundingClientRect().top;
     const header=document.querySelector('.site-header').getBoundingClientRect().bottom;
     const padding=parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
-    return top>=header+8&&top<=padding+36;
+    return top>=header+8&&top<=header+40&&Math.abs(top-padding)<=4;
    },target);
    assert.equal(new URL(page.url()).hash,'#'+target);
    assert.equal(await page.locator('#site-menu').evaluate(el=>el.open),false);
@@ -36,6 +36,43 @@ const {execFileSync}=require('node:child_process');
   };
   const openMenu=()=>page.locator('.menu-toggle').click();
   const menuLink=(lang,index)=>page.locator('#site-menu').getByRole('link',{name:content[lang].nav[index],exact:true});
+  // Reading header follows scroll direction without shifting the document or hiding navigation.
+  for(const lang of ['hu','ro','en'])for(const [width,height] of [[320,640],[390,844],[768,900],[1366,600],[1440,900]]){
+   await page.setViewportSize({width,height});
+   await page.goto(origin+base+'/'+lang+'/');
+   if(await page.locator('#privacy-preferences').isVisible())await page.locator('[data-consent=reject]').click();
+   const full=await page.locator('.site-header').evaluate(el=>el.getBoundingClientRect().height);
+   const position=()=>page.locator('#services').evaluate(el=>el.getBoundingClientRect().top+scrollY);
+   const documentTop=await position();
+   await page.mouse.move(width/2,height*.75);await page.mouse.wheel(0,900);
+   if(width<=1200||height<=700){
+    const during=await page.locator('#services').evaluate(async el=>{const positions=[];for(let i=0;i<20;i++){await new Promise(requestAnimationFrame);positions.push(el.getBoundingClientRect().top+scrollY);}return positions;});
+    assert.ok(during.every(top=>Math.abs(top-documentTop)<1),'Header animation must preserve document position: '+JSON.stringify(during));
+    await page.waitForFunction(()=>Math.abs(document.querySelector('.site-header').getBoundingClientRect().height-64)<1).catch(async error=>{
+     console.error('Reading header failure',lang,width,height,await page.locator('.site-header').evaluate(el=>({classes:el.className,height:el.getBoundingClientRect().height,full:el.style.getPropertyValue('--header-full-height'),y:scrollY,focus:el.querySelector(':focus-visible')?.outerHTML,hash:location.hash})));throw error;
+    });
+    assert.ok(Math.abs(await position()-documentTop)<1,'Collapsing must not shift document content');
+    const controls=await page.locator('.site-header').evaluate(el=>{
+     const brand=el.querySelector('.brand').getBoundingClientRect(),account=el.querySelector('.account-link').getBoundingClientRect(),menu=el.querySelector('.menu-toggle').getBoundingClientRect();
+     return {clear:brand.right<=account.left&&account.right<=menu.left,menuHeight:menu.height,accountHeight:account.height,overflow:document.documentElement.scrollWidth>innerWidth};
+    });
+    assert.ok(controls.clear&&controls.menuHeight>=44&&controls.accountHeight>=44&&!controls.overflow,JSON.stringify(controls));
+    if(lang==='hu'&&width===390)await page.screenshot({path:'artifacts/header-mobile-compact.png'});
+    await page.mouse.wheel(0,-60);
+    await page.waitForFunction(full=>Math.abs(document.querySelector('.site-header').getBoundingClientRect().height-full)<1,full);
+    assert.ok(Math.abs(await position()-documentTop)<1,'Expanding must not shift document content');
+    await page.mouse.wheel(0,260);
+    await page.waitForFunction(()=>document.querySelector('.site-header').classList.contains('is-compact'));
+    await openMenu();await menuLink(lang,1).click();await aligned('about');
+   }else assert.equal(await page.locator('.site-header').evaluate(el=>el.classList.contains('is-compact')),false);
+   console.log('PASS reading header',lang,width,height);
+  }
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.setViewportSize({width:390,height:844});await page.goto(origin+base+'/hu/');
+  await page.mouse.move(195,630);await page.mouse.wheel(0,900);
+  await page.waitForFunction(()=>document.querySelector('.site-header').classList.contains('is-compact'));
+  assert.equal(await page.locator('.site-header').evaluate(el=>getComputedStyle(el).transitionDuration),'0s');
+  await page.emulateMedia({reducedMotion:'no-preference'});
   for(const width of [390,1440])for(const lang of ['hu','ro','en']){
    await page.setViewportSize({width,height:900});
    const home=origin+base+'/'+lang+'/';
@@ -65,7 +102,10 @@ const {execFileSync}=require('node:child_process');
    }
    // Repeat the existing fragment after the visitor has manually scrolled elsewhere.
    await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
-   await openMenu();await menuLink(lang,3).click();await aligned('contact');
+   for(let i=0;i<targets.length;i++)for(let repeat=0;repeat<2;repeat++){
+    await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
+    await openMenu();await menuLink(lang,i).click();await aligned(targets[i]);
+   }
    // Each drawer link also works when navigating back from a service subpage.
    for(let i=0;i<targets.length;i++){
     await page.goto(home+'services/diagnostics/');

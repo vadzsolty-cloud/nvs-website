@@ -55,6 +55,8 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    const equipmentStyles=await page.locator('.equipment-list>li').evaluateAll(items=>items.map(e=>{const s=getComputedStyle(e);return {background:s.backgroundColor,radius:s.borderRadius,padding:s.padding};}));
    assert.ok(equipmentStyles.every(s=>JSON.stringify(s)===JSON.stringify(equipmentStyles[0])),'All eight cards should share the same base styling');
    for(const theme of ['light','dark']){
+    await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));
+    await page.waitForFunction(()=>!document.querySelector('.site-header').classList.contains('is-compact'));
     await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
     assert.ok(['rgb(245, 248, 242)','rgb(162, 255, 38)'].includes(await page.locator('.hero .slider-prev').evaluate(e=>getComputedStyle(e).color)));
     const overflow=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,offenders:[...document.querySelectorAll('body *')].filter(el=>{const r=el.getBoundingClientRect();return r.width>0&&r.right>innerWidth+1&&!el.closest('.slides,.site-menu,.lightbox');}).map(el=>({tag:el.tagName,class:el.className,id:el.id,right:el.getBoundingClientRect().right})).slice(0,12)}));

@@ -386,3 +386,25 @@ html[data-theme] .lightbox button:not(:hover):not(:focus-visible){color:#f5f8f2}
 .site-menu>nav{flex-grow:1}
 .site-menu>nav a{flex:1 0 auto}
 .site-menu .menu-contact{margin-top:0}
+
+/* Every main navigation destination starts at its visible content, not its outer spacing. */
+html{scroll-padding-top:var(--anchor-offset,132px)}
+:is(#about,#references,#contact,#app,#booking){scroll-margin-top:-85px}
+@media(max-width:700px){:is(#about,#references,#contact,#app,#booking){scroll-margin-top:-55px}}
+
+/* Preserve the header's place in the document while freeing reading space on smaller screens. */
+@media(max-width:1200px),(max-height:700px){
+ .site-header.scroll-header{height:var(--header-full-height);margin-bottom:0;transition:height .2s ease,margin-bottom .2s ease,padding .2s ease}
+ .site-header.scroll-header .brand img.site-logo{transition:width .2s ease}
+ .site-header.scroll-header.is-compact{height:64px;min-height:64px;padding-top:6px;padding-bottom:6px;margin-bottom:calc(var(--header-full-height) - 64px);gap:8px}
+ .site-header.is-compact .brand{font-size:13px;gap:8px}
+ .site-header.is-compact .brand small{font-size:10px;margin-top:3px}
+ .site-header.is-compact .brand img.site-logo{width:36px}
+ .site-header.is-compact .languages,.site-header.is-compact .theme-toggle,.site-header.is-compact .desktop-nav{display:none}
+ .site-header.is-compact .account-link,.site-header.is-compact .menu-toggle{min-height:44px;min-width:44px;padding:10px}
+ .site-header.is-compact .account-link span{display:none}
+}
+@media(max-width:700px){
+ .site-header.scroll-header.is-compact{grid-template-rows:44px;column-gap:8px;row-gap:0}
+}
+@media(prefers-reduced-motion:reduce){.site-header.scroll-header,.site-header.scroll-header .brand img.site-logo{transition:none}}
