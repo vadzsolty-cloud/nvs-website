@@ -16,9 +16,9 @@
     "en": "Headlights"
    },
    "alt": {
-    "hu": "LED-fényszóró beállítása fénymérő berendezéssel az NVS műhelyében",
-    "ro": "Reglarea unui far LED cu echipament de măsurare în atelierul NVS",
-    "en": "Adjusting an LED headlight with beam-setting equipment in the NVS workshop"
+    "hu": "LED-fényszóró precíz beállítása",
+    "ro": "Reglarea precisă a farurilor LED",
+    "en": "Precision LED headlight adjustment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -40,9 +40,9 @@
     "en": "Headlights"
    },
    "alt": {
-    "hu": "Világító fényszóró a beállítóberendezés mellett, ellenőrzés közben",
-    "ro": "Far aprins lângă echipamentul de reglare, în timpul verificării",
-    "en": "Illuminated headlight next to the aiming equipment during a check"
+    "hu": "Fényszóró vetítési képének ellenőrzése",
+    "ro": "Verificarea fasciculului farurilor",
+    "en": "Headlight beam pattern inspection"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -64,9 +64,9 @@
     "en": "ADAS"
    },
    "alt": {
-    "hu": "MAHLE TechPRO Digital ADAS kalibrálókijelző és kerékre szerelt mérőfejek egy jármű előtt a műhelyben",
-    "ro": "Ecran de calibrare MAHLE TechPRO Digital ADAS și capete de măsurare montate pe roată, în fața unui vehicul din atelier",
-    "en": "MAHLE TechPRO Digital ADAS calibration screen and wheel-mounted measuring heads in front of a vehicle in the workshop"
+    "hu": "ADAS-kalibrálás MAHLE TechPRO rendszerrel",
+    "ro": "Calibrare ADAS cu sistemul MAHLE TechPRO",
+    "en": "ADAS calibration with MAHLE TechPRO"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -88,9 +88,9 @@
     "en": "ACC radar"
    },
    "alt": {
-    "hu": "MAHLE TechPRO tablet a statikus elülső radarkalibrálás lépésével",
-    "ro": "Tabletă MAHLE TechPRO afișând pasul de calibrare statică a radarului frontal",
-    "en": "MAHLE TechPRO tablet showing the static front radar calibration step"
+    "hu": "ACC-radar kalibrálása MAHLE TechPRO rendszerrel",
+    "ro": "Calibrarea radarului ACC cu MAHLE TechPRO",
+    "en": "ACC radar calibration with MAHLE TechPRO"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -112,9 +112,9 @@
     "en": "Workshop"
    },
    "alt": {
-    "hu": "Emelőn álló jármű alváza, mögötte a műhely szerszámfala és szerelőpadjai",
-    "ro": "Partea inferioară a unui vehicul ridicat pe elevator, cu peretele de scule și bancurile de lucru ale atelierului în spate",
-    "en": "Underside of a vehicle on a lift, with the workshop tool wall and workbenches behind it"
+    "hu": "A Night Vision Service műhelye",
+    "ro": "Atelierul Night Vision Service",
+    "en": "The Night Vision Service workshop"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -136,9 +136,9 @@
     "en": "Gearbox"
    },
    "alt": {
-    "hu": "Szétszerelt sebességváltó tengelyei és fogaskerekei",
-    "ro": "Arborii și pinioanele unei cutii de viteze demontate",
-    "en": "Shafts and gears of a dismantled gearbox"
+    "hu": "Sebességváltó javítása – tengelyek és fogaskerekek",
+    "ro": "Reparație cutie de viteze – arbori și pinioane",
+    "en": "Gearbox repair – shafts and gears"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -160,9 +160,9 @@
     "en": "Gearbox"
    },
    "alt": {
-    "hu": "Kiszerelt váltóegység fogaskerekekkel a műhely munkapadján",
-    "ro": "Ansamblu de cutie de viteze demontat, cu pinioane, pe bancul de lucru al atelierului",
-    "en": "Removed gearbox assembly with gears on the workshop bench"
+    "hu": "Sebességváltó javítása műhelyünkben",
+    "ro": "Reparație cutie de viteze în atelierul nostru",
+    "en": "Gearbox repair in our workshop"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -184,9 +184,9 @@
     "en": "Gearbox"
    },
    "alt": {
-    "hu": "Nyitott váltóház a tengelyekkel a szerelőkocsin",
-    "ro": "Carcasă de cutie de viteze deschisă, cu arborii, pe căruciorul de montaj",
-    "en": "Open gearbox case with its shafts on the assembly trolley"
+    "hu": "Sebességváltó javítása – belső szerkezet",
+    "ro": "Reparație cutie de viteze – mecanismul interior",
+    "en": "Gearbox repair – internal components"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -208,9 +208,9 @@
     "en": "Gearbox"
    },
    "alt": {
-    "hu": "Váltóház a szerelőkocsin, a háttérben a műhely szerszámfala",
-    "ro": "Carcasă de cutie de viteze pe căruciorul de montaj, cu peretele de scule în fundal",
-    "en": "Gearbox housing on the assembly trolley, with the tool wall in the background"
+    "hu": "Sebességváltó javítása – váltóház",
+    "ro": "Reparație cutie de viteze – carcasă",
+    "en": "Gearbox repair – transmission housing"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -233,9 +233,9 @@
     "en": "Gearbox"
    },
    "alt": {
-    "hu": "Kiszerelt váltóvezérlő (mechatronikai) egység a munkapadon",
-    "ro": "Unitate mecatronică de comandă a cutiei de viteze, demontată, pe bancul de lucru",
-    "en": "Removed gearbox mechatronic control unit on the workbench"
+    "hu": "Sebességváltó javítása – mechatronikai egység",
+    "ro": "Reparație cutie de viteze – unitate mecatronică",
+    "en": "Gearbox repair – mechatronic unit"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -258,9 +258,9 @@
     "en": "Gearbox"
    },
    "alt": {
-    "hu": "A váltó vezérlőegysége a járműben, alulnézetből, leszerelt fedéllel",
-    "ro": "Unitatea de comandă a cutiei de viteze în vehicul, văzută de dedesubt, cu capacul demontat",
-    "en": "Gearbox control unit in the vehicle seen from below with its cover removed"
+    "hu": "Automata váltó vezérlőegysége",
+    "ro": "Unitatea de comandă a cutiei automate",
+    "en": "Automatic transmission control unit"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -282,9 +282,9 @@
     "en": "Gearbox"
    },
    "alt": {
-    "hu": "Kesztyűs kézzel végzett munka a nyitott váltón a szerelőpadnál",
-    "ro": "Lucru cu mănuși de protecție la o cutie de viteze deschisă, lângă bancul de lucru",
-    "en": "Gloved hands working on an open gearbox at the workbench"
+    "hu": "Sebességváltó szakszerű javítása",
+    "ro": "Reparație profesională a cutiei de viteze",
+    "en": "Professional gearbox repair"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -307,9 +307,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Jármű a futóműállító emelőn, kerékre szerelt mérőfejekkel és Hunter futóműmérő állomással",
-    "ro": "Vehicul pe elevatorul de geometrie, cu capete de măsurare pe roți și stația de geometrie Hunter",
-    "en": "Vehicle on the alignment lift with wheel-mounted targets and the Hunter alignment station"
+    "hu": "Precíz futóműállítás Hunter 3D rendszerrel",
+    "ro": "Reglarea geometriei roților cu Hunter 3D",
+    "en": "Precision wheel alignment with Hunter 3D"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -332,9 +332,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Hunter futóműmérő szoftver a műhely monitorain",
-    "ro": "Software de geometrie Hunter pe monitoarele atelierului",
-    "en": "Hunter wheel alignment software on the workshop monitors"
+    "hu": "Futóműgeometria mérése Hunter 3D rendszerrel",
+    "ro": "Măsurarea geometriei roților cu Hunter 3D",
+    "en": "Wheel geometry measurement with Hunter 3D"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -357,9 +357,9 @@
     "en": "Camera"
    },
    "alt": {
-    "hu": "Kamerakalibráló tábla a jármű előtt, kerékre szerelt mérőfejekkel és tablettel",
-    "ro": "Panou de calibrare a camerei în fața vehiculului, cu capete de măsurare pe roți și tabletă",
-    "en": "Camera calibration target in front of the vehicle with wheel-mounted heads and a tablet"
+    "hu": "Járműkamera kalibrálása célberendezéssel",
+    "ro": "Calibrarea camerei auto cu echipament dedicat",
+    "en": "Vehicle camera calibration with dedicated equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -382,9 +382,9 @@
     "en": "Camera"
    },
    "alt": {
-    "hu": "Kamerakalibráló tábla egy jármű orra előtt a műhelyben",
-    "ro": "Panou de calibrare a camerei în fața unui vehicul, în atelier",
-    "en": "Camera calibration target in front of a vehicle in the workshop"
+    "hu": "Járműkamera precíz kalibrálása",
+    "ro": "Calibrarea precisă a camerei auto",
+    "en": "Precision vehicle camera calibration"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -421,9 +421,9 @@
     ]
    ],
    "alt": {
-    "hu": "Járműhöz csatlakoztatott diagnosztikai szoftver laptopon az utastérben",
-    "ro": "Software de diagnoză pe laptop, conectat la vehicul, în habitaclu",
-    "en": "Diagnostic software on a laptop connected to the vehicle, inside the cabin"
+    "hu": "Autódiagnosztika és hibafeltárás",
+    "ro": "Diagnoză auto și identificarea defecțiunilor",
+    "en": "Vehicle diagnostics and fault finding"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -446,9 +446,9 @@
     "en": "ADAS"
    },
    "alt": {
-    "hu": "MAHLE TechPRO Digital ADAS kalibrálóállomás és diagnosztikai kocsi a műhelyben",
-    "ro": "Stație de calibrare MAHLE TechPRO Digital ADAS și cărucior de diagnoză în atelier",
-    "en": "MAHLE TechPRO Digital ADAS calibration station and diagnostic trolley in the workshop"
+    "hu": "MAHLE TechPRO Digital ADAS kalibrálóállomás",
+    "ro": "Stație de calibrare MAHLE TechPRO Digital ADAS",
+    "en": "MAHLE TechPRO Digital ADAS calibration station"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -471,9 +471,9 @@
     "en": "Headlights"
    },
    "alt": {
-    "hu": "Fényszóró-beállító berendezés lézeres vonallal egy jármű fényszórója előtt",
-    "ro": "Echipament de reglare a farurilor cu linie laser în fața farului unui vehicul",
-    "en": "Headlight aiming unit with a laser line in front of a vehicle headlight"
+    "hu": "Fényszóró-beállítás lézeres pozicionálással",
+    "ro": "Reglarea farurilor cu poziționare laser",
+    "en": "Headlight adjustment with laser positioning"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -496,9 +496,9 @@
     "en": "Air conditioning"
    },
    "alt": {
-    "hu": "Járműhöz csatlakoztatott klímaszerviz-berendezés a műhelyben",
-    "ro": "Stație de service pentru climatizare conectată la vehicul, în atelier",
-    "en": "Air conditioning service unit connected to a vehicle in the workshop"
+    "hu": "Klímaszerviz professzionális berendezéssel",
+    "ro": "Service climatizare cu echipament profesional",
+    "en": "Air conditioning service with professional equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -521,9 +521,9 @@
     "en": "Diagnostics"
    },
    "alt": {
-    "hu": "MAHLE TechPRO diagnosztikai tablet a jármű utasterében",
-    "ro": "Tabletă de diagnoză MAHLE TechPRO în habitaclul vehiculului",
-    "en": "MAHLE TechPRO diagnostic tablet inside the vehicle cabin"
+    "hu": "Autódiagnosztika MAHLE TechPRO műszerrel",
+    "ro": "Diagnoză auto cu MAHLE TechPRO",
+    "en": "Vehicle diagnostics with MAHLE TechPRO"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -546,9 +546,9 @@
     "en": "ACC radar"
    },
    "alt": {
-    "hu": "MAHLE TechPRO Digital ADAS kijelző radarreflektorral egy nyitott motorháztetejű jármű előtt",
-    "ro": "Ecran MAHLE TechPRO Digital ADAS cu reflector radar în fața unui vehicul cu capota deschisă",
-    "en": "MAHLE TechPRO Digital ADAS screen with a radar reflector in front of a vehicle with its bonnet open"
+    "hu": "ACC-radar kalibrálása MAHLE célberendezéssel",
+    "ro": "Calibrarea radarului ACC cu echipament MAHLE",
+    "en": "ACC radar calibration with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -571,9 +571,9 @@
     "en": "ADAS"
    },
    "alt": {
-    "hu": "MAHLE TechPRO Digital ADAS kalibrálókijelző egy jármű orra előtt",
-    "ro": "Ecran de calibrare MAHLE TechPRO Digital ADAS în fața unui vehicul",
-    "en": "MAHLE TechPRO Digital ADAS calibration screen in front of a vehicle"
+    "hu": "Vezetéstámogató rendszerek kalibrálása",
+    "ro": "Calibrarea sistemelor de asistență la conducere",
+    "en": "Driver assistance system calibration"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -596,9 +596,9 @@
     "en": "ADAS"
    },
    "alt": {
-    "hu": "ADAS-kalibráló kijelző beállítási útmutatóval egy jármű előtt",
-    "ro": "Ecran de calibrare ADAS cu ghid de poziționare în fața unui vehicul",
-    "en": "ADAS calibration screen with positioning guidance in front of a vehicle"
+    "hu": "ADAS-kalibrálás előkészítése MAHLE rendszerrel",
+    "ro": "Pregătirea calibrării ADAS cu MAHLE",
+    "en": "ADAS calibration setup with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -621,9 +621,9 @@
     "en": "ADAS"
    },
    "alt": {
-    "hu": "ADAS-kalibráló állomás és kerékre szerelt mérőfej egy kisbusz mellett",
-    "ro": "Stație de calibrare ADAS și cap de măsurare pe roată lângă o dubă",
-    "en": "ADAS calibration station and wheel-mounted head next to a van"
+    "hu": "Kisbusz ADAS-rendszerének kalibrálása",
+    "ro": "Calibrarea sistemului ADAS al unei autoutilitare",
+    "en": "Van ADAS system calibration"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -646,9 +646,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Kerékre szerelt mérőfej a futóműállító emelőn, háttérben a Hunter állomás",
-    "ro": "Cap de măsurare pe roată pe elevatorul de geometrie, cu stația Hunter în fundal",
-    "en": "Wheel-mounted target on the alignment lift with the Hunter station behind"
+    "hu": "Futóműmérés Hunter 3D mérőfejekkel",
+    "ro": "Măsurarea geometriei cu ținte Hunter 3D",
+    "en": "Wheel alignment measurement with Hunter 3D targets"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -671,9 +671,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Hunter futóműmérő konzol a műhelyben",
-    "ro": "Consola de geometrie Hunter în atelier",
-    "en": "Hunter alignment console in the workshop"
+    "hu": "Hunter 3D futóműmérő rendszer",
+    "ro": "Sistem Hunter 3D pentru geometria roților",
+    "en": "Hunter 3D wheel alignment system"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -696,9 +696,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Hunter 3D kameragerenda és tartalék mérőfejek a műhely falán",
-    "ro": "Grinda cu camere Hunter 3D și capete de măsurare pe peretele atelierului",
-    "en": "Hunter 3D camera beam and spare targets on the workshop wall"
+    "hu": "Hunter 3D kamerás futóműmérés",
+    "ro": "Măsurarea geometriei cu camere Hunter 3D",
+    "en": "Camera-based Hunter 3D wheel alignment measurement"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -721,9 +721,9 @@
     "en": "Camera"
    },
    "alt": {
-    "hu": "Kamerakalibráló tábla és kerékre szerelt mérőfej egy fekete jármű előtt",
-    "ro": "Panou de calibrare a camerei și cap de măsurare pe roată în fața unui vehicul negru",
-    "en": "Camera calibration target and wheel-mounted head in front of a black vehicle"
+    "hu": "Kamerakalibrálás professzionális célberendezéssel",
+    "ro": "Calibrare cameră cu echipament profesional",
+    "en": "Camera calibration with professional equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -746,9 +746,9 @@
     "en": "Camera"
    },
    "alt": {
-    "hu": "Kamerakalibráló tábla egy fehér jármű orra előtt",
-    "ro": "Panou de calibrare a camerei în fața unui vehicul alb",
-    "en": "Camera calibration target in front of a white vehicle"
+    "hu": "Járműkamera beállítása kalibrálóberendezéssel",
+    "ro": "Reglarea camerei auto cu echipament de calibrare",
+    "en": "Vehicle camera adjustment with calibration equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -771,9 +771,9 @@
     "en": "Camera"
    },
    "alt": {
-    "hu": "Kamerakalibráló tábla, a jármű utasteréből nézve",
-    "ro": "Panou de calibrare a camerei, văzut din habitaclul vehiculului",
-    "en": "Camera calibration target seen from inside the vehicle"
+    "hu": "Kamerakalibrálás műhelyünkben",
+    "ro": "Calibrare cameră în atelierul nostru",
+    "en": "Camera calibration in our workshop"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -796,9 +796,9 @@
     "en": "Headlights"
    },
    "alt": {
-    "hu": "LED-fényszóró beállítása fénymérő berendezéssel, nyitott motorháztetővel",
-    "ro": "Reglarea unui far LED cu echipament de măsurare, cu capota deschisă",
-    "en": "Adjusting an LED headlight with aiming equipment, bonnet open"
+    "hu": "LED-fényszóró beállítása mérőberendezéssel",
+    "ro": "Reglarea farurilor LED cu aparat de măsurare",
+    "en": "LED headlight adjustment with measuring equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -820,9 +820,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Bézs Audi az NVS futóműállító padján, az első kerékre szerelt Hunter 3D mérőtáblával",
-    "ro": "Audi bej pe standul de geometrie NVS, cu țintă Hunter 3D montată pe roata din față",
-    "en": "Beige Audi on the NVS wheel alignment rack with a Hunter 3D target on the front wheel"
+    "hu": "Audi – Hunter 3D futóműállítás",
+    "ro": "Audi – reglarea geometriei cu Hunter 3D",
+    "en": "Audi – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -853,9 +853,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Bézs Audi elölről és oldalról, a kerekekre szerelt Hunter 3D mérőtáblákkal a műhelyben",
-    "ro": "Audi bej văzut din față și lateral, cu ținte Hunter 3D montate pe roți în atelier",
-    "en": "Front three-quarter view of a beige Audi with Hunter 3D alignment targets attached to its wheels in the workshop"
+    "hu": "Audi – Hunter 3D futóműállítás",
+    "ro": "Audi – reglarea geometriei cu Hunter 3D",
+    "en": "Audi – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -886,9 +886,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Emelőn álló bézs Audi Hunter 3D futóműmérés közben, több kerékre szerelt mérőtáblával",
-    "ro": "Audi bej pe elevator în timpul măsurării geometriei Hunter 3D, cu ținte montate pe mai multe roți",
-    "en": "Beige Audi on the alignment lift during Hunter 3D measurement with targets attached to multiple wheels"
+    "hu": "Audi – Hunter 3D futóműállítás",
+    "ro": "Audi – reglarea geometriei cu Hunter 3D",
+    "en": "Audi – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -919,9 +919,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Kerékre szerelt Hunter 3D mérőtábla közelről, háttérben a futóműmérés képernyője",
-    "ro": "Detaliu al țintei Hunter 3D montate pe roată, cu ecranul de măsurare a geometriei în fundal",
-    "en": "Close-up of a Hunter 3D wheel-mounted target with the wheel alignment measurement screen in the background"
+    "hu": "Audi – Hunter 3D futóműállítás",
+    "ro": "Audi – reglarea geometriei cu Hunter 3D",
+    "en": "Audi – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -943,9 +943,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Bézs Audi a futóműállító padon, oldalról látható mérőtáblákkal és műhelyemelőkkel",
-    "ro": "Audi bej pe standul de geometrie, cu ținte de măsurare vizibile lateral și elevatoare în atelier",
-    "en": "Beige Audi on the wheel alignment rack with side-view measurement targets and workshop lifts"
+    "hu": "Audi – Hunter 3D futóműállítás",
+    "ro": "Audi – reglarea geometriei cu Hunter 3D",
+    "en": "Audi – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -976,9 +976,9 @@
     "en": "Headlights"
    },
    "alt": {
-    "hu": "Fehér Audi fényszóró-beállítása nyitott motorháztetővel, zöld lézervonalakkal és fényszóró-ellenőrző műszerrel",
-    "ro": "Reglarea farurilor unui Audi alb, cu capota deschisă, linii laser verzi și aparat de verificare a farurilor",
-    "en": "White Audi undergoing headlight adjustment with bonnet open, green laser alignment lines and a headlight testing instrument"
+    "hu": "Audi fényszóróinak precíz beállítása",
+    "ro": "Reglarea precisă a farurilor Audi",
+    "en": "Precision Audi headlight adjustment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1000,9 +1000,9 @@
     "en": "Headlights"
    },
    "alt": {
-    "hu": "Audi fényszórójának közeli képe zöld pozicionáló lézervonalakkal, mellette a narancssárga ellenőrző műszer",
-    "ro": "Detaliu al farului Audi cu linii laser verzi de poziționare și aparatul portocaliu de verificare alături",
-    "en": "Close-up of an Audi headlight with green positioning laser lines and the orange testing instrument alongside"
+    "hu": "Audi fényszóróinak precíz beállítása",
+    "ro": "Reglarea precisă a farurilor Audi",
+    "en": "Precision Audi headlight adjustment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1024,9 +1024,9 @@
     "en": "Headlights"
    },
    "alt": {
-    "hu": "Fényszóró-ellenőrzés ferde nézetből: nyitott Audi-motortér, zöld lézervonalak és a mérőberendezés",
-    "ro": "Verificarea farurilor din unghi: compartimentul motor Audi deschis, linii laser verzi și echipamentul de măsurare",
-    "en": "Angled view of headlight testing showing an open Audi engine bay, green laser lines and measuring equipment"
+    "hu": "Audi fényszóróinak precíz beállítása",
+    "ro": "Reglarea precisă a farurilor Audi",
+    "en": "Precision Audi headlight adjustment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1048,9 +1048,9 @@
     "en": "ACC radar"
    },
    "alt": {
-    "hu": "MAHLE kalibrálókijelző és kerékre szerelt mérőfej egy fekete jármű mellett az NVS műhelyében",
-    "ro": "Ecran de calibrare MAHLE și cap de măsurare montat pe roată, lângă un vehicul negru în atelierul NVS",
-    "en": "MAHLE calibration screen and wheel-mounted measuring head beside a black vehicle in the NVS workshop"
+    "hu": "ACC-radar kalibrálása MAHLE rendszerrel",
+    "ro": "Calibrarea radarului ACC cu sistemul MAHLE",
+    "en": "ACC radar calibration with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1072,9 +1072,9 @@
     "en": "Camera"
    },
    "alt": {
-    "hu": "MAHLE TechPRO Digital ADAS kamerakalibráló kijelző egy piros Nissan előtt a műhelyben",
-    "ro": "Ecran MAHLE TechPRO Digital ADAS pentru calibrarea camerei în fața unui Nissan roșu, în atelier",
-    "en": "MAHLE TechPRO Digital ADAS camera calibration screen in front of a red Nissan in the workshop"
+    "hu": "Nissan kamerakalibrálása MAHLE rendszerrel",
+    "ro": "Calibrarea camerei Nissan cu sistemul MAHLE",
+    "en": "Nissan camera calibration with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1096,9 +1096,9 @@
     "en": "Camera"
    },
    "alt": {
-    "hu": "Piros Nissan a kamerakalibráló kijelző mellett, kerékre szerelt mérőfejjel és diagnosztikai tablettel",
-    "ro": "Nissan roșu lângă ecranul de calibrare a camerei, cu un cap de măsurare pe roată și o tabletă de diagnoză",
-    "en": "Red Nissan beside the camera calibration screen with a wheel-mounted measuring head and diagnostic tablet"
+    "hu": "Nissan kamerakalibrálása MAHLE rendszerrel",
+    "ro": "Calibrarea camerei Nissan cu sistemul MAHLE",
+    "en": "Nissan camera calibration with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1120,9 +1120,9 @@
     "en": "Camera"
    },
    "alt": {
-    "hu": "Piros Nissan elölnézetből, a bal első kerékre szerelt kalibrálási mérőfejjel az NVS műhelyében",
-    "ro": "Nissan roșu văzut din față, cu un cap de măsurare pentru calibrare pe roata din stânga față, în atelierul NVS",
-    "en": "Front view of a red Nissan with a calibration measuring head on the front left wheel in the NVS workshop"
+    "hu": "Nissan kamerakalibrálása MAHLE rendszerrel",
+    "ro": "Calibrarea camerei Nissan cu sistemul MAHLE",
+    "en": "Nissan camera calibration with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1153,9 +1153,9 @@
     "en": "Camera"
    },
    "alt": {
-    "hu": "Piros Nissan a másik oldalról, a jobb első kerékre szerelt kalibrálási mérőfejjel a műhelyben",
-    "ro": "Nissan roșu văzut din partea opusă, cu un cap de măsurare pentru calibrare pe roata din dreapta față, în atelier",
-    "en": "Red Nissan from the opposite side with a calibration measuring head on the front right wheel in the workshop"
+    "hu": "Nissan kamerakalibrálása MAHLE rendszerrel",
+    "ro": "Calibrarea camerei Nissan cu sistemul MAHLE",
+    "en": "Nissan camera calibration with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1187,9 +1187,9 @@
     "en": "Night Vision"
    },
    "alt": {
-    "hu": "Night Vision kalibrálási célkép egy Audi műszeregységének kijelzőjén",
-    "ro": "Imaginea țintei de calibrare Night Vision pe afișajul instrumentelor unui Audi",
-    "en": "Night Vision calibration target image on an Audi instrument cluster display"
+    "hu": "Audi Night Vision rendszerének kalibrálása",
+    "ro": "Calibrarea sistemului Night Vision Audi",
+    "en": "Audi Night Vision system calibration"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1212,9 +1212,9 @@
     "en": "Night Vision"
    },
    "alt": {
-    "hu": "Fehér Audi Night Vision kalibrálás közben, MAHLE kijelzővel és kerékre szerelt mérőfejjel",
-    "ro": "Audi alb în timpul calibrării Night Vision, cu ecran MAHLE și cap de măsurare pe roată",
-    "en": "White Audi during Night Vision calibration with a MAHLE screen and wheel-mounted measuring head"
+    "hu": "Audi Night Vision rendszerének kalibrálása",
+    "ro": "Calibrarea sistemului Night Vision Audi",
+    "en": "Audi Night Vision system calibration"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1237,9 +1237,9 @@
     "en": "Night Vision"
    },
    "alt": {
-    "hu": "Az Audi Night Vision kalibrálási képe a műszeregységen, oldalról nézve",
-    "ro": "Imaginea de calibrare Night Vision pe instrumentele Audi, văzută din lateral",
-    "en": "Side view of the Night Vision calibration image on an Audi instrument display"
+    "hu": "Audi Night Vision rendszerének kalibrálása",
+    "ro": "Calibrarea sistemului Night Vision Audi",
+    "en": "Audi Night Vision system calibration"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1262,9 +1262,9 @@
     "en": "Night Vision"
    },
    "alt": {
-    "hu": "Audi utastér diagnosztikai laptoppal és védőfóliás kormánnyal a Night Vision ellenőrzés során",
-    "ro": "Habitaclu Audi cu laptop de diagnoză și volan protejat în timpul verificării Night Vision",
-    "en": "Audi interior with a diagnostic laptop and protected steering wheel during a Night Vision check"
+    "hu": "Audi Night Vision rendszerének diagnosztikája",
+    "ro": "Diagnoza sistemului Night Vision Audi",
+    "en": "Audi Night Vision system diagnostics"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1287,9 +1287,9 @@
     "en": "Night Vision"
    },
    "alt": {
-    "hu": "MAHLE TechPRO Digital ADAS állomás Night Vision céltáblával és diagnosztikai tablettel",
-    "ro": "Stație MAHLE TechPRO Digital ADAS cu țintă Night Vision și tabletă de diagnoză",
-    "en": "MAHLE TechPRO Digital ADAS station with a Night Vision target and diagnostic tablet"
+    "hu": "Night Vision kalibrálása MAHLE célberendezéssel",
+    "ro": "Calibrare Night Vision cu echipament MAHLE",
+    "en": "Night Vision calibration with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1312,9 +1312,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Kék Volvo elölnézetből a futóműállító emelőn az NVS műhelyében",
-    "ro": "Volvo albastru văzut din față pe elevatorul de geometrie în atelierul NVS",
-    "en": "Front view of a blue Volvo on the alignment lift in the NVS workshop"
+    "hu": "Volvo – Hunter 3D futóműállítás",
+    "ro": "Volvo – reglarea geometriei cu Hunter 3D",
+    "en": "Volvo – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1346,9 +1346,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Hunter futóműmérő állomás egy kék Volvo mellett, kerékre szerelt mérőfejjel",
-    "ro": "Stație Hunter de geometrie lângă un Volvo albastru, cu un cap de măsurare montat pe roată",
-    "en": "Hunter alignment station beside a blue Volvo with a wheel-mounted measuring head"
+    "hu": "Volvo – Hunter 3D futóműállítás",
+    "ro": "Volvo – reglarea geometriei cu Hunter 3D",
+    "en": "Volvo – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1371,9 +1371,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Kék Volvo futóműmérés közben, a bal első kerékre szerelt Hunter mérőfejjel",
-    "ro": "Volvo albastru în timpul măsurării geometriei, cu un cap Hunter pe roata din stânga față",
-    "en": "Blue Volvo during wheel alignment measurement with a Hunter target on the front left wheel"
+    "hu": "Volvo – Hunter 3D futóműállítás",
+    "ro": "Volvo – reglarea geometriei cu Hunter 3D",
+    "en": "Volvo – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1405,9 +1405,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Kék Volvo a futóműállító emelőn, a jobb első kerékre szerelt mérőfejjel",
-    "ro": "Volvo albastru pe elevatorul de geometrie, cu un cap de măsurare pe roata din dreapta față",
-    "en": "Blue Volvo on the alignment lift with a measuring head on the front right wheel"
+    "hu": "Volvo – Hunter 3D futóműállítás",
+    "ro": "Volvo – reglarea geometriei cu Hunter 3D",
+    "en": "Volvo – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1430,9 +1430,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Kék Volvo és a kerékre szerelt mérőfejek a futóműállító emelőn, tágabb elölnézetből",
-    "ro": "Volvo albastru cu capete de măsurare pe roți pe elevatorul de geometrie, vedere frontală de ansamblu",
-    "en": "Wider front view of a blue Volvo and wheel-mounted targets on the alignment lift"
+    "hu": "Volvo – Hunter 3D futóműállítás",
+    "ro": "Volvo – reglarea geometriei cu Hunter 3D",
+    "en": "Volvo – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1464,9 +1464,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Hunter futóműmérő állomás és a kék Volvo hátsó kerekére szerelt mérőfej",
-    "ro": "Stație Hunter de geometrie și cap de măsurare montat pe roata din spate a unui Volvo albastru",
-    "en": "Hunter alignment station and a measuring head mounted on the rear wheel of a blue Volvo"
+    "hu": "Volvo – Hunter 3D futóműállítás",
+    "ro": "Volvo – reglarea geometriei cu Hunter 3D",
+    "en": "Volvo – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1489,9 +1489,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Fehér BMW utastere kormányrögzítővel a futóműállítás előkészítése során",
-    "ro": "Habitaclul unui BMW alb cu dispozitiv de blocare a volanului în timpul pregătirii geometriei",
-    "en": "Interior of a white BMW with a steering wheel clamp during preparation for wheel alignment"
+    "hu": "BMW – Hunter 3D futóműállítás",
+    "ro": "BMW – reglarea geometriei cu Hunter 3D",
+    "en": "BMW – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1514,9 +1514,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Fehér BMW hátulról a futóműállító emelőn az NVS műhelyében",
-    "ro": "BMW alb văzut din spate pe elevatorul de geometrie în atelierul NVS",
-    "en": "Rear view of a white BMW on the alignment lift in the NVS workshop"
+    "hu": "BMW – Hunter 3D futóműállítás",
+    "ro": "BMW – reglarea geometriei cu Hunter 3D",
+    "en": "BMW – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1539,9 +1539,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Fehér BMW a futóműállító emelőn, az első kerékre szerelt Hunter mérőfejjel",
-    "ro": "BMW alb pe elevatorul de geometrie, cu un cap de măsurare Hunter montat pe roata din față",
-    "en": "White BMW on the alignment lift with a Hunter measuring head mounted on the front wheel"
+    "hu": "BMW – Hunter 3D futóműállítás",
+    "ro": "BMW – reglarea geometriei cu Hunter 3D",
+    "en": "BMW – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1564,9 +1564,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Fehér BMW oldalnézetből, kerékre szerelt mérőfejekkel a Hunter állomás mellett",
-    "ro": "BMW alb văzut din lateral, cu capete de măsurare pe roți lângă stația Hunter",
-    "en": "Side view of a white BMW with wheel-mounted measuring heads beside the Hunter station"
+    "hu": "BMW – Hunter 3D futóműállítás",
+    "ro": "BMW – reglarea geometriei cu Hunter 3D",
+    "en": "BMW – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1589,9 +1589,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "BMW-kerékre szerelt Hunter mérőfej közelről, háttérben a futóműmérő kijelzővel",
-    "ro": "Prim-plan al capului de măsurare Hunter montat pe o roată BMW, cu ecranul de geometrie în fundal",
-    "en": "Close-up of a Hunter measuring head on a BMW wheel with the alignment screen in the background"
+    "hu": "BMW – Hunter 3D futóműállítás",
+    "ro": "BMW – reglarea geometriei cu Hunter 3D",
+    "en": "BMW – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1614,9 +1614,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Fehér BMW az emelő oszlopai között, az első keréken futóműmérő fejjel",
-    "ro": "BMW alb între stâlpii elevatorului, cu un cap de măsurare a geometriei pe roata din față",
-    "en": "White BMW between the lift posts with an alignment measuring head on the front wheel"
+    "hu": "BMW – Hunter 3D futóműállítás",
+    "ro": "BMW – reglarea geometriei cu Hunter 3D",
+    "en": "BMW – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1639,9 +1639,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Fehér BMW elölnézetből a futóműállító emelőn, kerékre szerelt mérőfejjel",
-    "ro": "BMW alb văzut din față pe elevatorul de geometrie, cu un cap de măsurare montat pe roată",
-    "en": "Front view of a white BMW on the alignment lift with a wheel-mounted measuring head"
+    "hu": "BMW – Hunter 3D futóműállítás",
+    "ro": "BMW – reglarea geometriei cu Hunter 3D",
+    "en": "BMW – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1664,9 +1664,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Fehér BMW alacsony nézőpontból a futóműállító emelőn, a kerékre szerelt mérőfejjel",
-    "ro": "BMW alb văzut de jos pe elevatorul de geometrie, cu un cap de măsurare montat pe roată",
-    "en": "Low-angle view of a white BMW on the alignment lift with a wheel-mounted measuring head"
+    "hu": "BMW – Hunter 3D futóműállítás",
+    "ro": "BMW – reglarea geometriei cu Hunter 3D",
+    "en": "BMW – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1689,9 +1689,9 @@
     "en": "Transmission oil"
    },
    "alt": {
-    "hu": "BMW a műhely emelőjén a váltóolajcsere során, kitakart rendszámmal",
-    "ro": "BMW pe elevatorul atelierului în timpul schimbului de ulei la cutie, cu numărul de înmatriculare mascat",
-    "en": "BMW on the workshop lift during transmission oil service with its registration plate masked"
+    "hu": "BMW – automata váltó olajcseréje",
+    "ro": "BMW – schimb de ulei la cutia automată",
+    "en": "BMW – automatic transmission oil change"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1723,9 +1723,9 @@
     "en": "Transmission oil"
    },
    "alt": {
-    "hu": "Váltóolajcsere-berendezés az emelőn álló jármű alatt, a váltóhoz csatlakoztatva",
-    "ro": "Echipament pentru schimbul uleiului la cutie, conectat sub vehiculul ridicat",
-    "en": "Transmission oil service equipment connected beneath the vehicle on the lift"
+    "hu": "Váltóolajcsere professzionális célberendezéssel",
+    "ro": "Schimb de ulei la cutie cu echipament profesional",
+    "en": "Transmission oil change with dedicated service equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1747,9 +1747,9 @@
     "en": "Transmission oil"
    },
    "alt": {
-    "hu": "BMW oldalnézetből az emelőn, a váltóolajcsere műhelyi munkafolyamatában",
-    "ro": "BMW văzut din lateral pe elevator, în timpul lucrării de schimb al uleiului la cutie",
-    "en": "Side view of a BMW on the lift during the workshop transmission oil service"
+    "hu": "BMW – automata váltó olajcseréje",
+    "ro": "BMW – schimb de ulei la cutia automată",
+    "en": "BMW – automatic transmission oil change"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1772,9 +1772,9 @@
     "en": "Transmission oil"
    },
    "alt": {
-    "hu": "A jármű váltóolajteknője és környezete alulnézetből a műhelyben",
-    "ro": "Baia de ulei a cutiei și zona din jur, văzute de dedesubt în atelier",
-    "en": "Transmission oil pan and surrounding underbody viewed from beneath the vehicle in the workshop"
+    "hu": "BMW automata váltójának olajteknője",
+    "ro": "Baia de ulei a cutiei automate BMW",
+    "en": "BMW automatic transmission oil pan"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1797,9 +1797,9 @@
     "en": "Transmission oil"
    },
    "alt": {
-    "hu": "BMW elölnézetből az emelőn a váltóolajcsere alatt, kitakart rendszámmal",
-    "ro": "BMW văzut din față pe elevator în timpul schimbului de ulei la cutie, cu numărul mascat",
-    "en": "Front view of a BMW on the lift during transmission oil service with its registration plate masked"
+    "hu": "BMW – automata váltó olajcseréje",
+    "ro": "BMW – schimb de ulei la cutia automată",
+    "en": "BMW – automatic transmission oil change"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1825,9 +1825,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Mercedes kerékre szerelt mérőfeje a Hunter állomás mellett",
-    "ro": "Cap de măsurare pe roata unui Mercedes lângă stația Hunter",
-    "en": "Mercedes wheel-mounted target beside the Hunter station"
+    "hu": "Mercedes – Hunter 3D futóműállítás",
+    "ro": "Mercedes – reglarea geometriei cu Hunter 3D",
+    "en": "Mercedes – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1850,9 +1850,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Mercedes a futóműállító emelőn, elölről és oldalról",
-    "ro": "Mercedes pe elevatorul de geometrie, văzut din față și lateral",
-    "en": "Mercedes on the alignment lift, viewed from the front and side"
+    "hu": "Mercedes – Hunter 3D futóműállítás",
+    "ro": "Mercedes – reglarea geometriei cu Hunter 3D",
+    "en": "Mercedes – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1883,9 +1883,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Mercedes oldalnézete a futóműállító emelőn, mérőfejekkel",
-    "ro": "Mercedes văzut din lateral pe elevatorul de geometrie, cu capete de măsurare",
-    "en": "Side view of a Mercedes on the alignment lift with wheel targets"
+    "hu": "Mercedes – Hunter 3D futóműállítás",
+    "ro": "Mercedes – reglarea geometriei cu Hunter 3D",
+    "en": "Mercedes – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1907,9 +1907,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Kormányrögzítő és vízmérték a Mercedes utasterében",
-    "ro": "Dispozitiv de fixare a volanului și nivelă în habitaclul unui Mercedes",
-    "en": "Steering-wheel clamp and level inside a Mercedes"
+    "hu": "Mercedes – Hunter 3D futóműállítás",
+    "ro": "Mercedes – reglarea geometriei cu Hunter 3D",
+    "en": "Mercedes – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1931,9 +1931,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Mercedes másik első oldala, kerékre szerelt futóműmérő fejjel",
-    "ro": "Cealaltă parte frontală a unui Mercedes, cu un cap de măsurare pe roată",
-    "en": "The other front quarter of a Mercedes with a wheel alignment target"
+    "hu": "Mercedes – Hunter 3D futóműállítás",
+    "ro": "Mercedes – reglarea geometriei cu Hunter 3D",
+    "en": "Mercedes – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1964,9 +1964,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Tesla utastere védőfóliás kormánnyal a műhelyben",
-    "ro": "Habitaclu Tesla cu volanul protejat cu folie în atelier",
-    "en": "Tesla interior with a protective steering-wheel cover in the workshop"
+    "hu": "Tesla – Hunter 3D futóműállítás",
+    "ro": "Tesla – reglarea geometriei cu Hunter 3D",
+    "en": "Tesla – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -1989,9 +1989,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Tesla oldalnézete a kerékre szerelt mérőfejekkel és Hunter állomással",
-    "ro": "Tesla văzută din lateral cu capete de măsurare pe roți și stația Hunter",
-    "en": "Side view of a Tesla with wheel-mounted targets and the Hunter station"
+    "hu": "Tesla – Hunter 3D futóműállítás",
+    "ro": "Tesla – reglarea geometriei cu Hunter 3D",
+    "en": "Tesla – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2014,9 +2014,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Tesla hátulról és oldalról a futóműállító emelőn",
-    "ro": "Tesla văzută din spate și lateral pe elevatorul de geometrie",
-    "en": "Tesla rear quarter on the wheel alignment lift"
+    "hu": "Tesla – Hunter 3D futóműállítás",
+    "ro": "Tesla – reglarea geometriei cu Hunter 3D",
+    "en": "Tesla – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2039,9 +2039,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Hunter mérőállomás két kijelzővel a futóműállítás során",
-    "ro": "Stație Hunter cu două monitoare în timpul reglării geometriei",
-    "en": "Hunter alignment station with two monitors during the work"
+    "hu": "Futóműmérési adatok a Hunter rendszerben",
+    "ro": "Date de geometrie în sistemul Hunter",
+    "en": "Wheel alignment measurements in the Hunter system"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2064,9 +2064,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Tesla első kereke a futóműmérő fejjel, közelről",
-    "ro": "Roata din față a unei Tesla cu capul de măsurare, de aproape",
-    "en": "Close view of a Tesla front wheel with an alignment target"
+    "hu": "Tesla – Hunter 3D futóműállítás",
+    "ro": "Tesla – reglarea geometriei cu Hunter 3D",
+    "en": "Tesla – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2089,9 +2089,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Tesla elölről, az első és hátsó kerekeken mérőfejekkel",
-    "ro": "Tesla văzută din față, cu capete de măsurare pe roțile din față și spate",
-    "en": "Front view of a Tesla with targets on the front and rear wheels"
+    "hu": "Tesla – Hunter 3D futóműállítás",
+    "ro": "Tesla – reglarea geometriei cu Hunter 3D",
+    "en": "Tesla – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2123,9 +2123,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Tesla másik első kereke a rögzített futóműmérő fejjel",
-    "ro": "Cealaltă roată din față a unei Tesla cu capul de geometrie fixat",
-    "en": "The opposite front wheel of a Tesla with the alignment target attached"
+    "hu": "Tesla – Hunter 3D futóműállítás",
+    "ro": "Tesla – reglarea geometriei cu Hunter 3D",
+    "en": "Tesla – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2157,9 +2157,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Tesla hátulnézete a Hunter futóműmérő állomás előtt",
-    "ro": "Tesla văzută din spate în fața stației de geometrie Hunter",
-    "en": "Rear view of a Tesla in front of the Hunter alignment station"
+    "hu": "Tesla – Hunter 3D futóműállítás",
+    "ro": "Tesla – reglarea geometriei cu Hunter 3D",
+    "en": "Tesla – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2191,9 +2191,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Tesla első futóműmérő feje az emelőn, alacsony nézőpontból",
-    "ro": "Cap de geometrie pe roata din față a unei Tesla, văzut de jos",
-    "en": "Low view of a Tesla front alignment target on the lift"
+    "hu": "Tesla – Hunter 3D futóműállítás",
+    "ro": "Tesla – reglarea geometriei cu Hunter 3D",
+    "en": "Tesla – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2216,9 +2216,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Hunter kameragerenda, mérőállomás és emelő a műhelyben",
-    "ro": "Grindă cu camere Hunter, stație de măsurare și elevator în atelier",
-    "en": "Hunter camera beam, measuring station and lift in the workshop"
+    "hu": "Hunter 3D futóműmérő berendezésünk",
+    "ro": "Echipamentul nostru de geometrie Hunter 3D",
+    "en": "Our Hunter 3D wheel alignment equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2241,9 +2241,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Tesla a magasra emelt futóműállító padon, oldalról és hátulról",
-    "ro": "Tesla pe elevatorul de geometrie ridicat, văzută lateral și din spate",
-    "en": "Tesla on the raised alignment lift, viewed from the side and rear"
+    "hu": "Tesla – Hunter 3D futóműállítás",
+    "ro": "Tesla – reglarea geometriei cu Hunter 3D",
+    "en": "Tesla – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2275,9 +2275,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "BYD hátsó kereke a rögzített Hunter futóműmérő fejjel",
-    "ro": "Roata din spate a unui BYD cu capul de geometrie Hunter fixat",
-    "en": "BYD rear wheel with a Hunter alignment target attached"
+    "hu": "BYD – Hunter 3D futóműállítás",
+    "ro": "BYD – reglarea geometriei cu Hunter 3D",
+    "en": "BYD – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2300,9 +2300,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "BYD hátulnézete a futóműállító emelőn, tetőboxszal",
-    "ro": "BYD văzut din spate pe elevatorul de geometrie, cu portbagaj de plafon",
-    "en": "Rear view of a BYD on the alignment lift with a roof box"
+    "hu": "BYD – Hunter 3D futóműállítás",
+    "ro": "BYD – reglarea geometriei cu Hunter 3D",
+    "en": "BYD – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2333,9 +2333,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "Tesla utastere a kameranézeteket mutató központi kijelzővel",
-    "ro": "Habitaclu Tesla cu ecranul central afișând imaginile camerelor",
-    "en": "Tesla interior with camera views on the central display"
+    "hu": "Tesla – Hunter 3D futóműállítás",
+    "ro": "Tesla – reglarea geometriei cu Hunter 3D",
+    "en": "Tesla – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2379,9 +2379,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "BYD első kereke a futóműmérő fejjel az emelőn",
-    "ro": "Roata din față a unui BYD cu capul de geometrie pe elevator",
-    "en": "BYD front wheel with an alignment target on the lift"
+    "hu": "BYD – Hunter 3D futóműállítás",
+    "ro": "BYD – reglarea geometriei cu Hunter 3D",
+    "en": "BYD – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2404,9 +2404,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "BYD kormánya és központi kijelzője a műhelyben",
-    "ro": "Volanul și ecranul central al unui BYD în atelier",
-    "en": "BYD steering wheel and central display in the workshop"
+    "hu": "BYD – Hunter 3D futóműállítás",
+    "ro": "BYD – reglarea geometriei cu Hunter 3D",
+    "en": "BYD – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2429,9 +2429,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "BYD hátulról és oldalról, kerékre szerelt futóműmérő fejjel",
-    "ro": "BYD văzut din spate și lateral, cu capul de geometrie pe roată",
-    "en": "BYD rear quarter with a wheel-mounted alignment target"
+    "hu": "BYD – Hunter 3D futóműállítás",
+    "ro": "BYD – reglarea geometriei cu Hunter 3D",
+    "en": "BYD – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2454,9 +2454,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "BYD elölről a futóműállító emelőn, Hunter mérőfejekkel",
-    "ro": "BYD văzut din față pe elevatorul de geometrie, cu capete Hunter",
-    "en": "Front view of a BYD on the alignment lift with Hunter targets"
+    "hu": "BYD – Hunter 3D futóműállítás",
+    "ro": "BYD – reglarea geometriei cu Hunter 3D",
+    "en": "BYD – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2487,9 +2487,9 @@
     "en": "Hunter 3D"
    },
    "alt": {
-    "hu": "BYD oldalnézete a futóműállító emelőn, tetőboxszal és mérőfejekkel",
-    "ro": "BYD văzut din lateral pe elevator, cu portbagaj de plafon și capete de măsurare",
-    "en": "Side view of a BYD on the lift with a roof box and alignment targets"
+    "hu": "BYD – Hunter 3D futóműállítás",
+    "ro": "BYD – reglarea geometriei cu Hunter 3D",
+    "en": "BYD – Hunter 3D wheel alignment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2512,9 +2512,9 @@
     "en": "Air conditioning"
    },
    "alt": {
-    "hu": "TEXA 707 Touch R-1234yf klímaszerviz-berendezés a műhelyben",
-    "ro": "Stație de service pentru climatizare TEXA 707 Touch R-1234yf în atelier",
-    "en": "TEXA 707 Touch R-1234yf air conditioning service unit in the workshop"
+    "hu": "TEXA 707 Touch klímaszerviz-berendezésünk",
+    "ro": "Stația noastră de climatizare TEXA 707 Touch",
+    "en": "Our TEXA 707 Touch air conditioning service station"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2537,9 +2537,9 @@
     "en": "Air conditioning"
    },
    "alt": {
-    "hu": "Klímaszerviz-berendezés és csatlakoztatott tömlők a Mercedes mellett",
-    "ro": "Stație de climatizare și furtunuri conectate lângă un Mercedes",
-    "en": "Air conditioning service unit and connected hoses beside a Mercedes"
+    "hu": "Mercedes klímaszervize TEXA berendezéssel",
+    "ro": "Service climatizare Mercedes cu echipament TEXA",
+    "en": "Mercedes air conditioning service with TEXA equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2561,9 +2561,9 @@
     "en": "Air conditioning"
    },
    "alt": {
-    "hu": "Nyitott motorháztetejű Mercedes klímaszerviz közben",
-    "ro": "Mercedes cu capota deschisă în timpul lucrărilor la climatizare",
-    "en": "Mercedes with its bonnet open during air conditioning service"
+    "hu": "Mercedes klímaszervize TEXA berendezéssel",
+    "ro": "Service climatizare Mercedes cu echipament TEXA",
+    "en": "Mercedes air conditioning service with TEXA equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2595,9 +2595,9 @@
     "en": "Air conditioning"
    },
    "alt": {
-    "hu": "Mercedes csatlakoztatott klímatömlőkkel a TEXA berendezés mellett",
-    "ro": "Mercedes cu furtunuri de climatizare conectate lângă stația TEXA",
-    "en": "Mercedes with air conditioning hoses connected beside the TEXA unit"
+    "hu": "Mercedes klímaszervize TEXA berendezéssel",
+    "ro": "Service climatizare Mercedes cu echipament TEXA",
+    "en": "Mercedes air conditioning service with TEXA equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2634,9 +2634,9 @@
     "en": "Air conditioning"
    },
    "alt": {
-    "hu": "Piros és kék klímatömlők a Mercedes motorterében",
-    "ro": "Furtunuri roșii și albastre de climatizare în compartimentul motor al unui Mercedes",
-    "en": "Red and blue air conditioning hoses in a Mercedes engine bay"
+    "hu": "Mercedes klímaszervize TEXA berendezéssel",
+    "ro": "Service climatizare Mercedes cu echipament TEXA",
+    "en": "Mercedes air conditioning service with TEXA equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2668,9 +2668,9 @@
     "en": "Air conditioning"
    },
    "alt": {
-    "hu": "Toyota megbontott eleje klímajavítás és nyomásmérés közben",
-    "ro": "Partea frontală demontată a unui Toyota în timpul reparației și măsurării presiunii climatizării",
-    "en": "Dismantled Toyota front during air conditioning repair and pressure measurement"
+    "hu": "Toyota klímajavítása és nyomásellenőrzése",
+    "ro": "Reparație climatizare Toyota și verificarea presiunii",
+    "en": "Toyota air conditioning repair and pressure checks"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2693,9 +2693,9 @@
     "en": "Air conditioning"
    },
    "alt": {
-    "hu": "Mercedes klímaszerviz közben, mellette a sárga TEXA berendezés",
-    "ro": "Mercedes în timpul lucrărilor la climatizare, lângă stația TEXA galbenă",
-    "en": "Mercedes during air conditioning service beside the yellow TEXA unit"
+    "hu": "Mercedes klímaszervize TEXA berendezéssel",
+    "ro": "Service climatizare Mercedes cu echipament TEXA",
+    "en": "Mercedes air conditioning service with TEXA equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2739,9 +2739,9 @@
     "en": "ACC radar"
    },
    "alt": {
-    "hu": "Volkswagen nyitott motorháztetővel az ACC-kalibráló állomás előtt",
-    "ro": "Volkswagen cu capota deschisă în fața stației de calibrare ACC",
-    "en": "Volkswagen with its bonnet open in front of the ACC calibration station"
+    "hu": "Volkswagen ACC-radarjának kalibrálása MAHLE rendszerrel",
+    "ro": "Calibrarea radarului ACC Volkswagen cu MAHLE",
+    "en": "Volkswagen ACC radar calibration with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2772,9 +2772,9 @@
     "en": "ACC radar"
    },
    "alt": {
-    "hu": "Volkswagen az ACC-kalibráló berendezés mellett a műhelyállásban",
-    "ro": "Volkswagen lângă echipamentul de calibrare ACC în atelier",
-    "en": "Volkswagen beside the ACC calibration equipment in the workshop bay"
+    "hu": "Volkswagen ACC-radarjának kalibrálása MAHLE rendszerrel",
+    "ro": "Calibrarea radarului ACC Volkswagen cu MAHLE",
+    "en": "Volkswagen ACC radar calibration with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2806,9 +2806,9 @@
     "en": "ACC radar"
    },
    "alt": {
-    "hu": "Volkswagen kerékre szerelt mérőfejjel az ACC-beállító állomásnál",
-    "ro": "Volkswagen cu un cap de măsurare pe roată la stația de reglare ACC",
-    "en": "Volkswagen with a wheel-mounted measuring head at the ACC setup station"
+    "hu": "Volkswagen ACC-radarjának kalibrálása MAHLE rendszerrel",
+    "ro": "Calibrarea radarului ACC Volkswagen cu MAHLE",
+    "en": "Volkswagen ACC radar calibration with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2831,9 +2831,9 @@
     "en": "ACC radar"
    },
    "alt": {
-    "hu": "MAHLE beállítási képernyő a Volkswagen előtt, rögzített mérőfejjel",
-    "ro": "Ecran MAHLE în fața unui Volkswagen, cu cap de măsurare fixat",
-    "en": "MAHLE setup screen in front of a Volkswagen with a measuring head attached"
+    "hu": "Volkswagen ACC-radarjának kalibrálása MAHLE rendszerrel",
+    "ro": "Calibrarea radarului ACC Volkswagen cu MAHLE",
+    "en": "Volkswagen ACC radar calibration with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2856,9 +2856,9 @@
     "en": "ACC radar"
    },
    "alt": {
-    "hu": "Volkswagen a vezetőoldal felől, előtte a MAHLE kalibrálóállomás",
-    "ro": "Volkswagen văzut dinspre șofer, cu stația de calibrare MAHLE în față",
-    "en": "Volkswagen viewed from the driver side with the MAHLE calibration station ahead"
+    "hu": "Volkswagen ACC-radarjának kalibrálása MAHLE rendszerrel",
+    "ro": "Calibrarea radarului ACC Volkswagen cu MAHLE",
+    "en": "Volkswagen ACC radar calibration with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2881,9 +2881,9 @@
     "en": "ACC radar"
    },
    "alt": {
-    "hu": "MAHLE radarreflektor és TechPRO kijelző a Volkswagen előtt",
-    "ro": "Reflector radar MAHLE și ecran TechPRO în fața unui Volkswagen",
-    "en": "MAHLE radar reflector and TechPRO display in front of a Volkswagen"
+    "hu": "Volkswagen ACC-radarjának kalibrálása MAHLE rendszerrel",
+    "ro": "Calibrarea radarului ACC Volkswagen cu MAHLE",
+    "en": "Volkswagen ACC radar calibration with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2906,9 +2906,9 @@
     "en": "ACC radar"
    },
    "alt": {
-    "hu": "Volkswagen első kereke a rögzített ACC-beállító mérőfejjel",
-    "ro": "Roata din față a unui Volkswagen cu capul de măsurare pentru ACC fixat",
-    "en": "Volkswagen front wheel with the ACC setup measuring head attached"
+    "hu": "Volkswagen ACC-radarjának kalibrálása MAHLE rendszerrel",
+    "ro": "Calibrarea radarului ACC Volkswagen cu MAHLE",
+    "en": "Volkswagen ACC radar calibration with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2931,9 +2931,9 @@
     "en": "ACC radar"
    },
    "alt": {
-    "hu": "Volkswagen másik első kereke és a MAHLE beállítási képernyő",
-    "ro": "Cealaltă roată din față a unui Volkswagen și ecranul de reglare MAHLE",
-    "en": "Opposite front wheel of a Volkswagen and the MAHLE setup screen"
+    "hu": "Volkswagen ACC-radarjának kalibrálása MAHLE rendszerrel",
+    "ro": "Calibrarea radarului ACC Volkswagen cu MAHLE",
+    "en": "Volkswagen ACC radar calibration with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2956,9 +2956,9 @@
     "en": "ACC radar"
    },
    "alt": {
-    "hu": "MAHLE diagnosztikai tablet az elülső radarkalibrálás eredményével",
-    "ro": "Tabletă de diagnoză MAHLE cu rezultatul calibrării radarului frontal",
-    "en": "MAHLE diagnostic tablet showing the front radar calibration result"
+    "hu": "Volkswagen ACC-kalibrálásának diagnosztikai eredménye",
+    "ro": "Rezultatul diagnostic al calibrării ACC Volkswagen",
+    "en": "Volkswagen ACC calibration diagnostic result"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -2981,9 +2981,9 @@
     "en": "ACC radar"
    },
    "alt": {
-    "hu": "MAHLE kalibrálóképernyő és mérőgerenda a Volkswagen előtt",
-    "ro": "Ecran de calibrare MAHLE și grindă de măsurare în fața unui Volkswagen",
-    "en": "MAHLE calibration screen and measuring beam in front of a Volkswagen"
+    "hu": "Volkswagen ACC-radarjának kalibrálása MAHLE rendszerrel",
+    "ro": "Calibrarea radarului ACC Volkswagen cu MAHLE",
+    "en": "Volkswagen ACC radar calibration with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -3006,9 +3006,9 @@
     "en": "ACC radar"
    },
    "alt": {
-    "hu": "Diagnosztikai laptop és MAHLE állomás a nyitott motorháztetejű Volkswagen mellett",
-    "ro": "Laptop de diagnoză și stație MAHLE lângă Volkswagen cu capota deschisă",
-    "en": "Diagnostic laptop and MAHLE station beside a Volkswagen with its bonnet open"
+    "hu": "Volkswagen ACC-rendszerének diagnosztikája",
+    "ro": "Diagnoza sistemului ACC Volkswagen",
+    "en": "Volkswagen ACC system diagnostics"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -3031,9 +3031,9 @@
     "en": "ACC radar"
    },
    "alt": {
-    "hu": "Volkswagen elölnézete nyitott motorháztetővel az ACC-munka során",
-    "ro": "Volkswagen văzut din față cu capota deschisă în timpul lucrării ACC",
-    "en": "Front view of a Volkswagen with its bonnet open during the ACC work"
+    "hu": "Volkswagen ACC-radarjának kalibrálása MAHLE rendszerrel",
+    "ro": "Calibrarea radarului ACC Volkswagen cu MAHLE",
+    "en": "Volkswagen ACC radar calibration with MAHLE equipment"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -3065,9 +3065,9 @@
     "en": "Transmission oil"
    },
    "alt": {
-    "hu": "BMW elölről az emelőn, alatta az olajkezelő berendezéssel",
-    "ro": "BMW văzut din față pe elevator, cu echipamentul de ulei dedesubt",
-    "en": "Front view of a BMW on the lift with the oil service equipment below"
+    "hu": "BMW – automata váltó olajcseréje",
+    "ro": "BMW – schimb de ulei la cutia automată",
+    "en": "BMW – automatic transmission oil change"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -3099,9 +3099,9 @@
     "en": "Transmission oil"
    },
    "alt": {
-    "hu": "BMW hátulról és oldalról az emelőn váltóolajcsere közben",
-    "ro": "BMW văzut din spate și lateral pe elevator în timpul schimbului de ulei la cutie",
-    "en": "BMW rear quarter on the lift during a transmission oil change"
+    "hu": "BMW – automata váltó olajcseréje",
+    "ro": "BMW – schimb de ulei la cutia automată",
+    "en": "BMW – automatic transmission oil change"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -3132,9 +3132,9 @@
     "en": "Transmission oil"
    },
    "alt": {
-    "hu": "Leszerelt váltóolajteknő a műhely munkapadján",
-    "ro": "Baie de ulei a cutiei de viteze demontată, pe bancul de lucru",
-    "en": "Removed transmission oil pan on the workshop bench"
+    "hu": "Váltóolajteknő az automata váltó szervize során",
+    "ro": "Baia de ulei în timpul service-ului cutiei automate",
+    "en": "Transmission oil pan during automatic gearbox servicing"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -3156,9 +3156,9 @@
     "en": "Transmission oil"
    },
    "alt": {
-    "hu": "A váltó alsó vezérlőegysége leszerelt olajteknővel",
-    "ro": "Blocul hidraulic al cutiei de viteze cu baia de ulei demontată",
-    "en": "Transmission valve body with the oil pan removed"
+    "hu": "BMW automata váltójának hidraulikus vezérlőegysége",
+    "ro": "Blocul hidraulic al cutiei automate BMW",
+    "en": "BMW automatic transmission valve body"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -3181,9 +3181,9 @@
     "en": "Transmission oil"
    },
    "alt": {
-    "hu": "BMW az emelőn, mellette a váltóolajcsere berendezései",
-    "ro": "BMW pe elevator, lângă echipamentele pentru schimbul uleiului la cutie",
-    "en": "BMW on the lift beside the transmission oil service equipment"
+    "hu": "BMW – automata váltó olajcseréje",
+    "ro": "BMW – schimb de ulei la cutia automată",
+    "en": "BMW – automatic transmission oil change"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -3215,9 +3215,9 @@
     "en": "Transmission oil"
    },
    "alt": {
-    "hu": "BMW első részlete az emelőn, alul az olajgyűjtő berendezéssel",
-    "ro": "Detaliu frontal al unui BMW pe elevator, cu echipamentul de colectare a uleiului dedesubt",
-    "en": "Front detail of a BMW on the lift with oil collection equipment below"
+    "hu": "BMW – automata váltó olajcseréje",
+    "ro": "BMW – schimb de ulei la cutia automată",
+    "en": "BMW – automatic transmission oil change"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
@@ -3249,9 +3249,9 @@
     "en": "Our workshop"
    },
    "alt": {
-    "hu": "A Night Vision Service műhelyének homlokzata három szervizkapuval, napelemekkel és térkövezett udvarral",
-    "ro": "Fațada atelierului Night Vision Service cu trei porți de service, panouri solare și curte pavată",
-    "en": "The Night Vision Service workshop exterior with three service doors, rooftop solar panels and a paved courtyard"
+    "hu": "A Night Vision Service műhelye",
+    "ro": "Atelierul Night Vision Service",
+    "en": "The Night Vision Service workshop"
    },
    "privacy": {
     "reviewedAt": "2026-11-21",
