@@ -8,6 +8,7 @@ import {photos,placement,assetStem} from '../src/photos.mjs';
 import {ids} from '../src/content.mjs';
 import {sliderOrder} from '../src/slider.mjs';
 import {facebookPosts,pageId} from '../src/facebook-posts.mjs';
+import {rankedFacebookPosts} from '../src/facebook-ranking.mjs';
 import {referenceCopy} from '../src/reference-disclosure.mjs';
 
 // Files whose bottom-left corner shows the Samsung "AI által előállított tartalom" label, the edited
@@ -61,11 +62,13 @@ test('pages use responsive images under /nvs-website/, eager hero, lazy gallery,
   assert.ok(html.indexOf('id="references"')<html.indexOf('id="about"'));
   assert.ok(html.indexOf('class="gallery photo-gallery"')<html.indexOf('id="gearbox-oil"'));
   const facebook=await readFile(output+'/'+l+'/facebook/index.html','utf8');
-  for(const p of facebookPosts){assert.ok(facebook.includes('href="https://www.facebook.com/'+pageId+'/posts/'+p.id+'" target="_blank" rel="noopener"'),p.id);assert.ok(facebook.includes(p.title[l].replaceAll('&','&amp;')));}
-  assert.equal((facebook.match(/class="fb-card fb-photo-card"/g)||[]).length,facebookPosts.length-1);
+  for(const p of rankedFacebookPosts){assert.ok(facebook.includes('href="'+p.url+'" target="_blank" rel="noopener"'),p.id);assert.ok(facebook.includes(p.title[l].replaceAll('&','&amp;')));}
+  assert.deepEqual([...facebook.matchAll(/data-ranking-views="(\d+)"/g)].map(m=>Number(m[1])),rankedFacebookPosts.map(p=>p.views));
+  assert.equal(rankedFacebookPosts.length,10);assert.ok(rankedFacebookPosts.every((p,i,a)=>i===0||a[i-1].views>=p.views));
+  assert.equal((facebook.match(/class="fb-card fb-photo-card"/g)||[]).length,rankedFacebookPosts.length-1);
   assert.ok(!/connect\.facebook\.net|fbq\(/.test(facebook));
-  assert.equal((facebook.match(/plugins\/video\.php/g)||[]).length,1);
-  assert.equal((facebook.match(/plugins\/page\.php/g)||[]).length,1);
+  assert.equal((facebook.match(/plugins\/video\.php/g)||[]).length,0);
+  assert.equal((facebook.match(/plugins\/page\.php/g)||[]).length,0);
   assert.ok(facebook.indexOf('class="section facebook-selected"')<facebook.indexOf('class="section facebook-page-view"'));
   assert.ok(facebook.includes('hreflang="en" href="https://vadzsolty-cloud.github.io/nvs-website/en/facebook/"'));
   // service slider: one slide per service, real photo or labelled icon slide, links to the service page

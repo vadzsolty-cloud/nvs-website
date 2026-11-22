@@ -81,7 +81,7 @@ const {execFileSync}=require('node:child_process');
    await page.setViewportSize({width,height:900});
    const home=origin+base+'/'+lang+'/';
    await page.goto(home);
-   assert.deepEqual(await page.locator('.desktop-nav a').evaluateAll(links=>links.map(a=>new URL(a.href).hash)),['#services','#references','#about','#contact']);
+   assert.deepEqual(await page.locator('.desktop-nav a[href*="#"]').evaluateAll(links=>links.map(a=>new URL(a.href).hash)),['#services','#references','#about','#contact']);
    if(await page.locator('#privacy-preferences').isVisible())await page.locator('[data-consent=reject]').click();
    const links=await page.locator('.site-header a,#site-menu a,.legal-footer a').evaluateAll(els=>els.map(a=>({href:a.href,text:a.textContent.trim()})));
    for(const link of links){
