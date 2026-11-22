@@ -81,6 +81,7 @@ const {execFileSync}=require('node:child_process');
    await page.setViewportSize({width,height:900});
    const home=origin+base+'/'+lang+'/';
    await page.goto(home);
+   assert.deepEqual(await page.locator('.desktop-nav a').evaluateAll(links=>links.map(a=>new URL(a.href).hash)),['#services','#references','#about','#contact']);
    if(await page.locator('#privacy-preferences').isVisible())await page.locator('[data-consent=reject]').click();
    const links=await page.locator('.site-header a,#site-menu a,.legal-footer a').evaluateAll(els=>els.map(a=>({href:a.href,text:a.textContent.trim()})));
    for(const link of links){
@@ -131,6 +132,10 @@ const {execFileSync}=require('node:child_process');
    await page.goto(home+'facebook/');
    assert.equal(await page.locator('.languages a[lang=en]').getAttribute('href'),base+'/en/facebook/');
    await page.locator('.facebook-intro>a').click();await aligned('references');
+   await page.goto(home+'services/acc/');
+   assert.equal(await page.locator('.service-actions a[href^="tel:"]').count(),2);
+   await page.locator('.service-actions--compact a').first().click();
+   await page.waitForURL(home+'account/');
    console.log('PASS navigation',lang,width);
   }
   // The complete menu, including its contact card, fits typical laptop windows.
