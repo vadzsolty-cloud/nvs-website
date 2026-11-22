@@ -20,6 +20,7 @@ const {execFileSync}=require('node:child_process');
   page.on('pageerror',e=>errors.push(e.message));
   const targets=['services','about','references','contact'];
   const aligned=async target=>{
+   await page.waitForURL(url=>url.hash==='#'+target&&!url.pathname.includes('/services/'));
    await page.waitForFunction(id=>{
     const top=document.getElementById(id).getBoundingClientRect().top;
     const header=document.querySelector('.site-header').getBoundingClientRect().bottom;
