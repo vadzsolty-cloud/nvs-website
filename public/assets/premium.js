@@ -5,7 +5,7 @@
  // Keep anchor arrivals below the full header, even when the reading header is compact.
  const header=document.querySelector('.site-header');
  const smallViewport=matchMedia('(max-width:1200px), (max-height:700px)');
- let lastY=Math.max(0,scrollY),travel=0,direction=0,frame=0,anchorUntil=0,lastWidth=innerWidth;
+ let lastY=Math.max(0,scrollY),travel=0,direction=0,frame=0,anchorUntil=location.hash?performance.now()+1600:0,lastWidth=innerWidth;
  const expandHeader=()=>header?.classList.remove('is-compact');
  const measureHeader=()=>{
   if(!header)return;
@@ -40,6 +40,7 @@
     }else if(direction<0&&travel>=16)expandHeader();
    });
   },{passive:true});
+  addEventListener('hashchange',()=>{expandHeader();anchorUntil=performance.now()+1600;travel=0;direction=0;});
   // A visitor's gesture takes precedence over an in-progress anchor animation.
   for(const event of ['wheel','touchmove'])addEventListener(event,()=>{anchorUntil=0;},{passive:true});
   addEventListener('keydown',event=>{if(['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' '].includes(event.key))anchorUntil=0;});
