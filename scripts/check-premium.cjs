@@ -82,7 +82,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
     const compactContact=await menuContact.evaluate(el=>{const r=el.getBoundingClientRect(),dialog=el.closest('dialog').getBoundingClientRect();return {left:r.left,right:r.right,dialogLeft:dialog.left,dialogRight:dialog.right,font:parseFloat(getComputedStyle(el.querySelector('.portal-contact-phone strong')).fontSize)};});
     assert.ok(compactContact.left>=compactContact.dialogLeft&&compactContact.right<=compactContact.dialogRight&&compactContact.font===22,JSON.stringify(compactContact));
     if(lang==='hu'&&[320,390,1440].includes(width))await page.locator('#site-menu').screenshot({path:'artifacts/menu-contact-'+width+'-'+theme+'.png'});
-    await page.keyboard.press('Escape');assert.equal(await page.locator('#site-menu').evaluate(e=>e.open),false);assert.equal(await page.locator('.menu-toggle').evaluate(e=>e===document.activeElement),true);
+    await page.keyboard.press('Escape');await page.waitForFunction(()=>!document.body.classList.contains('menu-open'));assert.equal(await page.locator('#site-menu').evaluate(e=>e.open),false);assert.equal(await page.locator('.menu-toggle').evaluate(e=>e===document.activeElement),true);
     if(lang==='hu'){
      await page.evaluate(()=>{document.activeElement.blur();scrollTo(0,0);});await page.screenshot({path:'artifacts/premium-home-'+width+'-'+theme+'.png'});
      await page.locator('#services').scrollIntoViewIfNeeded();
