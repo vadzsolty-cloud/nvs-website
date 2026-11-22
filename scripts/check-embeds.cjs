@@ -29,7 +29,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
     assert.equal(Number(src.searchParams.get('height')),Math.round(box.height));
     if(selector==='.fb-featured'){assert.ok(Math.abs(box.height-box.width*16/9)<1);assert.equal(new URL(src.searchParams.get('href')).pathname,'/61572089218581/videos/1697012922028515/');}
     await el.scrollIntoViewIfNeeded();const frame=await (await el.elementHandle()).contentFrame();await frame.waitForSelector('[data-poster]');
-    const visible=await frame.evaluate(()=>{const b=document.querySelector('[data-poster]').getBoundingClientRect();return b.top>=0&&b.bottom<=innerHeight+1&&b.right<=innerWidth+1;});assert.equal(visible,true,lang+' '+width+' '+selector+' must show both ends of the preview');
+    if(selector==='.fb-featured'){const visible=await frame.evaluate(()=>{const b=document.querySelector('[data-poster]').getBoundingClientRect();return b.top>=0&&b.bottom<=innerHeight+1&&b.right<=innerWidth+1;});assert.equal(visible,true,lang+' '+width+' featured video must show both ends of the preview');}else{assert.ok(box.height<=760&&box.height>=420);assert.equal(await frame.evaluate(()=>document.documentElement.scrollHeight>innerHeight),true,'Page view supports internal scrolling');assert.equal(src.searchParams.get('small_header'),'false');assert.equal(src.searchParams.get('hide_cover'),'false');}
    }
    for(const theme of ['light','dark']){await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);assert.equal(await page.locator('.fb-cover img').first().evaluate(e=>getComputedStyle(e).objectFit),'contain');}
    if(lang==='hu'&&[390,1280].includes(width))await page.locator('.facebook-browser').screenshot({path:'artifacts/embeds-'+width+'.png'});
@@ -37,6 +37,6 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
   await page.locator('.legal-footer [data-privacy-settings]').click();await page.locator('[data-consent=reject]').click();const after=requests.length;
   await page.setViewportSize({width:390,height:950});await page.waitForTimeout(400);
   assert.equal(await page.locator('iframe[src]').count(),0);assert.equal(requests.length,after,'Resize must not reload Facebook after consent withdrawal');assert.deepEqual(errors,[]);
-  console.log('PASS: satellite mode; direct portrait video; entire featured and first timeline previews at 320–1920px in HU/RO/EN; both themes; consent and resize remain gated.');
+  console.log('PASS: satellite mode; direct portrait video; entire featured video and compact scrollable Page view at 320–1920px in HU/RO/EN; both themes; consent and resize remain gated.');
  }finally{if(browser)await browser.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exit(1)});
