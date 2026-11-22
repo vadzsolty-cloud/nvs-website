@@ -40,6 +40,7 @@ const {execFileSync}=require('node:child_process');
   for(const lang of ['hu','ro','en'])for(const [width,height] of [[320,640],[390,844],[768,900],[1366,600],[1440,900]]){
    await page.setViewportSize({width,height});
    await page.goto(origin+base+'/'+lang+'/');
+   if(await page.locator('#privacy-preferences').isVisible())await page.locator('[data-consent=reject]').click();
    const full=await page.locator('.site-header').evaluate(el=>el.getBoundingClientRect().height);
    const position=()=>page.locator('#services').evaluate(el=>el.getBoundingClientRect().top+scrollY);
    const documentTop=await position();
