@@ -88,7 +88,7 @@ const {execFileSync}=require('node:child_process');
    const full=await page.locator('.site-header').evaluate(el=>el.getBoundingClientRect().height);
    const position=()=>page.locator('#services').evaluate(el=>el.getBoundingClientRect().top+scrollY);
    const documentTop=await position();
-   await page.mouse.wheel(0,900);
+   await page.mouse.move(width/2,height*.75);await page.mouse.wheel(0,900);
    if(width<=1200||height<=700){
     await page.waitForFunction(()=>Math.abs(document.querySelector('.site-header').getBoundingClientRect().height-64)<1).catch(async error=>{
      console.error('Reading header failure',lang,width,height,await page.locator('.site-header').evaluate(el=>({classes:el.className,height:el.getBoundingClientRect().height,full:el.style.getPropertyValue('--header-full-height'),y:scrollY,focus:el.querySelector(':focus-visible')?.outerHTML,hash:location.hash})));throw error;
@@ -111,7 +111,7 @@ const {execFileSync}=require('node:child_process');
   }
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.setViewportSize({width:390,height:844});await page.goto(origin+base+'/hu/');
-  await page.mouse.wheel(0,900);
+  await page.mouse.move(195,630);await page.mouse.wheel(0,900);
   await page.waitForFunction(()=>document.querySelector('.site-header').classList.contains('is-compact'));
   assert.equal(await page.locator('.site-header').evaluate(el=>getComputedStyle(el).transitionDuration),'0s');
   await page.emulateMedia({reducedMotion:'no-preference'});
