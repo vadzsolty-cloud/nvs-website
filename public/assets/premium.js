@@ -7,6 +7,28 @@
  const smallViewport=matchMedia('(max-width:1200px), (max-height:700px)');
  let lastY=Math.max(0,scrollY),travel=0,direction=0,frame=0,anchorUntil=location.hash?performance.now()+1600:0,lastWidth=innerWidth;
  const expandHeader=()=>header?.classList.remove('is-compact');
+ // Keep a selected section aligned while mobile chrome and delayed content settle.
+ const sectionIds=new Set(['services','about','references','contact']);
+ let fragment=null,settleTimer=0,expiryTimer=0,fragmentObserver=null;
+ const cancelFragment=()=>{fragment=null;clearTimeout(settleTimer);clearTimeout(expiryTimer);fragmentObserver?.disconnect();anchorUntil=0;};
+ const sectionStart=section=>section.id==='about'&&matchMedia('(max-width:700px)').matches?section.querySelector('.workshop-intro > div:not(.about-photo) > .eyebrow'):section.firstElementChild;
+ const sectionTop=section=>Math.max(0,scrollY+sectionStart(section).getBoundingClientRect().top-parseFloat(header.style.getPropertyValue('--header-full-height'))-24);
+ const settleFragment=()=>{
+  clearTimeout(settleTimer);
+  settleTimer=setTimeout(()=>{if(fragment&&Math.abs(scrollY-sectionTop(fragment))>1)scrollTo({top:sectionTop(fragment),behavior:'instant'});},140);
+ };
+ const jumpToSection=(section,behavior='smooth')=>{
+  cancelFragment();expandHeader();fragment=section;anchorUntil=performance.now()+4100;
+  fragmentObserver=new ResizeObserver(settleFragment);fragmentObserver.observe(document.body);
+  expiryTimer=setTimeout(cancelFragment,4000);
+  // Let the modal close and the full header reserve its space before measuring.
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+   if(fragment!==section)return;
+   scrollTo({top:sectionTop(section),behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':behavior});
+   settleFragment();
+  }));
+ };
+
  const measureHeader=()=>{
   if(!header)return;
   const compact=header.classList.contains('is-compact');
@@ -27,6 +49,7 @@
     frame=0;
     const y=Math.max(0,Math.min(scrollY,document.documentElement.scrollHeight-innerHeight)),delta=y-lastY;
     lastY=y;
+    if(fragment)settleFragment();
     if(!smallViewport.matches||document.body.classList.contains('menu-open')||performance.now()<anchorUntil){travel=0;direction=0;return;}
     if(y<24){expandHeader();travel=0;return;}
     if(Math.abs(delta)<1)return;
@@ -38,17 +61,22 @@
     }else if(direction<0&&travel>=16)expandHeader();
    });
   },{passive:true});
-  addEventListener('hashchange',()=>{expandHeader();anchorUntil=performance.now()+1600;travel=0;direction=0;});
+  const followFragment=()=>{const id=location.hash.slice(1);if(sectionIds.has(id)){const section=document.getElementById(id);if(section)jumpToSection(section,'instant');}};
+  addEventListener('hashchange',followFragment);
+  addEventListener('pageshow',event=>{if(!event.persisted)followFragment();});
+  window.visualViewport?.addEventListener('resize',()=>{if(fragment)settleFragment();});
   // A visitor's gesture takes precedence over an in-progress anchor animation.
-  for(const event of ['wheel','touchmove'])addEventListener(event,()=>{anchorUntil=0;},{passive:true});
-  addEventListener('keydown',event=>{if(['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' '].includes(event.key))anchorUntil=0;});
+  for(const event of ['wheel','touchmove'])addEventListener(event,cancelFragment,{passive:true});
+  addEventListener('keydown',event=>{if(['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' '].includes(event.key))cancelFragment();});
   header.addEventListener('focusin',()=>{if(header.querySelector(':focus-visible'))expandHeader();});
   document.addEventListener('click',event=>{
    const link=event.target.closest('a[href]');if(!link)return;
    const destination=new URL(link.href,location.href);
-   if(destination.origin===location.origin&&destination.pathname===location.pathname&&destination.hash){
-    // Reserve the full header before native fragment scrolling, in either direction.
-    expandHeader();anchorUntil=performance.now()+1600;travel=0;direction=0;
+   const id=destination.hash.slice(1),section=document.getElementById(id);
+   if(destination.origin===location.origin&&destination.pathname===location.pathname&&sectionIds.has(id)&&section&&!event.ctrlKey&&!event.metaKey&&!event.shiftKey&&!event.altKey&&event.button===0){
+    event.preventDefault();
+    if(location.hash!==destination.hash)history.pushState(null,'',destination.href);
+    jumpToSection(section);
    }
   },true);
  }
@@ -57,7 +85,7 @@
   document.documentElement.classList.add('js-ready');
   toggle.hidden=false;
   const close=()=>{if(menu.open)menu.close();};
-  toggle.addEventListener('click',()=>{expandHeader();menu.showModal();toggle.setAttribute('aria-expanded','true');document.body.classList.add('menu-open');menu.querySelector('.menu-close').focus();});
+  toggle.addEventListener('click',()=>{cancelFragment();expandHeader();menu.showModal();toggle.setAttribute('aria-expanded','true');document.body.classList.add('menu-open');menu.querySelector('.menu-close').focus();});
   menu.querySelector('.menu-close').addEventListener('click',close);
   menu.addEventListener('click',e=>{if(e.target===menu||e.target.closest('a'))close();});
   // Restore keyboard focus without cancelling the selected anchor's scrolling.
