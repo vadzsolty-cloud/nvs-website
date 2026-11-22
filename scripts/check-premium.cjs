@@ -162,7 +162,8 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    assert.equal(await page.locator('#service-guide').count(),1);assert.equal(await page.locator('.education-faq details').count(),2);
    assert.equal(await page.locator('.education-systems dt').count(),3);assert.equal(await page.locator('.education-process article').count(),3);
    assert.ok(await page.locator('.education-heading .lead').innerText());
-   assert.equal(await page.locator('main a[href*="/account/"]').count(),0,'Service reading content should not repeat appointment calls to action');
+   assert.equal(await page.locator('main a[href*="/account/"]').count(),2,'Core services offer appointment actions before and after the guide');
+   assert.equal(await page.locator('#service-guide a[href*="/account/"]').count(),0,'Educational reading content stays uninterrupted');
    assert.equal(await page.locator('main #booking,main #contact,main #app,main .booking-demo,main .education-help').count(),0);
    assert.equal(await page.locator('.detail-hero p').filter({hasText:'Strada Principală'}).count(),0);
    assert.equal(await page.locator('.site-header .account-link').count(),1);assert.equal(await page.locator('.footer-apps a[href*="/account/"]').count(),1);

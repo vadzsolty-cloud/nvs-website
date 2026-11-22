@@ -30,6 +30,17 @@ for(const basePath of ['', '/nvs-website'])test('localized HTML, assets, redirec
   assert.ok(html.includes('href="'+business.phoneHref+'"'));assert.ok(html.includes(business.phone));assert.ok(html.includes(business.address));
   assert.ok(html.includes('href="'+business.facebook+'"'));
   assert.ok(!html.includes('connect.facebook.net'));assert.equal(html.includes('<iframe'),!id,'Only the homepage repeats embedded contact/social sections');
+  if(id){
+   const main=html.match(/<main[^>]*>([\s\S]*?)<\/main>/)[1];
+   assert.equal((main.match(/class="service-actions(?: service-actions--compact)?"/g)||[]).length,2,'Core services offer contact before and after the guide');
+   assert.ok(main.includes('href="'+basePath+'/'+l+'/account/"'));
+   assert.ok(main.includes('href="'+business.phoneHref+'"'));
+  }else{
+   assert.ok(!html.includes('class="booking-demo"'),'The public homepage should not offer an obsolete booking demo');
+   const navigation=html.match(/<nav class="desktop-nav"[^>]*>([\s\S]*?)<\/nav>/)[1];
+   assert.deepEqual([...navigation.matchAll(/href="[^"#]*#([^"]+)"/g)].map(m=>m[1]),['services','references','about','contact']);
+   assert.ok(html.includes('<h2 id="app-title">'));
+  }
   assert.ok(html.includes('href="'+business.maps+'"'),'Every page exposes the workshop map in the quick-menu contact card');assert.ok(html.includes('href="'+business.app+'"'));
   assert.ok(!html.includes('www.google.com/maps/search'));assert.ok(!html.includes('emulator-lab.js'));
   for(const link of html.matchAll(/(?:href|src)="(\/[^"#]*)/g)){
