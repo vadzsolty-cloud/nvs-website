@@ -15,10 +15,14 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
   await page.setViewportSize({width:320,height:950});await page.goto('http://127.0.0.1:4191/nvs-website/hu/');
   assert.equal(requests.length,0,'Dimensions must not request vendors before consent');
   assert.equal(await page.locator('iframe[src]').count(),0);
+  await page.goto('http://127.0.0.1:4191/nvs-website/hu/facebook/');assert.equal(requests.length,0);assert.equal(await page.locator('iframe[src]').count(),0);
   await page.locator('[data-consent=accept]').click();
   for(const lang of ['hu','ro','en'])for(const width of [320,390,768,1280,1920]){
    await page.setViewportSize({width,height:950});await page.goto('http://127.0.0.1:4191/nvs-website/'+lang+'/');
+   const map=new URL(await page.locator('.map-loaded iframe').getAttribute('src'));assert.equal(map.searchParams.get('t'),'k');assert.equal(map.searchParams.get('z'),'18');assert.equal(await page.locator('iframe[data-consent-category=facebook]').count(),0);
+   await page.goto('http://127.0.0.1:4191/nvs-website/'+lang+'/facebook/');
    await page.waitForTimeout(350);
+   assert.equal(await page.locator('.fb-card').count(),8);assert.equal(await page.locator('main>section').last().getAttribute('class'),'section facebook-page-view');
    for(const selector of ['.fb-featured','.fb-timeline']){
     const el=page.locator(selector),src=new URL(await el.getAttribute('src')),box=await el.boundingBox();
     assert.equal(Number(src.searchParams.get('width')),Math.round(box.width));
@@ -27,9 +31,8 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
     await el.scrollIntoViewIfNeeded();const frame=await (await el.elementHandle()).contentFrame();await frame.waitForSelector('[data-poster]');
     const visible=await frame.evaluate(()=>{const b=document.querySelector('[data-poster]').getBoundingClientRect();return b.top>=0&&b.bottom<=innerHeight+1&&b.right<=innerWidth+1;});assert.equal(visible,true,lang+' '+width+' '+selector+' must show both ends of the preview');
    }
-   const map=new URL(await page.locator('.map-loaded iframe').getAttribute('src'));assert.equal(map.searchParams.get('t'),'k');assert.equal(map.searchParams.get('z'),'18');
    for(const theme of ['light','dark']){await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);assert.equal(await page.locator('.fb-cover img').first().evaluate(e=>getComputedStyle(e).objectFit),'contain');}
-   if(lang==='hu'&&[390,1280].includes(width))await page.locator('.facebook-live-grid').screenshot({path:'artifacts/embeds-'+width+'.png'});
+   if(lang==='hu'&&[390,1280].includes(width))await page.locator('.facebook-browser').screenshot({path:'artifacts/embeds-'+width+'.png'});
   }
   await page.locator('.legal-footer [data-privacy-settings]').click();await page.locator('[data-consent=reject]').click();const after=requests.length;
   await page.setViewportSize({width:390,height:950});await page.waitForTimeout(400);

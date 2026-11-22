@@ -40,23 +40,34 @@ test('pages use responsive images under /nvs-website/, eager hero, lazy gallery,
  for(const l of ['hu','ro','en']){
   const html=await readFile(output+'/'+l+'/index.html','utf8');
   assert.ok(!html.includes('fb-cover-label'));assert.ok(!html.includes('booking-strip'));assert.ok(!html.includes('general-workshop-link'));
-  for(const kind of ['posts','photos']){
+  for(const kind of ['photos']){
    const disclosure=html.match(new RegExp('<details class="reference-disclosure" data-reference-more="'+kind+'">([\\s\\S]*?)</details>'));
    assert.ok(disclosure);assert.ok(disclosure[1].includes(referenceCopy[l][kind]));assert.ok(disclosure[1].includes(kind==='posts'?'(+6)':'(+14)'));
   }
   for(const m of html.matchAll(/(?:image)?srcset="([^"]+)"/g))for(const item of m[1].split(', ')){const url=item.split(' ')[0];assert.ok(url.startsWith('/nvs-website/assets/photos/'),url);await stat(output+url.slice('/nvs-website'.length));}
   const imgs=[...html.matchAll(/<img [^>]*>/g)].map(m=>m[0]).filter(t=>t.includes('/assets/photos/'));
   const sliderPhotos=sliderOrder.filter(id=>placement.services[id]).length;
-  assert.equal(imgs.length,sliderPhotos+Object.values(placement.services).filter(Boolean).length+1+placement.gallery.length+facebookPosts.length+placement.gearboxOilSlides.length+1);
+  assert.equal(imgs.length,sliderPhotos+Object.values(placement.services).filter(Boolean).length+1+placement.gallery.length+placement.gearboxOilSlides.length+1);
   for(const t of imgs){assert.match(t,/ alt="[^"]{15,}"/);assert.match(t,/ width="\d+" height="\d+"/);}
   assert.match(imgs[0],/fetchpriority="high"/);assert.ok(imgs.slice(1).every(t=>t.includes('loading="lazy"')));
   assert.ok(html.includes('rel="preload" as="image"'));
   assert.equal([...html.matchAll(/data-lightbox/g)].length,1+placement.gallery.length+placement.gearboxOilSlides.length);
   assert.ok(html.includes('<dialog class="lightbox"'));
   assert.ok(!html.includes('/assets/workshop/'));
-  // Facebook post cards: static links only, every selected post, no embed/SDK
-  for(const p of facebookPosts){assert.ok(html.includes(`href="https://www.facebook.com/${pageId}/posts/${p.id}" target="_blank" rel="noopener"`),p.id);assert.ok(html.includes(p.title[l]));}
-  assert.ok(!/connect\.facebook\.net|fbq\(/.test(html));assert.ok(html.includes('https://www.facebook.com/plugins/video.php'));assert.ok(html.includes('https://www.facebook.com/plugins/page.php'));assert.equal((html.match(/plugins\/video\.php/g)||[]).length,1);
+  // The homepage shows real work first; Facebook is a separate localized page.
+  assert.ok(!html.includes('plugins/video.php')&&!html.includes('plugins/page.php'));
+  assert.ok(html.includes('href="/nvs-website/'+l+'/facebook/"'));
+  assert.ok(html.indexOf('id="services"')<html.indexOf('id="references"'));
+  assert.ok(html.indexOf('id="references"')<html.indexOf('id="about"'));
+  assert.ok(html.indexOf('class="gallery photo-gallery"')<html.indexOf('id="gearbox-oil"'));
+  const facebook=await readFile(output+'/'+l+'/facebook/index.html','utf8');
+  for(const p of facebookPosts){assert.ok(facebook.includes('href="https://www.facebook.com/'+pageId+'/posts/'+p.id+'" target="_blank" rel="noopener"'),p.id);assert.ok(facebook.includes(p.title[l].replaceAll('&','&amp;')));}
+  assert.equal((facebook.match(/class="fb-card fb-photo-card"/g)||[]).length,facebookPosts.length-1);
+  assert.ok(!/connect\.facebook\.net|fbq\(/.test(facebook));
+  assert.equal((facebook.match(/plugins\/video\.php/g)||[]).length,1);
+  assert.equal((facebook.match(/plugins\/page\.php/g)||[]).length,1);
+  assert.ok(facebook.indexOf('class="section facebook-selected"')<facebook.indexOf('class="section facebook-page-view"'));
+  assert.ok(facebook.includes('hreflang="en" href="https://vadzsolty-cloud.github.io/nvs-website/en/facebook/"'));
   // service slider: one slide per service, real photo or labelled icon slide, links to the service page
   const slider=html.match(/<section class="service-slider"[\s\S]*?<\/section>/)[0];
   assert.equal([...slider.matchAll(/class="slide[ "]/g)].length,ids.length);

@@ -18,7 +18,8 @@ const assert=require('node:assert/strict');
  assert.equal(await page.locator('iframe[src]').count(),0);
  await page.locator('.legal-footer [data-privacy-settings]').click();await page.locator('[data-consent=accept]').click();
  assert.equal(await page.locator('iframe[data-consent-category=maps][src]').count(),1);
- assert.ok(await page.locator('iframe[data-consent-category=facebook][src]').count()>0);
+ assert.equal(await page.locator('iframe[data-consent-category=facebook]').count(),0);
+ await page.goto('http://127.0.0.1:4182/hu/facebook/',{waitUntil:'load'});assert.equal(await page.locator('iframe[data-consent-category=facebook][src]').count(),2);
  assert.ok(maps>0);
  for(const l of ['hu','ro','en'])for(const kind of ['company','privacy','cookies','terms']){
   const response=await page.goto('http://127.0.0.1:4182/'+l+'/'+kind+'/',{waitUntil:'load'});assert.equal(response.status(),200);assert.equal(await page.locator('h1').count(),1);assert.ok(await page.locator('.legal-footer').count());

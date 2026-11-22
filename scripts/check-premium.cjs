@@ -41,7 +41,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    assert.equal(await page.locator('#native-login').count(),0);assert.equal(await page.locator('#services .tile-visual picture').count(),6);
    assert.equal(await page.locator('.fb-cover-brand').count(),0,'Facebook photo covers should not repeat the company wordmark');
    assert.equal(await page.locator('.fb-cover-label').count(),0);
-   assert.equal(await page.locator('.fb-card:visible').count(),3);assert.equal(await page.locator('.fb-card').count(),9);
+   assert.equal(await page.locator('.fb-card').count(),0);assert.equal(await page.locator('iframe[data-consent-category=facebook]').count(),0);
    assert.equal(await page.locator('.photo-gallery .zoom:visible').count(),6);assert.equal(await page.locator('.photo-gallery .zoom').count(),20);
    assert.equal(await page.locator('main a[href*="/account/"]:visible').count(),2);
    assert.equal(await page.locator('.booking-strip').count(),0);
@@ -110,7 +110,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
     for(let i=0;i<8;i++){const card=equipment.nth(i);await card.locator('summary').focus();await page.keyboard.press('Space');assert.equal(await card.evaluate(e=>e.open),false);}
     assert.equal(await page.locator('.equipment-explanation:visible').count(),0);
    }
-   if([320,390,1440].includes(width))for(const kind of ['posts','photos']){
+   if([320,390,1440].includes(width))for(const kind of ['photos']){
     const more=page.locator('[data-reference-more="'+kind+'"]'),summary=more.locator('summary');
     assert.equal(await more.evaluate(e=>e.open),false);
     await summary.focus();await page.keyboard.press('Enter');assert.equal(await more.evaluate(e=>e.open),true);
@@ -196,11 +196,13 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    await motion.keyboard.press('Tab');await social.focus();assert.equal(await social.evaluate(el=>el.matches(':focus-visible')),true);
    await motion.waitForFunction(()=>getComputedStyle(document.querySelector('.facebook-link')).color==='rgb(24, 119, 242)');
    await social.evaluate(el=>el.blur());
-   for(const selector of ['#services .service-card','.service-slider','.fb-card','.photo-gallery .zoom','.portal-entry','[data-reference-more]>summary'])await lifted(selector);
+   for(const selector of ['#services .service-card','.service-slider','.photo-gallery .zoom','.portal-entry','[data-reference-more]>summary'])await lifted(selector);
    await motion.locator('.equipment-card>summary').first().hover();assert.equal(await motion.locator('.equipment-list>li').first().evaluate(e=>getComputedStyle(e).transform),'none');await motion.waitForFunction(()=>getComputedStyle(document.querySelector('.equipment-list>li')).boxShadow!=='none');
    await motion.emulateMedia({reducedMotion:'reduce'});
-   for(const selector of ['#services .service-card','.fb-card','.facebook-link']){await motion.locator(selector).first().hover();assert.equal(await motion.locator(selector).first().evaluate(el=>getComputedStyle(el).transform),'none');}
+   for(const selector of ['#services .service-card','.facebook-link']){await motion.locator(selector).first().hover();assert.equal(await motion.locator(selector).first().evaluate(el=>getComputedStyle(el).transform),'none');}
    await motion.emulateMedia({reducedMotion:'no-preference'});
+   await motion.goto('http://127.0.0.1:4188/nvs-website/hu/facebook/');await lifted('.fb-card');
+   await motion.emulateMedia({reducedMotion:'reduce'});await motion.locator('.fb-card').first().hover();assert.equal(await motion.locator('.fb-card').first().evaluate(el=>getComputedStyle(el).transform),'none');await motion.emulateMedia({reducedMotion:'no-preference'});
    await motion.goto('http://127.0.0.1:4188/nvs-website/hu/account/');
    await motion.evaluate(t=>document.documentElement.dataset.theme=t,theme);
    for(const selector of ['.register-card','.portal-tile'])await lifted(selector);
@@ -213,9 +215,9 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
   assert.equal(await plain.locator('.consent-panel').evaluate(e=>getComputedStyle(e).position),'static');
   assert.equal(await plain.locator('.consent-actions').isVisible(),false);assert.equal(await plain.locator('iframe[src]').count(),0);
   const nativeCard=plain.locator('.equipment-card').last();await nativeCard.locator('summary').click();assert.equal(await nativeCard.evaluate(e=>e.open),true);assert.equal(await nativeCard.locator('.equipment-explanation').isVisible(),true);await nativeCard.locator('summary').click();assert.equal(await nativeCard.evaluate(e=>e.open),false);
-  assert.equal(await plain.locator('.fb-card:visible').count(),3);assert.equal(await plain.locator('.photo-gallery .zoom:visible').count(),6);
+  assert.equal(await plain.locator('.fb-card').count(),0);assert.equal(await plain.locator('.photo-gallery .zoom:visible').count(),6);
   for(const kind of ['posts','photos']){await plain.locator('[data-reference-more="'+kind+'"]>summary').click();assert.equal(await plain.locator('[data-reference-more="'+kind+'"]').evaluate(e=>e.open),true);}
-  assert.equal(await plain.locator('.fb-card:visible').count(),9);assert.equal(await plain.locator('.photo-gallery .zoom:visible').count(),20);await noScript.close();
+  assert.equal(await plain.locator('.photo-gallery .zoom:visible').count(),20);await plain.goto('http://127.0.0.1:4188/nvs-website/hu/facebook/');assert.equal(await plain.locator('.fb-card:visible').count(),8);assert.equal(await plain.locator('iframe[src]').count(),0);await noScript.close();
   const downloadEvent=page.waitForEvent('download');await page.goto('http://127.0.0.1:4188/nvs-website/hu/download/',{waitUntil:'commit'});
   const download=await downloadEvent;assert.equal(download.url(),asset('5.0.10').browser_download_url);assert.equal(releaseCalls,1);assert.equal(apkCalls,1);await download.delete();
   apiFails=true;await page.goto('http://127.0.0.1:4188/nvs-website/en/download/');await page.waitForFunction(()=>document.querySelector('[data-download-status]').textContent===document.querySelector('[data-download-status]').dataset.error);
