@@ -214,7 +214,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
   assert.equal(await plain.locator('.fb-card:visible').count(),3);assert.equal(await plain.locator('.photo-gallery .zoom:visible').count(),6);
   for(const kind of ['posts','photos']){await plain.locator('[data-reference-more="'+kind+'"]>summary').click();assert.equal(await plain.locator('[data-reference-more="'+kind+'"]').evaluate(e=>e.open),true);}
   assert.equal(await plain.locator('.fb-card:visible').count(),9);assert.equal(await plain.locator('.photo-gallery .zoom:visible').count(),20);await noScript.close();
-  const downloadEvent=page.waitForEvent('download');await page.goto('http://127.0.0.1:4188/nvs-website/hu/download/',{waitUntil:'domcontentloaded'});
+  const downloadEvent=page.waitForEvent('download');await page.goto('http://127.0.0.1:4188/nvs-website/hu/download/',{waitUntil:'commit'});
   const download=await downloadEvent;assert.equal(download.url(),asset('5.0.10').browser_download_url);assert.equal(releaseCalls,1);assert.equal(apkCalls,1);await download.delete();
   apiFails=true;await page.goto('http://127.0.0.1:4188/nvs-website/en/download/');await page.waitForFunction(()=>document.querySelector('[data-download-status]').textContent===document.querySelector('[data-download-status]').dataset.error);
   assert.equal(await page.locator('[data-apk-link]').getAttribute('href'),'https://github.com/vadzsolty-cloud/nvs-app-letoltes/releases/latest');assert.equal(apkCalls,1);assert.equal(await page.locator('[data-download-status]').innerText(),portalCopy.en.downloadError);assert.equal(authCalls,0);
