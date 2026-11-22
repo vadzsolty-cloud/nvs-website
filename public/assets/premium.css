@@ -364,3 +364,19 @@ html[data-theme] .lightbox button:not(:hover):not(:focus-visible){color:#f5f8f2}
 .menu-contact address{margin:12px 0 10px}
 .menu-contact .portal-contact-address,.menu-contact .portal-contact-email{font-size:13px;line-height:1.6}
 .menu-contact .portal-contact-address>.ui-icon{width:19px;height:19px}
+
+/* Match the available browser height, including laptop windows below 768px. */
+.site-menu{padding:clamp(12px,2dvh,24px)}
+.site-menu>.menu-heading{padding-bottom:clamp(6px,1dvh,14px)}
+.site-menu>nav{margin:clamp(6px,1dvh,16px) 0;gap:0}
+.site-menu>nav a{min-height:clamp(36px,6dvh,52px);padding:clamp(4px,.65dvh,10px) 8px;font-size:16px;line-height:1.3}
+.site-menu .menu-contact{padding:clamp(10px,1.6dvh,16px)}
+.site-menu .menu-contact h2{font-size:16px;line-height:1.3;margin-bottom:8px}
+.menu-contact .portal-contact-phone{flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between;min-height:44px;gap:3px 10px;padding:7px 10px}
+.menu-contact .portal-contact-company{margin-top:8px}
+.menu-contact .portal-contact-name{line-height:1.4;margin-bottom:3px}
+.menu-contact .portal-contact-tax{line-height:1.4}
+.menu-contact address{margin:8px 0 6px}
+.menu-contact .portal-contact-address,.menu-contact .portal-contact-email{line-height:1.4}
+.menu-contact .portal-contact-label{display:inline;line-height:1.4;margin:0 6px 0 0}
+@media(pointer:coarse){.site-menu>nav a{min-height:44px}}
