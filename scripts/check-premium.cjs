@@ -94,7 +94,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    if([320,768,1440].includes(width)){
     const equipment=page.locator('.equipment-card');
     for(let i=0;i<8;i++){
-     const card=equipment.nth(i);await card.locator('summary').press('Enter');
+     const card=equipment.nth(i);await card.locator('summary').press('Enter');await card.locator('.equipment-explanation').waitFor({state:'visible'});
      assert.equal(await card.evaluate(e=>e.open),true,lang+' '+width+' equipment '+i+' keyboard toggle');assert.equal(await card.locator('.equipment-explanation').isVisible(),true);
      assert.equal(await card.locator('.equipment-collapse').isVisible(),true);assert.equal(await card.locator('.equipment-expand').isVisible(),false);
      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,lang+' '+width+' equipment '+i);
