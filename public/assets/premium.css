@@ -380,3 +380,8 @@ html[data-theme] .lightbox button:not(:hover):not(:focus-visible){color:#f5f8f2}
 .menu-contact .portal-contact-address,.menu-contact .portal-contact-email{line-height:1.4}
 .menu-contact .portal-contact-label{display:inline;line-height:1.4;margin:0 6px 0 0}
 @media(pointer:coarse){.site-menu>nav a{min-height:44px}}
+
+/* Share spare height between menu rows instead of leaving a gap above the card. */
+.site-menu>nav{flex-grow:1}
+.site-menu>nav a{flex:1 0 auto}
+.site-menu .menu-contact{margin-top:0}
