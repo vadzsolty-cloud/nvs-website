@@ -19,10 +19,8 @@
   lastY=Math.max(0,scrollY);travel=0;direction=0;
  };
  if(header){
-  measureHeader();
   smallViewport.addEventListener('change',()=>{expandHeader();measureHeader();});
   addEventListener('resize',()=>{if(innerWidth!==lastWidth){lastWidth=innerWidth;measureHeader();}},{passive:true});
-  document.fonts?.ready.then(measureHeader);
   addEventListener('scroll',()=>{
    if(frame)return;
    frame=requestAnimationFrame(()=>{
@@ -65,6 +63,8 @@
   // Restore keyboard focus without cancelling the selected anchor's scrolling.
   menu.addEventListener('close',()=>{toggle.setAttribute('aria-expanded','false');document.body.classList.remove('menu-open');toggle.focus({preventScroll:true});});
  }
+ // Measure only after progressive enhancement has revealed the menu and hidden fallback navigation.
+ measureHeader();
  const page=document.querySelector('[data-download-page]');if(!page)return;
  const status=page.querySelector('[data-download-status]'),link=page.querySelector('[data-apk-link]');
  async function latest(){

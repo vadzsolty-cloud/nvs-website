@@ -88,9 +88,11 @@ const {execFileSync}=require('node:child_process');
    const full=await page.locator('.site-header').evaluate(el=>el.getBoundingClientRect().height);
    const position=()=>page.locator('#services').evaluate(el=>el.getBoundingClientRect().top+scrollY);
    const documentTop=await position();
-   await page.evaluate(()=>scrollTo({top:900,behavior:'instant'}));
+   await page.mouse.wheel(0,900);
    if(width<=1200||height<=700){
-    await page.waitForFunction(()=>Math.abs(document.querySelector('.site-header').getBoundingClientRect().height-64)<1);
+    await page.waitForFunction(()=>Math.abs(document.querySelector('.site-header').getBoundingClientRect().height-64)<1).catch(async error=>{
+     console.error('Reading header failure',lang,width,height,await page.locator('.site-header').evaluate(el=>({classes:el.className,height:el.getBoundingClientRect().height,full:el.style.getPropertyValue('--header-full-height'),y:scrollY,focus:el.querySelector(':focus-visible')?.outerHTML,hash:location.hash})));throw error;
+    });
     assert.ok(Math.abs(await position()-documentTop)<1,'Collapsing must not shift document content');
     const controls=await page.locator('.site-header').evaluate(el=>{
      const brand=el.querySelector('.brand').getBoundingClientRect(),account=el.querySelector('.account-link').getBoundingClientRect(),menu=el.querySelector('.menu-toggle').getBoundingClientRect();
@@ -98,10 +100,10 @@ const {execFileSync}=require('node:child_process');
     });
     assert.ok(controls.clear&&controls.menuHeight>=44&&controls.accountHeight>=44&&!controls.overflow,JSON.stringify(controls));
     if(lang==='hu'&&width===390)await page.screenshot({path:'artifacts/header-mobile-compact.png'});
-    await page.evaluate(()=>scrollTo({top:840,behavior:'instant'}));
+    await page.mouse.wheel(0,-60);
     await page.waitForFunction(full=>Math.abs(document.querySelector('.site-header').getBoundingClientRect().height-full)<1,full);
     assert.ok(Math.abs(await position()-documentTop)<1,'Expanding must not shift document content');
-    await page.evaluate(()=>scrollTo({top:1100,behavior:'instant'}));
+    await page.mouse.wheel(0,260);
     await page.waitForFunction(()=>document.querySelector('.site-header').classList.contains('is-compact'));
     await openMenu();await menuLink(lang,1).click();await aligned('about');
    }else assert.equal(await page.locator('.site-header').evaluate(el=>el.classList.contains('is-compact')),false);
@@ -109,7 +111,7 @@ const {execFileSync}=require('node:child_process');
   }
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.setViewportSize({width:390,height:844});await page.goto(origin+base+'/hu/');
-  await page.evaluate(()=>scrollTo({top:900,behavior:'instant'}));
+  await page.mouse.wheel(0,900);
   await page.waitForFunction(()=>document.querySelector('.site-header').classList.contains('is-compact'));
   assert.equal(await page.locator('.site-header').evaluate(el=>getComputedStyle(el).transitionDuration),'0s');
   await page.emulateMedia({reducedMotion:'no-preference'});
