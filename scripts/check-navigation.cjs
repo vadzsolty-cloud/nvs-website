@@ -138,6 +138,14 @@ const {execFileSync}=require('node:child_process');
    await page.waitForURL(home+'account/');
    console.log('PASS navigation',lang,width);
   }
+  // Wrapped Romanian service actions keep the same compact spacing on narrow phones.
+  await page.setViewportSize({width:320,height:740});
+  await page.goto(origin+base+'/ro/services/camera/');
+  const actionSpacing=await page.locator('.service-actions--compact a').evaluateAll(links=>{
+   const first=links[0].getBoundingClientRect(),second=links[1].getBoundingClientRect();
+   return {gap:second.top-first.bottom,overflow:document.documentElement.scrollWidth>innerWidth};
+  });
+  assert.ok(actionSpacing.gap>=0&&actionSpacing.gap<=16&&!actionSpacing.overflow,JSON.stringify(actionSpacing));
   // The complete menu, including its contact card, fits typical laptop windows.
   for(const lang of ['hu','ro','en']){
    await page.goto(origin+base+'/'+lang+'/');

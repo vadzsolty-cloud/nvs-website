@@ -421,6 +421,6 @@ html{scroll-padding-top:var(--anchor-offset,132px)}
 @media(max-width:1000px){.facebook-featured{grid-template-columns:minmax(0,1fr);border-radius:16px}.facebook-browser-bar{flex-wrap:wrap;gap:4px}.facebook-browser-content{padding:12px}.facebook-browser{border-radius:14px}}
 
 /* Clear next steps on every core service page. */
-.service-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.service-actions .button{font-size:16px;white-space:normal;text-align:center}.service-actions--compact{margin:24px 0 12px}.service-actions .ui-icon{width:20px;height:20px}
+.service-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.service-actions .button{margin:0;font-size:16px;white-space:normal;text-align:center}.service-actions--compact{margin:24px 0 12px}.service-actions .ui-icon{width:20px;height:20px}
 .service-next{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.service-next h2{font-size:clamp(28px,3.4vw,48px);line-height:1.15;margin:16px 0 20px}.service-next p{max-width:65ch}.service-next-note{font-size:14px;color:var(--muted);margin:16px 0 0}.app-section>h2{font-size:clamp(28px,3.4vw,48px);margin:0 0 28px}
 @media(max-width:800px){.service-next{grid-template-columns:minmax(0,1fr)}.service-next .service-actions .button{width:100%}}
