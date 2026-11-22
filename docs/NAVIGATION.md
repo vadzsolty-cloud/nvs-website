@@ -5,3 +5,5 @@
 A fejléc és a mobilmenü négy közös célja: `#services`, `#about`, `#references`, `#contact`. Aloldalról a megfelelő nyelvű főoldal szakaszára vezetnek. Az ügyfélkapu, a nyelvváltás, az Android-letöltési oldal, a webalkalmazás, a telefon és a lábléc jogi hivatkozásai változatlan célpontokat használnak.
 
 A `scripts/check-navigation.cjs` böngészős regresszió a HU/RO/EN oldalak 390 és 1440 pixeles nézetében ellenőrzi az asztali és a mobilmenü ugrásait, az aloldalról visszatérést, az ismételt fragmenthivatkozást, az ügyfélkaput, az Escape utáni fókuszt, valamint a menü és a lábléc belső céloldalait/azonosítóit. A külső alkalmazást nem módosítja, valódi APK-letöltést vagy ügyfélműveletet nem indít. A meglévő CI böngészős ellenőrzés részeként fut.
+
+2026-11-22: a gyorsmenü alján lévő önálló telefonszám helyére a fiókoldali „Kapcsolat regisztráció nélkül” kártya kompakt változata került, közös renderelővel és cégadatokkal. A hívás, a térképre mutató cím és az e-mail mindhárom nyelven elérhető; az account- és menükártya külön címazonosítót kap. A menü rövid kijelzőn függőlegesen görgethető, a kártya nem zsugorodik és nem lóg ki vízszintesen.
