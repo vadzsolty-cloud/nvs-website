@@ -128,6 +128,9 @@ const {execFileSync}=require('node:child_process');
    await page.waitForURL(home+'account/');
    await openMenu();await page.keyboard.press('Escape');
    assert.equal(await page.locator('.menu-toggle').evaluate(el=>el===document.activeElement),true);
+   await page.goto(home+'facebook/');
+   assert.equal(await page.locator('.languages a[lang=en]').getAttribute('href'),base+'/en/facebook/');
+   await page.locator('.facebook-intro>a').click();await aligned('references');
    console.log('PASS navigation',lang,width);
   }
   // The complete menu, including its contact card, fits typical laptop windows.

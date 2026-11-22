@@ -408,3 +408,14 @@ html{scroll-padding-top:var(--anchor-offset,132px)}
  .site-header.scroll-header.is-compact{grid-template-rows:44px;column-gap:8px;row-gap:0}
 }
 @media(prefers-reduced-motion:reduce){.site-header.scroll-header,.site-header.scroll-header .brand img.site-logo{transition:none}}
+
+/* The homepage leads with workshop references; the Facebook journal has its own page. */
+.menu-heading{gap:8px}.menu-heading>p{margin-right:auto}.menu-facebook{display:inline-flex;align-items:center;min-height:44px;padding:6px;font-size:13px;color:var(--green)}
+.facebook-entry{margin:32px 0 0}.facebook-intro{padding-top:32px;padding-bottom:40px}.facebook-intro>h1{font-size:clamp(38px,4vw,64px);max-width:950px;line-height:1.08;margin:28px 0}.facebook-intro>.eyebrow{margin-top:32px}
+.facebook-featured{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,500px);gap:clamp(24px,5vw,90px);align-items:start;margin-top:32px;padding:clamp(20px,3vw,44px);border:1px solid var(--line);border-radius:24px;background:var(--panel)}
+.facebook-featured h2{font-size:clamp(28px,3vw,46px)}.facebook-featured-player{min-width:0;width:100%;max-width:500px;justify-self:center}.facebook-featured .fb-featured{display:block;max-width:100%;margin:0 auto;border-radius:12px}
+.facebook-selected{padding-top:32px}.facebook-page-view{padding-top:30px}.facebook-page-heading{max-width:760px;margin:0 auto 28px;text-align:center}
+.facebook-browser{max-width:1000px;margin:auto;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--panel)}
+.facebook-browser-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;border-bottom:1px solid var(--line)}.facebook-browser-bar>span{font-size:14px;color:var(--muted)}.facebook-browser-bar a{min-height:44px;display:inline-flex;align-items:center;text-decoration:underline}
+.facebook-browser-content{max-width:540px;padding:20px;margin:auto}.facebook-browser-content .fb-timeline{display:block;width:100%;max-width:500px;margin:auto;border:0;background:#fff}.facebook-display-note{max-width:760px;margin:20px auto;text-align:center;font-size:14px}
+@media(max-width:1000px){.facebook-featured{grid-template-columns:minmax(0,1fr);border-radius:16px}.facebook-browser-bar{flex-wrap:wrap;gap:4px}.facebook-browser-content{padding:12px}.facebook-browser{border-radius:14px}}

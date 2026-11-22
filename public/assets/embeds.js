@@ -6,7 +6,7 @@ document.querySelectorAll('.fb-embed').forEach(frame=>{
   if(!measured)return;
   const width=Math.min(500,Math.max(220,Math.round(measured)));
   const videoWidth=Number(frame.dataset.videoWidth)||9,videoHeight=Number(frame.dataset.videoHeight)||16;
-  const height=frame.classList.contains('fb-featured')?Math.ceil(width*videoHeight/videoWidth):Math.ceil(width*16/9)+520;
+  const height=frame.dataset.view==='page'?Math.round(Math.min(760,Math.max(420,innerHeight*.7))):frame.classList.contains('fb-featured')?Math.ceil(width*videoHeight/videoWidth):Math.ceil(width*16/9)+520;
   const url=new URL(frame.dataset.embedSrc);
   url.searchParams.set('width',String(width));url.searchParams.set('height',String(height));
   frame.setAttribute('width',String(width));frame.setAttribute('height',String(height));
@@ -15,6 +15,7 @@ document.querySelectorAll('.fb-embed').forEach(frame=>{
   if(frame.hasAttribute('src')&&frame.src!==url.href)frame.src=url.href;
  };
  document.addEventListener('nvs-consent-change',fit);
+ if(frame.dataset.view==='page')addEventListener('resize',()=>{clearTimeout(timer);timer=setTimeout(fit,250);},{passive:true});
  fit();
  if('ResizeObserver' in window)new ResizeObserver(()=>{clearTimeout(timer);timer=setTimeout(fit,250);}).observe(frame);
 });
