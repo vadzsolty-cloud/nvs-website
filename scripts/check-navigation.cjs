@@ -22,7 +22,10 @@ const {execFileSync}=require('node:child_process');
   const aligned=async target=>{
    await page.waitForURL(url=>url.hash==='#'+target&&!url.pathname.includes('/services/'));
    await page.waitForFunction(id=>{
-    const top=document.getElementById(id).getBoundingClientRect().top;
+    const section=document.getElementById(id);
+    // Services has intentional top spacing; its visible introduction is the arrival point.
+    const arrival=id==='services'?section.querySelector(':scope > .eyebrow'):section;
+    const top=arrival.getBoundingClientRect().top;
     const header=document.querySelector('.site-header').getBoundingClientRect().bottom;
     const padding=parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
     return top>=header+8&&top<=padding+36;
