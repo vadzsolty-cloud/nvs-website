@@ -20,6 +20,7 @@ const {execFileSync}=require('node:child_process');
   page.on('pageerror',e=>errors.push(e.message));
   const targets=['services','about','references','contact'];
   const aligned=async target=>{
+   await page.waitForURL(url=>url.hash==='#'+target&&!url.pathname.includes('/services/'));
    await page.waitForFunction(id=>{
     const top=document.getElementById(id).getBoundingClientRect().top;
     const header=document.querySelector('.site-header').getBoundingClientRect().bottom;
@@ -73,6 +74,21 @@ const {execFileSync}=require('node:child_process');
    await openMenu();await page.keyboard.press('Escape');
    assert.equal(await page.locator('.menu-toggle').evaluate(el=>el===document.activeElement),true);
    console.log('PASS navigation',lang,width);
+  }
+  // The complete menu, including its contact card, fits typical laptop windows.
+  for(const lang of ['hu','ro','en']){
+   await page.goto(origin+base+'/'+lang+'/');
+   await openMenu();
+   for(const [width,height] of [[1366,600],[1280,640],[1440,768],[1920,1080],[390,844],[320,640]]){
+    await page.setViewportSize({width,height});
+    const menu=await page.locator('#site-menu').evaluate(el=>{
+     const r=el.getBoundingClientRect(),heading=el.querySelector('.menu-heading').getBoundingClientRect(),card=el.querySelector('.menu-contact').getBoundingClientRect();
+     return {scroll:el.scrollHeight,client:el.clientHeight,width:r.width,top:heading.top,bottom:card.bottom,viewport:innerHeight,navMin:Math.min(...Array.from(el.querySelectorAll('nav a'),a=>a.getBoundingClientRect().height))};
+    });
+    assert.ok(menu.scroll<=menu.client+1&&menu.top>=0&&menu.bottom<=menu.viewport&&menu.navMin>=36,lang+' '+width+'x'+height+' '+JSON.stringify(menu));
+    if(lang==='hu'&&width===1366)await page.screenshot({path:'artifacts/menu-laptop-fit.png'});
+   }
+   await page.keyboard.press('Escape');
   }
   assert.deepEqual(errors,[]);
  }finally{await browser?.close();await new Promise(r=>server.close(r));}

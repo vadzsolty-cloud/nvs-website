@@ -82,7 +82,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
     const compactContact=await menuContact.evaluate(el=>{const r=el.getBoundingClientRect(),dialog=el.closest('dialog').getBoundingClientRect();return {left:r.left,right:r.right,dialogLeft:dialog.left,dialogRight:dialog.right,font:parseFloat(getComputedStyle(el.querySelector('.portal-contact-phone strong')).fontSize)};});
     assert.ok(compactContact.left>=compactContact.dialogLeft&&compactContact.right<=compactContact.dialogRight&&compactContact.font===22,JSON.stringify(compactContact));
     if(lang==='hu'&&[320,390,1440].includes(width))await page.locator('#site-menu').screenshot({path:'artifacts/menu-contact-'+width+'-'+theme+'.png'});
-    await page.keyboard.press('Escape');assert.equal(await page.locator('#site-menu').evaluate(e=>e.open),false);assert.equal(await page.locator('.menu-toggle').evaluate(e=>e===document.activeElement),true);
+    await page.keyboard.press('Escape');await page.waitForFunction(()=>!document.body.classList.contains('menu-open'));assert.equal(await page.locator('#site-menu').evaluate(e=>e.open),false);assert.equal(await page.locator('.menu-toggle').evaluate(e=>e===document.activeElement),true);
     if(lang==='hu'){
      await page.evaluate(()=>{document.activeElement.blur();scrollTo(0,0);});await page.screenshot({path:'artifacts/premium-home-'+width+'-'+theme+'.png'});
      await page.locator('#services').scrollIntoViewIfNeeded();
@@ -94,7 +94,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    if([320,768,1440].includes(width)){
     const equipment=page.locator('.equipment-card');
     for(let i=0;i<8;i++){
-     const card=equipment.nth(i);await card.locator('summary').press('Enter');
+     const card=equipment.nth(i);await card.locator('summary').press('Enter');await card.locator('.equipment-explanation').waitFor({state:'visible'});
      assert.equal(await card.evaluate(e=>e.open),true,lang+' '+width+' equipment '+i+' keyboard toggle');assert.equal(await card.locator('.equipment-explanation').isVisible(),true);
      assert.equal(await card.locator('.equipment-collapse').isVisible(),true);assert.equal(await card.locator('.equipment-expand').isVisible(),false);
      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,lang+' '+width+' equipment '+i);
@@ -214,7 +214,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
   assert.equal(await plain.locator('.fb-card:visible').count(),3);assert.equal(await plain.locator('.photo-gallery .zoom:visible').count(),6);
   for(const kind of ['posts','photos']){await plain.locator('[data-reference-more="'+kind+'"]>summary').click();assert.equal(await plain.locator('[data-reference-more="'+kind+'"]').evaluate(e=>e.open),true);}
   assert.equal(await plain.locator('.fb-card:visible').count(),9);assert.equal(await plain.locator('.photo-gallery .zoom:visible').count(),20);await noScript.close();
-  const downloadEvent=page.waitForEvent('download');await page.goto('http://127.0.0.1:4188/nvs-website/hu/download/',{waitUntil:'domcontentloaded'});
+  const downloadEvent=page.waitForEvent('download');await page.goto('http://127.0.0.1:4188/nvs-website/hu/download/',{waitUntil:'commit'});
   const download=await downloadEvent;assert.equal(download.url(),asset('5.0.10').browser_download_url);assert.equal(releaseCalls,1);assert.equal(apkCalls,1);await download.delete();
   apiFails=true;await page.goto('http://127.0.0.1:4188/nvs-website/en/download/');await page.waitForFunction(()=>document.querySelector('[data-download-status]').textContent===document.querySelector('[data-download-status]').dataset.error);
   assert.equal(await page.locator('[data-apk-link]').getAttribute('href'),'https://github.com/vadzsolty-cloud/nvs-app-letoltes/releases/latest');assert.equal(apkCalls,1);assert.equal(await page.locator('[data-download-status]').innerText(),portalCopy.en.downloadError);assert.equal(authCalls,0);
