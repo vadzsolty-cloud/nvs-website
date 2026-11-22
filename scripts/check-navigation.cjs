@@ -21,14 +21,18 @@ const {execFileSync}=require('node:child_process');
   const targets=['services','about','references','contact'];
   const aligned=async target=>{
    await page.waitForURL(url=>url.hash==='#'+target&&!url.pathname.includes('/services/'));
-   await page.waitForFunction(id=>{
+   await page.waitForFunction(async id=>{
     const section=document.getElementById(id);
-    // All destinations align their visible content below the full header.
-    const arrival=section.firstElementChild;
-    const top=arrival.getBoundingClientRect().top;
-    const header=document.querySelector('.site-header').getBoundingClientRect().bottom;
-    const padding=parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop);
-    return top>=header+8&&top<=header+40&&Math.abs(top-padding)<=4;
+    const arrival=id==='about'&&innerWidth<=700?section.querySelector('.workshop-intro > div:not(.about-photo) > .eyebrow'):section.firstElementChild;
+    let previous=scrollY;
+    // Check the final resting position over successive frames, not a point crossed mid-animation.
+    for(let frame=0;frame<12;frame++){
+     await new Promise(requestAnimationFrame);
+     const gap=arrival.getBoundingClientRect().top-document.querySelector('.site-header').getBoundingClientRect().bottom;
+     if(Math.abs(gap-24)>3||Math.abs(scrollY-previous)>1)return false;
+     previous=scrollY;
+    }
+    return !document.querySelector('.site-header').classList.contains('is-compact');
    },target);
    assert.equal(new URL(page.url()).hash,'#'+target);
    assert.equal(await page.locator('#site-menu').evaluate(el=>el.open),false);
@@ -99,6 +103,14 @@ const {execFileSync}=require('node:child_process');
    }
    for(let i=0;i<targets.length;i++){
     await openMenu();await menuLink(lang,i).click();await aligned(targets[i]);
+    if(width===390&&['about','references'].includes(targets[i])){
+     // A phone's address bar changes viewport height; late upstream content can also move the title.
+     await page.setViewportSize({width,height:760});await aligned(targets[i]);
+     await page.locator('#services').evaluate(el=>{el.style.paddingBottom=(parseFloat(getComputedStyle(el).paddingBottom)+64)+'px';});
+     await aligned(targets[i]);
+     await page.locator('#services').evaluate(el=>el.style.removeProperty('padding-bottom'));await aligned(targets[i]);
+     await page.setViewportSize({width,height:900});await aligned(targets[i]);
+    }
    }
    // Repeat the existing fragment after the visitor has manually scrolled elsewhere.
    await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
