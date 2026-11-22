@@ -75,6 +75,13 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
     if(width>=1280)assert.ok(footer.height<=380,lang+' '+width+' compact desktop footer '+JSON.stringify(footer));
     if(width<=700)assert.ok(footer.height<=720,lang+' '+width+' compact mobile footer '+JSON.stringify(footer));
     await page.locator('.menu-toggle').click();assert.equal(await page.locator('#site-menu').evaluate(e=>e.open),true);assert.equal(await page.locator('.menu-toggle').getAttribute('aria-expanded'),'true');
+    const menuContact=page.locator('#site-menu .menu-contact');
+    assert.equal(await menuContact.locator('.portal-contact-phone').getAttribute('href'),'tel:+40741738604');
+    assert.equal(await menuContact.locator('.portal-contact-email').getAttribute('href'),'mailto:nightvisionservice2025@gmail.com');
+    await menuContact.scrollIntoViewIfNeeded();
+    const compactContact=await menuContact.evaluate(el=>{const r=el.getBoundingClientRect(),dialog=el.closest('dialog').getBoundingClientRect();return {left:r.left,right:r.right,dialogLeft:dialog.left,dialogRight:dialog.right,font:parseFloat(getComputedStyle(el.querySelector('.portal-contact-phone strong')).fontSize)};});
+    assert.ok(compactContact.left>=compactContact.dialogLeft&&compactContact.right<=compactContact.dialogRight&&compactContact.font===22,JSON.stringify(compactContact));
+    if(lang==='hu'&&[320,390,1440].includes(width))await page.locator('#site-menu').screenshot({path:'artifacts/menu-contact-'+width+'-'+theme+'.png'});
     await page.keyboard.press('Escape');assert.equal(await page.locator('#site-menu').evaluate(e=>e.open),false);assert.equal(await page.locator('.menu-toggle').evaluate(e=>e===document.activeElement),true);
     if(lang==='hu'){
      await page.evaluate(()=>{document.activeElement.blur();scrollTo(0,0);});await page.screenshot({path:'artifacts/premium-home-'+width+'-'+theme+'.png'});
@@ -132,13 +139,13 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    assert.equal(await page.locator('.languages a[lang=en]').getAttribute('href'),'/nvs-website/en/account/');
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
    assert.equal(await page.locator('.copyright').count(),1);
-   const contact=page.locator('.portal-contact');await contact.waitFor({state:'visible'});
+   const contact=page.locator('.portal-hero .portal-contact');await contact.waitFor({state:'visible'});
    assert.equal(await contact.locator('.portal-contact-phone').getAttribute('href'),'tel:+40741738604');
    assert.equal(await contact.locator('.portal-contact-email').getAttribute('href'),'mailto:nightvisionservice2025@gmail.com');
    for(const theme of ['light','dark']){
     await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,lang+' '+width+' contact '+theme);
-    const layout=await page.evaluate(()=>{const r=s=>document.querySelector(s).getBoundingClientRect(),phone=r('.portal-contact-phone'),contact=r('.portal-contact'),heading=r('.portal-heading');return {phoneTop:phone.top,phoneHeight:phone.height,font:parseFloat(getComputedStyle(document.querySelector('.portal-contact-phone strong')).fontSize),contactTop:contact.top,contactBottom:contact.bottom,contactLeft:contact.left,headingRight:heading.right,headingBottom:heading.bottom,loginTop:r('#native-login').top};});
+    const layout=await page.evaluate(()=>{const r=s=>document.querySelector(s).getBoundingClientRect(),phone=r('.portal-hero .portal-contact-phone'),contact=r('.portal-hero .portal-contact'),heading=r('.portal-heading');return {phoneTop:phone.top,phoneHeight:phone.height,font:parseFloat(getComputedStyle(document.querySelector('.portal-hero .portal-contact-phone strong')).fontSize),contactTop:contact.top,contactBottom:contact.bottom,contactLeft:contact.left,headingRight:heading.right,headingBottom:heading.bottom,loginTop:r('#native-login').top};});
     assert.ok(layout.font>=24&&layout.phoneHeight>=44,JSON.stringify(layout));
     assert.ok(layout.phoneTop<950,lang+' '+width+' phone should be immediately available '+JSON.stringify(layout));
     if(width>1000)assert.ok(layout.contactLeft>=layout.headingRight,JSON.stringify(layout));

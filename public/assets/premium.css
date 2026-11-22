@@ -348,3 +348,19 @@ html[data-theme] .lightbox button:not(:hover):not(:focus-visible){color:#f5f8f2}
 .fb-featured{background:#000}
 .fb-cover .photo img{object-fit:contain}
 .fb-photo-card:hover .fb-cover img{transform:none}
+
+/* The account contact card, compact enough for the bottom of the quick menu. */
+.site-menu[open]{display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain}
+.site-menu>.menu-heading,.site-menu>nav{flex-shrink:0}
+.site-menu .menu-contact{grid-area:auto;flex-shrink:0;width:100%;max-width:none;margin-top:auto;padding:16px;border-radius:16px;box-shadow:inset 0 1px 0 var(--control-highlight),0 5px 16px var(--control-shadow)}
+.site-menu .menu-contact h2{font-size:17px;margin-bottom:12px}
+.menu-contact .portal-contact-phone{padding:10px 12px;gap:5px}
+.menu-contact .portal-contact-call{font-size:13px;gap:7px}
+.menu-contact .portal-contact-call .ui-icon{width:20px;height:20px}
+.menu-contact .portal-contact-phone strong{font-size:22px}
+.menu-contact .portal-contact-company{margin-top:15px}
+.menu-contact .portal-contact-name{font-size:13px}
+.menu-contact .portal-contact-tax{font-size:12px;line-height:1.6}
+.menu-contact address{margin:12px 0 10px}
+.menu-contact .portal-contact-address,.menu-contact .portal-contact-email{font-size:13px;line-height:1.6}
+.menu-contact .portal-contact-address>.ui-icon{width:19px;height:19px}
