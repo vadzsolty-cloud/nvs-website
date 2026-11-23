@@ -23,16 +23,25 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
     env:
-      SITE_URL: https://vadzsolty-cloud.github.io
-      BASE_PATH: /nvs-website
       PRODUCTION: 'false'
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
           node-version: '24'
-      - run: npm run build
+      - name: Read published Pages address
+        if: github.event_name != 'pull_request'
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Build the website
+        env:
+          SITE_URL: https://${{ github.event_name == 'pull_request' && 'vadzsolty-cloud.github.io' || steps.pages.outputs.host }}
+          BASE_PATH: ${{ github.event_name == 'pull_request' && '/nvs-website' || steps.pages.outputs.base_path }}
+        run: npm run build
       - run: npm test
       - uses: actions/upload-pages-artifact@v4
         with:
