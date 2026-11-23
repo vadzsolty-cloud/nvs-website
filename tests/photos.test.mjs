@@ -65,12 +65,14 @@ test('pages use responsive images under /nvs-website/, eager hero, lazy gallery,
   for(const p of rankedFacebookPosts){assert.ok(facebook.includes('href="'+p.url+'" target="_blank" rel="noopener"'),p.id);assert.ok(facebook.includes(p.title[l].replaceAll('&','&amp;')));}
   assert.deepEqual([...facebook.matchAll(/data-ranking-views="(\d+)"/g)].map(m=>Number(m[1])),rankedFacebookPosts.map(p=>p.views));
   assert.equal(rankedFacebookPosts.length,10);assert.ok(rankedFacebookPosts.every((p,i,a)=>i===0||a[i-1].views>=p.views));
-  assert.equal((facebook.match(/class="fb-card fb-photo-card"/g)||[]).length,rankedFacebookPosts.length-1);
+  assert.equal((facebook.match(/class="fb-card fb-photo-card"/g)||[]).length,rankedFacebookPosts.length);
   assert.ok(!/connect\.facebook\.net|fbq\(/.test(facebook));
   assert.equal((facebook.match(/plugins\/video\.php/g)||[]).length,0);
   assert.equal((facebook.match(/plugins\/page\.php/g)||[]).length,0);
-  assert.ok(facebook.indexOf('class="social-page-heading"')<facebook.indexOf('class="facebook-featured"'));
-  assert.ok(facebook.indexOf('class="facebook-featured"')<facebook.indexOf('class="section facebook-selected"'));
+  assert.ok(facebook.indexOf('class="social-page-heading"')<facebook.indexOf('class="section facebook-selected"'));
+  assert.ok(!facebook.includes('class="facebook-featured"'));
+  assert.ok(!facebook.includes('1726574845200133')&&!facebook.includes('1603279241585323'));
+  assert.ok(rankedFacebookPosts.every(p=>p.cover&&!p.brand));
   assert.equal((facebook.match(/class="hero-social-link /g)||[]).length,2);
   assert.ok(!facebook.includes('class="section facebook-page-view"'));
   assert.ok(facebook.includes('hreflang="en" href="https://vadzsolty-cloud.github.io/nvs-website/en/facebook/"'));
