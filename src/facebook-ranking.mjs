@@ -1,27 +1,9 @@
-// Public Reels view labels checked on 2026-11-22; 23 public video posts reviewed.
-// Rounded public counts stay marked approximate. This is a dated snapshot, not a live Insights feed.
+// Workshop projects only: inactive recruitment and general introduction excluded.
+// Public Reels counts checked on 2026-11-22; rounded counts stay approximate.
+// This is a dated snapshot, not a live Insights feed.
 export const rankingCheckedAt="2026-11-22";
 export const rankingSource="https://www.facebook.com/profile.php?id=61572089218581&sk=reels_tab";
 export const rankedFacebookPosts=[
- {
-  "id": "1726574845200133",
-  "url": "https://www.facebook.com/reel/1726574845200133/",
-  "views": 7700,
-  "approximate": true,
-  "cover": "workshop-exterior-main",
-  "brand": false,
-  "video": true,
-  "title": {
-   "hu": "Csapatbővítés a Night Vision Service-nél",
-   "ro": "Extinderea echipei Night Vision Service",
-   "en": "Growing the Night Vision Service team"
-  },
-  "text": {
-   "hu": "Bejegyzésünk a csapatbővítésről és a műhelyben kínált munkalehetőségekről.",
-   "ro": "Postarea noastră despre extinderea echipei și oportunitățile de lucru din atelier.",
-   "en": "Our post about growing the team and workshop job opportunities."
-  }
- },
  {
   "id": "1604059460661087",
   "url": "https://www.facebook.com/reel/1604059460661087/",
@@ -137,25 +119,6 @@ export const rankedFacebookPosts=[
   }
  },
  {
-  "id": "1603279241585323",
-  "url": "https://www.facebook.com/reel/1603279241585323/",
-  "views": 431,
-  "approximate": false,
-  "cover": null,
-  "brand": true,
-  "video": true,
-  "title": {
-   "hu": "Night Vision Service – bemutatkozó videó",
-   "ro": "Night Vision Service – videoclip de prezentare",
-   "en": "Night Vision Service – introduction video"
-  },
-  "text": {
-   "hu": "A Night Vision Service videós bemutatkozása a Facebookon.",
-   "ro": "Prezentarea video Night Vision Service pe Facebook.",
-   "en": "The Night Vision Service introduction video on Facebook."
-  }
- },
- {
   "id": "1697012922028515",
   "url": "https://www.facebook.com/reel/1697012922028515/",
   "views": 412,
@@ -191,6 +154,44 @@ export const rankedFacebookPosts=[
    "hu": "Olajcsere az automata váltóban, az osztóműben és a differenciálművekben.",
    "ro": "Schimb de ulei la cutia automată, cutia de transfer și diferențiale.",
    "en": "Oil service for the automatic transmission, transfer case and differentials."
+  }
+ },
+ {
+  "id": "2136188703593341",
+  "url": "https://www.facebook.com/reel/2136188703593341/",
+  "views": 332,
+  "approximate": false,
+  "cover": "acc-radar-reflector",
+  "brand": false,
+  "video": true,
+  "title": {
+   "hu": "Volkswagen Touareg 2019 – ACC-javítás",
+   "ro": "Volkswagen Touareg 2019 – reparație ACC",
+   "en": "Volkswagen Touareg 2019 – ACC repair"
+  },
+  "text": {
+   "hu": "Az adaptív tempomat hibájának javítása és a radar pontos beállítása.",
+   "ro": "Remedierea problemei tempomatului adaptiv și reglarea precisă a radarului.",
+   "en": "Adaptive cruise control repair and precise radar adjustment."
+  }
+ },
+ {
+  "id": "979880138186155",
+  "url": "https://www.facebook.com/reel/979880138186155/",
+  "views": 329,
+  "approximate": false,
+  "cover": "ac-mercedes-texa-overview",
+  "brand": false,
+  "video": true,
+  "title": {
+   "hu": "Autóklíma-szerviz professzionális felszereléssel",
+   "ro": "Service climatizare cu echipament profesional",
+   "en": "Air conditioning service with professional equipment"
+  },
+  "text": {
+   "hu": "Klímaszerviz célberendezéssel a megfelelő hűtési teljesítményért.",
+   "ro": "Service climatizare cu echipament dedicat pentru o răcire eficientă.",
+   "en": "Air conditioning service with dedicated equipment for effective cooling."
   }
  }
 ];
