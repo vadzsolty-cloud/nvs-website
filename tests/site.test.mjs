@@ -28,7 +28,9 @@ for(const basePath of ['', '/nvs-website'])test('localized HTML, assets, redirec
   const json=JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/)[1]);assert.equal(json['@type'],'AutoRepair');assert.equal(json.telephone,business.phone);
   assert.equal(json.name,business.brandName);assert.equal(json.legalName,business.name);assert.equal(json.vatID,business.vatId);assert.equal(json.email,business.email);assert.equal(json.hasMap,business.maps);
   assert.ok(html.includes('href="'+business.phoneHref+'"'));assert.ok(html.includes(business.phone));assert.ok(html.includes(business.address));
-  assert.ok(html.includes('href="'+business.facebook+'"'));
+  assert.equal((html.match(/class="social-media-link header-social"/g)||[]).length,1);
+  assert.ok(html.includes('href="'+basePath+'/'+l+'/facebook/" aria-label="Social media" title="Social media"'));
+  assert.ok(!html.includes('class="hero-social-links"'));
   assert.ok(!html.includes('connect.facebook.net'));assert.equal(html.includes('<iframe'),!id,'Only the homepage repeats embedded contact/social sections');
   if(id){
    const main=html.match(/<main[^>]*>([\s\S]*?)<\/main>/)[1];
