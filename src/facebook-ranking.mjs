@@ -9,18 +9,16 @@ export const rankedFacebookPosts=[
   "url": "https://www.facebook.com/reel/1604059460661087/",
   "views": 3900,
   "approximate": true,
-  "cover": "hunter-byd-front-overview",
-  "brand": false,
   "video": true,
   "title": {
-   "hu": "Futóművizsgálat a műhelyben",
-   "ro": "Verificarea suspensiei în atelier",
-   "en": "Suspension testing in the workshop"
+   "hu": "Audi – futóművizsgálat",
+   "ro": "Audi – verificarea suspensiei",
+   "en": "Audi – suspension testing"
   },
   "text": {
-   "hu": "Videó a műhelyünkben végzett futóművizsgálatról.",
-   "ro": "Un videoclip despre verificarea suspensiei în atelierul nostru.",
-   "en": "A video of suspension testing in our workshop."
+   "hu": "Audi futóművének vizsgálata célberendezéssel.",
+   "ro": "Verificarea suspensiei unui Audi cu echipament dedicat.",
+   "en": "Audi suspension testing with dedicated equipment."
   }
  },
  {
@@ -28,8 +26,6 @@ export const rankedFacebookPosts=[
   "url": "https://www.facebook.com/reel/1681464432880476/",
   "views": 2800,
   "approximate": true,
-  "cover": "hunter-alignment-screens",
-  "brand": false,
   "video": true,
   "title": {
    "hu": "Audi SQ8 2025 – futóműállítás",
@@ -47,8 +43,6 @@ export const rankedFacebookPosts=[
   "url": "https://www.facebook.com/reel/886829887122082/",
   "views": 815,
   "approximate": false,
-  "cover": "headlight-adjustment",
-  "brand": false,
   "video": true,
   "title": {
    "hu": "Fényszóró-beállítás a műhelyben",
@@ -66,8 +60,6 @@ export const rankedFacebookPosts=[
   "url": "https://www.facebook.com/reel/952075754287535/",
   "views": 810,
   "approximate": false,
-  "cover": "gearbox-oil-service-equipment",
-  "brand": false,
   "video": true,
   "title": {
    "hu": "Ford Mondeo 2018 – automata váltó olajcseréje",
@@ -85,8 +77,6 @@ export const rankedFacebookPosts=[
   "url": "https://www.facebook.com/reel/1642824280735910/",
   "views": 523,
   "approximate": false,
-  "cover": "hunter-tesla-front-quarter",
-  "brand": false,
   "video": true,
   "title": {
    "hu": "Tesla Model 3 – kerékcsapágycsere és futóműállítás",
@@ -104,8 +94,6 @@ export const rankedFacebookPosts=[
   "url": "https://www.facebook.com/reel/1307091771302573/",
   "views": 516,
   "approximate": false,
-  "cover": "gearbox-oil-pan-workbench",
-  "brand": false,
   "video": true,
   "title": {
    "hu": "Ford Kuga 2017 – váltóolaj- és szűrőcsere",
@@ -123,8 +111,6 @@ export const rankedFacebookPosts=[
   "url": "https://www.facebook.com/reel/1697012922028515/",
   "views": 412,
   "approximate": false,
-  "cover": "acc-radar-reflector",
-  "brand": false,
   "video": true,
   "title": {
    "hu": "Audi SQ5 – ACC Master & Slave kalibrálás",
@@ -142,8 +128,6 @@ export const rankedFacebookPosts=[
   "url": "https://www.facebook.com/reel/1752152812475213/",
   "views": 337,
   "approximate": false,
-  "cover": "gearbox-on-workbench",
-  "brand": false,
   "video": true,
   "title": {
    "hu": "BMW X6 2022 – hajtáslánc-karbantartás",
@@ -161,8 +145,6 @@ export const rankedFacebookPosts=[
   "url": "https://www.facebook.com/reel/2136188703593341/",
   "views": 332,
   "approximate": false,
-  "cover": "acc-radar-reflector",
-  "brand": false,
   "video": true,
   "title": {
    "hu": "Volkswagen Touareg 2019 – ACC-javítás",
@@ -180,8 +162,6 @@ export const rankedFacebookPosts=[
   "url": "https://www.facebook.com/reel/979880138186155/",
   "views": 329,
   "approximate": false,
-  "cover": "ac-mercedes-texa-overview",
-  "brand": false,
   "video": true,
   "title": {
    "hu": "Autóklíma-szerviz professzionális felszereléssel",
