@@ -430,3 +430,11 @@ html{scroll-padding-top:var(--anchor-offset,132px)}
 @media(max-width:500px){.menu-heading>p{position:absolute;width:1px;height:1px;padding:0;margin:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.menu-heading .social-media-link{margin-right:auto}.facebook-visit-link{width:100%;padding:14px 12px}.facebook-visit-link span{min-width:0}}
 
 .facebook-featured-poster{display:block;border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none}.facebook-featured-poster .photo{display:block;aspect-ratio:3/2}.facebook-featured-poster img{width:100%;height:100%;object-fit:cover}.facebook-poster-label{display:block;text-align:center;padding:18px;background:#122018;color:#a2ff26;font-size:17px}.facebook-featured-poster:is(:hover,:focus-visible) .facebook-poster-label{color:#1877f2}.facebook-poster-note{font-size:13px;color:var(--muted);margin:12px 0 0}
+
+/* Direct Facebook destinations in the homepage introduction. */
+.hero-social-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.hero-social-link{display:flex;flex:1 1 200px;align-items:center;gap:13px;min-height:86px;padding:16px 18px;border:1px solid #1877f2;border-radius:14px;background:#0866df;color:#fff;text-decoration:none;box-shadow:0 6px 22px #0866df20;transition:background .2s,border-color .2s,box-shadow .2s}
+.hero-social-link>svg{width:36px;height:36px;flex-shrink:0}.hero-social-link>span:not(.hero-social-arrow){min-width:0}.hero-social-link strong{display:block;font-size:17px;line-height:1.35;font-weight:650}.hero-social-link small{display:block;font-size:13px;line-height:1.45;margin-top:3px;color:#fff}.hero-social-arrow{margin-left:auto;font-size:23px;line-height:1}
+.hero-social-group{background:var(--panel);color:var(--white);border-color:var(--line);box-shadow:none}.hero-social-group>svg{color:#1877f2}.hero-social-group small{color:var(--muted)}
+.hero-social-link:focus-visible{outline:3px solid var(--green);outline-offset:4px}.hero-social-link:hover{background:#0758bf;border-color:#3b8cff;box-shadow:0 8px 26px #0866df30}.hero-social-group:hover{background:var(--premium-soft);border-color:#1877f2}
+@media(max-width:700px){.hero-social-links{margin-top:22px;gap:10px}.hero-social-link{min-height:80px;padding:15px 16px}.hero-social-link strong{font-size:16px}}
