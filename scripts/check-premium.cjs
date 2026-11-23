@@ -62,8 +62,8 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
     const overflow=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,offenders:[...document.querySelectorAll('body *')].filter(el=>{const r=el.getBoundingClientRect();return r.width>0&&r.right>innerWidth+1&&!el.closest('.slides,.site-menu,.lightbox');}).map(el=>({tag:el.tagName,class:el.className,id:el.id,right:el.getBoundingClientRect().right})).slice(0,12)}));
     assert.ok(overflow.scroll<=overflow.width,lang+' '+width+' '+theme+' '+JSON.stringify(overflow));
     const readability=await page.evaluate(()=>{
-     const rect=s=>document.querySelector(s).getBoundingClientRect(),brand=rect('.site-header .brand'),account=rect('.account-link'),menu=rect('.menu-toggle');
-     return {logo:rect('.site-logo').width,navFont:parseFloat(getComputedStyle(document.querySelector('.languages a')).fontSize),tileFont:parseFloat(getComputedStyle(document.querySelector('#services .service-card p')).fontSize),brandClear:brand.right<=account.left+1,actionsClear:account.right<=menu.left+1,canvas:rect('#services').width};
+     const rect=s=>document.querySelector(s).getBoundingClientRect(),brand=rect('.site-header .brand'),account=rect('.account-link'),social=rect('.header-social'),menu=rect('.menu-toggle');
+     return {logo:rect('.site-logo').width,navFont:parseFloat(getComputedStyle(document.querySelector('.languages a')).fontSize),tileFont:parseFloat(getComputedStyle(document.querySelector('#services .service-card p')).fontSize),brandClear:brand.right<=account.left+1,actionsClear:account.right<=social.left+1&&social.right<=menu.left+1,canvas:rect('#services').width};
     });
     assert.ok(readability.logo>=(width<=700?52:72),JSON.stringify(readability));
     assert.ok(readability.navFont>=13&&readability.tileFont>=16,JSON.stringify(readability));
@@ -188,19 +188,19 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    await motion.goto('http://127.0.0.1:4188/nvs-website/hu/');
    if(await motion.locator('#privacy-preferences').isVisible())await motion.locator('[data-consent=reject]').click();
    await motion.evaluate(t=>document.documentElement.dataset.theme=t,theme);
-   const social=motion.locator('.facebook-link');assert.equal(await social.count(),1);
-   assert.equal(await social.getAttribute('href'),'https://www.facebook.com/share/19q4Kb3jFq/');assert.ok(await social.getAttribute('aria-label'));
-   const grey=await social.evaluate(async el=>{getComputedStyle(el).color;await Promise.all(el.getAnimations().map(a=>a.finished));return getComputedStyle(el).color;});assert.notEqual(grey,'rgb(24, 119, 242)');
-   await lifted('.facebook-link');await motion.waitForFunction(()=>getComputedStyle(document.querySelector('.facebook-link')).color==='rgb(24, 119, 242)');
+   const social=motion.locator('.header-social');assert.equal(await social.count(),1);
+   assert.equal(await social.getAttribute('href'),'/nvs-website/hu/facebook/');assert.equal(await social.getAttribute('aria-label'),'Social media');assert.equal(await social.innerText(),'');
+   const green='rgb(162, 255, 38)';assert.equal(await social.locator('svg').evaluate(el=>getComputedStyle(el).color),green);
+   await social.hover();await motion.waitForFunction(()=>getComputedStyle(document.querySelector('.header-social svg')).color==='rgb(24, 119, 242)');
    await social.screenshot({path:'artifacts/facebook-hover-'+theme+'.png'});
-   await motion.mouse.move(0,0);await motion.waitForFunction(c=>getComputedStyle(document.querySelector('.facebook-link')).color===c,grey);
+   await motion.mouse.move(0,0);await motion.waitForFunction(c=>getComputedStyle(document.querySelector('.header-social svg')).color===c,green);
    await motion.keyboard.press('Tab');await social.focus();assert.equal(await social.evaluate(el=>el.matches(':focus-visible')),true);
-   await motion.waitForFunction(()=>getComputedStyle(document.querySelector('.facebook-link')).color==='rgb(24, 119, 242)');
+   await motion.waitForFunction(()=>getComputedStyle(document.querySelector('.header-social svg')).color==='rgb(24, 119, 242)');
    await social.evaluate(el=>el.blur());
    for(const selector of ['#services .service-card','.service-slider','.photo-gallery .zoom','.portal-entry','[data-reference-more]>summary'])await lifted(selector);
    await motion.locator('.equipment-card>summary').first().hover();assert.equal(await motion.locator('.equipment-list>li').first().evaluate(e=>getComputedStyle(e).transform),'none');await motion.waitForFunction(()=>getComputedStyle(document.querySelector('.equipment-list>li')).boxShadow!=='none');
    await motion.emulateMedia({reducedMotion:'reduce'});
-   for(const selector of ['#services .service-card','.facebook-link']){await motion.locator(selector).first().hover();assert.equal(await motion.locator(selector).first().evaluate(el=>getComputedStyle(el).transform),'none');}
+   for(const selector of ['#services .service-card','.header-social']){await motion.locator(selector).first().hover();assert.equal(await motion.locator(selector).first().evaluate(el=>getComputedStyle(el).transform),'none');}
    await motion.emulateMedia({reducedMotion:'no-preference'});
    await motion.goto('http://127.0.0.1:4188/nvs-website/hu/facebook/');await lifted('.fb-card');
    await motion.emulateMedia({reducedMotion:'reduce'});await motion.locator('.fb-card').first().hover();assert.equal(await motion.locator('.fb-card').first().evaluate(el=>getComputedStyle(el).transform),'none');await motion.emulateMedia({reducedMotion:'no-preference'});
