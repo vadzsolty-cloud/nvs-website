@@ -131,7 +131,7 @@ const {execFileSync}=require('node:child_process');
    assert.equal(await page.locator('.menu-toggle').evaluate(el=>el===document.activeElement),true);
    await page.goto(home+'facebook/');
    assert.equal(await page.locator('.languages a[lang=en]').getAttribute('href'),base+'/en/facebook/');
-   await page.locator('.facebook-intro>a').click();await aligned('references');
+   await page.locator('.social-page-tools .social-back').click();await aligned('references');
    await page.goto(home+'services/acc/');
    assert.equal(await page.locator('.service-actions a[href^="tel:"]').count(),2);
    await page.locator('.service-actions--compact a').first().click();

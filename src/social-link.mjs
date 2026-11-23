@@ -10,6 +10,6 @@ const spotlightCopy={
 };
 export function socialSpotlight(l){
  const t=spotlightCopy[l];
- const card=(href,title,detail,kind)=>`<a class="hero-social-link hero-social-${kind}" href="${href}" target="_blank" rel="noopener noreferrer">${facebookIcon}<span><strong>${title}</strong><small>${detail}</small></span></a>`;
- return `<div class="hero-social-links">${card('https://www.facebook.com/'+pageId,t.page,t.pageDetail,'page')}${business.facebookGroup?card(business.facebookGroup,t.group,t.groupDetail,'group'):''}</div>`;
+ const card=(href,title,kind)=>`<a class="hero-social-link hero-social-${kind} text-link" href="${href}" target="_blank" rel="noopener noreferrer">${facebookIcon}<span>${title}</span></a>`;
+ return `<div class="hero-social-links">${card('https://www.facebook.com/'+pageId,t.page,'page')}${business.facebookGroup?card(business.facebookGroup,t.group,'group'):''}</div>`;
 }

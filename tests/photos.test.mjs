@@ -74,6 +74,7 @@ test('pages use responsive images under /nvs-website/, eager hero, lazy gallery,
   assert.ok(!facebook.includes('1726574845200133')&&!facebook.includes('1603279241585323'));
   assert.ok(rankedFacebookPosts.every(p=>p.cover&&!p.brand));
   assert.equal((facebook.match(/class="hero-social-link /g)||[]).length,2);
+  assert.ok(facebook.indexOf('class="social-page-tools"')<facebook.indexOf('class="social-page-heading"'));
   assert.ok(!facebook.includes('class="section facebook-page-view"'));
   assert.ok(facebook.includes('hreflang="en" href="https://vadzsolty-cloud.github.io/nvs-website/en/facebook/"'));
   // service slider: one slide per service, real photo or labelled icon slide, links to the service page
