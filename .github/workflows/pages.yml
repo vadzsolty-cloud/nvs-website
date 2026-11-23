@@ -41,6 +41,8 @@ jobs:
         env:
           SITE_URL: https://${{ github.event_name == 'pull_request' && 'vadzsolty-cloud.github.io' || steps.pages.outputs.host }}
           BASE_PATH: ${{ github.event_name == 'pull_request' && '/nvs-website' || steps.pages.outputs.base_path }}
+          PRODUCTION: ${{ github.event_name != 'pull_request' && steps.pages.outputs.host == 'night-vision-service.eu' }}
+          CONTACT_APPROVED: 'true'
         run: npm run build
       - run: npm test
       - uses: actions/upload-pages-artifact@v4

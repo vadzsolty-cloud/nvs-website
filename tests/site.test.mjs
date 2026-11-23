@@ -93,8 +93,13 @@ test('local emulator build is opt-in and owner approval controls structured stre
   assert.equal(response.headers['Content-Security-Policy'].includes('http://127.0.0.1:9099'),allowed);
  }
  const approved=resolve('artifacts/test-builds/approved');
- execFileSync(process.execPath,['scripts/build.mjs'],{env:{...process.env,BASE_PATH:'/nvs-website',SITE_URL:'https://example.com',PRODUCTION:'true',CONTACT_APPROVED:'true',EMULATOR_UI:'false',OUTPUT_DIR:approved},stdio:'pipe'});
+ execFileSync(process.execPath,['scripts/build.mjs'],{env:{...process.env,BASE_PATH:'',SITE_URL:'https://night-vision-service.eu',PRODUCTION:'true',CONTACT_APPROVED:'true',EMULATOR_UI:'false',OUTPUT_DIR:approved},stdio:'pipe'});
  const html=await readFile(approved+'/hu/index.html','utf8');const schema=JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/)[1]);assert.equal(schema.telephone,business.phone);assert.equal(schema.address.streetAddress,business.street);
+ assert.ok(html.includes('href="https://night-vision-service.eu/hu/"'));
+ assert.ok(html.includes('content="index,follow"'));
+ assert.ok(!html.includes('preview-footer'));
+ assert.ok(!html.includes('href="/nvs-website/'));
+ assert.match(await readFile(approved+'/robots.txt','utf8'),/Sitemap: https:\/\/night-vision-service\.eu\/sitemap\.xml/);
 });
 
 test('demo summarises and resets without network or persistent storage',async()=>{
