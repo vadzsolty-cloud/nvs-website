@@ -9,7 +9,8 @@ test('Facebook images are visually reviewed frames tied to the exact linked sour
  const first=rankedFacebookPosts[0];assert.equal(first.id,'1604059460661087');assert.match(first.title.hu,/Audi/);
  assert.equal(facebookPreviewFor(first).sourceUrl,first.url);
  for(const p of rankedFacebookPosts){assert.equal('cover' in p,false);const frame=facebookPreviewFor(p);if(frame){assert.equal(frame.videoId,p.id);assert.equal(frame.sourceUrl,p.url);assert.equal(frame.review.realWorkFrame,true);}}
- assert.equal(facebookPreviewFor(rankedFacebookPosts.find(p=>p.id==='979880138186155')),null);
+ assert.ok(facebookPreviewFor(rankedFacebookPosts.find(p=>p.id==='979880138186155')));
+ assert.equal(facebookPreviewFor(rankedFacebookPosts.find(p=>p.id==='2136188703593341')),null);
 });
 
 test('unverified or mismatched posts never fall back to a different workshop photograph',()=>{

@@ -8,7 +8,7 @@ export function checkFacebookMedia({manifest=facebookMediaManifest,readAsset=fil
  const files=new Set(),postIds=new Set();
  for(const[id,frame]of Object.entries(manifest.frames)){
   if(!/^\d+$/.test(id)||frame.sourceUrl!=='https://www.facebook.com/reel/'+id+'/')throw Error('Facebook preview: source does not match video '+id);
-  if(frame.file!==id+'.jpg'||frame.publishedBy!=='Night Vision Service SRL'||!frame.review?.realWorkFrame||frame.review.privacy!=='no-readable-registration'||!/^\d{4}-\d{2}-\d{2}$/.test(frame.review.reviewedAt))throw Error('Facebook preview: manual source and image review missing '+id);
+  if(frame.file!==id+'-'+frame.sha256.slice(0,8)+'.jpg'||frame.publishedBy!=='Night Vision Service SRL'||!frame.review?.realWorkFrame||frame.review.privacy!=='no-readable-registration'||!/^\d{4}-\d{2}-\d{2}$/.test(frame.review.reviewedAt))throw Error('Facebook preview: manual source and image review missing '+id);
   if(frame.width<100||frame.height<100||frame.frameTime<=0||!/^center(?: \d{1,2}%)?$/.test(frame.position))throw Error('Facebook preview: invalid frame dimensions or position '+id);
   if(digest(readAsset(frame.file))!==frame.sha256)throw Error('Facebook preview: image changed after source review '+id);
   files.add(frame.file);
