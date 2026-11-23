@@ -194,25 +194,25 @@
     "1752152812475213": {
       "sourceUrl": "https://www.facebook.com/reel/1752152812475213/",
       "publishedBy": "Night Vision Service SRL",
-      "file": "1752152812475213-b6c88463.jpg",
-      "width": 387,
-      "height": 330,
-      "frameTime": 15.980534,
+      "file": "1752152812475213-6a5958f8.jpg",
+      "width": 430,
+      "height": 300,
+      "frameTime": 20.052091,
       "position": "center",
       "originalPostIds": [],
       "method": "native screenshot of a manually selected original video work frame, clipped to the work without Facebook controls or captions",
       "captureCrop": {
-        "x": 480,
+        "x": 413,
         "y": 185,
-        "width": 387,
-        "height": 330
+        "width": 430,
+        "height": 300
       },
       "review": {
         "reviewedAt": "2026-11-23",
         "realWorkFrame": true,
         "privacy": "no-readable-registration"
       },
-      "sha256": "b6c88463a5d9f0d464cb4db71f22579e04b8bcc172ed750e010774aa264689a1"
+      "sha256": "6a5958f872d260ec1f8f751c4b961e55dc05ebc4bed206a8af221be19eb46e39"
     }
   }
 }
