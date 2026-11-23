@@ -7,6 +7,7 @@ export const business={
  street:'Strada Principală 244/A',locality:'Văcărești',region:'Harghita',country:'RO',
  phone:'+40 741 738 604',phoneHref:'tel:+40741738604',email:'nightvisionservice2025@gmail.com',
  facebook:'https://www.facebook.com/share/19q4Kb3jFq/',
+ facebookGroup:'https://www.facebook.com/share/g/1H4uBLyUhJ/',
  maps:'https://maps.app.goo.gl/PCEcWUp4iUa8GtKy6?g_st=ac',
  app:'https://vadzsolty-cloud.github.io/nvs-app-letoltes/app/',
  download:'https://vadzsolty-cloud.github.io/nvs-app-letoltes/#letoltes',
