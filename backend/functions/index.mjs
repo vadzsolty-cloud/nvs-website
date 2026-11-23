@@ -5,6 +5,7 @@ import {getFirestore} from 'firebase-admin/firestore';
 import {getAuth} from 'firebase-admin/auth';
 import {createBookingService} from './booking.mjs';
 import {mailTransport,deliverNotification} from './mail.mjs';
+import {isWebsiteOriginAllowed} from './website-origins.mjs';
 const projectId='night-vision-service',shopId='QB2fsNCT32ReZ5fiGcaHM7BjoNw2';
 const app=initializeApp({projectId,credential:applicationDefault()});
 const options={region:'europe-west1',serviceAccount:'nvs-website@night-vision-service.iam.gserviceaccount.com',maxInstances:2,memory:'256MiB',timeoutSeconds:45};
@@ -12,7 +13,7 @@ const codes={UNAUTHENTICATED:401,EMAIL_NOT_VERIFIED:403,FORBIDDEN:403,NOTICE_REQ
 function guard(){if(process.env.GCLOUD_PROJECT!==projectId||process.env.FIRESTORE_EMULATOR_HOST||process.env.FIREBASE_AUTH_EMULATOR_HOST)throw Error('WRONG_ENVIRONMENT');}
 export const nvsWebsiteApi=onRequest(options,async(req,res)=>{
  res.set('Cache-Control','no-store');const origin=req.get('origin');
- if(origin&&origin!=='https://vadzsolty-cloud.github.io'){res.status(403).json({error:'FORBIDDEN'});return;}
+ if(!isWebsiteOriginAllowed(origin)){res.status(403).json({error:'FORBIDDEN'});return;}
  if(origin){res.set('Access-Control-Allow-Origin',origin);res.set('Vary','Origin');}
  res.set('Access-Control-Allow-Headers','Authorization, Content-Type');res.set('Access-Control-Allow-Methods','GET, POST, OPTIONS');
  if(req.method==='OPTIONS'){res.status(204).end();return;}
@@ -44,4 +45,3 @@ export const nvsWebsiteMail=onDocumentCreated({...options,document:'nvsWebsiteMa
  }
  await deliverNotification(db,event.params.eventId,transport);
 });
-
