@@ -9,6 +9,7 @@ import {ids} from '../src/content.mjs';
 import {sliderOrder} from '../src/slider.mjs';
 import {facebookPosts,pageId} from '../src/facebook-posts.mjs';
 import {rankedFacebookPosts} from '../src/facebook-ranking.mjs';
+import {facebookPreviewFor} from '../src/facebook-media.mjs';
 import {referenceCopy} from '../src/reference-disclosure.mjs';
 
 // Files whose bottom-left corner shows the Samsung "AI által előállított tartalom" label, the edited
@@ -72,7 +73,9 @@ test('pages use responsive images under /nvs-website/, eager hero, lazy gallery,
   assert.ok(facebook.indexOf('class="social-page-heading"')<facebook.indexOf('class="section facebook-selected"'));
   assert.ok(!facebook.includes('class="facebook-featured"'));
   assert.ok(!facebook.includes('1726574845200133')&&!facebook.includes('1603279241585323'));
-  assert.ok(rankedFacebookPosts.every(p=>p.cover&&!p.brand));
+  assert.equal(rankedFacebookPosts.filter(p=>facebookPreviewFor(p)).length,9);
+  assert.ok(!facebook.includes('Illusztráció'));
+  assert.ok(!facebook.includes('hunter-byd-front-overview'));
   assert.equal((facebook.match(/class="hero-social-link /g)||[]).length,2);
   assert.ok(facebook.indexOf('class="social-page-tools"')<facebook.indexOf('class="social-page-heading"'));
   assert.ok(!facebook.includes('class="section facebook-page-view"'));
