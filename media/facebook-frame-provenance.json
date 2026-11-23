@@ -1,164 +1,218 @@
 {
   "version": 1,
   "reviewedAt": "2026-11-23",
-  "note": "Frames captured from the exact linked public NVS video and visually checked. Generic workshop photographs are never used as post previews. The air-conditioning reel preview is intentionally omitted because its available promotional graphic cannot be verified as a genuine work photograph.",
+  "note": "Individually selected work frames captured from the exact linked public video, with controls and captions outside the crop. The AC reel has genuine later work footage. The Touareg short reel contains promotional/edited graphics; its previous unconfirmed tablet preview is removed rather than presented as a genuine work photograph.",
   "frames": {
-    "1604059460661087": {
-      "sourceUrl": "https://www.facebook.com/reel/1604059460661087/",
+    "979880138186155": {
+      "sourceUrl": "https://www.facebook.com/reel/979880138186155/",
       "publishedBy": "Night Vision Service SRL",
-      "file": "1604059460661087.jpg",
-      "width": 353,
-      "height": 628,
-      "frameTime": 6.604173,
-      "position": "center 15%",
-      "originalPostIds": [],
-      "method": "original Facebook video frame captured from the matching public post",
-      "review": {
-        "reviewedAt": "2026-11-23",
-        "realWorkFrame": true,
-        "privacy": "no-readable-registration"
-      },
-      "sha256": "6124b2b08bea625f753ebd5aaa08b180143d44eb2fd078a5b27297386abc46aa"
-    },
-    "1681464432880476": {
-      "sourceUrl": "https://www.facebook.com/reel/1681464432880476/",
-      "publishedBy": "Night Vision Service SRL",
-      "file": "1681464432880476.jpg",
-      "width": 353,
-      "height": 628,
-      "frameTime": 3.736029,
-      "position": "center",
-      "originalPostIds": [
-        "122111409848736307"
-      ],
-      "method": "original Facebook video frame captured from the matching public post",
-      "review": {
-        "reviewedAt": "2026-11-23",
-        "realWorkFrame": true,
-        "privacy": "no-readable-registration"
-      },
-      "sha256": "ce63541be5906c3223fc781c03e114b35edb261bb22b181ebe3ac95332d6f88f"
-    },
-    "886829887122082": {
-      "sourceUrl": "https://www.facebook.com/reel/886829887122082/",
-      "publishedBy": "Night Vision Service SRL",
-      "file": "886829887122082.jpg",
-      "width": 353,
-      "height": 628,
-      "frameTime": 6.312312,
+      "file": "979880138186155-fbc3fb7b.jpg",
+      "width": 454,
+      "height": 405,
+      "frameTime": 29.106827,
       "position": "center",
       "originalPostIds": [],
-      "method": "original Facebook video frame captured from the matching public post",
+      "method": "native screenshot of a manually selected original video work frame, clipped to the work without Facebook controls or captions",
+      "captureCrop": {
+        "x": 413,
+        "y": 190,
+        "width": 454,
+        "height": 405
+      },
       "review": {
         "reviewedAt": "2026-11-23",
         "realWorkFrame": true,
         "privacy": "no-readable-registration"
       },
-      "sha256": "1fe786c8c5986235b824148119e9c263ae62d42ae2cc99ee83500ce41208a0c3"
-    },
-    "952075754287535": {
-      "sourceUrl": "https://www.facebook.com/reel/952075754287535/",
-      "publishedBy": "Night Vision Service SRL",
-      "file": "952075754287535.jpg",
-      "width": 353,
-      "height": 628,
-      "frameTime": 15.527183,
-      "position": "center",
-      "originalPostIds": [],
-      "method": "original Facebook video frame captured from the matching public post",
-      "review": {
-        "reviewedAt": "2026-11-23",
-        "realWorkFrame": true,
-        "privacy": "no-readable-registration"
-      },
-      "sha256": "4feea74ae06033e5570a9b9e6ea6f684a2feb4c45212f0321b360edaa1624efb"
-    },
-    "1642824280735910": {
-      "sourceUrl": "https://www.facebook.com/reel/1642824280735910/",
-      "publishedBy": "Night Vision Service SRL",
-      "file": "1642824280735910.jpg",
-      "width": 353,
-      "height": 628,
-      "frameTime": 15.975917,
-      "position": "center 40%",
-      "originalPostIds": [],
-      "method": "original Facebook video frame captured from the matching public post",
-      "review": {
-        "reviewedAt": "2026-11-23",
-        "realWorkFrame": true,
-        "privacy": "no-readable-registration"
-      },
-      "sha256": "ea15be3814e723220304b70b14bab4bb99c8008ee9358e03ce9e1e34acc149f4"
-    },
-    "1307091771302573": {
-      "sourceUrl": "https://www.facebook.com/reel/1307091771302573/",
-      "publishedBy": "Night Vision Service SRL",
-      "file": "1307091771302573.jpg",
-      "width": 353,
-      "height": 628,
-      "frameTime": 16.027782,
-      "position": "center 42%",
-      "originalPostIds": [],
-      "method": "original Facebook video frame captured from the matching public post",
-      "review": {
-        "reviewedAt": "2026-11-23",
-        "realWorkFrame": true,
-        "privacy": "no-readable-registration"
-      },
-      "sha256": "5d45db1063c8e3f0da4f5054c9b2ec13b714b38a3439b969b08d3a5adbfb247b"
+      "sha256": "fbc3fb7b4ee43f5005df53175ff8b371c2546a3f6cc36fafda0b0a673765b1ab"
     },
     "1697012922028515": {
       "sourceUrl": "https://www.facebook.com/reel/1697012922028515/",
       "publishedBy": "Night Vision Service SRL",
-      "file": "1697012922028515.jpg",
-      "width": 353,
-      "height": 628,
-      "frameTime": 16.083007,
+      "file": "1697012922028515-d3579424.jpg",
+      "width": 420,
+      "height": 340,
+      "frameTime": 23.084264,
       "position": "center",
       "originalPostIds": [
         "122133267458736307"
       ],
-      "method": "original Facebook video frame captured from the matching public post",
+      "method": "native screenshot of a manually selected original video work frame, clipped to the work without Facebook controls or captions",
+      "captureCrop": {
+        "x": 413,
+        "y": 365,
+        "width": 420,
+        "height": 340
+      },
       "review": {
         "reviewedAt": "2026-11-23",
         "realWorkFrame": true,
         "privacy": "no-readable-registration"
       },
-      "sha256": "456371453c5d982bbb2217727b205af0ff1dd9ca432cf3edee0ae4d85b2f4d2a"
+      "sha256": "d3579424889f0b41b0aeb31b51b89cc14a41c94d768c7e457fa44b4e372f04dc"
+    },
+    "1307091771302573": {
+      "sourceUrl": "https://www.facebook.com/reel/1307091771302573/",
+      "publishedBy": "Night Vision Service SRL",
+      "file": "1307091771302573-14abeffa.jpg",
+      "width": 454,
+      "height": 330,
+      "frameTime": 9.4655,
+      "position": "center",
+      "originalPostIds": [],
+      "method": "native screenshot of a manually selected original video work frame, clipped to the work without Facebook controls or captions",
+      "captureCrop": {
+        "x": 413,
+        "y": 275,
+        "width": 454,
+        "height": 330
+      },
+      "review": {
+        "reviewedAt": "2026-11-23",
+        "realWorkFrame": true,
+        "privacy": "no-readable-registration"
+      },
+      "sha256": "14abeffa04e690a4d92a6bf47713893431c4b8db4de5b9c0ce56492892b12df1"
+    },
+    "952075754287535": {
+      "sourceUrl": "https://www.facebook.com/reel/952075754287535/",
+      "publishedBy": "Night Vision Service SRL",
+      "file": "952075754287535-9be3372f.jpg",
+      "width": 454,
+      "height": 230,
+      "frameTime": 23.026097,
+      "position": "center",
+      "originalPostIds": [],
+      "method": "native screenshot of a manually selected original video work frame, clipped to the work without Facebook controls or captions",
+      "captureCrop": {
+        "x": 413,
+        "y": 376,
+        "width": 454,
+        "height": 230
+      },
+      "review": {
+        "reviewedAt": "2026-11-23",
+        "realWorkFrame": true,
+        "privacy": "no-readable-registration"
+      },
+      "sha256": "9be3372f613d1709eef6e0e511c52b08777b7acfbf972384aea7b949ea317051"
+    },
+    "1604059460661087": {
+      "sourceUrl": "https://www.facebook.com/reel/1604059460661087/",
+      "publishedBy": "Night Vision Service SRL",
+      "file": "1604059460661087-76ad0d4e.jpg",
+      "width": 454,
+      "height": 440,
+      "frameTime": 6.68558,
+      "position": "center",
+      "originalPostIds": [],
+      "method": "native screenshot of a manually selected original video work frame, clipped to the work without Facebook controls or captions",
+      "captureCrop": {
+        "x": 413,
+        "y": 140,
+        "width": 454,
+        "height": 440
+      },
+      "review": {
+        "reviewedAt": "2026-11-23",
+        "realWorkFrame": true,
+        "privacy": "no-readable-registration"
+      },
+      "sha256": "76ad0d4e1294daf96a123d06ebf3321bb0240466cd3b0a19e3c6cd704e1fc01a"
+    },
+    "1681464432880476": {
+      "sourceUrl": "https://www.facebook.com/reel/1681464432880476/",
+      "publishedBy": "Night Vision Service SRL",
+      "file": "1681464432880476-481e46e8.jpg",
+      "width": 425,
+      "height": 226,
+      "frameTime": 10.988258,
+      "position": "center",
+      "originalPostIds": [
+        "122111409848736307"
+      ],
+      "method": "native screenshot of a manually selected original video work frame, clipped to the work without Facebook controls or captions",
+      "captureCrop": {
+        "x": 442,
+        "y": 379,
+        "width": 425,
+        "height": 226
+      },
+      "review": {
+        "reviewedAt": "2026-11-23",
+        "realWorkFrame": true,
+        "privacy": "no-readable-registration"
+      },
+      "sha256": "481e46e848d0fe29b7307e401c60eb8196dadc95cd7dcd0064a41b2431145d3b"
+    },
+    "886829887122082": {
+      "sourceUrl": "https://www.facebook.com/reel/886829887122082/",
+      "publishedBy": "Night Vision Service SRL",
+      "file": "886829887122082-ddea1dbc.jpg",
+      "width": 454,
+      "height": 380,
+      "frameTime": 7.035159,
+      "position": "center",
+      "originalPostIds": [],
+      "method": "native screenshot of a manually selected original video work frame, clipped to the work without Facebook controls or captions",
+      "captureCrop": {
+        "x": 413,
+        "y": 350,
+        "width": 454,
+        "height": 380
+      },
+      "review": {
+        "reviewedAt": "2026-11-23",
+        "realWorkFrame": true,
+        "privacy": "no-readable-registration"
+      },
+      "sha256": "ddea1dbced9e77c3f4f3baaa31ec2ecb2a800e672e80b9115a827110c52fbf78"
+    },
+    "1642824280735910": {
+      "sourceUrl": "https://www.facebook.com/reel/1642824280735910/",
+      "publishedBy": "Night Vision Service SRL",
+      "file": "1642824280735910-a83e3591.jpg",
+      "width": 424,
+      "height": 365,
+      "frameTime": 14.940403,
+      "position": "center",
+      "originalPostIds": [],
+      "method": "native screenshot of a manually selected original video work frame, clipped to the work without Facebook controls or captions",
+      "captureCrop": {
+        "x": 443,
+        "y": 305,
+        "width": 424,
+        "height": 365
+      },
+      "review": {
+        "reviewedAt": "2026-11-23",
+        "realWorkFrame": true,
+        "privacy": "no-readable-registration"
+      },
+      "sha256": "a83e3591405135b6dfeaab7091bf56b93fc202fb35f2ea52ee70514f6a767ee4"
     },
     "1752152812475213": {
       "sourceUrl": "https://www.facebook.com/reel/1752152812475213/",
       "publishedBy": "Night Vision Service SRL",
-      "file": "1752152812475213.jpg",
-      "width": 353,
-      "height": 628,
-      "frameTime": 15.954338,
-      "position": "center 25%",
-      "originalPostIds": [],
-      "method": "original Facebook video frame captured from the matching public post",
-      "review": {
-        "reviewedAt": "2026-11-23",
-        "realWorkFrame": true,
-        "privacy": "no-readable-registration"
-      },
-      "sha256": "e43777cea765b91ce8b3ab6aadafa31edfd73071e3411573f6f2014f84437368"
-    },
-    "2136188703593341": {
-      "sourceUrl": "https://www.facebook.com/reel/2136188703593341/",
-      "publishedBy": "Night Vision Service SRL",
-      "file": "2136188703593341.jpg",
-      "width": 353,
-      "height": 628,
-      "frameTime": 15.033338,
+      "file": "1752152812475213-b6c88463.jpg",
+      "width": 387,
+      "height": 330,
+      "frameTime": 15.980534,
       "position": "center",
       "originalPostIds": [],
-      "method": "original Facebook video frame captured from the matching public post",
+      "method": "native screenshot of a manually selected original video work frame, clipped to the work without Facebook controls or captions",
+      "captureCrop": {
+        "x": 480,
+        "y": 185,
+        "width": 387,
+        "height": 330
+      },
       "review": {
         "reviewedAt": "2026-11-23",
         "realWorkFrame": true,
         "privacy": "no-readable-registration"
       },
-      "sha256": "0802603000fd551002488ff25dc9317a2a4d8d070eac12cd6e6ec4eb19bfecd4"
+      "sha256": "b6c88463a5d9f0d464cb4db71f22579e04b8bcc172ed750e010774aa264689a1"
     }
   }
 }
