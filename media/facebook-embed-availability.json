@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "checkedAt": "2026-11-24",
+  "entries": {
+    "1604059460661087": {
+      "sourceUrl": "https://www.facebook.com/reel/1604059460661087/",
+      "status": "available",
+      "checkedAt": "2026-11-24",
+      "reason": "Facebook embedded player loads the original video."
+    },
+    "1681464432880476": {
+      "sourceUrl": "https://www.facebook.com/reel/1681464432880476/",
+      "status": "restricted",
+      "checkedAt": "2026-11-24",
+      "reason": "Facebook explicitly refuses embedding because the video may contain third-party content."
+    },
+    "886829887122082": {
+      "sourceUrl": "https://www.facebook.com/reel/886829887122082/",
+      "status": "restricted",
+      "checkedAt": "2026-11-24",
+      "reason": "Facebook explicitly refuses embedding because the video may contain third-party content."
+    },
+    "952075754287535": {
+      "sourceUrl": "https://www.facebook.com/reel/952075754287535/",
+      "status": "available",
+      "checkedAt": "2026-11-24",
+      "reason": "Facebook embedded player loads the original video."
+    },
+    "1642824280735910": {
+      "sourceUrl": "https://www.facebook.com/reel/1642824280735910/",
+      "status": "available",
+      "checkedAt": "2026-11-24",
+      "reason": "Facebook embedded player loads the original video."
+    },
+    "1307091771302573": {
+      "sourceUrl": "https://www.facebook.com/reel/1307091771302573/",
+      "status": "available",
+      "checkedAt": "2026-11-24",
+      "reason": "Facebook embedded player loads the original video."
+    },
+    "1697012922028515": {
+      "sourceUrl": "https://www.facebook.com/reel/1697012922028515/",
+      "status": "available",
+      "checkedAt": "2026-11-24",
+      "reason": "Facebook embedded player loads the original video."
+    },
+    "1752152812475213": {
+      "sourceUrl": "https://www.facebook.com/reel/1752152812475213/",
+      "status": "restricted",
+      "checkedAt": "2026-11-24",
+      "reason": "Facebook explicitly refuses embedding because the video may contain third-party content."
+    },
+    "2136188703593341": {
+      "sourceUrl": "https://www.facebook.com/reel/2136188703593341/",
+      "status": "available",
+      "checkedAt": "2026-11-24",
+      "reason": "Facebook embedded player loads the original video."
+    },
+    "979880138186155": {
+      "sourceUrl": "https://www.facebook.com/reel/979880138186155/",
+      "status": "restricted",
+      "checkedAt": "2026-11-24",
+      "reason": "Facebook explicitly refuses embedding because the video may contain third-party content."
+    }
+  }
+}
