@@ -5,6 +5,7 @@ const assert=require('node:assert/strict');
  const server=createPreviewServer();await new Promise(r=>server.listen(4182,'127.0.0.1',r));
  const browser=await chromium.launch({headless:true,...(process.env.PW_EXECUTABLE?{executablePath:process.env.PW_EXECUTABLE}:{})});
  const context=await browser.newContext();const page=await context.newPage();let maps=0,facebook=0;
+ await context.route('https://connect.facebook.net/**',r=>r.abort());
  await context.route('https://maps.google.com/**',r=>{maps++;return r.fulfill({body:'<!doctype html><title>Map test</title>',contentType:'text/html'});});
  await context.route('https://www.facebook.com/**',r=>{facebook++;return r.fulfill({body:'<!doctype html><title>Facebook test</title>',contentType:'text/html'});});
  await page.goto('http://127.0.0.1:4182/hu/',{waitUntil:'load'});

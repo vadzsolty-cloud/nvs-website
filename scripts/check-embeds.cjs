@@ -44,6 +44,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
   await social.hover();await page.waitForFunction(()=>getComputedStyle(document.querySelector('.header-social svg')).color==='rgb(24, 119, 242)');
   assert.equal(vendors.some(u=>new URL(u).hostname.includes('facebook')),false,'Static social posts never load Facebook before opening a link');
   await page.locator('.legal-footer [data-privacy-settings]').click();await page.locator('[data-consent=reject]').click();assert.equal(await page.locator('iframe[src]').count(),0);assert.deepEqual(errors,[]);
+  await require('./check-facebook-playback.cjs')(browser,'http://127.0.0.1:4191');
   console.log('PASS: nine exact-source video frames and one honest no-image preview in ten equal cards, source URLs, equal Back, Page and Group buttons in one evenly spaced desktop row, neon green and hover blue, consent-safe static previews; HU/RO/EN 320–1920px, both themes.');
  }finally{if(browser)await browser.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exit(1)});
