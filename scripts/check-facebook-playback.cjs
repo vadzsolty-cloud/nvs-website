@@ -11,8 +11,8 @@ module.exports=async function checkPlayback(browser,origin){
  assert.equal(await page.locator('[data-fb-preview]').count(),5,'Only the five embedding-allowed genuine work videos are scheduled');
  await page.locator('[data-fb-preview]').nth(1).locator('.fb-cover').evaluate(e=>scrollTo({top:scrollY+e.getBoundingClientRect().top-180,behavior:'instant'}));
  assert.equal(requests.length,0,'No Meta request before Facebook permission, even when a preview is visible');
- await page.locator('[data-fb-preview]').nth(1).locator('.fb-preview-play').click();const consentScroll=await page.evaluate(()=>scrollY);await page.locator('#consent-facebook').check();await page.locator('[data-consent=save]').click();
- await page.waitForFunction(y=>Math.abs(scrollY-y)<1,consentScroll);
+ await page.locator('[data-fb-preview]').nth(1).locator('.fb-preview-play').click();await page.locator('#consent-facebook').check();await page.locator('[data-consent=save]').click();
+ await page.waitForFunction(()=>{const item=document.querySelectorAll('[data-fb-preview]')[1],cover=item.querySelector('.fb-cover').getBoundingClientRect();return document.activeElement===item.querySelector('.fb-preview-play')&&cover.top>=100&&cover.bottom<innerHeight;});
  const current=()=>page.locator('[data-fb-playing]');await current().waitFor();
  assert.equal(await current().count(),1);assert.equal(await current().getAttribute('data-fb-preview'),'https://www.facebook.com/reel/952075754287535/');
  assert.equal(await current().locator('.fb-video').getAttribute('data-muted'),'true');assert.equal(await page.locator('.fb-video-overlay iframe').count(),1);
