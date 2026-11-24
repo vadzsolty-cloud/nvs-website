@@ -19,7 +19,8 @@ module.exports=async function checkPlayback(browser,origin){
  await page.locator('[data-fb-toggle]').click();assert.equal(await page.locator('.fb-video-overlay').count(),0);
  await page.clock.fastForward(60000);assert.equal(await page.locator('.fb-video-overlay').count(),0,'Explicit pause stays paused');
  await page.locator('[data-fb-toggle]').click();await current().waitFor();
- await page.locator('[data-fb-preview]').nth(3).locator('.fb-cover').scrollIntoViewIfNeeded();
+ await page.locator('[data-fb-preview]').nth(3).locator('.fb-cover').evaluate(e=>scrollTo({top:scrollY+e.getBoundingClientRect().top-150,behavior:'instant'}));
+ await page.clock.runFor(100);
  await page.waitForFunction(()=>document.querySelector('[data-fb-playing]')?.dataset.fbPreview.includes('952075754287535'));
  assert.equal(await page.locator('.fb-video-overlay iframe').count(),1,'Scrolling stops the previous row');
  await page.locator('.legal-footer [data-privacy-settings]').click();await page.locator('[data-consent=reject]').click();

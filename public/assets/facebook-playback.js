@@ -107,5 +107,5 @@
  });
  document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else schedule();});
  motion.addEventListener?.('change',()=>{if(motion.matches){enabled=false;stop();label();}});
- addEventListener('pagehide',()=>{stop();observer.disconnect();});label();schedule();
+ addEventListener('pagehide',stop);label();schedule();
 })();
