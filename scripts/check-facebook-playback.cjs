@@ -10,7 +10,7 @@ module.exports=async function checkPlayback(browser,origin){
  await page.goto(url);await page.locator('[data-consent=reject]').click();
  await page.locator('.fb-cover').first().scrollIntoViewIfNeeded();
  assert.equal(requests.length,0,'No Meta request before Facebook permission, even when a preview is visible');
- const consentScroll=await page.evaluate(()=>scrollY);await page.locator('[data-fb-toggle]').click();await page.locator('#consent-facebook').check();await page.locator('[data-consent=save]').click();
+ await page.locator('[data-fb-toggle]').click();const consentScroll=await page.evaluate(()=>scrollY);await page.locator('#consent-facebook').check();await page.locator('[data-consent=save]').click();
  await page.waitForFunction(y=>Math.abs(scrollY-y)<1,consentScroll);
  const current=()=>page.locator('[data-fb-playing]');await current().waitFor();
  assert.equal(await current().count(),1);assert.equal(await current().getAttribute('data-fb-preview'),'https://www.facebook.com/reel/1604059460661087/');
