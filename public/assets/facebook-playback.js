@@ -78,7 +78,7 @@
   const item=available.find(item=>items.indexOf(item)>cursor)||available[0];
   if(item)start(item);else if(visible.size&&failed.size){enabled=false;label();}
  }
- function preferences(opener=toggle){permissionOpener=opener;enabled=true;document.querySelector('[data-privacy-settings]')?.click();status.textContent=t.permission;}
+ function preferences(opener=toggle){permissionOpener={element:opener,x:window.scrollX,y:window.scrollY};enabled=true;document.querySelector('[data-privacy-settings]')?.click();status.textContent=t.permission;}
  toolbar.hidden=false;
  for(const item of items){
   const button=document.createElement('button');button.type='button';button.className='fb-preview-play';
@@ -101,7 +101,7 @@
  },{threshold:[0,.5,1],rootMargin:'-'+top+'px 0px -24px 0px'});
  items.forEach(item=>observer.observe(item.querySelector('.fb-cover')));
  document.addEventListener('nvs-consent-change',()=>{
-  if(permissionOpener){const opener=permissionOpener;permissionOpener=null;queueMicrotask(()=>opener.focus());}
+  if(permissionOpener){const opener=permissionOpener;permissionOpener=null;queueMicrotask(()=>{opener.element.focus({preventScroll:true});window.scrollTo({left:opener.x,top:opener.y,behavior:'instant'});});}
   if(!permitted()){stop();document.querySelector('#fb-root')?.replaceChildren();document.querySelector('#nvs-facebook-sdk')?.remove();status.textContent='';}
   label();schedule();
  });
