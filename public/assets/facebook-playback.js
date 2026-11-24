@@ -21,11 +21,11 @@
  function advance(entry){if(active!==entry)return;stop();schedule(true);}
  function ready(message){
   const entry=active;if(!entry||message.type!=='video'||message.id!==entry.id)return;
-  clearTimeout(readyTimer);entry.player=message.instance;
+  entry.player=message.instance;
   try{
    entry.player.subscribe('startedPlaying',()=>{
     if(active!==entry)return;
-    entry.stage.classList.add('is-playing');entry.item.dataset.fbPlaying='true';
+    clearTimeout(readyTimer);entry.stage.classList.add('is-playing');entry.item.dataset.fbPlaying='true';
     entry.item.querySelector('.fb-preview-play').setAttribute('aria-label',t.stop+' — '+entry.title);
     status.textContent='';clearTimeout(advanceTimer);if(!entry.manual)advanceTimer=setTimeout(()=>advance(entry),15000);
    });
@@ -35,7 +35,7 @@
    });
    entry.player.subscribe('finishedPlaying',()=>advance(entry));
    entry.player.subscribe('error',()=>fail(entry));
-   entry.player.mute();if(entry.start>0)entry.player.seek(entry.start);entry.player.play();
+   entry.player.pause();entry.player.mute();if(entry.start>0)entry.player.seek(entry.start);entry.player.play();
   }catch{fail(entry);}
  }
  function sdk(){
