@@ -1,9 +1,9 @@
 const assert=require('node:assert/strict');
 const fixture=`(()=>{let ready;window.FB={Event:{subscribe:(event,cb)=>{ready=cb;}},XFBML:{parse(stage){const plugin=stage.querySelector('.fb-video'),events={};const frame=document.createElement('iframe');frame.title='Facebook player fixture';frame.src='https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(plugin.dataset.href);plugin.append(frame);const player={subscribe:(e,cb)=>{events[e]=cb;},mute:()=>{plugin.dataset.muted='true';},seek:t=>{plugin.dataset.seek=String(t);},play:()=>{plugin.dataset.paused='false';events.startedPlaying?.();},pause:()=>{plugin.dataset.paused='true';events.paused?.();}};ready({type:'video',id:plugin.id,instance:player});}}};window.fbAsyncInit();})();`;
 module.exports=async function checkPlayback(browser,origin){
- const requests=[],errors=[];
+ const requests=[],errors=[];let phase='setup';const watchdog=setTimeout(()=>{console.error('Facebook playback test timeout during '+phase);process.exit(1);},120000);watchdog.unref();
  const page=await browser.newPage({viewport:{width:1280,height:950}});
- await page.clock.install();await page.emulateMedia({reducedMotion:'no-preference'});
+ await page.emulateMedia({reducedMotion:'no-preference'});
  page.on('pageerror',e=>errors.push(e.message));
  await page.route('**/*',r=>{const u=new URL(r.request().url());if(u.origin===origin)return r.continue();requests.push(u.href);if(u.hostname==='connect.facebook.net')return r.fulfill({contentType:'application/javascript',body:fixture});if(u.hostname==='www.facebook.com')return r.fulfill({contentType:'text/html',body:'<!doctype html><title>Player fixture</title>'});return r.abort();});
  const url=origin+'/nvs-website/hu/facebook/';
@@ -14,18 +14,18 @@ module.exports=async function checkPlayback(browser,origin){
  const current=()=>page.locator('[data-fb-playing]');await current().waitFor();
  assert.equal(await current().count(),1);assert.equal(await current().getAttribute('data-fb-preview'),'https://www.facebook.com/reel/1604059460661087/');
  assert.equal(await current().locator('.fb-video').getAttribute('data-muted'),'true');assert.equal(await page.locator('.fb-video-overlay iframe').count(),1);
- await page.clock.fastForward(15001);await page.waitForFunction(()=>document.querySelector('[data-fb-playing]')?.dataset.fbPreview.includes('1681464432880476'));
+ phase='automatic advance';console.log('Checking Facebook automatic advance');await page.waitForTimeout(15500);await page.waitForFunction(()=>document.querySelector('[data-fb-playing]')?.dataset.fbPreview.includes('1681464432880476'));
  assert.equal(await page.locator('.fb-video-overlay iframe').count(),1,'Only one player survives the automatic switch');
  await page.locator('[data-fb-toggle]').click();assert.equal(await page.locator('.fb-video-overlay').count(),0);
- await page.clock.fastForward(60000);assert.equal(await page.locator('.fb-video-overlay').count(),0,'Explicit pause stays paused');
+ await page.waitForTimeout(300);assert.equal(await page.locator('.fb-video-overlay').count(),0,'Explicit pause stays paused');
  await page.locator('[data-fb-toggle]').click();await current().waitFor();
  await page.locator('[data-fb-preview]').nth(3).locator('.fb-cover').evaluate(e=>scrollTo({top:scrollY+e.getBoundingClientRect().top-150,behavior:'instant'}));
- await page.clock.runFor(100);
+ phase='scroll';console.log('Checking Facebook visible row change');await page.waitForTimeout(200);
  await page.waitForFunction(()=>document.querySelector('[data-fb-playing]')?.dataset.fbPreview.includes('952075754287535'));
  assert.equal(await page.locator('.fb-video-overlay iframe').count(),1,'Scrolling stops the previous row');
  await page.locator('.legal-footer [data-privacy-settings]').click();await page.locator('[data-consent=reject]').click();
  assert.equal(await page.locator('.fb-video-overlay').count(),0,'Withdrawal removes the player immediately');
- const afterWithdrawal=requests.length;await page.locator('.fb-cover').first().scrollIntoViewIfNeeded();await page.clock.fastForward(60000);assert.equal(requests.length,afterWithdrawal);
+ const afterWithdrawal=requests.length;await page.locator('.fb-cover').first().scrollIntoViewIfNeeded();await page.waitForTimeout(300);assert.equal(requests.length,afterWithdrawal);
  assert.equal(await page.locator('.fb-card').first().getAttribute('href'),'https://www.facebook.com/reel/1604059460661087/');assert.deepEqual(errors,[]);
  await page.close();
  const reduced=await browser.newPage({viewport:{width:390,height:844}});let sdkRequests=0;
@@ -39,5 +39,5 @@ module.exports=async function checkPlayback(browser,origin){
  const failure=await browser.newPage();await failure.route('**/*',r=>new URL(r.request().url()).origin===origin?r.continue():r.abort());
  await failure.goto(url);await failure.locator('[data-consent=accept]').click();await failure.locator('.fb-cover').first().scrollIntoViewIfNeeded();
  await failure.locator('.fb-playback-status').filter({hasText:'nem érhető el'}).waitFor();assert.equal(await failure.locator('.fb-video-overlay').count(),0);assert.equal(await failure.locator('.fb-cover img').count(),9,'Provider failure keeps genuine stills and links usable');await failure.close();
- console.log('PASS: consent gates all Meta requests; one muted player at a time; visible-row order, 15-second advance, pause, scrolling, withdrawal, reduced-motion/manual mobile playback and provider-error fallback.');
+ clearTimeout(watchdog);console.log('PASS: consent gates all Meta requests; one muted player at a time; visible-row order, 15-second advance, pause, scrolling, withdrawal, reduced-motion/manual mobile playback and provider-error fallback.');
 };
