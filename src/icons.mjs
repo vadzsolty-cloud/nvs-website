@@ -1,4 +1,5 @@
 const drawings={
+ snowflake:'<path d="M12 2v20M3.34 7l17.32 10M3.34 17 20.66 7M9 4l3 3 3-3M9 20l3-3 3 3M3.57 10.6l4.1-1.1-1.1-4.1m10.86 13.2-1.1-4.1 4.1-1.1M6.57 18.6l1.1-4.1-4.1-1.1m17.86-2.8-4.1-1.1 1.1-4.1"/>',
  'arrow-left':'<path d="M19 12H5m6-6-6 6 6 6"/>',
  'chevron-left':'<path d="m15 5-7 7 7 7"/>','chevron-right':'<path d="m9 5 7 7-7 7"/>',
  'chevron-down':'<path d="m5 9 7 7 7-7"/>',plus:'<path d="M12 5v14M5 12h14"/>',minus:'<path d="M5 12h14"/>',
