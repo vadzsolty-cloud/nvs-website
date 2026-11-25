@@ -38,7 +38,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    await page.setViewportSize({width,height:950});await page.goto('http://127.0.0.1:4188/nvs-website/'+lang+'/');
    if(await page.locator('#privacy-preferences').isVisible())await page.locator('[data-consent=reject]').click();
    assert.equal(await page.locator('.account-link').getAttribute('href'),'/nvs-website/'+lang+'/account/');
-   assert.equal(await page.locator('#native-login').count(),0);assert.equal(await page.locator('#services .tile-visual picture').count(),6);
+   assert.equal(await page.locator('#native-login').count(),0);assert.equal(await page.locator('#services .tile-visual picture').count(),7);
    assert.equal(await page.locator('.fb-cover-brand').count(),0,'Facebook photo covers should not repeat the company wordmark');
    assert.equal(await page.locator('.fb-cover-label').count(),0);
    assert.equal(await page.locator('.fb-card').count(),0);assert.equal(await page.locator('iframe[data-consent-category=facebook]').count(),0);
