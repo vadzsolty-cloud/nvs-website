@@ -1,3 +1,4 @@
 /* With scripts disabled, keep the privacy notice readable without covering the page. */
+.consent-panel[hidden]{display:block!important}
 .consent-panel{position:static;inset:auto;width:calc(100% - 32px);max-height:none;margin:24px auto;overflow:visible;box-shadow:none}
 .consent-panel fieldset,.consent-actions{display:none}
