@@ -222,6 +222,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
   await noScript.route('**/*',r=>new URL(r.request().url()).origin==='http://127.0.0.1:4188'?r.continue():r.abort());
   const plain=await noScript.newPage();await plain.goto('http://127.0.0.1:4188/nvs-website/hu/');
   assert.equal(await plain.locator('.consent-panel').evaluate(e=>getComputedStyle(e).position),'static');
+  assert.equal(await plain.locator('.consent-panel').isVisible(),true,'Privacy information remains readable without JavaScript');
   assert.equal(await plain.locator('.consent-actions').isVisible(),false);assert.equal(await plain.locator('iframe[src]').count(),0);
   const nativeCard=plain.locator('.equipment-card').last();await nativeCard.locator('summary').click();assert.equal(await nativeCard.evaluate(e=>e.open),true);assert.equal(await nativeCard.locator('.equipment-explanation').isVisible(),true);await nativeCard.locator('summary').click();assert.equal(await nativeCard.evaluate(e=>e.open),false);
   assert.equal(await plain.locator('.fb-card').count(),0);assert.equal(await plain.locator('.photo-gallery .zoom:visible').count(),6);
