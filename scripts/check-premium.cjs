@@ -38,7 +38,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    await page.setViewportSize({width,height:950});await page.goto('http://127.0.0.1:4188/nvs-website/'+lang+'/');
    if(await page.locator('#privacy-preferences').isVisible())await page.locator('[data-consent=reject]').click();
    assert.equal(await page.locator('.account-link').getAttribute('href'),'/nvs-website/'+lang+'/account/');
-   assert.equal(await page.locator('#native-login').count(),0);assert.equal(await page.locator('#services .tile-visual picture').count(),6);
+   assert.equal(await page.locator('#native-login').count(),0);assert.equal(await page.locator('#services .tile-visual picture').count(),7);
    assert.equal(await page.locator('.fb-cover-brand').count(),0,'Facebook photo covers should not repeat the company wordmark');
    assert.equal(await page.locator('.fb-cover-label').count(),0);
    assert.equal(await page.locator('.fb-card').count(),0);assert.equal(await page.locator('iframe[data-consent-category=facebook]').count(),0);
@@ -69,6 +69,11 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
     assert.ok(readability.navFont>=13&&readability.tileFont>=16,JSON.stringify(readability));
     assert.ok(readability.brandClear&&readability.actionsClear,lang+' '+width+' header overlap '+JSON.stringify(readability));
     if(width>=1920)assert.ok(readability.canvas>=1900,'Wide screens should use the larger canvas');
+    const serviceCards=page.locator('#services .cards > .service-card');assert.equal(await serviceCards.count(),9);
+    const extra=page.locator('#services [data-service]');assert.equal(await extra.count(),3);
+    const row=await extra.evaluateAll(cards=>cards.map(el=>{const r=el.getBoundingClientRect();return {top:r.top,left:r.left,width:r.width};}));
+    if(width>1000){assert.ok(row.every(r=>Math.abs(r.top-row[0].top)<2),'Additional services share one desktop row');assert.ok(row[0].left<row[1].left&&row[1].left<row[2].left);}
+    if(width<=700)assert.ok(row[0].top<row[1].top&&row[1].top<row[2].top,'Additional services stack on mobile');
     assert.ok((await page.locator('.copyright').innerText()).includes('Copyright © 2026 NICHTVISION SERVICE S.R.L.'));
     const footer=await page.locator('.legal-footer').evaluate(el=>({height:el.getBoundingClientRect().height,atBottom:el.nextElementSibling?.classList.contains('consent-panel'),groups:el.querySelectorAll('.footer-group').length,collapsible:el.querySelectorAll('details,summary').length}));
     assert.equal(footer.atBottom,true,'Footer should be the last normal-flow content');
