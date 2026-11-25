@@ -39,7 +39,8 @@ test('expanded workshop pages keep guides, photos and illustration provenance to
    assert.equal((page.match(/class="service-actions/g)||[]).length,2);
    assert.ok(!page.includes('undefined'));
    const slug=id==='brake-testing'?'brake-audi-bench-illustration':'gearbox-ford-mondeo-machine';
-   assert.ok(card.includes(mediaDisclosure(slug,l)));assert.ok(page.includes(mediaDisclosure(slug,l)));
+   if(id==='brake-testing'){assert.equal(mediaDisclosure(slug,l),'AI');assert.ok(card.includes('class="media-disclosure">AI</span>'));assert.ok(page.includes('<figcaption>'+photos[slug].alt[l]+' · AI</figcaption>'));assert.ok(!photos[slug].alt[l].includes('ACC'));}
+   else{assert.equal(mediaDisclosure(slug,l),'');assert.ok(!card.includes('media-disclosure'));assert.ok(!page.includes('AI-labelled')&&!page.includes('AI-jelöléssel')&&!page.includes('etichetată AI'));}
    const displayed=[...page.matchAll(/<img [^>]*src="([^"]+)"/g)].map(m=>m[1]);
    assert.equal(new Set(displayed).size,displayed.length);
   }

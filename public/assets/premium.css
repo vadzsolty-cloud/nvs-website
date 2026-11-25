@@ -322,7 +322,7 @@ html[data-theme] .lightbox button:not(:hover):not(:focus-visible){color:#f5f8f2}
 
 /* Service images carry clear provenance captions, including in cropped cards. */
 .tile-visual{position:relative}
-.media-disclosure{position:absolute;left:12px;bottom:12px;max-width:calc(100% - 24px);padding:5px 9px;border-radius:6px;background:#101612e8;color:#f5f6f2;font-size:12px;line-height:1.4;letter-spacing:0}
+.media-disclosure{position:absolute;right:12px;bottom:12px;padding:3px 6px;border-radius:4px;background:#101612cc;color:#f5f6f2;font-size:12px;line-height:1.3;letter-spacing:.04em;pointer-events:none}
 .service-media-figure{margin:0;min-width:0}.service-media-figure>.zoom{position:relative;display:block;overflow:hidden;border-radius:18px}
 .service-media-figure picture,.service-media-figure img{display:block;width:100%;height:auto}
 .service-media-figure figcaption{font-size:14px;line-height:1.6;color:var(--muted);margin-top:10px}

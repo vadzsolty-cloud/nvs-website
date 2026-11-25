@@ -10,7 +10,7 @@ export const assetStem=slug=>photos[slug].assetStem||slug;
 const file=(slug,w,ext)=>`/assets/photos/${assetStem(slug)}-${w}.${ext}`;
 const srcset=(p,ext)=>p.widths.map(w=>`${file(p.slug,w,ext)} ${w}w`).join(', ');
 export const fullSize=slug=>{const p=photos[slug];return file(slug,p.widths.at(-1),'jpg');};
-export const mediaDisclosure=(slug,l)=>{const kind=photos[slug]?.provenance?.kind;return kind==='ai-generated-illustration'?{hu:'AI által készített illusztráció',ro:'Ilustrație generată cu AI',en:'AI-generated illustration'}[l]:kind==='owner-supplied-ai-labelled'?{hu:'Beküldött kép · AI-jelöléssel',ro:'Imagine furnizată · etichetată AI',en:'Supplied image · AI-labelled'}[l]:'';};
+export const mediaDisclosure=(slug,l)=>{const kind=photos[slug]?.provenance?.kind;return kind==='ai-generated-illustration'?'AI':'';};
 export const alt=(slug,l)=>photos[slug].alt[l]+(mediaDisclosure(slug,l)?' · '+mediaDisclosure(slug,l):'');
 
 /** Responsive <picture>: AVIF, WebP, JPEG fallback; intrinsic width/height prevent layout shift. */
