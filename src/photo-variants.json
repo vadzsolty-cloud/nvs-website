@@ -1209,5 +1209,45 @@
    540,
    720
   ]
+ },
+ "gearbox-ford-mondeo-machine": {
+  "original": "1000113223.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
+ },
+ "gearbox-atf-equipment-underbody": {
+  "original": "1000119148.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
+ },
+ "gearbox-audi-atf-workshop": {
+  "original": "1000114323.jpg",
+  "width": 720,
+  "height": 1280,
+  "widths": [
+   360,
+   540,
+   720
+  ]
+ },
+ "brake-audi-bench-illustration": {
+  "original": "brake-audi-bench-illustration.jpg",
+  "width": 1536,
+  "height": 1024,
+  "widths": [
+   640,
+   960,
+   1280
+  ]
  }
 }

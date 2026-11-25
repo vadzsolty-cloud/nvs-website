@@ -1,5 +1,9 @@
 import {uiIcon} from './icons.mjs';
-import {serviceActions} from './customer-journey.mjs';
+import {serviceActions,serviceNext} from './customer-journey.mjs';
+import {picture,placement,alt,fullSize,galleryCopy,mediaDisclosure} from './photos.mjs';
+import {photoSlider} from './slider.mjs';
+import {guideLabels} from './service-guides.mjs';
+import {workshopServiceGuide} from './workshop-service-guides.mjs';
 
 export const workshopServiceIds=['automatic-transmission-oil','brake-testing'];
 export const workshopServiceCopy={
@@ -19,5 +23,6 @@ export const workshopServiceCopy={
   back:'Back to services',detail:'Explore',work:'What does the service include?'
  }
 };
-export function workshopServiceCard(l,id){const copy=workshopServiceCopy[l],t=copy[id],number=String(workshopServiceIds.indexOf(id)+8).padStart(2,'0');return `<a class="service-card" data-service="${id}" href="/${l}/services/${id}/"><div class="tile-visual service-symbol" aria-hidden="true">${uiIcon(t.icon)}<span>${t.symbol}</span></div><div class="card-top">${uiIcon(t.icon)}<span>${number}</span></div><h3>${t.title}</h3><p>${t.intro}</p><span class="card-link"><span>${copy.detail}</span>${uiIcon('arrow')}</span></a>`;}
-export function workshopServicePage(l,id){const copy=workshopServiceCopy[l],t=copy[id];return `<section class="section detail-hero"><a class="back" href="/${l}/#services">${uiIcon('arrow-left')}<span>${copy.back}</span></a><p class="eyebrow">NVS / ${t.tag}</p><h1>${t.title}</h1><p class="lead">${t.intro}</p>${serviceActions(l,{compact:true})}</section><section class="section ac-service-guide"><h2>${copy.work}</h2><div class="ac-service-steps">${t.items.map(([name,text])=>`<article><h3>${name}</h3><p>${text}</p></article>`).join('')}</div>${serviceActions(l)}</section>`;}
+export const workshopServiceImage=id=>id==='automatic-transmission-oil'?'gearbox-ford-mondeo-machine':'brake-audi-bench-illustration';
+export function workshopServiceCard(l,id){const copy=workshopServiceCopy[l],t=copy[id],number=String(workshopServiceIds.indexOf(id)+8).padStart(2,'0'),slug=workshopServiceImage(id);return `<a class="service-card" data-service="${id}" href="/${l}/services/${id}/"><div class="tile-visual">${picture(slug,l,{sizes:'(min-width: 1001px) 30vw, (min-width: 701px) 45vw, 90vw'})}<span class="media-disclosure">${mediaDisclosure(slug,l)}</span></div><div class="card-top">${uiIcon(t.icon).replace('class="ui-icon"','class="service-icon"')}<span>${number}</span></div><h3>${t.title}</h3><p>${t.intro}</p><span class="card-link"><span>${copy.detail}</span>${uiIcon('arrow')}</span></a>`;}
+export function workshopServicePage(l,id){const copy=workshopServiceCopy[l],t=copy[id],slug=workshopServiceImage(id);const visual=id==='automatic-transmission-oil'?photoSlider(l,placement.transmissionServiceSlides,{name:t.title,alt,fullSize,open:galleryCopy[l].open}):`<figure class="service-media-figure"><a class="zoom" href="${fullSize(slug)}" data-lightbox data-caption="${alt(slug,l)}" aria-label="${galleryCopy[l].open}: ${alt(slug,l)}">${picture(slug,l,{sizes:'(min-width: 1001px) 45vw, 100vw',priority:true})}<span class="zoom-icon" aria-hidden="true">${uiIcon('expand')}</span></a><figcaption>${mediaDisclosure(slug,l)}</figcaption></figure>`;return `<section class="section detail-hero"><a class="back" href="/${l}/#services">${uiIcon('arrow-left')}<span>${copy.back}</span></a><p class="eyebrow">NVS / ${t.tag}</p><h1>${t.title}</h1><p class="lead">${t.intro}</p>${serviceActions(l,{compact:true})}<a class="text-link guide-jump" href="#service-guide"><span>${guideLabels[l].jump}</span>${uiIcon('chevron-down')}</a><div class="service-visual">${visual}</div></section>${workshopServiceGuide(l,id)}${serviceNext(l)}`;}

@@ -1,5 +1,5 @@
 // Owner-supplied workshop photographs. Catalogue: media/photos.json; variants: scripts/optimize-photos.py.
-// Only real NVS photos are used. AI-labelled or AI-generated images are excluded (see docs/WORKSHOP-PHOTOS.md).
+// Owner-selected AI-labelled media and the requested brake illustration are explicitly disclosed (see docs/WORKSHOP-PHOTOS.md).
 import {readFileSync} from 'node:fs';
 const read=p=>JSON.parse(readFileSync(new URL(p,import.meta.url),'utf8'));
 const catalog=read('../media/photos.json'),variants=read('./photo-variants.json');
@@ -10,12 +10,13 @@ export const assetStem=slug=>photos[slug].assetStem||slug;
 const file=(slug,w,ext)=>`/assets/photos/${assetStem(slug)}-${w}.${ext}`;
 const srcset=(p,ext)=>p.widths.map(w=>`${file(p.slug,w,ext)} ${w}w`).join(', ');
 export const fullSize=slug=>{const p=photos[slug];return file(slug,p.widths.at(-1),'jpg');};
-export const alt=(slug,l)=>photos[slug].alt[l];
+export const mediaDisclosure=(slug,l)=>{const kind=photos[slug]?.provenance?.kind;return kind==='ai-generated-illustration'?{hu:'AI által készített illusztráció',ro:'Ilustrație generată cu AI',en:'AI-generated illustration'}[l]:kind==='owner-supplied-ai-labelled'?{hu:'Beküldött kép · AI-jelöléssel',ro:'Imagine furnizată · etichetată AI',en:'Supplied image · AI-labelled'}[l]:'';};
+export const alt=(slug,l)=>photos[slug].alt[l]+(mediaDisclosure(slug,l)?' · '+mediaDisclosure(slug,l):'');
 
 /** Responsive <picture>: AVIF, WebP, JPEG fallback; intrinsic width/height prevent layout shift. */
 export function picture(slug,l,{sizes='100vw',priority=false,className=''}={}){
  const p=photos[slug];if(!p)throw Error('Unknown photo '+slug);
- return `<picture class="photo ph-${slug} ${className}"><source type="image/avif" srcset="${srcset(p,'avif')}" sizes="${sizes}"><source type="image/webp" srcset="${srcset(p,'webp')}" sizes="${sizes}"><img src="${fullSize(slug)}" alt="${esc(p.alt[l])}" width="${p.width}" height="${p.height}" ${priority?'fetchpriority="high" loading="eager"':'loading="lazy"'} decoding="async"></picture>`;
+ return `<picture class="photo ph-${slug} ${className}"><source type="image/avif" srcset="${srcset(p,'avif')}" sizes="${sizes}"><source type="image/webp" srcset="${srcset(p,'webp')}" sizes="${sizes}"><img src="${fullSize(slug)}" alt="${esc(alt(slug,l))}" width="${p.width}" height="${p.height}" ${priority?'fetchpriority="high" loading="eager"':'loading="lazy"'} decoding="async"></picture>`;
 }
 export function preloadHero(slug){
  const p=photos[slug];

@@ -1,5 +1,5 @@
 {
- "_note": "Owner workshop photographs. Registration plates are manually reviewed and opaque masks are baked into source and responsive assets. See docs/WORKSHOP-PHOTOS.md.",
+ "_note": "Reviewed owner workshop photographs and explicitly requested, labelled service illustrations. Registration plates are manually reviewed. See docs/WORKSHOP-PHOTOS.md.",
  "photos": [
   {
    "slug": "headlight-adjustment",
@@ -3277,6 +3277,114 @@
     540,
     720
    ]
+  },
+  {
+   "slug": "gearbox-ford-mondeo-machine",
+   "original": "1000113223.jpg",
+   "position": "50% 40%",
+   "tag": {
+    "hu": "Váltóolajcsere",
+    "ro": "Schimb ulei cutie",
+    "en": "Transmission oil service"
+   },
+   "alt": {
+    "hu": "Ford Mondeo professzionális váltóolajcsere-berendezéssel",
+    "ro": "Ford Mondeo cu aparat profesional pentru schimbul uleiului din cutie",
+    "en": "Ford Mondeo with professional transmission oil-change equipment"
+   },
+   "provenance": {
+    "kind": "owner-supplied-ai-labelled",
+    "approvedAt": "2026-11-25"
+   },
+   "privacy": {
+    "reviewedAt": "2026-11-25",
+    "registration": "no-registration-visible"
+   },
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "fit": "contain"
+  },
+  {
+   "slug": "gearbox-atf-equipment-underbody",
+   "original": "1000119148.jpg",
+   "position": "50% 60%",
+   "tag": {
+    "hu": "Gépi olajcsere",
+    "ro": "Schimb cu aparat",
+    "en": "Machine-assisted oil change"
+   },
+   "alt": {
+    "hu": "Automata váltó olajcseréje piros ATF célberendezéssel",
+    "ro": "Schimbul uleiului din cutia automată cu aparat ATF roșu",
+    "en": "Automatic transmission oil service with a red ATF machine"
+   },
+   "privacy": {
+    "reviewedAt": "2026-11-25",
+    "registration": "no-registration-visible"
+   },
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "fit": "contain"
+  },
+  {
+   "slug": "gearbox-audi-atf-workshop",
+   "original": "1000114323.jpg",
+   "position": "50% 55%",
+   "tag": {
+    "hu": "Váltóolajcsere",
+    "ro": "Schimb ulei cutie",
+    "en": "Transmission oil service"
+   },
+   "alt": {
+    "hu": "Audi a műhelyben váltóolajcsere-géphez csatlakoztatva",
+    "ro": "Audi în atelier, conectat la aparatul pentru schimbul uleiului din cutie",
+    "en": "Audi in the workshop connected to transmission oil-service equipment"
+   },
+   "privacy": {
+    "reviewedAt": "2026-11-25",
+    "registration": "no-registration-visible"
+   },
+   "widths": [
+    360,
+    540,
+    720
+   ],
+   "fit": "contain"
+  },
+  {
+   "slug": "brake-audi-bench-illustration",
+   "original": "brake-audi-bench-illustration.jpg",
+   "position": "50% 63%",
+   "tag": {
+    "hu": "Fékpadi mérés",
+    "ro": "Test pe stand",
+    "en": "Brake bench testing"
+   },
+   "alt": {
+    "hu": "Audi görgős fékpadon az ACC-mérőhelyet idéző műhelytérben",
+    "ro": "Audi pe stand cu role, într-un atelier inspirat de zona de calibrare ACC",
+    "en": "Audi on a roller brake tester in a workshop inspired by the ACC calibration bay"
+   },
+   "provenance": {
+    "kind": "ai-generated-illustration",
+    "approvedAt": "2026-11-25",
+    "tool": "built-in image_gen"
+   },
+   "privacy": {
+    "reviewedAt": "2026-11-25",
+    "registration": "no-registration-visible"
+   },
+   "widths": [
+    640,
+    960,
+    1280
+   ]
   }
  ],
  "placement": {
@@ -3443,6 +3551,11 @@
    "ac-mercedes-hose-connections",
    "ac-toyota-gauge-repair",
    "ac-mercedes-workshop-service"
+  ],
+  "transmissionServiceSlides": [
+   "gearbox-ford-mondeo-machine",
+   "gearbox-atf-equipment-underbody",
+   "gearbox-audi-atf-workshop"
   ]
  }
 }

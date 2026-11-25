@@ -1,6 +1,6 @@
 # Tulajdonosi műhelyfotók
 
-Csak a tulajdonos valódi műhelyfotói használhatók. A Samsung „AI által előállított tartalom” jelölésével ellátott képek és a generált látványtervek kizárva. A HU/RO/EN képleírásokat a media/photos.json tartalmazza; a méretek a src/photo-variants.json fájlban vannak.
+Alapesetben a tulajdonos valódi műhelyfotói használhatók. A korábban kizárt AI-jelölt képek továbbra is kizártak. A 2026-11-25-i kifejezett tulajdonosi kérés két, külön megjelölt szolgáltatási illusztrációra ad kivételt (lásd alább). A HU/RO/EN képleírásokat a media/photos.json tartalmazza; a méretek a src/photo-variants.json fájlban vannak.
 
 ## Kötelező rendszámvédelem
 
@@ -33,3 +33,11 @@ Az Audi maradt a Hunter szolgáltatás főfotója, az ACC főfotója továbbra i
 ## Diagnosztikai képsor bővítése
 
 2026-11-21: a tulajdonos kérésére a diagnosztika korábbi utolsó képe, az `adas-station` (IMG-20260816-WA0000.jpg) lett a nyitókép a főoldali szolgáltatásnál, a részletes képsorban. A képsor a már jóváhagyott katalógusból három további felvételt kapott: Audi utastér diagnosztikai laptoppal (1000141173.jpg), MAHLE diagnosztikai eredményképernyő (1000141265.jpg), illetve diagnosztikai laptop a Volkswagen mellett (1000141260.jpg). Mind a hat kép egyedi a képsoron belül; új képfájl, másolat vagy adatvédelmi felülvizsgálat nem keletkezett. A három felvétel korábbi Night Vision/ACC elhelyezése megmarad.
+
+## 2026-11-25: szolgáltatási képek és kifejezett kivételek
+
+A tulajdonos a Ford Mondeót (1000113223.jpg) választotta a gépi váltóolajcsere kártyájához és részletes oldalának nyitóképéhez. A beküldött képen AI-jelölés látszik; ezt a katalógus provenance mezője, a kártya felirata, a képleírás és a nagyított kép képaláírása is jelzi. Az eredeti jelölést nem távolítjuk el.
+
+A fékpados Audi külön, a tulajdonos kérésére generált illusztráció. Az ACC-kalibrálás helyszínének fotói a környezet referenciái; a kép nem bizonyítja az autó vagy a bemutatott fékpad tényleges jelenlétét. Nem kerül valódi ügyfélreferenciák közé. A kártyán, a részletes oldalon és a képleírásban AI-illusztrációként jelölt. A készítési specifikáció: BRAKE-ILLUSTRATION.md.
+
+A 1000119148.jpg és 1000114323.jpg további, egyedi váltóolajcsere-felvételek. A közel azonos Audi-nézeteket nem duplázzuk; a további két beküldött AI-jelölt Audi-kép nincs felvéve. A három váltós kép egyszer szerepel a részletes képsoron belül. Az új képek teljes szemrevételezésekor nem volt látható forgalmi rendszám: a Ford táblája üres, az Audikon nincs látható rendszám, a generált Audi táblája jelöletlen sötét felület. Minden új forrás és változat a meglévő adatvédelmi lenyomat-ellenőrzés alá tartozik.
