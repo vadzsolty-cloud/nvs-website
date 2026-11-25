@@ -72,9 +72,9 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
     const serviceCards=page.locator('#services .cards > .service-card');assert.equal(await serviceCards.count(),9);
     const extra=page.locator('#services [data-service]');assert.equal(await extra.count(),3);
     const row=await extra.evaluateAll(cards=>cards.map(el=>{const r=el.getBoundingClientRect();return {top:r.top,left:r.left,width:r.width};}));
-    if(width>1000){assert.ok(row.every(r=>Math.abs(r.top-row[0].top)<2),'Additional services share one desktop row');assert.ok(row[0].left<row[1].left&&row[1].left<row[2].left);}
+    if(width>1000){assert.ok(row.every(r=>Math.abs(r.top-row[0].top)<2),'Additional services share one desktop row');assert.ok(row[0].left<row[1].left&&row[1].left<row[2].left);const bottoms=await serviceCards.evaluateAll(cards=>cards.map(c=>c.querySelector('.card-link').getBoundingClientRect().bottom));for(let i=0;i<bottoms.length;i+=3)assert.ok(bottoms.slice(i,i+3).every(b=>Math.abs(b-bottoms[i])<2),'Card actions align within each row');}
     if(width<=700)assert.ok(row[0].top<row[1].top&&row[1].top<row[2].top,'Additional services stack on mobile');
-    if(lang==='hu'&&width===1440&&theme==='dark')await page.locator('#services .cards').screenshot({path:'artifacts/services-nine-photo-cards.png'});
+    if(lang==='hu'&&width===1440&&theme==='dark')await page.locator('#services .cards').screenshot({path:'artifacts/services-nine-photo-cards.png',style:'.site-header,.skip{visibility:hidden!important}'});
     if(lang==='hu'&&width===390&&theme==='dark')for(const id of ['air-conditioning','automatic-transmission-oil','brake-testing'])await page.locator('#services [data-service="'+id+'"]').screenshot({path:'artifacts/service-card-mobile-'+id+'.png'});
     assert.ok((await page.locator('.copyright').innerText()).includes('Copyright © 2026 NICHTVISION SERVICE S.R.L.'));
     const footer=await page.locator('.legal-footer').evaluate(el=>({height:el.getBoundingClientRect().height,atBottom:el.nextElementSibling?.classList.contains('consent-panel'),groups:el.querySelectorAll('.footer-group').length,collapsible:el.querySelectorAll('details,summary').length}));

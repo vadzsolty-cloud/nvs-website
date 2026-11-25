@@ -446,3 +446,8 @@ html{scroll-padding-top:var(--anchor-offset,132px)}
 
 /* Keep the owner-selected portrait Ford fully visible, with its service machine. */
 .tile-visual .ph-gearbox-ford-mondeo-machine img{object-fit:contain}
+
+/* Align the shared detail action along the bottom of every service-card row. */
+#services .service-card{display:flex;flex-direction:column}
+#services .service-card .tile-visual{flex-shrink:0}
+#services .service-card .card-link{margin-top:auto;align-self:flex-start}
