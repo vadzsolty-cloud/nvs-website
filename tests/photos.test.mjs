@@ -49,7 +49,7 @@ test('pages use responsive images under /nvs-website/, eager hero, lazy gallery,
   for(const m of html.matchAll(/(?:image)?srcset="([^"]+)"/g))for(const item of m[1].split(', ')){const url=item.split(' ')[0];assert.ok(url.startsWith('/nvs-website/assets/photos/'),url);await stat(output+url.slice('/nvs-website'.length));}
   const imgs=[...html.matchAll(/<img [^>]*>/g)].map(m=>m[0]).filter(t=>t.includes('/assets/photos/'));
   const sliderPhotos=sliderOrder.filter(id=>placement.services[id]).length;
-  assert.equal(imgs.length,sliderPhotos+Object.values(placement.services).filter(Boolean).length+1+placement.gallery.length+placement.gearboxOilSlides.length+1);
+  assert.equal(imgs.length,sliderPhotos+Object.values(placement.services).filter(Boolean).length+1+placement.gallery.length+placement.gearboxOilSlides.length+3);
   for(const t of imgs){assert.match(t,/ alt="[^"]{15,}"/);assert.match(t,/ width="\d+" height="\d+"/);}
   assert.match(imgs[0],/fetchpriority="high"/);assert.ok(imgs.slice(1).every(t=>t.includes('loading="lazy"')));
   assert.ok(html.includes('rel="preload" as="image"'));

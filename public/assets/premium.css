@@ -320,10 +320,12 @@ html[data-theme] .lightbox button:not(:hover):not(:focus-visible){color:#f5f8f2}
 @media(max-width:1000px){.gearbox-report{grid-template-columns:minmax(0,1fr);gap:24px}.gearbox-copy h3{max-width:650px}}
 @media(max-width:700px){.gearbox-report{border-radius:16px;margin:32px 0}.gearbox-copy>p:last-child{font-size:16px}}
 
-/* Service illustrations use the existing NVS icons without duplicating workshop photos. */
-.service-symbol{display:flex;align-items:center;justify-content:center;gap:22px;background:radial-gradient(circle at 50% 45%,var(--control-highlight),transparent 70%),var(--bg);color:var(--green)}
-.service-symbol>.ui-icon{width:100px;height:100px;stroke-width:1.2}
-.service-symbol>span{font-size:clamp(22px,3vw,38px);font-weight:600;letter-spacing:.08em}
+/* Service images carry clear provenance captions, including in cropped cards. */
+.tile-visual{position:relative}
+.media-disclosure{position:absolute;left:12px;bottom:12px;max-width:calc(100% - 24px);padding:5px 9px;border-radius:6px;background:#101612e8;color:#f5f6f2;font-size:12px;line-height:1.4;letter-spacing:0}
+.service-media-figure{margin:0;min-width:0}.service-media-figure>.zoom{position:relative;display:block;overflow:hidden;border-radius:18px}
+.service-media-figure picture,.service-media-figure img{display:block;width:100%;height:auto}
+.service-media-figure figcaption{font-size:14px;line-height:1.6;color:var(--muted);margin-top:10px}
 .ac-service-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:32px 0 48px}
 .ac-service-steps article{padding:24px;border:1px solid var(--line);border-radius:20px}
 .ac-service-guide h2,.ac-contact h2{font-size:clamp(25px,3vw,42px)}
@@ -441,3 +443,6 @@ html{scroll-padding-top:var(--anchor-offset,132px)}
 
 /* One silent, consent-gated Facebook preview at a time. */
 .fb-playback-controls{display:flex;align-items:center;flex-wrap:wrap;gap:16px;margin:20px 0 28px}.fb-playback-controls[hidden]{display:none}.fb-playback-controls>p{margin:0;flex:1 1 420px}.fb-playback-controls>.fb-playback-status{flex-basis:100%;font-size:14px}.fb-playback-status:empty{display:none}.facebook-selected [data-fb-preview]{position:relative}.fb-video-overlay{position:absolute;top:1px;left:1px;right:1px;height:225px;overflow:hidden;background:#080b09;border-radius:17px 17px 0 0;opacity:0;pointer-events:none;z-index:3}.fb-video-overlay.is-playing{opacity:1;pointer-events:auto}.fb-video-overlay .fb-video,.fb-video-overlay .fb-video>span,.fb-video-overlay iframe{display:block!important;width:100%!important;height:100%!important;min-height:0!important;border:0}.fb-preview-play{position:absolute;top:169px;right:12px;width:44px;height:44px;border:1px solid #a2ff26;border-radius:50%;background:#101a13;color:#a2ff26;display:grid;place-items:center;z-index:4;cursor:pointer}.fb-preview-play:hover,.fb-preview-play:focus-visible{color:#1877f2;border-color:#1877f2}.fb-preview-play:focus-visible{outline:2px solid #1877f2;outline-offset:3px}[data-fb-playing]>.fb-preview-play{opacity:0}[data-fb-playing]:hover>.fb-preview-play,[data-fb-playing]:focus-within>.fb-preview-play{opacity:1}.fb-preview-play:focus-visible{opacity:1}@media(max-width:700px){.fb-video-overlay{height:210px}.fb-preview-play{top:154px}}
+
+/* Keep the owner-selected portrait Ford fully visible, with its service machine. */
+.tile-visual .ph-gearbox-ford-mondeo-machine img{object-fit:contain}

@@ -38,7 +38,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    await page.setViewportSize({width,height:950});await page.goto('http://127.0.0.1:4188/nvs-website/'+lang+'/');
    if(await page.locator('#privacy-preferences').isVisible())await page.locator('[data-consent=reject]').click();
    assert.equal(await page.locator('.account-link').getAttribute('href'),'/nvs-website/'+lang+'/account/');
-   assert.equal(await page.locator('#native-login').count(),0);assert.equal(await page.locator('#services .tile-visual picture').count(),7);
+   assert.equal(await page.locator('#native-login').count(),0);assert.equal(await page.locator('#services .tile-visual picture').count(),9);
    assert.equal(await page.locator('.fb-cover-brand').count(),0,'Facebook photo covers should not repeat the company wordmark');
    assert.equal(await page.locator('.fb-cover-label').count(),0);
    assert.equal(await page.locator('.fb-card').count(),0);assert.equal(await page.locator('iframe[data-consent-category=facebook]').count(),0);
@@ -46,7 +46,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    assert.equal(await page.locator('main a[href*="/account/"]:visible').count(),2);
    assert.equal(await page.locator('.booking-strip').count(),0);
    assert.equal(await page.locator('.hero .slider-prev [data-icon="chevron-left"],.hero .slider-next [data-icon="chevron-right"]').count(),2);
-   assert.equal(await page.locator('#services .card-top .service-icon .icon-depth').count(),6);
+   assert.equal(await page.locator('#services .card-top .service-icon .icon-depth').count(),9);
    assert.equal(await page.locator('#services .card-link').first().evaluate(e=>parseFloat(getComputedStyle(e).borderTopWidth)>=1&&getComputedStyle(e).boxShadow!=='none'),true);
    assert.equal(await page.locator('.equipment-list>li').count(),8);
    assert.equal(await page.locator('.equipment-card').count(),8);
@@ -74,6 +74,8 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
     const row=await extra.evaluateAll(cards=>cards.map(el=>{const r=el.getBoundingClientRect();return {top:r.top,left:r.left,width:r.width};}));
     if(width>1000){assert.ok(row.every(r=>Math.abs(r.top-row[0].top)<2),'Additional services share one desktop row');assert.ok(row[0].left<row[1].left&&row[1].left<row[2].left);}
     if(width<=700)assert.ok(row[0].top<row[1].top&&row[1].top<row[2].top,'Additional services stack on mobile');
+    if(lang==='hu'&&width===1440&&theme==='dark')await page.locator('#services .cards').screenshot({path:'artifacts/services-nine-photo-cards.png'});
+    if(lang==='hu'&&width===390&&theme==='dark')for(const id of ['air-conditioning','automatic-transmission-oil','brake-testing'])await page.locator('#services [data-service="'+id+'"]').screenshot({path:'artifacts/service-card-mobile-'+id+'.png'});
     assert.ok((await page.locator('.copyright').innerText()).includes('Copyright © 2026 NICHTVISION SERVICE S.R.L.'));
     const footer=await page.locator('.legal-footer').evaluate(el=>({height:el.getBoundingClientRect().height,atBottom:el.nextElementSibling?.classList.contains('consent-panel'),groups:el.querySelectorAll('.footer-group').length,collapsible:el.querySelectorAll('details,summary').length}));
     assert.equal(footer.atBottom,true,'Footer should be the last normal-flow content');
@@ -162,10 +164,10 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    }
    if(lang==='hu')await page.screenshot({path:'artifacts/premium-account-'+width+'.png',fullPage:true});
   }
-  const guideIds=['acc','adas','hunter-3d','camera','led-matrix','diagnostics'];
+  const guideIds=['acc','adas','hunter-3d','camera','led-matrix','diagnostics','air-conditioning','automatic-transmission-oil','brake-testing'];
   for(const lang of ['hu','ro','en'])for(const id of guideIds){
    await page.goto('http://127.0.0.1:4188/nvs-website/'+lang+'/services/'+id+'/');
-   assert.equal(await page.locator('#service-guide').count(),1);assert.equal(await page.locator('.education-faq details').count(),2);
+   assert.equal(await page.locator('#service-guide').count(),1);assert.equal(await page.locator('.education-faq details').count(),guideIds.indexOf(id)<6?2:3);
    assert.equal(await page.locator('.education-systems dt').count(),3);assert.equal(await page.locator('.education-process article').count(),3);
    assert.ok(await page.locator('.education-heading .lead').innerText());
    assert.equal(await page.locator('main a[href*="/account/"]').count(),2,'Core services offer appointment actions before and after the guide');
@@ -178,7 +180,7 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
    for(const width of [320,768,1280,1440])for(const theme of ['light','dark']){
     await page.setViewportSize({width,height:950});await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,lang+' '+id+' '+width+' '+theme);
-    if(lang==='hu'&&width===1440&&theme==='dark')await page.locator('#service-guide').screenshot({path:'artifacts/service-guide-'+id+'.png'});
+    if(lang==='hu'&&width===1440&&theme==='dark'){await page.locator('#service-guide').screenshot({path:'artifacts/service-guide-'+id+'.png'});if(guideIds.indexOf(id)>=6)await page.locator('.detail-hero').screenshot({path:'artifacts/service-detail-'+id+'.png'});}
    }
   }
   assert.equal(releaseCalls,0,'APK resolution is only allowed on the download page');assert.equal(authCalls,0);
