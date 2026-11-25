@@ -70,12 +70,13 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
     assert.ok(readability.brandClear&&readability.actionsClear,lang+' '+width+' header overlap '+JSON.stringify(readability));
     if(width>=1920)assert.ok(readability.canvas>=1900,'Wide screens should use the larger canvas');
     assert.ok((await page.locator('.copyright').innerText()).includes('Copyright © 2026 NICHTVISION SERVICE S.R.L.'));
-    const footer=await page.locator('.legal-footer').evaluate(el=>({height:el.getBoundingClientRect().height,atBottom:el.nextElementSibling?.classList.contains('consent-panel'),groups:[...el.querySelectorAll('[data-footer-group]')].map(g=>g.open)}));
+    const footer=await page.locator('.legal-footer').evaluate(el=>({height:el.getBoundingClientRect().height,atBottom:el.nextElementSibling?.classList.contains('consent-panel'),groups:el.querySelectorAll('.footer-group').length,collapsible:el.querySelectorAll('details,summary').length}));
     assert.equal(footer.atBottom,true,'Footer should be the last normal-flow content');
-    assert.deepEqual(footer.groups,[width>700,width>700]);
+    assert.equal(footer.groups,2);assert.equal(footer.collapsible,0);
+    for(const link of await page.locator('.footer-group a').all())assert.equal(await link.isVisible(),true);
     assert.deepEqual(await page.locator('.footer-assurance img').evaluate(el=>({width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height})),{width:250,height:50});
     if(width>=1280)assert.ok(footer.height<=380,lang+' '+width+' compact desktop footer '+JSON.stringify(footer));
-    if(width<=700)assert.ok(footer.height<=720,lang+' '+width+' compact mobile footer '+JSON.stringify(footer));
+    if(width<=700)assert.ok(footer.height<=1100,lang+' '+width+' compact mobile footer '+JSON.stringify(footer));
     await page.locator('.menu-toggle').click();assert.equal(await page.locator('#site-menu').evaluate(e=>e.open),true);assert.equal(await page.locator('.menu-toggle').getAttribute('aria-expanded'),'true');
     const menuContact=page.locator('#site-menu .menu-contact');
     assert.equal(await menuContact.locator('.portal-contact-phone').getAttribute('href'),'tel:+40741738604');
@@ -177,9 +178,11 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),{exe
   }
   assert.equal(releaseCalls,0,'APK resolution is only allowed on the download page');assert.equal(authCalls,0);
   await page.setViewportSize({width:390,height:950});await page.goto('http://127.0.0.1:4188/nvs-website/hu/');
-  const footerGroup=page.locator('.footer-information');assert.equal(await footerGroup.getAttribute('open'),null);
-  await footerGroup.locator('summary').click();assert.equal(await footerGroup.evaluate(el=>el.open),true);assert.equal(await footerGroup.locator('a').first().isVisible(),true);
-  await page.setViewportSize({width:1440,height:950});await page.waitForFunction(()=>[...document.querySelectorAll('[data-footer-group]')].every(g=>g.open));
+  for(const width of [390,1440,390]){
+   await page.setViewportSize({width,height:950});
+   assert.equal(await page.locator('.legal-footer details,.legal-footer summary').count(),0);
+   for(const link of await page.locator('.footer-group a').all())assert.equal(await link.isVisible(),true);
+  }
   const desktop=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'no-preference'});
   await desktop.route('**/*',r=>new URL(r.request().url()).origin==='http://127.0.0.1:4188'?r.continue():r.abort());
   const motion=await desktop.newPage();

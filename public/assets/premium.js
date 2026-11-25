@@ -1,7 +1,4 @@
 (()=>{
- const compactFooter=matchMedia('(max-width:700px)'),footerGroups=document.querySelectorAll('[data-footer-group]');
- const arrangeFooter=()=>footerGroups.forEach(group=>{group.open=!compactFooter.matches;});
- arrangeFooter();compactFooter.addEventListener('change',arrangeFooter);
  // Keep anchor arrivals below the full header, even when the reading header is compact.
  const header=document.querySelector('.site-header');
  const smallViewport=matchMedia('(max-width:1200px), (max-height:700px)');
