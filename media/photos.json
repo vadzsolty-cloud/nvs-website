@@ -3367,9 +3367,9 @@
     "en": "Brake bench testing"
    },
    "alt": {
-    "hu": "Audi görgős fékpadon az ACC-mérőhelyet idéző műhelytérben",
-    "ro": "Audi pe stand cu role, într-un atelier inspirat de zona de calibrare ACC",
-    "en": "Audi on a roller brake tester in a workshop inspired by the ACC calibration bay"
+    "hu": "Fékpadi fékerőmérés Audival",
+    "ro": "Măsurarea forței de frânare cu un Audi pe stand",
+    "en": "Audi brake force testing on a roller test bench"
    },
    "provenance": {
     "kind": "ai-generated-illustration",
